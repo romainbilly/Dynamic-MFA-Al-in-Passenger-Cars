@@ -52,7 +52,25 @@ x_dict = {
         }
     
 def plot_result_time(array, y_dict, IndexTable, t_min, t_max, width=35, height=25, show='no', stack='no'):
+    """
+    Function used to draw and save standard plots from the model results
+    x-axis is always time in years
     
+    :param array:  2D numpy array that will be plotted
+    :param y_dict: dict, defines the properties of the y axis,
+    with the following template:
+        y_dict = {
+            'name': 'name', #name of graph
+            'aspect': aspect', #aspect used for splitting the data in categories, 2nd dim of the array
+            'unit': 'unit'  #unit of the data (will show on the y axis)
+        }
+        the plot will be saved at results/plots/'name' by 'aspect'.png
+    :param t_min and t_max: define the years of x-axis 
+    :param width and height: define the size of the plot
+    :param show: if 'yes', the graph is shown on the console, 
+                otherwise it is just saved under results/plot
+    :param stack: if 'yes', uses a stackplot
+    """    
     # Car Stock per region
     fig, ax = plt.subplots()
     plt.figure(figsize=(width, height))
@@ -75,6 +93,5 @@ def plot_result_time(array, y_dict, IndexTable, t_min, t_max, width=35, height=2
     ax.legend(category, loc='upper left',prop={'size':8})
     fig.savefig('results/plots/' + y_dict['name'] +' by ' + y_dict['aspect'], dpi = 400)    
     if show == 'yes':
-        print('pouet')
         plt.show()
     plt.close(fig)
