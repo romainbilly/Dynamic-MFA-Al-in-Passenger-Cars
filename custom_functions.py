@@ -5,12 +5,9 @@ Created on Fri Dec 25 23:04:02 2020
 @author: romainb
 """
 import pandas as pd
-from varname import nameof
 import numpy as np
 import matplotlib.pyplot as plt
 import pylab
-plt.ioff()
-
 
 
 def export_to_csv(array: np.array, array_name: str, IndexTable):
