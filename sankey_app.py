@@ -94,23 +94,23 @@ def display_sankey(year, scenario):
           pad = 15,
           thickness = 20,
           line = dict(color = "white", width = 0.5),
-          label = ["0. Environment"," 1. Production", "2. Use", "3. Collection",
-                   "4. Dismantling", "5. Shredding", "6. Mixed Shredding", "7. Scrap Surplus", ""],
-          x = [0.05, 0.2, 0.3, 0.4, 0.5, 0.8, 0.6, 0.7, 1.1],
-          y = [0.18, 0.4, 0.4, 0.4, 0.16, 0.16, 0.7, 0.5, 1.1],
+          label = ["0. Environment", "1. Raw Material Market", "2. Production", "3. Use", "4. Collection",
+                   "5. Dismantling", "6. Shredding of dismantled component", "7. Sorting and Shredding of mixed scrap", "8. Alloy Sorting", "9. Scrap Surplus", ""],
+          x = [0.05, 0.12, 0.22, 0.32, 0.42, 0.52, 0.72, 0.62, 0.72, 0.32, 1.1],
+          y = [0.18, 0.4, 0.4, 0.4, 0.4, 0.16, 0.16, 0.4, 0.55, 0.65, 1.1],
           color = ["#594F4F", "#594F4F", "#594F4F", "#594F4F", "#594F4F",
-                   "#594F4F", "#594F4F", "#FE4365","white"]
+                   "#594F4F", "#594F4F", "#594F4F", "#594F4F","#FE4365","white"]
         ),
         link = dict(
-          source = [0, 1, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6, 6, 7, 8], # indices correspond to labels, eg A1, A2, A1, B1, ...
-          target = [1, 2, 3, 0, 4, 6, 5, 6, 0, 1, 0, 1, 7, 7, 8],
-          color = ["lightsteelblue", "lightsteelblue", "lightsteelblue", "#FE4365", 
+          source = [0, 1, 2, 3, 4, 4, 4, 5, 5, 6, 6, 7, 7, 7, 8, 1, 8, 9, 10], # indices correspond to labels, eg A1, A2, A1, B1, ...
+          target = [1, 2, 3, 4, 0, 5, 7, 6, 7, 0, 1, 0, 1, 8, 1, 9, 8, 9, 10],
+          color = ["lightsteelblue", "lightsteelblue", "lightsteelblue", "lightsteelblue", "#FE4365", 
                    "lightsteelblue", "lightsteelblue", "lightsteelblue", "lightsteelblue",
-                   "#FE4365", "#83AF9B", "#FE4365","#83AF9B","#FE4365", "white", "white"],
-          value = [df['F_0_1_t'][year], df['F_1_2_t'][year], df['F_2_3_t'][year], df['F_3_0_t'][year],
-                   df['F_3_4_t'][year], df['F_3_6_t'][year], df['F_4_5_t'][year], df['F_4_6_t'][year],
-                   df['F_5_0_t'][year], df['F_5_1_t'][year], df['F_6_0_t'][year], df['F_6_1_t'][year],
-                   df['scrap_surplus_t'][year], 0.001, max_value/2], 
+                   "#FE4365", "#83AF9B", "#FE4365","#83AF9B","lightsteelblue", "lightsteelblue", "#FE4365","white", "white", "white"],
+          value = [df['F_0_1_t'][year], df['F_1_2_t'][year], df['F_2_3_t'][year], df['F_3_4_t'][year], df['F_4_0_t'][year],
+                   df['F_4_5_t'][year], df['F_4_7_t'][year], df['F_5_6_t'][year], df['F_5_7_t'][year],
+                   df['F_6_0_t'][year], df['F_6_1_t'][year], df['F_7_0_t'][year], df['F_7_1_t'][year],
+                   df['F_7_8_t'][year], df['F_8_1_t'][year], df['F_1_9_t'][year], 0.001, 0.001, max_value/2], 
                    ), 
         textfont=dict(color="black", size=15))]
         )

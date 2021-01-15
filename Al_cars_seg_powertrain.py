@@ -724,6 +724,9 @@ df['F_8_1_ta'] = F_8_1_ta.flatten()/10**9
 
 df.to_excel('results/flows.xlsx', merge_cells=False)
 
+F_0_1_t = np.einsum('ta -> t', F_0_1_ta)/10**9
+F_1_2_t = np.einsum('ta -> t', F_1_2_ta)/10**9
+F_1_9_t = np.einsum('ta -> t', F_1_9_ta)/10**9
 F_2_3_t = np.einsum('ta -> t', F_2_3_ta)/10**9
 F_3_4_t = np.einsum('ta -> t', F_3_4_ta)/10**9
 F_4_0_t = np.einsum('ta -> t', F_4_0_ta)/10**9
@@ -735,9 +738,8 @@ F_6_0_t = np.einsum('ta -> t', F_6_0_ta)/10**9
 F_6_1_t = np.einsum('ta -> t', F_6_1_ta)/10**9
 F_7_0_t = np.einsum('ta -> t', F_7_0_ta)/10**9
 F_7_1_t = np.einsum('ta -> t', F_7_1_ta)/10**9
-F_1_2_t = np.einsum('ta -> t', F_1_2_ta)/10**9
-scrap_surplus_t = np.einsum('ta -> t', scrap_surplus_ta)/10**9
-
+F_7_8_t = np.einsum('ta -> t', F_7_8_ta)/10**9
+F_8_1_t = np.einsum('ta -> t', F_8_1_ta)/10**9
 
 
 
@@ -746,7 +748,11 @@ index = pd.Index(
         PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:],
         name="Time")
 
-df = pd.DataFrame(F_2_3_t.flatten(),index=index, columns = ['F_2_3_t'])
+df = pd.DataFrame(F_0_1_t.flatten(),index=index, columns = ['F_0_1_t'])
+
+df['F_1_2_t'] = F_1_2_t.flatten()
+df['F_1_9_t'] = F_1_9_t.flatten()
+df['F_2_3_t'] = F_2_3_t.flatten()
 df['F_3_4_t'] = F_3_4_t.flatten()
 df['F_4_0_t'] = F_4_0_t.flatten()
 df['F_4_5_t'] = F_4_5_t.flatten()
@@ -757,8 +763,9 @@ df['F_6_0_t'] = F_6_0_t.flatten()
 df['F_6_1_t'] = F_6_1_t.flatten()
 df['F_7_0_t'] = F_7_0_t.flatten()
 df['F_7_1_t'] = F_7_1_t.flatten()
-df['F_1_2_t'] = F_1_2_t.flatten()
-df['scrap_surplus_t'] = scrap_surplus_t.flatten()
+df['F_7_8_t'] = F_7_8_t.flatten()
+df['F_8_1_t'] = F_8_1_t.flatten()
+
 
 
 df.to_excel('results/flows_per_year.xlsx')
