@@ -44,6 +44,10 @@ A total of 9060 values was read from file for parameter Dismantling.
 
 9060.0 of 9060 values for parameter Dismantling were assigned.
 
+A total of 755 values was read from file for parameter Alloy_Sorting.
+
+755.0 of 755 values for parameter Alloy_Sorting were assigned.
+
 ### 4 - Define MFA system
 
 ### 5 - Building and solving the MFA model

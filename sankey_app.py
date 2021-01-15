@@ -3,6 +3,23 @@
 Created on Sun Dec 27 22:54:11 2020
 
 @author: romainb
+
+This file creates a Dash app that display a dynamic Sankey diagram
+of Aluminium use in passenger cars
+
+It uses the excel file flows_per_year.xlsx as a data source
+
+It needs to be run from the Anaconda prompt:
+$ cd *current_directory*
+$ python sankey_app.py
+
+After the app is launched, it shoud be available on the local server at:
+    http://127.0.0.1:8050/
+
+dependencies:
+    dash 
+    
+    
 """
 import dash
 import dash_core_components as dcc
