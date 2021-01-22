@@ -48,10 +48,15 @@ A total of 755 values was read from file for parameter Alloy_Sorting.
 
 755.0 of 755 values for parameter Alloy_Sorting were assigned.
 
+A total of 15100 values was read from file for parameter Powertrains.
+
+15100.0 of 15100 values for parameter Powertrains were assigned.
+
+A total of 15100 values was read from file for parameter Segments.
+
+15100.0 of 15100 values for parameter Segments were assigned.
+
 ### 4 - Define MFA system
 
 ### 5 - Building and solving the MFA model
-
-Dash is running on http://127.0.0.1:8050/
-
 
