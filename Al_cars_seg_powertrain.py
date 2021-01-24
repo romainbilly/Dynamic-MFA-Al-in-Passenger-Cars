@@ -114,7 +114,7 @@ while True:
             ThisItem = Classsheet.cell_value(ri,ci)
         except:
             break
-        if ThisItem is not '':
+        if ThisItem != '':
             TheseItems.append(ThisItem)
     MasterClassification[ThisName] = msc.Classification(Name = ThisName, Dimension = ThisDim, 
                                                         ID = ThisID, UUID = ThisUUID, Items = TheseItems)
@@ -270,6 +270,7 @@ Np = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get
 Ns = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('s')].Items) 
 Nz = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('z')].Items)
 Na = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('a')].Items)
+NS = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('S')].Items)
 print('Read model data and parameters.')
 
 ParameterDict = {}
@@ -409,28 +410,48 @@ DS_tr = np.zeros((Nt,Nr))
 I_cr = np.zeros((Nt,Nr))
 O_tr = np.zeros((Nt,Nr))
 
-print('Solving dynamic stock model of the passenger vehicle fleet for: ')
-for region in np.arange(0,Nr):
-         
-    # 1a) Loop over all regions to determine inflow-driven stock of vehicles, with pre 2005 age-cohorts absent
-    print(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('r')].Items[region])
-    # Create helper DSM for computing the dynamic stock model:
-    DSM = dsm.DynamicStockModel(t = np.array(IndexTable.Classification[IndexTable.index.get_loc('Time')].Items),
-                                       s = PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Stock'].Values[region,:], 
-                                       lt = {'Type': 'Normal', 'Mean': PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Lifetime'].Values[:,region],
-                                             'StdDev': PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Lifetime'].Values[:,region]/4} )
+O_tcrS = np.zeros((Nt,Nt,Nr,NS))
+S_tcrS= np.zeros((Nt,Nt,Nr,NS))
+DS_trS = np.zeros((Nt,Nr,NS))
+I_crS = np.zeros((Nt,Nr,NS))
+O_trS = np.zeros((Nt,Nr,NS))
+
+
+
+for scenario in np.arange(0,NS):
+    print('Computing Scenario:  ',IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('S')].Items[scenario])
     
-    Stock_by_cohort = DSM.compute_stock_driven_model()
+    print('Solving dynamic stock model of the passenger vehicle fleet for: ')
+    for region in np.arange(0,Nr):
+             
+        # 1a) Loop over all regions to determine inflow-driven stock of vehicles, with pre 2005 age-cohorts absent
+        print(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('r')].Items[region])
+        # Create helper DSM for computing the dynamic stock model:
+        DSM = dsm.DynamicStockModel(t = np.array(IndexTable.Classification[IndexTable.index.get_loc('Time')].Items),
+                                           s = PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Stock'].Values[region,:], 
+                                           lt = {'Type': 'Normal', 'Mean': PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Lifetime'].Values[:,region],
+                                                 'StdDev': PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Lifetime'].Values[:,region]/4} )
+        
+        Stock_by_cohort = DSM.compute_stock_driven_model()
+    
+    
+    
+        #print(Stock_by_cohort.shape)
+        O_tcr[:,:,region] = DSM.compute_o_c_from_s_c()
+        O_tr[:,region] = DSM.compute_outflow_total()
+        S_tcr[:,:,region] = DSM.s_c
+        I_cr[:,region] = DSM.i
+        DS_tr[:,region] = DSM.compute_stock_change()
+        S_tr = np.einsum('tcr -> tr', S_tcr)
+        
+        
+        O_tcrS[:,:,region,scenario] = DSM.compute_o_c_from_s_c()
+        O_trS[:,region,scenario] = DSM.compute_outflow_total()
+        S_tcrS[:,:,region,scenario] = DSM.s_c
+        I_crS[:,region,scenario] = DSM.i
+        DS_trS[:,region,scenario] = DSM.compute_stock_change()
+        S_trS = np.einsum('tcrS -> trS', S_tcrS)
 
-
-
-    #print(Stock_by_cohort.shape)
-    O_tcr[:,:,region] = DSM.compute_o_c_from_s_c()
-    O_tr[:,region] = DSM.compute_outflow_total()
-    S_tcr[:,:,region] = DSM.s_c
-    I_cr[:,region] = DSM.i
-    DS_tr[:,region] = DSM.compute_stock_change()
-    S_tr = np.einsum('tcr -> tr', S_tcr)
 
 
 #Stock py powertrain and segment
@@ -452,14 +473,41 @@ O_ts = np.einsum('tcrps -> ts', O_tcrps)
 O_tp = np.einsum('tcrps -> tp', O_tcrps) 
 
 
+#Stock py powertrain and segment with scenarios
+S_tcrpS = np.einsum('tcrS, Srpc -> tcrpS', S_tcrS, 
+                    PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values) 
+S_tcrpsS = np.einsum('tcrpS, Srsc -> tcrpsS', S_tcrpS, 
+                    PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
+
+S_trpsS = np.einsum('tcrpsS -> trpsS', S_tcrpsS) 
+S_tpsS = np.einsum('tcrpsS -> tpsS', S_tcrpsS) 
+S_tpS = np.einsum('tcrpsS -> tpS', S_tcrpsS) 
+S_tsS = np.einsum('tcrpsS -> tsS', S_tcrpsS) 
+
+I_crpS = np.einsum('cr, Srpc -> crpS', I_cr, 
+                    PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values) 
+I_crpsS = np.einsum('crpS, Srsc -> crpsS', I_crpS, 
+                    PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
+I_csS = np.einsum('crpsS -> csS', I_crpsS) 
+I_cpS = np.einsum('crpsS -> cpS', I_crpsS) 
+
+
+O_tcrpS = np.einsum('tcr, Srpc -> tcrpS', O_tcr, 
+                    PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values) 
+O_tcrpsS = np.einsum('tcrpS, Srsc -> tcrpsS', O_tcrpS, 
+                    PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
+O_tsS = np.einsum('tcrpsS -> tsS', O_tcrpsS) 
+O_tpS = np.einsum('tcrpsS -> tpS', O_tcrpsS) 
+
+
 #Aluminium content calculations
 
 # Stock
-Al_stock_tcrps = np.einsum('tcrps, erc -> tcrps ', S_tcrps, 
+Al_stock_tcrps = np.einsum('tcrps, erc -> tcrps', S_tcrps, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
-Al_stock_tcrps_pseg = np.einsum('tcrps, sc -> tcrps ', Al_stock_tcrps, 
+Al_stock_tcrps_pseg = np.einsum('tcrps, sc -> tcrps', Al_stock_tcrps, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
-Al_stock_tcrps_pseg_ptype = np.einsum('tcrps, pc -> tcrps ', Al_stock_tcrps_pseg, 
+Al_stock_tcrps_pseg_ptype = np.einsum('tcrps, pc -> tcrps', Al_stock_tcrps_pseg, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
 Al_stock_tcrps = Al_stock_tcrps_pseg_ptype
 
@@ -487,11 +535,46 @@ Al_outflow_tcrps = Al_outflow_tcrps_pseg_ptype
 Al_outflow_tr = np.einsum('tcrps -> tr ', Al_outflow_tcrps) 
 
 
+
+#Aluminium content calculations by scenario
+
+# Stock
+Al_stock_tcrpsS = np.einsum('tcrpsS, erc -> tcrpsS', S_tcrpsS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
+Al_stock_tcrpsS_pseg = np.einsum('tcrpsS, sc -> tcrpsS', Al_stock_tcrpsS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
+Al_stock_tcrpsS_pseg_ptype = np.einsum('tcrpsS, pc -> tcrpsS', Al_stock_tcrpsS_pseg, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
+Al_stock_tcrpsS = Al_stock_tcrpsS_pseg_ptype
+
+Al_stock_trS = np.einsum('tcrpsS -> trS', Al_stock_tcrpsS_pseg_ptype)
+
+# Inflow
+Al_inflow_crpsS = np.einsum('crpsS, erc -> crpsS', I_crpsS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
+Al_inflow_crpsS_pseg = np.einsum('crpsS, sc -> crpsS', Al_inflow_crpsS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
+Al_inflow_crpsS_pseg_ptype = np.einsum('crpsS, pc -> crpsS', Al_inflow_crpsS_pseg, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
+Al_inflow_crpsS = Al_inflow_crpsS_pseg_ptype
+Al_inflow_crS = np.einsum('crpsS-> crS ', Al_inflow_crpsS) 
+
+
+# Outflow
+Al_outflow_tcrpsS = np.einsum('tcrpsS, erc -> tcrpsS', O_tcrpsS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
+Al_outflow_tcrpsS_pseg = np.einsum('tcrpsS, sc -> tcrpsS', Al_outflow_tcrpsS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
+Al_outflow_tcrpsS_pseg_ptype = np.einsum('tcrpsS, pc -> tcrpsS', Al_outflow_tcrpsS_pseg, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
+Al_outflow_tcrpsS = Al_outflow_tcrpsS_pseg_ptype
+Al_outflow_trS = np.einsum('tcrpsS -> trS', Al_outflow_tcrpsS) 
+
+
 # Component level
 Components = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('z')].Items
 
-
-Al_stock_tcrpsz = np.einsum('tcrps, crpsz -> tcrpsz ', Al_stock_tcrps_pseg_ptype, 
+Al_stock_tcrpsz = np.einsum('tcrps, crpsz -> tcrpsz ', Al_stock_tcrps, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values) 
 Al_stock_tz = np.einsum('tcrpsz -> tz ', Al_stock_tcrpsz)
 
@@ -502,6 +585,24 @@ Al_inflow_cz = np.einsum('crpsz -> cz ', Al_inflow_crpsz)
 Al_outflow_tcrpsz = np.einsum('tcrps, crpsz -> tcrpsz ', Al_outflow_tcrps, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values) 
 Al_outflow_tz = np.einsum('tcrpsz -> tz ', Al_outflow_tcrpsz)
+
+
+
+# Component level by Scenario
+Components = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('z')].Items
+
+Al_stock_tcrpszS = np.einsum('tcrpsS, crpsz -> tcrpszS', Al_stock_tcrpsS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values) 
+Al_stock_tzS = np.einsum('tcrpszS -> tzS ', Al_stock_tcrpszS)
+
+Al_inflow_crpszS = np.einsum('crpsS, crpsz -> crpszS ', Al_inflow_crpsS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values) 
+Al_inflow_czS = np.einsum('crpszS -> czS', Al_inflow_crpszS)
+
+Al_outflow_tcrpszS = np.einsum('tcrpsS, crpsz -> tcrpszS', Al_outflow_tcrpsS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values) 
+Al_outflow_tzS = np.einsum('tcrpszS -> tzS', Al_outflow_tcrpszS)
+
 
 # Aluminium Alloys calculation
 Alloys = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('a')].Items
@@ -516,8 +617,30 @@ Alloys_outflow_tcrpsza = np.einsum('tcrpsz, az -> tcrpsza ', Al_outflow_tcrpsz,
                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values) 
 Alloys_outflow_tra = np.einsum('tcrpsza -> tra ', Alloys_outflow_tcrpsza)
 Alloys_outflow_ta = np.einsum('tcrpsza -> ta ', Alloys_outflow_tcrpsza)
+
 Alloys_stock_tcrpsza = np.einsum('tcrpsz, az -> tcrpsza ', Al_stock_tcrpsz, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values) 
+
+
+# Aluminium Alloys calculation
+Alloys = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('a')].Items
+
+Alloys_inflow_crpszaS = np.einsum('crpszS, az -> crpszaS', Al_inflow_crpszS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values) 
+
+Alloys_inflow_craS = np.einsum('crpszaS -> craS', Alloys_inflow_crpszaS)
+Alloys_inflow_caS = np.einsum('craS-> caS', Alloys_inflow_craS)
+
+Alloys_outflow_tcrpszaS = np.einsum('tcrpszS, az -> tcrpszaS', Al_outflow_tcrpszS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values) 
+Alloys_outflow_traS = np.einsum('tcrpszaS -> traS', Alloys_outflow_tcrpszaS)
+Alloys_outflow_taS = np.einsum('traS -> taS ', Alloys_outflow_traS)
+
+Alloys_stock_tcrpszaS = np.einsum('tcrpszS, az -> tcrpszaS', Al_stock_tcrpszS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values) 
+
+
+
 
 
 # Solving the NFA system
