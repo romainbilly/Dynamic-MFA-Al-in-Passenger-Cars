@@ -56,6 +56,14 @@ A total of 15100 values was read from file for parameter Segments.
 
 15100.0 of 15100 values for parameter Segments were assigned.
 
+A total of 755 values was read from file for parameter Carbon_Footprint_Primary.
+
+755.0 of 755 values for parameter Carbon_Footprint_Primary were assigned.
+
+A total of 755 values was read from file for parameter Carbon_Footprint_Secondary.
+
+755.0 of 755 values for parameter Carbon_Footprint_Secondary were assigned.
+
 ### 4 - Define MFA system
 
 ### 5 - Building and solving the MFA model

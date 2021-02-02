@@ -321,78 +321,78 @@ for m in range(0, len(PrL_Number)):
     
 # Define system variables: 6 flows.
 PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'] = msc.Flow(Name = 'Primary Aluminium demand', P_Start = 0,
-                                                  P_End = 1, Indices = 't,e,a',
+                                                  P_End = 1, Indices = 't,e,a,S',
                                                   Values=None, Uncert=None, Color = None,
                                                   ID = None, UUID = None)     
 PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'] = msc.Flow(Name = 'Materials for Passenger vehicle production', P_Start = 1,
-                                                  P_End = 2, Indices = 't,r,e,a',
+                                                  P_End = 2, Indices = 't,r,e,a,S',
                                                   Values=None, Uncert=None, Color = None,
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'] = msc.Flow(Name = 'Scrap surplus', P_Start = 1, 
-                                                  P_End = 9, Indices = 't,e,a', 
+                                                  P_End = 9, Indices = 't,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'] = msc.Flow(Name = 'New registration of vehicles', P_Start = 2, 
-                                                  P_End = 3, Indices = 't,r,p,s,z,e,a', 
+                                                  P_End = 3, Indices = 't,r,p,s,z,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'] = msc.Flow(Name = 'End of Life vehicles', P_Start = 3, 
-                                                  P_End = 4, Indices = 't,c,r,p,s,z,e,a',
+                                                  P_End = 4, Indices = 't,c,r,p,s,z,e,a,S',
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'] = msc.Flow(Name = 'Collection losses', P_Start = 4, 
-                                                  P_End = 0, Indices = 't,c,r,p,s,z,e,a', 
+                                                  P_End = 0, Indices = 't,c,r,p,s,z,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'] = msc.Flow(Name = 'Collected cars to dismantling', P_Start = 4, 
-                                                  P_End = 5, Indices = 't,c,r,p,s,z,e,a', 
+                                                  P_End = 5, Indices = 't,c,r,p,s,z,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'] = msc.Flow(Name = 'Collected cars directly to shredding', P_Start = 4, 
-                                                  P_End = 7, Indices = 't,c,r,p,s,z,e,a', 
+                                                  P_End = 7, Indices = 't,c,r,p,s,z,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'] = msc.Flow(Name = 'Dismantled components to shredding', P_Start = 5, 
-                                                  P_End = 6, Indices = 't,r,e,a', 
+                                                  P_End = 6, Indices = 't,r,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'] = msc.Flow(Name = 'Residues from dismantllng to shredding', P_Start = 5, 
-                                                  P_End = 7, Indices = 't,r,e,a', 
+                                                  P_End = 7, Indices = 't,r,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'] = msc.Flow(Name = 'Shredding losses', P_Start = 6, 
-                                                  P_End = 0, Indices = 't,r,e,a', 
+                                                  P_End = 0, Indices = 't,r,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'] = msc.Flow(Name = 'Al scrap from dismantled components', P_Start = 6, 
-                                                  P_End = 1, Indices = 't,r,e,a', 
+                                                  P_End = 1, Indices = 't,r,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'] = msc.Flow(Name = 'Shredding losses', P_Start = 7, 
-                                                  P_End = 0, Indices = 't,r,e,a', 
+                                                  P_End = 0, Indices = 't,r,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'] = msc.Flow(Name = 'Mixed Al scrap', P_Start = 7, 
-                                                  P_End = 1, Indices = 't,r,e,a', 
+                                                  P_End = 1, Indices = 't,r,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
 PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'] = msc.Flow(Name = 'Mixed Al scrap to alloy sorting', P_Start = 7, 
-                                                  P_End = 8, Indices = 't,r,e,a', 
+                                                  P_End = 8, Indices = 't,r,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)          
 PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'] = msc.Flow(Name = 'Alloy sorted scrap', P_Start = 8, 
-                                                  P_End = 1, Indices = 't,r,e,a', 
+                                                  P_End = 1, Indices = 't,r,e,a,S', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)                                               
                                                                                        
                                                   
 # Define system variables: 1 stock and 1 stock change:
 PassengerVehicleFleet_MFA_System.StockDict['S_3']  = msc.Stock(Name = 'In-use stock', P_Res = 3, Type = 0,
-                                                  Indices = 't,c,r,p,s,z,e,a', Values=None, Uncert=None,
+                                                  Indices = 't,c,r,p,s,z,e,a,S', Values=None, Uncert=None,
                                                   ID = None, UUID = None)
 
 PassengerVehicleFleet_MFA_System.StockDict['dS_3']  = msc.Stock(Name = 'Net in-use stock change', P_Res = 3, Type = 1,
-                                                  Indices = 't,r,p,s,z,e,a', Values=None, Uncert=None,
+                                                  Indices = 't,r,p,s,z,e,a,S', Values=None, Uncert=None,
                                                   ID = None, UUID = None)
 
 PassengerVehicleFleet_MFA_System.Initialize_StockValues() # Assign empty arrays to stocks according to dimensions.
@@ -418,11 +418,11 @@ O_trS = np.zeros((Nt,Nr,NS))
 
 
 
-for scenario in np.arange(0,NS):
+for scenario in range(NS):
     print('Computing Scenario:  ',IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('S')].Items[scenario])
     
     print('Solving dynamic stock model of the passenger vehicle fleet for: ')
-    for region in np.arange(0,Nr):
+    for region in range(Nr):
              
         # 1a) Loop over all regions to determine inflow-driven stock of vehicles, with pre 2005 age-cohorts absent
         print(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('r')].Items[region])
@@ -454,26 +454,8 @@ for scenario in np.arange(0,NS):
 
 
 
-#Stock py powertrain and segment
-S_tcrps = np.einsum('tcr, rpsc -> tcrps', S_tcr, 
-                    PassengerVehicleFleet_MFA_System.ParameterDict['Powertrain_and_Segment'].Values) 
-S_trps = np.einsum('tcrps -> trps', S_tcrps) 
-S_tps = np.einsum('tcrps -> tps', S_tcrps) 
-S_tp = np.einsum('tcrps -> tp', S_tcrps) 
-S_ts = np.einsum('tcrps -> ts', S_tcrps) 
-
-I_crps = np.einsum('cr, rpsc -> crps', I_cr, 
-                    PassengerVehicleFleet_MFA_System.ParameterDict['Powertrain_and_Segment'].Values) 
-I_cs = np.einsum('crps -> cs', I_crps) 
-I_cp = np.einsum('crps -> cp', I_crps) 
-
-O_tcrps = np.einsum('tcr, rpsc -> tcrps', O_tcr, 
-                    PassengerVehicleFleet_MFA_System.ParameterDict['Powertrain_and_Segment'].Values) 
-O_ts = np.einsum('tcrps -> ts', O_tcrps) 
-O_tp = np.einsum('tcrps -> tp', O_tcrps) 
-
-
 #Stock py powertrain and segment with scenarios
+print("Performing Stock calculations")
 S_tcrpS = np.einsum('tcrS, Srpc -> tcrpS', S_tcrS, 
                     PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values) 
 S_tcrpsS = np.einsum('tcrpS, Srsc -> tcrpsS', S_tcrpS, 
@@ -499,45 +481,8 @@ O_tcrpsS = np.einsum('tcrpS, Srsc -> tcrpsS', O_tcrpS,
 O_tsS = np.einsum('tcrpsS -> tsS', O_tcrpsS) 
 O_tpS = np.einsum('tcrpsS -> tpS', O_tcrpsS) 
 
-
-#Aluminium content calculations
-
-# Stock
-Al_stock_tcrps = np.einsum('tcrps, erc -> tcrps', S_tcrps, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
-Al_stock_tcrps_pseg = np.einsum('tcrps, sc -> tcrps', Al_stock_tcrps, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
-Al_stock_tcrps_pseg_ptype = np.einsum('tcrps, pc -> tcrps', Al_stock_tcrps_pseg, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
-Al_stock_tcrps = Al_stock_tcrps_pseg_ptype
-
-Al_stock_tr = np.einsum('tcrps -> tr', Al_stock_tcrps_pseg_ptype)
-
-# Inflow
-Al_inflow_crps = np.einsum('crps, erc -> crps ', I_crps, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
-Al_inflow_crps_pseg = np.einsum('crps, sc -> crps ', Al_inflow_crps, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
-Al_inflow_crps_pseg_ptype = np.einsum('crps, pc -> crps ', Al_inflow_crps_pseg, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
-Al_inflow_crps = Al_inflow_crps_pseg_ptype
-Al_inflow_cr = np.einsum('crps-> cr ', Al_inflow_crps) 
-
-
-# Outflow
-Al_outflow_tcrps = np.einsum('tcrps, erc -> tcrps ', O_tcrps, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
-Al_outflow_tcrps_pseg = np.einsum('tcrps, sc -> tcrps ', Al_outflow_tcrps, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
-Al_outflow_tcrps_pseg_ptype = np.einsum('tcrps, pc -> tcrps ', Al_outflow_tcrps_pseg, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
-Al_outflow_tcrps = Al_outflow_tcrps_pseg_ptype
-Al_outflow_tr = np.einsum('tcrps -> tr ', Al_outflow_tcrps) 
-
-
-
 #Aluminium content calculations by scenario
-
+print("Performing Al content calculations")
 # Stock
 Al_stock_tcrpsS = np.einsum('tcrpsS, erc -> tcrpsS', S_tcrpsS, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
@@ -571,24 +516,8 @@ Al_outflow_tcrpsS = Al_outflow_tcrpsS_pseg_ptype
 Al_outflow_trS = np.einsum('tcrpsS -> trS', Al_outflow_tcrpsS) 
 
 
-# Component level
-Components = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('z')].Items
-
-Al_stock_tcrpsz = np.einsum('tcrps, crpsz -> tcrpsz ', Al_stock_tcrps, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values) 
-Al_stock_tz = np.einsum('tcrpsz -> tz ', Al_stock_tcrpsz)
-
-Al_inflow_crpsz = np.einsum('crps, crpsz -> crpsz ', Al_inflow_crps, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values) 
-Al_inflow_cz = np.einsum('crpsz -> cz ', Al_inflow_crpsz)
-
-Al_outflow_tcrpsz = np.einsum('tcrps, crpsz -> tcrpsz ', Al_outflow_tcrps, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values) 
-Al_outflow_tz = np.einsum('tcrpsz -> tz ', Al_outflow_tcrpsz)
-
-
-
 # Component level by Scenario
+print("Performing component level calculations")
 Components = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('z')].Items
 
 Al_stock_tcrpszS = np.einsum('tcrpsS, crpsz -> tcrpszS', Al_stock_tcrpsS, 
@@ -604,25 +533,9 @@ Al_outflow_tcrpszS = np.einsum('tcrpsS, crpsz -> tcrpszS', Al_outflow_tcrpsS,
 Al_outflow_tzS = np.einsum('tcrpszS -> tzS', Al_outflow_tcrpszS)
 
 
-# Aluminium Alloys calculation
-Alloys = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('a')].Items
-
-Alloys_inflow_crpsza = np.einsum('crpsz, az -> crpsza ', Al_inflow_crpsz, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values) 
-
-Alloys_inflow_cra = np.einsum('crpsza -> cra ', Alloys_inflow_crpsza)
-Alloys_inflow_ca = np.einsum('crpsza -> ca ', Alloys_inflow_crpsza)
-
-Alloys_outflow_tcrpsza = np.einsum('tcrpsz, az -> tcrpsza ', Al_outflow_tcrpsz, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values) 
-Alloys_outflow_tra = np.einsum('tcrpsza -> tra ', Alloys_outflow_tcrpsza)
-Alloys_outflow_ta = np.einsum('tcrpsza -> ta ', Alloys_outflow_tcrpsza)
-
-Alloys_stock_tcrpsza = np.einsum('tcrpsz, az -> tcrpsza ', Al_stock_tcrpsz, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values) 
-
 
 # Aluminium Alloys calculation
+print("Performing alloy content calculations")
 Alloys = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('a')].Items
 
 Alloys_inflow_crpszaS = np.einsum('crpszS, az -> crpszaS', Al_inflow_crpszS, 
@@ -642,21 +555,21 @@ Alloys_stock_tcrpszaS = np.einsum('tcrpszS, az -> tcrpszaS', Al_stock_tcrpszS,
 
 
 
-
-# Solving the NFA system
+# Solving the MFA system
+print("Solving the MFA system")
 # F_2_3, dimensions trpszea
-PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values = np.expand_dims(Alloys_inflow_crpsza, axis=5)
+PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values = np.expand_dims(Alloys_inflow_crpszaS, axis=5)
 # F_1_2, Materials for Passenger vehicle production
 PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values = \
-        np.einsum('trpszea-> trea', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values) 
+        np.einsum('trpszeaS-> treaS', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values) 
 # F_3_4, EoL Vehicles, dimensions tcrpszea
-PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values = np.expand_dims(Alloys_outflow_tcrpsza, axis=6)
+PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values = np.expand_dims(Alloys_outflow_tcrpszaS, axis=6)
 # F_4_0, dimensions tcrpszea
-PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values = np.einsum('tcrpszea, tr -> tcrpszea',
+PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values = np.einsum('tcrpszeaS, tr -> tcrpszeaS',
                                          PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values,
                                          1 - PassengerVehicleFleet_MFA_System.ParameterDict['Collection'].Values)
-# F_4_5, Collected cars to dismantling, dimensions trtcrpszeaea
-PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values = np.einsum('tcrpszea, rzt -> tcrpszea',
+# F_4_5, Collected cars to dismantling, dimensions tcrpszeaS
+PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values = np.einsum('tcrpszeaS, rzt -> tcrpszeaS',
                                          PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values - \
                                          PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values,
                                          PassengerVehicleFleet_MFA_System.ParameterDict['Dismantling'].Values)
@@ -668,13 +581,13 @@ PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values = \
 # F_5_6, Dismantled components to shredding, dimensions trea
 # need to add dismantling yield
 PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values = \
-        0.7 * np.einsum('tcrpszea-> trea', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values) 
+        0.7 * np.einsum('tcrpszeaS-> treaS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values) 
 
                                          
 # F_5_7, Residues from dismantllng to shredding
 # need to add dismantling yield
 PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values = \
-        0.3 * np.einsum('tcrpszea-> trea', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values) 
+        0.3 * np.einsum('tcrpszeaS -> treaS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values) 
 
 
 # F_6_0, Shredding losses, dimensions trea
@@ -691,13 +604,13 @@ PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values = \
 # F_7_0, Shredding losses, dimensions trea
 # need to add shredding yield
 PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values =  0.05 * (
-        np.einsum('tcrpszea-> trea', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values) + \
+        np.einsum('tcrpszeaS-> treaS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values) + \
         PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values)
 
 # F_7_8, Scrap to alloy sorting, dimensions trea
 PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values = \
-np.einsum('trea, tr -> trea',
-        np.einsum('tcrpszea-> trea', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values) + \
+np.einsum('treaS, tr -> treaS',
+        np.einsum('tcrpszeaS-> treaS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values) + \
         PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values - \
         PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values,
         PassengerVehicleFleet_MFA_System.ParameterDict['Alloy_Sorting'].Values)
@@ -705,16 +618,16 @@ np.einsum('trea, tr -> trea',
 # F_7_1, Mixed shredded scrap, dimensions trea
 # need to add shredding yield
 PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values = \
-        np.einsum('tcrpszea-> trea', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values) + \
+        np.einsum('tcrpszeaS-> treaS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values) + \
         PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values - \
         PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values - \
         PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values
 # Alloy composition adjusted to become secondary castings only
 PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values[:,:,:,2] =\
-        np.einsum('trea-> tre', PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values)  
+        np.einsum('treaS -> treS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values)  
 # Setting wrought and primary casting to zero        
 PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values = \
-        np.einsum('trea, a -> trea', 
+        np.einsum('treaS, a -> treaS', 
                   PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values, 
                   np.array([0,0,1]))
 
@@ -724,45 +637,29 @@ PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values = PassengerVehicleFlee
                
 # Correcting for scrap surplus
 # Scrap surplus considered at global level only
-
+print("Correcting for scrap surplus")
 # Mass balance of process 1 without scrap surplus and primary production
 # If positive, there is a scrap surplus for the alloy considered
-Process_1_mb_tea = np.einsum('trea-> tea', 
+Process_1_mb_teaS = np.einsum('treaS-> teaS', 
         PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values + \
         PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values + \
         PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values - \
         PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)
-        
+scrap_surplus_teaS = np.zeros(Process_1_mb_teaS.shape)        
 
-scrap_surplus_tea = np.zeros(Process_1_mb_tea.shape)
-for it,ie,ia in np.ndindex(Process_1_mb_tea.shape):
-    if Process_1_mb_tea[it,ie,ia] > 0:
-        scrap_surplus_tea[it,ie,ia] = Process_1_mb_tea[it,ie,ia]
-
+for it,ie,ia,iS in np.ndindex(Process_1_mb_teaS.shape):
+    if Process_1_mb_teaS[it,ie,ia,iS] > 0:
+        scrap_surplus_teaS[it,ie,ia,iS] = Process_1_mb_teaS[it,ie,ia,iS]
 
 
-PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'].Values = scrap_surplus_tea       
-scrap_surplus_ta =  np.einsum('tea-> ta', scrap_surplus_tea)
 
-
-#                
-## Correcting for scrap surplus
-## Scrap surplus considered at global level only
-#scrap_surplus_ta = np.zeros(F_1_2_ta.shape)
-#
-#for it,ia in np.ndindex(F_1_2_ta.shape):
-#    if F_1_2_ta[it,ia] < 0:
-#        scrap_surplus_ta[it,ia] = - F_1_2_ta[it,ia]
-#        F_1_2_ta[it,ia] = 0
-#        F_7_1_ta[it,ia] -= scrap_surplus_ta[it,ia]
-
-# Ideally, the scrap surplus should be used to correct F_1_2_trea values as well    
-# What is the best way to do this?      
+PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'].Values = scrap_surplus_teaS       
+scrap_surplus_taS =  np.einsum('teaS-> taS', scrap_surplus_teaS)
 
 
 # F_0_1, Primary Aluminium Demand, determined by mass balance
 PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values = \
-        np.einsum('trea-> tea', 
+        np.einsum('treaS-> teaS', 
         PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values - \
         PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values - \
         PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values - \
@@ -771,499 +668,328 @@ PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values = \
 
         
 # S_3, dimensions tcrpsza
-PassengerVehicleFleet_MFA_System.StockDict['S_3'].Values = np.expand_dims(Alloys_stock_tcrpsza, axis=3)
+PassengerVehicleFleet_MFA_System.StockDict['S_3'].Values = np.expand_dims(Alloys_stock_tcrpszaS, axis=3)
 # dS_3, dimensions trpsza
 PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values = PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values - \
-                                                            np.einsum('tcrpszea-> trpszea', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
+                                                            np.einsum('tcrpszeaS-> trpszeaS', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
+                                                            
+                                                            
+                                                            
+#### Carbon footprint calculations   
+
+
+                                                         
                                                            
 # Mass balance check:
+print("Checking Mass Balance")    
 Bal = PassengerVehicleFleet_MFA_System.MassBalance()
-print(Bal.shape) # dimensions of balance are: time step x process x chemical element
 print(np.abs(Bal).sum(axis = 0)) # reports the sum of all absolute balancing errors by process.        
 
-F_1_2_ta = np.einsum('trea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)
-F_2_3_ta = np.einsum('trpszea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values)
-F_3_4_ta = np.einsum('tcrpszea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
-F_4_0_ta = np.einsum('tcrpszea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values)
-F_4_5_ta = np.einsum('tcrpszea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values)
-F_4_7_ta = np.einsum('tcrpszea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values)
-F_5_6_ta = np.einsum('trea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values)
-F_5_7_ta = np.einsum('trea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values)
-F_6_0_ta = np.einsum('trea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'].Values)
-F_6_1_ta = np.einsum('trea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values)
-F_7_0_ta = np.einsum('trea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values)
-F_7_1_ta = np.einsum('trea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values)
-F_7_8_ta = np.einsum('trea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values)
-F_8_1_ta = np.einsum('trea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values)
-F_0_1_ta = np.einsum('tea -> ta', PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values)
-F_1_9_ta = scrap_surplus_ta
-S_3_ta = np.einsum('tcrpszea -> ta', PassengerVehicleFleet_MFA_System.StockDict['S_3'].Values)
-dS_3_ta = np.einsum('trpszea -> ta', PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values)
+# Exports
+print("Exporting data")
+F_1_2_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)
+F_2_3_taS = np.einsum('trpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values)
+F_3_4_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
+F_4_0_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values)
+F_4_5_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values)
+F_4_7_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values)
+F_5_6_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values)
+F_5_7_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values)
+F_6_0_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'].Values)
+F_6_1_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values)
+F_7_0_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values)
+F_7_1_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values)
+F_7_8_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values)
+F_8_1_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values)
+F_0_1_taS = np.einsum('teaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values)
+F_1_9_taS = scrap_surplus_taS
+S_3_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.StockDict['S_3'].Values)
+dS_3_taS = np.einsum('trpszeaS -> taS', PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values)
 
 
-
-
-cf.export_to_csv(F_2_3_ta, 'F_2_3_ta', IndexTable)
-cf.export_to_csv(F_3_4_ta, 'F_3_4_ta', IndexTable)
-cf.export_to_csv(F_4_0_ta, 'F_4_0_ta', IndexTable)
-cf.export_to_csv(F_4_5_ta, 'F_4_5_ta', IndexTable)
-cf.export_to_csv(F_4_7_ta, 'F_4_7_ta', IndexTable)
-cf.export_to_csv(F_5_6_ta, 'F_5_6_ta', IndexTable)
-cf.export_to_csv(F_5_7_ta, 'F_5_7_ta', IndexTable)
-cf.export_to_csv(F_6_0_ta, 'F_6_0_ta', IndexTable)
-cf.export_to_csv(F_6_1_ta, 'F_6_1_ta', IndexTable)
-cf.export_to_csv(F_7_0_ta, 'F_7_0_ta', IndexTable)
-cf.export_to_csv(F_7_1_ta, 'F_7_1_ta', IndexTable)
-cf.export_to_csv(F_1_2_ta, 'F_1_2_ta', IndexTable)
-cf.export_to_csv(F_1_9_ta, 'scrap_surplus_ta', IndexTable)
+cf.export_to_csv(F_2_3_taS, 'F_2_3_taS', IndexTable)
+cf.export_to_csv(F_3_4_taS, 'F_3_4_taS', IndexTable)
+cf.export_to_csv(F_4_0_taS, 'F_4_0_taS', IndexTable)
+cf.export_to_csv(F_4_5_taS, 'F_4_5_taS', IndexTable)
+cf.export_to_csv(F_4_7_taS, 'F_4_7_taS', IndexTable)
+cf.export_to_csv(F_5_6_taS, 'F_5_6_taS', IndexTable)
+cf.export_to_csv(F_5_7_taS, 'F_5_7_taS', IndexTable)
+cf.export_to_csv(F_6_0_taS, 'F_6_0_taS', IndexTable)
+cf.export_to_csv(F_6_1_taS, 'F_6_1_taS', IndexTable)
+cf.export_to_csv(F_7_0_taS, 'F_7_0_taS', IndexTable)
+cf.export_to_csv(F_7_1_taS, 'F_7_1_taS', IndexTable)
+cf.export_to_csv(F_1_2_taS, 'F_1_2_taS', IndexTable)
+cf.export_to_csv(F_1_9_taS, 'scrap_surplus_taS', IndexTable)
 
 iterables = []
 names = []
-for dim in ['t','a']:
+for dim in ['t','a','S']:
     iterables.append(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc(dim)].Items)
     names.append(IndexTable[IndexTable['IndexLetter'] == dim]['Description'].index.values[0])  
 
 index = pd.MultiIndex.from_product(iterables, names=names)
-df = pd.DataFrame(F_2_3_ta.flatten()/10**9,index=index, columns = ['F_2_3_ta'])
-df['F_3_4_ta'] = F_3_4_ta.flatten()/10**9
-df['F_4_0_ta'] = F_4_0_ta.flatten()/10**9
-df['F_4_5_ta'] = F_4_5_ta.flatten()/10**9
-df['F_4_7_ta'] = F_4_7_ta.flatten()/10**9
-df['F_5_6_ta'] = F_5_6_ta.flatten()/10**9
-df['F_5_7_ta'] = F_5_7_ta.flatten()/10**9
-df['F_6_0_ta'] = F_6_0_ta.flatten()/10**9
-df['F_6_1_ta'] = F_6_1_ta.flatten()/10**9
-df['F_7_0_ta'] = F_7_0_ta.flatten()/10**9
-df['F_7_1_ta'] = F_7_1_ta.flatten()/10**9
-df['F_1_2_ta'] = F_1_2_ta.flatten()/10**9
-df['F_1_9_ta'] = scrap_surplus_ta.flatten()/10**9
-df['S_3_ta'] = S_3_ta.flatten()/10**9
-df['dS_3_ta'] = dS_3_ta.flatten()/10**9
-df['F_0_1_ta'] = F_0_1_ta.flatten()/10**9
-df['F_7_8_ta'] = F_7_8_ta.flatten()/10**9
-df['F_8_1_ta'] = F_8_1_ta.flatten()/10**9
+df = pd.DataFrame(F_2_3_taS.flatten()/10**9,index=index, columns = ['F_2_3_ta'])
+df['F_3_4_ta'] = F_3_4_taS.flatten()/10**9
+df['F_4_0_ta'] = F_4_0_taS.flatten()/10**9
+df['F_4_5_ta'] = F_4_5_taS.flatten()/10**9
+df['F_4_7_ta'] = F_4_7_taS.flatten()/10**9
+df['F_5_6_ta'] = F_5_6_taS.flatten()/10**9
+df['F_5_7_ta'] = F_5_7_taS.flatten()/10**9
+df['F_6_0_ta'] = F_6_0_taS.flatten()/10**9
+df['F_6_1_ta'] = F_6_1_taS.flatten()/10**9
+df['F_7_0_ta'] = F_7_0_taS.flatten()/10**9
+df['F_7_1_ta'] = F_7_1_taS.flatten()/10**9
+df['F_1_2_ta'] = F_1_2_taS.flatten()/10**9
+df['F_1_9_ta'] = scrap_surplus_taS.flatten()/10**9
+df['S_3_ta'] = S_3_taS.flatten()/10**9
+df['dS_3_ta'] = dS_3_taS.flatten()/10**9
+df['F_0_1_ta'] = F_0_1_taS.flatten()/10**9
+df['F_7_8_ta'] = F_7_8_taS.flatten()/10**9
+df['F_8_1_ta'] = F_8_1_taS.flatten()/10**9
 
 
 
-df.to_excel('results/flows.xlsx', merge_cells=False)
+df.to_excel('results/flows_scenarios.xlsx', merge_cells=False)
 
-F_0_1_t = np.einsum('ta -> t', F_0_1_ta)/10**9
-F_1_2_t = np.einsum('ta -> t', F_1_2_ta)/10**9
-F_1_9_t = np.einsum('ta -> t', F_1_9_ta)/10**9
-F_2_3_t = np.einsum('ta -> t', F_2_3_ta)/10**9
-F_3_4_t = np.einsum('ta -> t', F_3_4_ta)/10**9
-F_4_0_t = np.einsum('ta -> t', F_4_0_ta)/10**9
-F_4_5_t = np.einsum('ta -> t', F_4_5_ta)/10**9
-F_4_7_t = np.einsum('ta -> t', F_4_7_ta)/10**9
-F_5_6_t = np.einsum('ta -> t', F_5_6_ta)/10**9
-F_5_7_t = np.einsum('ta -> t', F_5_7_ta)/10**9
-F_6_0_t = np.einsum('ta -> t', F_6_0_ta)/10**9
-F_6_1_t = np.einsum('ta -> t', F_6_1_ta)/10**9
-F_7_0_t = np.einsum('ta -> t', F_7_0_ta)/10**9
-F_7_1_t = np.einsum('ta -> t', F_7_1_ta)/10**9
-F_7_8_t = np.einsum('ta -> t', F_7_8_ta)/10**9
-F_8_1_t = np.einsum('ta -> t', F_8_1_ta)/10**9
-
-
-
-
-index = pd.Index(
-        PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:],
-        name="Time")
-
-df = pd.DataFrame(F_0_1_t.flatten(),index=index, columns = ['F_0_1_t'])
-
-df['F_1_2_t'] = F_1_2_t.flatten()
-df['F_1_9_t'] = F_1_9_t.flatten()
-df['F_2_3_t'] = F_2_3_t.flatten()
-df['F_3_4_t'] = F_3_4_t.flatten()
-df['F_4_0_t'] = F_4_0_t.flatten()
-df['F_4_5_t'] = F_4_5_t.flatten()
-df['F_4_7_t'] = F_4_7_t.flatten()
-df['F_5_6_t'] = F_5_6_t.flatten()
-df['F_5_7_t'] = F_5_7_t.flatten()
-df['F_6_0_t'] = F_6_0_t.flatten()
-df['F_6_1_t'] = F_6_1_t.flatten()
-df['F_7_0_t'] = F_7_0_t.flatten()
-df['F_7_1_t'] = F_7_1_t.flatten()
-df['F_7_8_t'] = F_7_8_t.flatten()
-df['F_8_1_t'] = F_8_1_t.flatten()
+# F_0_1_t = np.einsum('ta -> t', F_0_1_ta)/10**9
+# F_1_2_t = np.einsum('ta -> t', F_1_2_ta)/10**9
+# F_1_9_t = np.einsum('ta -> t', F_1_9_ta)/10**9
+# F_2_3_t = np.einsum('ta -> t', F_2_3_ta)/10**9
+# F_3_4_t = np.einsum('ta -> t', F_3_4_ta)/10**9
+# F_4_0_t = np.einsum('ta -> t', F_4_0_ta)/10**9
+# F_4_5_t = np.einsum('ta -> t', F_4_5_ta)/10**9
+# F_4_7_t = np.einsum('ta -> t', F_4_7_ta)/10**9
+# F_5_6_t = np.einsum('ta -> t', F_5_6_ta)/10**9
+# F_5_7_t = np.einsum('ta -> t', F_5_7_ta)/10**9
+# F_6_0_t = np.einsum('ta -> t', F_6_0_ta)/10**9
+# F_6_1_t = np.einsum('ta -> t', F_6_1_ta)/10**9
+# F_7_0_t = np.einsum('ta -> t', F_7_0_ta)/10**9
+# F_7_1_t = np.einsum('ta -> t', F_7_1_ta)/10**9
+# F_7_8_t = np.einsum('ta -> t', F_7_8_ta)/10**9
+# F_8_1_t = np.einsum('ta -> t', F_8_1_ta)/10**9
 
 
 
-df.to_excel('results/flows_per_year.xlsx')
+
+# index = pd.Index(
+#         PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:],
+#         name="Time")
+
+# df = pd.DataFrame(F_0_1_t.flatten(),index=index, columns = ['F_0_1_t'])
+
+# df['F_1_2_t'] = F_1_2_t.flatten()
+# df['F_1_9_t'] = F_1_9_t.flatten()
+# df['F_2_3_t'] = F_2_3_t.flatten()
+# df['F_3_4_t'] = F_3_4_t.flatten()
+# df['F_4_0_t'] = F_4_0_t.flatten()
+# df['F_4_5_t'] = F_4_5_t.flatten()
+# df['F_4_7_t'] = F_4_7_t.flatten()
+# df['F_5_6_t'] = F_5_6_t.flatten()
+# df['F_5_7_t'] = F_5_7_t.flatten()
+# df['F_6_0_t'] = F_6_0_t.flatten()
+# df['F_6_1_t'] = F_6_1_t.flatten()
+# df['F_7_0_t'] = F_7_0_t.flatten()
+# df['F_7_1_t'] = F_7_1_t.flatten()
+# df['F_7_8_t'] = F_7_8_t.flatten()
+# df['F_8_1_t'] = F_8_1_t.flatten()
+
+
+
+# df.to_excel('results/flows_per_year.xlsx')
 
 
 #### Plots
+print("Plots")
 plt.ioff() 
 
-## Car Stock per region
-y_dict = {
-        'name': 'Car Stock',
-        'aspect': 'Region',
-        'unit': 'cars'
-        }
-cf.plot_result_time(S_tr, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
+for scenario in range(NS):
 
-## Car inflows per region
-y_dict = {
-        'name': 'Car Inflows',
-        'aspect': 'Region',
-        'unit': 'cars/yr'
-        }
-cf.plot_result_time(I_cr, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-# Car outflows per region
-y_dict = {
-        'name': 'Car Outflows',
-        'aspect': 'Region',
-        'unit': 'cars/yr'
-        }
-cf.plot_result_time(O_tr, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-## Stock by powertrain
-y_dict = {
-        'name': 'Car Stock',
-        'aspect': 'Powertrain',
-        'unit': 'cars'
-        }
-cf.plot_result_time(S_tp, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-## Car inflows by powertrain
-y_dict = {
-        'name': 'Car inflows',
-        'aspect': 'Powertrain',
-        'unit': 'cars'
-        }
-cf.plot_result_time(I_cp, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-## Car outflows by powertrain
-y_dict = {
-        'name': 'Car Outflows',
-        'aspect': 'Powertrain',
-        'unit': 'cars'
-        }
-cf.plot_result_time(O_tp, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-## Stock by segment
-y_dict = {
-        'name': 'Car Stock',
-        'aspect': 'Segment',
-        'unit': 'cars'
-        }
-cf.plot_result_time(S_ts, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-## Car inflows by segment
-y_dict = {
-        'name': 'Car Inflows',
-        'aspect': 'Segment',
-        'unit': 'cars'
-        }
-cf.plot_result_time(I_cs, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-## Car outflows by segment
-y_dict = {
-        'name': 'Car Outflows',
-        'aspect': 'Segment',
-        'unit': 'cars'
-        }
-cf.plot_result_time(O_ts, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-
-
-## Plot Al Stock per component
-y_dict = {
-        'name': 'Al Stock',
-        'aspect': 'Component',
-        'unit': 'Mt'
-        }
-cf.plot_result_time(Al_stock_tz/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-## Plot Al inflows per conponent
-y_dict = {
-        'name': 'Al Inflows',
-        'aspect': 'Component',
-        'unit': 'Mt/yr'
-        }
-cf.plot_result_time(Al_inflow_cz/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-
-## Plot Al outflows per conponent
-y_dict = {
-        'name': 'Al Outflows',
-        'aspect': 'Component',
-        'unit': 'Mt/yr'
-        }
-cf.plot_result_time(Al_outflow_tz/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-
-
-# Aluminium stock per region
-y_dict = {
-        'name': 'Al stock',
-        'aspect': 'Region',
-        'unit': 'Mt'
-        }
-cf.plot_result_time(Al_stock_tr/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-# Aluminium inflows per region
-y_dict = {
-        'name': 'Al Inflows',
-        'aspect': 'Region',
-        'unit': 'Mt/yr'
-        }
-cf.plot_result_time(Al_inflow_cr/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-# Aluminium outflows per region
-y_dict = {
-        'name': 'Al Outflows',
-        'aspect': 'Region',
-        'unit': 'Mt/yr'
-        }
-cf.plot_result_time(Al_outflow_tr/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-## Plot Al Alloys inflows 
-y_dict = {
-        'name': 'Al Inflows',
-        'aspect': 'Alloy',
-        'unit': 'Mt/yr'
-        }
-cf.plot_result_time(Alloys_inflow_ca/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-## Plot Average Al content in inflows per region
-y_dict = {
-        'name': 'Average Al content',
-        'aspect': 'Region',
-        'unit': 'kg/car'
-        }
-cf.plot_result_time(Al_inflow_cr / I_cr, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='no')
-
-
-## Plot Average Al content in inflows per powertrain
-I_cp = np.einsum('crps -> cp', I_crps)
-Al_inflow_cp = np.einsum('crps -> cp', Al_inflow_crps)
-y_dict = {
-        'name': 'Average Al content',
-        'aspect': 'Powertrain',
-        'unit': 'kg/car'
-        }
-cf.plot_result_time(Al_inflow_cp / I_cp, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='no')
-
-
-## Plot Average Al content in inflows per segment
-I_cs = np.einsum('crps -> cs', I_crps)
-Al_inflow_cs = np.einsum('crps -> cs', Al_inflow_crps)
-y_dict = {
-        'name': 'Average Al content',
-        'aspect': 'Segment',
-        'unit': 'kg/car'
-        }
-cf.plot_result_time(Al_inflow_cs / I_cs, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='no')
-
-## Plot Al Alloys outflows
-y_dict = {
-        'name': 'Al Outflows',
-        'aspect': 'Alloy',
-        'unit': 'Mt/yr'
-        }
-cf.plot_result_time(Alloys_outflow_ta/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='yes')
-
-# Plot Ratio Outflows / Inflows
-y_dict = {
-        'name': 'Ratio Outflows - Inflows',
-        'aspect': 'Alloy',
-        'unit': ''
-        }
-cf.plot_result_time(Alloys_outflow_ta / Alloys_inflow_ca, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no')
-
-# Plot Ratio Outflows / Inflows for secondary castings per region
-y_dict = {
-        'name': 'O-I Ratio for 2nd castings',
-        'aspect': 'Region',
-        'unit': ''
-        }
-cf.plot_result_time(Alloys_outflow_tra[:,:,2] / Alloys_inflow_cra[:,:,2], y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no')
-
-
-
-
-
-
-
-MyColorCycle = pylab.cm.Paired(np.arange(0,1,0.1)) # select 10 colors from the 'Paired' color map.
-Regions = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('r')].Items
-width = 35
-height = 25
-
-## Car Stock per region
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for region in range(0,Nr):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:], 
-#            S_tr[:,region],
-#            color = MyColorCycle[region,:], linewidth = 2)
-#ax.set_ylabel('Car Stock, cars,',fontsize =16)
-#ax.legend(Regions, loc='upper right',prop={'size':8})
-#fig.savefig('Car Stock per region', dpi = 400)    
-#plt.show()
-
-## Car inflows per region
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for region in range(0,Nr):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:], 
-#            I_cr[:,region],
-#            color = MyColorCycle[region,:], linewidth = 2)
-#ax.set_ylabel('Car Inflow, cars/yr,',fontsize =16)
-#ax.legend(Regions, loc='upper right',prop={'size':8})
-#fig.savefig('Car Inflows per region', dpi = 400)    
-##plt.show()
-#plt.close()
-
-
-# Car outflows per region
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for region in range(0,Nr):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:], 
-#            O_tr[:,region],
-#            color = MyColorCycle[region,:], linewidth = 2)
-#ax.set_ylabel('Car Outflow, cars/yr,',fontsize =16)
-#ax.legend(Regions, loc='upper right',prop={'size':8})
-#fig.savefig('Car outflows per region', dpi = 400)      
-##plt.show()
-#plt.close()                            
-
-#Powertrains = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('p')].Items
-
-
-
-## Stock by powertrain
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for powertrain in range(0,Np):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:], 
-#            S_tp[:,powertrain],
-#            color = MyColorCycle[powertrain,:], linewidth = 2)
-#ax.set_ylabel('Car Stock, cars',fontsize =16)
-#ax.legend(Powertrains, loc='upper right',prop={'size':8})
-#fig.savefig('Car Stock per powertrain type', dpi = 400)      
-##plt.show()
-#plt.close()
-
-#Segments = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('s')].Items
-
-
-## Stock by segment
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for segment in range(0,Ns):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:], 
-#            S_ts[:,segment],
-#            color = MyColorCycle[segment,:], linewidth = 2)
-#ax.set_ylabel('Car Stock, cars',fontsize =16)
-#ax.legend(Segments, loc='upper right',prop={'size':8})
-#fig.savefig('Car Stock per marketing segment', dpi = 400)      
-##plt.show()
-#plt.close()
-
-
-## Plot Al Stock per component
-#MyColorCycle = pylab.cm.Paired(np.arange(0,1,0.08)) # select 13 colors from the 'Paired' color map.
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for component in range(0,Nz):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:], 
-#            Al_stock_tz[:,component],
-#            color = MyColorCycle[component,:], linewidth = 2)
-#ax.set_ylabel('Al Stock per component,',fontsize =16)
-#ax.legend(Components, loc='upper right',prop={'size':8})
-#fig.savefig('Al Stock per component', dpi = 400)      
-##plt.show()
-#plt.close()
-
-
-
-## Plot Al inflows per conponent
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for component in range(0,Nz):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:], 
-#            Al_inflow_cz[:,component],
-#            color = MyColorCycle[component,:], linewidth = 2)
-#ax.set_ylabel('Al Inflow per component,',fontsize =16)
-#ax.legend(Components, loc='upper right',prop={'size':8})
-#fig.savefig('Al Inflow per component', dpi = 400)      
-##plt.show()
-#plt.close()
-
-
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for region in range(0,Nr):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:], 
-#            Al_stock_tr[:,region],
-#            color = MyColorCycle[region,:], linewidth = 2)
-#ax.set_ylabel('Al Stock per region,',fontsize =16)
-#ax.legend(Regions, loc='upper right',prop={'size':8})
-#fig.savefig('Al Stock per region', dpi = 400)      
-##plt.show()
-#plt.close()
-#plt.show()
-
-## Plot Al Alloys inflows 
-#MyColorCycle = pylab.cm.Paired(np.arange(0,1,0.3)) # select 4 colors from the 'Paired' color map.
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for alloy in range(0,Na):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:], 
-#            Alloys_inflow_ca[:,alloy],
-#            color = MyColorCycle[alloy,:], linewidth = 2)
-#ax.set_ylabel('Al Inflow per Alloy,',fontsize =16)
-#ax.legend(Alloys, loc='upper right',prop={'size':8})
-#fig.savefig('Al Inflow per Alloy', dpi = 400)      
-##plt.show()
-#plt.close()
-
-
-## Plot Al Alloys outflows
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for alloy in range(0,Na):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:], 
-#            Alloys_outflow_ta[:,alloy],
-#            color = MyColorCycle[alloy,:], linewidth = 2)
-#ax.set_ylabel('Al outflow per Alloy,',fontsize =16)
-#ax.legend(Alloys, loc='upper right',prop={'size':8})
-#fig.savefig('Al outflow per Alloy', dpi = 400)      
-##plt.show()
-#plt.close()
-
-
-## Plot Ratio Outflows / Inflows per alloy
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for alloy in range(0,3):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[100:], 
-#            Alloys_outflow_ta[100:,alloy] / Alloys_inflow_ca[100:,alloy],
-#            color = MyColorCycle[alloy,:], linewidth = 2)
-#ax.set_ylabel('Ratio Outflows / Inflows per alloy,',fontsize =16)
-#ax.legend(Alloys, loc='upper right',prop={'size':8})
-#fig.savefig('Ratio Outflows - Inflows per alloy', dpi = 400)      
-##plt.show()
-#plt.close()
-
-#
-## Plot Ratio Outflows / Inflows for secondary castings per region
-#MyColorCycle = pylab.cm.Paired(np.arange(0,1,0.2)) # select 5 colors from the 'Paired' color map.
-#fig, ax = plt.subplots()
-#plt.figure(figsize=(width, height))
-#for region in range(0,Nr):
-#    ax.plot(PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[100:], 
-#            Alloys_outflow_tra[100:,region,2] / Alloys_inflow_cra[100:,region,2],
-#            color = MyColorCycle[region,:], linewidth = 2)
-#ax.set_ylabel('Ratio Out/In for 2nd castings,',fontsize =16)
-#ax.legend(Regions, loc='upper right',prop={'size':8})
-#fig.savefig('Ratio Outflows - Inflows for secondary castings per region', dpi = 400)      
-##plt.show()
-
+    print("Plotting results for scenario " + str(scenario))
+    ## Car Stock per region
+    y_dict = {
+            'name': 'Car Stock',
+            'aspect': 'Region',
+            'unit': 'cars'
+            }
+    cf.plot_result_time_scenario(S_trS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    ## Car inflows per region
+    y_dict = {
+            'name': 'Car Inflows',
+            'aspect': 'Region',
+            'unit': 'cars/yr'
+            }
+    cf.plot_result_time_scenario(I_crS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    # Car outflows per region
+    y_dict = {
+            'name': 'Car Outflows',
+            'aspect': 'Region',
+            'unit': 'cars/yr'
+            }
+    cf.plot_result_time_scenario(O_trS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    ## Stock by powertrain
+    y_dict = {
+            'name': 'Car Stock',
+            'aspect': 'Powertrain',
+            'unit': 'cars'
+            }
+    cf.plot_result_time_scenario(S_tpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    ## Car inflows by powertrain
+    y_dict = {
+            'name': 'Car inflows',
+            'aspect': 'Powertrain',
+            'unit': 'cars'
+            }
+    cf.plot_result_time_scenario(I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    ## Car outflows by powertrain
+    y_dict = {
+            'name': 'Car Outflows',
+            'aspect': 'Powertrain',
+            'unit': 'cars'
+            }
+    cf.plot_result_time_scenario(O_tpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    ## Stock by segment
+    y_dict = {
+            'name': 'Car Stock',
+            'aspect': 'Segment',
+            'unit': 'cars'
+            }
+    cf.plot_result_time_scenario(S_tsS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    ## Car inflows by segment
+    y_dict = {
+            'name': 'Car Inflows',
+            'aspect': 'Segment',
+            'unit': 'cars'
+            }
+    cf.plot_result_time_scenario(I_csS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    ## Car outflows by segment
+    y_dict = {
+            'name': 'Car Outflows',
+            'aspect': 'Segment',
+            'unit': 'cars'
+            }
+    cf.plot_result_time_scenario(O_tsS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    
+    
+    ## Plot Al Stock per component
+    y_dict = {
+            'name': 'Al Stock',
+            'aspect': 'Component',
+            'unit': 'Mt'
+            }
+    cf.plot_result_time_scenario(Al_stock_tzS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    ## Plot Al inflows per conponent
+    y_dict = {
+            'name': 'Al Inflows',
+            'aspect': 'Component',
+            'unit': 'Mt/yr'
+            }
+    cf.plot_result_time_scenario(Al_inflow_czS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    
+    ## Plot Al outflows per conponent
+    y_dict = {
+            'name': 'Al Outflows',
+            'aspect': 'Component',
+            'unit': 'Mt/yr'
+            }
+    cf.plot_result_time_scenario(Al_outflow_tzS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    
+    
+    # Aluminium stock per region
+    y_dict = {
+            'name': 'Al stock',
+            'aspect': 'Region',
+            'unit': 'Mt'
+            }
+    cf.plot_result_time_scenario(Al_stock_trS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    # Aluminium inflows per region
+    y_dict = {
+            'name': 'Al Inflows',
+            'aspect': 'Region',
+            'unit': 'Mt/yr'
+            }
+    cf.plot_result_time_scenario(Al_inflow_crS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    # Aluminium outflows per region
+    y_dict = {
+            'name': 'Al Outflows',
+            'aspect': 'Region',
+            'unit': 'Mt/yr'
+            }
+    cf.plot_result_time_scenario(Al_outflow_trS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    ## Plot Al Alloys inflows 
+    y_dict = {
+            'name': 'Al Inflows',
+            'aspect': 'Alloy',
+            'unit': 'Mt/yr'
+            }
+    cf.plot_result_time_scenario(Alloys_inflow_caS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    ## Plot Average Al content in inflows per region
+    y_dict = {
+            'name': 'Average Al content',
+            'aspect': 'Region',
+            'unit': 'kg/car'
+            }
+    cf.plot_result_time_scenario(Al_inflow_crS / I_crS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no')
+    
+    
+    ## Plot Average Al content in inflows per powertrain
+    I_cpS = np.einsum('crpsS -> cpS', I_crpsS)
+    Al_inflow_cpS = np.einsum('crpsS -> cpS', Al_inflow_crpsS)
+    y_dict = {
+            'name': 'Average Al content',
+            'aspect': 'Powertrain',
+            'unit': 'kg/car'
+            }
+    cf.plot_result_time_scenario(Al_inflow_cpS / I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no')
+    
+    
+    ## Plot Average Al content in inflows per segment
+    I_csS = np.einsum('crpsS -> csS', I_crpsS)
+    Al_inflow_csS = np.einsum('crpsS -> csS', Al_inflow_crpsS)
+    y_dict = {
+            'name': 'Average Al content',
+            'aspect': 'Segment',
+            'unit': 'kg/car'
+            }
+    cf.plot_result_time_scenario(Al_inflow_csS / I_csS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no')
+    
+    ## Plot Al Alloys outflows
+    y_dict = {
+            'name': 'Al Outflows',
+            'aspect': 'Alloy',
+            'unit': 'Mt/yr'
+            }
+    cf.plot_result_time_scenario(Alloys_outflow_taS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    # Plot Ratio Outflows / Inflows
+    y_dict = {
+            'name': 'Ratio Outflows - Inflows',
+            'aspect': 'Alloy',
+            'unit': ''
+            }
+    cf.plot_result_time_scenario(Alloys_outflow_taS / Alloys_inflow_caS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no')
+    
+    # Plot Ratio Outflows / Inflows for secondary castings per region
+    y_dict = {
+            'name': 'O-I Ratio for 2nd castings',
+            'aspect': 'Region',
+            'unit': ''
+            }
+    cf.plot_result_time_scenario(Alloys_outflow_traS[:,:,2] / Alloys_inflow_craS[:,:,2], y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no')
+    
+    

@@ -41,16 +41,38 @@ def export_to_csv(array: np.array, array_name: str, IndexTable):
     print(array_name + ' of dimensions: ' + array_dims + ' has been saved as: ' + file_name)
     
 
-y_dict = {
-        'name': 'Stock change',
-        'aspect': 'Region',
-        'unit': 'cars'
-        }
-x_dict = {
-        'name': 'Time',
-        'aspect': 't'
-        }
+def export_to_csv_scenario(array: np.array, array_name: str, IndexTable):
+    """
+    Function used to export a multidimensional array to a flat csv file
+    results are stored depending on the scenario which is the last index of the array
+
+    :param array: The array that will be exported
+    :param array_name: The name of the array that will be exported
+    this will be the name given to the csv file
+    IMPORTANT: the name needs to end with "_dims", 
+    where dims is a string composed of its dimensions indexes
+    according to the IndexTable
+    :paran IndexTable: The IndexTable used in the ODYM model,
+    used to give the correct index to the exported file
     
+    Exporting arrays containing many dimensions will result in slow execution 
+    and very large csv files, use with caution!
+    """
+
+    array_dims = array_name.split('_')[-1]
+    iterables = []
+    names = []
+    for dim in array_dims:
+        iterables.append(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc(dim)].Items)
+        names.append(IndexTable[IndexTable['IndexLetter'] == dim]['Description'].index.values[0])  
+    
+    index = pd.MultiIndex.from_product(iterables, names=names)
+    df = pd.DataFrame(array.flatten(),index=index, columns = ['Values'])
+    file_name = 'results/' + array_name + '.csv'
+    df.to_csv(file_name)
+    print(array_name + ' of dimensions: ' + array_dims + ' has been saved as: ' + file_name)
+     
+
 def plot_result_time(array, y_dict, IndexTable, t_min, t_max, width=35, height=25, show='no', stack='no'):
     """
     Function used to draw and save standard plots from the model results
@@ -92,6 +114,56 @@ def plot_result_time(array, y_dict, IndexTable, t_min, t_max, width=35, height=2
     fig.suptitle(y_dict['name'] +' by ' + y_dict['aspect'])
     ax.legend(category, loc='upper left',prop={'size':8})
     fig.savefig('results/plots/' + y_dict['name'] +' by ' + y_dict['aspect'], dpi = 400)    
+    if show == 'yes':
+        plt.show()
+    plt.close(fig)
+
+
+def plot_result_time_scenario(array, y_dict, IndexTable, t_min, t_max, scenario, 
+                              width=35, height=25, show='no', stack='no'):
+    """
+    Function used to draw and save standard plots from the model results
+    x-axis is always time in years
+    
+    :param array:  2D numpy array that will be plotted
+    :param y_dict: dict, defines the properties of the y axis,
+    with the following template:
+        y_dict = {
+            'name': 'name', #name of graph
+            'aspect': aspect', #aspect used for splitting the data in categories, 2nd dim of the array
+            'unit': 'unit'  #unit of the data (will show on the y axis)
+        }
+        the plot will be saved at results/plots/'name' by 'aspect'.png
+    :param t_min and t_max: define the years of x-axis 
+    :param width and height: define the size of the plot
+    :param show: if 'yes', the graph is shown on the console, 
+                otherwise it is just saved under results/plot
+    :param stack: if 'yes', uses a stackplot
+    """    
+    # Car Stock per region
+    fig, ax = plt.subplots()
+    plt.figure(figsize=(width, height))
+    m = 0
+    scenario_name = IndexTable.Classification[IndexTable.set_index('IndexLetter').\
+                                              index.get_loc('S')].Items[scenario]
+    category = IndexTable.Classification[y_dict['aspect']].Items
+    N_cat = len(category)
+    MyColorCycle = pylab.cm.Paired(np.arange(0,1,1/N_cat)) # select 10 colors from the 'Paired' color map.
+    if stack == 'yes':
+        ax.stackplot(np.array(IndexTable['Classification']['Time'].Items[t_min:t_max]),
+                np.transpose(array[t_min:t_max,:,scenario]),
+                colors = MyColorCycle[:,:])
+    else:
+        for m in range(N_cat):
+            ax.plot(IndexTable['Classification']['Time'].Items[t_min:t_max],
+                    array[t_min:t_max,m,scenario],
+                    color = MyColorCycle[m,:], linewidth = 2)
+            m += 1
+    ax.set_ylabel(y_dict['name'] +', ' + y_dict['unit'],fontsize =16)
+    fig.suptitle(y_dict['name'] +' by ' + y_dict['aspect'])
+    ax.legend(category, loc='upper left',prop={'size':8})
+    fig.savefig('results/plots/' + scenario_name + '/' + \
+                y_dict['name'] +' by ' + y_dict['aspect'], dpi = 400)    
     if show == 'yes':
         plt.show()
     plt.close(fig)
