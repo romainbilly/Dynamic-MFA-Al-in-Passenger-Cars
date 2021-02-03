@@ -676,7 +676,13 @@ PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values = PassengerVehicleFlee
                                                             
                                                             
 #### Carbon footprint calculations   
-
+carbon_footprint_primary = np.einsum('teaS, tS -> tS', 
+                                     PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values,
+                                     PassengerVehicleFleet_MFA_System.ParameterDict['Carbon_Footprint_Primary'].Values)
+carbon_footprint_secondary = np.einsum('teaS, tS -> tS', 
+                                     PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values - \
+                                     np.einsum('treaS -> teaS', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values),
+                                     PassengerVehicleFleet_MFA_System.ParameterDict['Carbon_Footprint_Secondary'].Values)
 
                                                          
                                                            
@@ -991,5 +997,13 @@ for scenario in range(NS):
             'unit': ''
             }
     cf.plot_result_time_scenario(Alloys_outflow_traS[:,:,2] / Alloys_inflow_craS[:,:,2], y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no')
-    
+
+
+## Plot Total Carbon footprint
+y_dict = {
+        'name': 'Carbon footprint of Al production',
+        'aspect': 'Scenario',
+        'unit': 'kg CO2'
+        }
+cf.plot_result_time(carbon_footprint_primary + carbon_footprint_secondary, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='no')
     
