@@ -1824,11 +1824,11 @@ Time,Alloy,Scenario,Values
 2021.0,Primary castings,Scenario2,0.0
 2021.0,Primary castings,Scenario3,0.0
 2021.0,Primary castings,Scenario4,0.0
-2021.0,Secondary castings,Baseline,3607896350.625532
-2021.0,Secondary castings,Scenario1,3607978890.7692623
-2021.0,Secondary castings,Scenario2,3607857686.3808146
-2021.0,Secondary castings,Scenario3,3607887021.627012
-2021.0,Secondary castings,Scenario4,3607893942.0060143
+2021.0,Secondary castings,Baseline,3675737136.705671
+2021.0,Secondary castings,Scenario1,3675821228.8862906
+2021.0,Secondary castings,Scenario2,3675697745.4409666
+2021.0,Secondary castings,Scenario3,3675727632.290084
+2021.0,Secondary castings,Scenario4,3675734682.795871
 2022.0,Wrought,Baseline,0.0
 2022.0,Wrought,Scenario1,0.0
 2022.0,Wrought,Scenario2,0.0
@@ -1839,11 +1839,11 @@ Time,Alloy,Scenario,Values
 2022.0,Primary castings,Scenario2,0.0
 2022.0,Primary castings,Scenario3,0.0
 2022.0,Primary castings,Scenario4,0.0
-2022.0,Secondary castings,Baseline,3731720140.839718
-2022.0,Secondary castings,Scenario1,3731946204.4729614
-2022.0,Secondary castings,Scenario2,3731616760.071003
-2022.0,Secondary castings,Scenario3,3731696907.5176883
-2022.0,Secondary castings,Scenario4,3731709942.002966
+2022.0,Secondary castings,Baseline,3875751444.5212507
+2022.0,Secondary castings,Scenario1,3875986233.4175315
+2022.0,Secondary castings,Scenario2,3875644073.617603
+2022.0,Secondary castings,Scenario3,3875727314.474511
+2022.0,Secondary castings,Scenario4,3875740852.0451856
 2023.0,Wrought,Baseline,0.0
 2023.0,Wrought,Scenario1,0.0
 2023.0,Wrought,Scenario2,0.0
@@ -1854,11 +1854,11 @@ Time,Alloy,Scenario,Values
 2023.0,Primary castings,Scenario2,0.0
 2023.0,Primary castings,Scenario3,0.0
 2023.0,Primary castings,Scenario4,0.0
-2023.0,Secondary castings,Baseline,3855355186.382135
-2023.0,Secondary castings,Scenario1,3855922312.585533
-2023.0,Secondary castings,Scenario2,3855099186.1819777
-2023.0,Secondary castings,Scenario3,3855300599.8901834
-2023.0,Secondary castings,Scenario4,3855323674.060279
+2023.0,Secondary castings,Baseline,4084592521.78864
+2023.0,Secondary castings,Scenario1,4085193369.009537
+2023.0,Secondary castings,Scenario2,4084321299.954961
+2023.0,Secondary castings,Scenario3,4084534689.6133833
+2023.0,Secondary castings,Scenario4,4084559135.7611604
 2024.0,Wrought,Baseline,0.0
 2024.0,Wrought,Scenario1,0.0
 2024.0,Wrought,Scenario2,0.0
@@ -1869,11 +1869,11 @@ Time,Alloy,Scenario,Values
 2024.0,Primary castings,Scenario2,0.0
 2024.0,Primary castings,Scenario3,0.0
 2024.0,Primary castings,Scenario4,0.0
-2024.0,Secondary castings,Baseline,3980840332.4459085
-2024.0,Secondary castings,Scenario1,3982169324.2415724
-2024.0,Secondary castings,Scenario2,3980245591.0940437
-2024.0,Secondary castings,Scenario3,3980719320.6726255
-2024.0,Secondary castings,Scenario4,3980753891.2276874
+2024.0,Secondary castings,Baseline,4305205100.274834
+2024.0,Secondary castings,Scenario1,4306642380.290885
+2024.0,Secondary castings,Scenario2,4304561898.516522
+2024.0,Secondary castings,Scenario3,4305074228.282989
+2024.0,Secondary castings,Scenario4,4305111615.698091
 2025.0,Wrought,Baseline,0.0
 2025.0,Wrought,Scenario1,0.0
 2025.0,Wrought,Scenario2,0.0
@@ -1884,11 +1884,11 @@ Time,Alloy,Scenario,Values
 2025.0,Primary castings,Scenario2,0.0
 2025.0,Primary castings,Scenario3,0.0
 2025.0,Primary castings,Scenario4,0.0
-2025.0,Secondary castings,Baseline,4110450235.881484
-2025.0,Secondary castings,Scenario1,4113372809.7979727
-2025.0,Secondary castings,Scenario2,4109150334.3453465
-2025.0,Secondary castings,Scenario3,4110196757.1207285
-2025.0,Secondary castings,Scenario4,4110231536.10035
+2025.0,Secondary castings,Baseline,4541068832.021449
+2025.0,Secondary castings,Scenario1,4544297580.348237
+2025.0,Secondary castings,Scenario2,4539632750.324384
+2025.0,Secondary castings,Scenario3,4540788798.3429
+2025.0,Secondary castings,Scenario4,4540827220.834673
 2026.0,Wrought,Baseline,0.0
 2026.0,Wrought,Scenario1,0.0
 2026.0,Wrought,Scenario2,0.0
@@ -1899,11 +1899,11 @@ Time,Alloy,Scenario,Values
 2026.0,Primary castings,Scenario2,0.0
 2026.0,Primary castings,Scenario3,0.0
 2026.0,Primary castings,Scenario4,0.0
-2026.0,Secondary castings,Baseline,4245911972.107314
-2026.0,Secondary castings,Scenario1,4251956130.1188326
-2026.0,Secondary castings,Scenario2,4243233958.3255587
-2026.0,Secondary castings,Scenario3,4245408845.6963797
-2026.0,Secondary castings,Scenario4,4245395603.133479
+2026.0,Secondary castings,Baseline,4795382933.203555
+2026.0,Secondary castings,Scenario1,4802209276.369504
+2026.0,Secondary castings,Scenario2,4792358352.932395
+2026.0,Secondary castings,Scenario3,4794814696.315912
+2026.0,Secondary castings,Scenario4,4794799740.009577
 2027.0,Wrought,Baseline,0.0
 2027.0,Wrought,Scenario1,0.0
 2027.0,Wrought,Scenario2,0.0
@@ -1914,11 +1914,11 @@ Time,Alloy,Scenario,Values
 2027.0,Primary castings,Scenario2,0.0
 2027.0,Primary castings,Scenario3,0.0
 2027.0,Primary castings,Scenario4,0.0
-2027.0,Secondary castings,Baseline,4387719603.04586
-2027.0,Secondary castings,Scenario1,4399491798.438036
-2027.0,Secondary castings,Scenario2,4382511902.119595
-2027.0,Secondary castings,Scenario3,4386770592.683849
-2027.0,Secondary castings,Scenario4,4386576239.505915
+2027.0,Secondary castings,Baseline,5070253763.519662
+2027.0,Secondary castings,Scenario1,5083857189.306174
+2027.0,Secondary castings,Scenario2,5064235975.782642
+2027.0,Secondary castings,Scenario3,5069157129.323559
+2027.0,Secondary castings,Scenario4,5068932543.429057
 2028.0,Wrought,Baseline,0.0
 2028.0,Wrought,Scenario1,0.0
 2028.0,Wrought,Scenario2,0.0
@@ -1929,11 +1929,11 @@ Time,Alloy,Scenario,Values
 2028.0,Primary castings,Scenario2,0.0
 2028.0,Primary castings,Scenario3,0.0
 2028.0,Primary castings,Scenario4,0.0
-2028.0,Secondary castings,Baseline,4534817474.867509
-2028.0,Secondary castings,Scenario1,4556450646.546308
-2028.0,Secondary castings,Scenario2,4525246588.482096
-2028.0,Secondary castings,Scenario3,4533113701.637079
-2028.0,Secondary castings,Scenario4,4532438413.573601
+2028.0,Secondary castings,Baseline,5366200678.59322
+2028.0,Secondary castings,Scenario1,5391799931.746465
+2028.0,Secondary castings,Scenario2,5354875129.703814
+2028.0,Secondary castings,Scenario3,5364184546.937211
+2028.0,Secondary castings,Scenario4,5363385456.062094
 2029.0,Wrought,Baseline,0.0
 2029.0,Wrought,Scenario1,0.0
 2029.0,Wrought,Scenario2,0.0
@@ -1944,11 +1944,11 @@ Time,Alloy,Scenario,Values
 2029.0,Primary castings,Scenario2,0.0
 2029.0,Primary castings,Scenario3,0.0
 2029.0,Primary castings,Scenario4,0.0
-2029.0,Secondary castings,Baseline,4684810610.328064
-2029.0,Secondary castings,Scenario1,4722394866.341884
-2029.0,Secondary castings,Scenario2,4668162250.084775
-2029.0,Secondary castings,Scenario3,4681894635.605516
-2029.0,Secondary castings,Scenario4,4680151540.620622
+2029.0,Secondary castings,Baseline,5682221901.559199
+2029.0,Secondary castings,Scenario1,5727807966.917897
+2029.0,Secondary castings,Scenario2,5662029051.715727
+2029.0,Secondary castings,Scenario3,5678685106.411852
+2029.0,Secondary castings,Scenario4,5676570900.881785
 2030.0,Wrought,Baseline,0.0
 2030.0,Wrought,Scenario1,0.0
 2030.0,Wrought,Scenario2,0.0
@@ -1959,11 +1959,11 @@ Time,Alloy,Scenario,Values
 2030.0,Primary castings,Scenario2,0.0
 2030.0,Primary castings,Scenario3,0.0
 2030.0,Primary castings,Scenario4,0.0
-2030.0,Secondary castings,Baseline,4834658556.469735
-2030.0,Secondary castings,Scenario1,4896532820.226745
-2030.0,Secondary castings,Scenario2,4807200110.7967
-2030.0,Secondary castings,Scenario3,4829892646.248523
-2030.0,Secondary castings,Scenario4,4826057305.798928
+2030.0,Secondary castings,Baseline,6016463981.384558
+2030.0,Secondary castings,Scenario1,6093463065.171061
+2030.0,Secondary castings,Scenario2,5982293471.213669
+2030.0,Secondary castings,Scenario3,6010533070.887051
+2030.0,Secondary castings,Scenario4,6005760202.771999
 2031.0,Wrought,Baseline,0.0
 2031.0,Wrought,Scenario1,0.0
 2031.0,Wrought,Scenario2,0.0
@@ -1974,11 +1974,11 @@ Time,Alloy,Scenario,Values
 2031.0,Primary castings,Scenario2,0.0
 2031.0,Primary castings,Scenario3,0.0
 2031.0,Primary castings,Scenario4,0.0
-2031.0,Secondary castings,Baseline,4981555900.278486
-2031.0,Secondary castings,Scenario1,5078314217.095478
-2031.0,Secondary castings,Scenario2,4938530381.423508
-2031.0,Secondary castings,Scenario3,4974104060.694805
-2031.0,Secondary castings,Scenario4,4966560855.995995
+2031.0,Secondary castings,Baseline,6367230070.241008
+2031.0,Secondary castings,Scenario1,6490902769.436979
+2031.0,Secondary castings,Scenario2,6312236533.497633
+2031.0,Secondary castings,Scenario3,6357705420.1064625
+2031.0,Secondary castings,Scenario4,6348063990.65235
 2032.0,Wrought,Baseline,0.0
 2032.0,Wrought,Scenario1,0.0
 2032.0,Wrought,Scenario2,0.0
@@ -1989,11 +1989,11 @@ Time,Alloy,Scenario,Values
 2032.0,Primary castings,Scenario2,0.0
 2032.0,Primary castings,Scenario3,0.0
 2032.0,Primary castings,Scenario4,0.0
-2032.0,Secondary castings,Baseline,5123819228.243869
-2032.0,Secondary castings,Scenario1,5268005447.014595
-2032.0,Secondary castings,Scenario2,5059594730.072915
-2032.0,Secondary castings,Scenario3,5112645282.043549
-2032.0,Secondary castings,Scenario4,5099061140.367493
+2032.0,Secondary castings,Baseline,6734162414.2633705
+2032.0,Secondary castings,Scenario1,6923664301.79061
+2032.0,Secondary castings,Scenario2,6649753073.810116
+2032.0,Secondary castings,Scenario3,6719476656.400092
+2032.0,Secondary castings,Scenario4,6701623213.054419
 2033.0,Wrought,Baseline,0.0
 2033.0,Wrought,Scenario1,0.0
 2033.0,Wrought,Scenario2,0.0
@@ -2004,11 +2004,11 @@ Time,Alloy,Scenario,Values
 2033.0,Primary castings,Scenario2,0.0
 2033.0,Primary castings,Scenario3,0.0
 2033.0,Primary castings,Scenario4,0.0
-2033.0,Secondary castings,Baseline,5260972605.042559
-2033.0,Secondary castings,Scenario1,5466370441.067075
-2033.0,Secondary castings,Scenario2,5169388517.527796
-2033.0,Secondary castings,Scenario3,5244866731.452839
-2033.0,Secondary castings,Scenario4,5222151613.755288
+2033.0,Secondary castings,Baseline,7118550586.576104
+2033.0,Secondary castings,Scenario1,7396471609.147549
+2033.0,Secondary castings,Scenario2,6994629401.4944
+2033.0,Secondary castings,Scenario3,7096757947.743595
+2033.0,Secondary castings,Scenario4,7066022430.463945
 2034.0,Wrought,Baseline,0.0
 2034.0,Wrought,Scenario1,0.0
 2034.0,Wrought,Scenario2,0.0
@@ -2019,11 +2019,11 @@ Time,Alloy,Scenario,Values
 2034.0,Primary castings,Scenario2,0.0
 2034.0,Primary castings,Scenario3,0.0
 2034.0,Primary castings,Scenario4,0.0
-2034.0,Secondary castings,Baseline,5393673942.226751
-2034.0,Secondary castings,Scenario1,5674411682.895169
-2034.0,Secondary castings,Scenario2,5268487337.157976
-2034.0,Secondary castings,Scenario3,5371293549.761143
-2034.0,Secondary castings,Scenario4,5335651782.173013
+2034.0,Secondary castings,Baseline,7523483652.747059
+2034.0,Secondary castings,Scenario1,7915076808.961467
+2034.0,Secondary castings,Scenario2,7348864388.2408695
+2034.0,Secondary castings,Scenario3,7492265874.538619
+2034.0,Secondary castings,Scenario4,7442550178.210563
 2035.0,Wrought,Baseline,0.0
 2035.0,Wrought,Scenario1,0.0
 2035.0,Wrought,Scenario2,0.0
@@ -2034,11 +2034,11 @@ Time,Alloy,Scenario,Values
 2035.0,Primary castings,Scenario2,0.0
 2035.0,Primary castings,Scenario3,0.0
 2035.0,Primary castings,Scenario4,0.0
-2035.0,Secondary castings,Baseline,5523475982.6931305
-2035.0,Secondary castings,Scenario1,5893160055.042096
-2035.0,Secondary castings,Scenario2,5358799318.150636
-2035.0,Secondary castings,Scenario3,5493388788.44202
-2035.0,Secondary castings,Scenario4,5440446468.310569
+2035.0,Secondary castings,Baseline,7953805415.078108
+2035.0,Secondary castings,Scenario1,8486150479.260619
+2035.0,Secondary castings,Scenario2,7716671018.136917
+2035.0,Secondary castings,Scenario3,7910479855.35651
+2035.0,Secondary castings,Scenario4,7834242914.36722
 2036.0,Wrought,Baseline,0.0
 2036.0,Wrought,Scenario1,0.0
 2036.0,Wrought,Scenario2,0.0
@@ -2049,11 +2049,11 @@ Time,Alloy,Scenario,Values
 2036.0,Primary castings,Scenario2,0.0
 2036.0,Primary castings,Scenario3,0.0
 2036.0,Primary castings,Scenario4,0.0
-2036.0,Secondary castings,Baseline,5653066124.339367
-2036.0,Secondary castings,Scenario1,6124208499.440739
-2036.0,Secondary castings,Scenario2,5443654838.49802
-2036.0,Secondary castings,Scenario3,5613771413.767318
-2036.0,Secondary castings,Scenario4,5538721846.456018
+2036.0,Secondary castings,Baseline,8416787340.683059
+2036.0,Secondary castings,Scenario1,9118265988.05621
+2036.0,Secondary castings,Scenario2,8104997203.985943
+2036.0,Secondary castings,Scenario3,8358281882.720229
+2036.0,Secondary castings,Scenario4,8246541415.834517
 2037.0,Wrought,Baseline,0.0
 2037.0,Wrought,Scenario1,0.0
 2037.0,Wrought,Scenario2,0.0
@@ -2064,11 +2064,11 @@ Time,Alloy,Scenario,Values
 2037.0,Primary castings,Scenario2,0.0
 2037.0,Primary castings,Scenario3,0.0
 2037.0,Primary castings,Scenario4,0.0
-2037.0,Secondary castings,Baseline,5786927564.447396
-2037.0,Secondary castings,Scenario1,6370758093.880901
-2037.0,Secondary castings,Scenario2,5528242578.908824
-2037.0,Secondary castings,Scenario3,5736834329.757489
-2037.0,Secondary castings,Scenario4,5634556349.331724
+2037.0,Secondary castings,Baseline,8923610041.40874
+2037.0,Secondary castings,Scenario1,9823893640.419247
+2037.0,Secondary castings,Scenario2,8524710295.592738
+2037.0,Secondary castings,Scenario3,8846364821.539087
+2037.0,Secondary castings,Scenario4,8688649211.143412
 2038.0,Wrought,Baseline,0.0
 2038.0,Wrought,Scenario1,0.0
 2038.0,Wrought,Scenario2,0.0
@@ -2079,11 +2079,11 @@ Time,Alloy,Scenario,Values
 2038.0,Primary castings,Scenario2,0.0
 2038.0,Primary castings,Scenario3,0.0
 2038.0,Primary castings,Scenario4,0.0
-2038.0,Secondary castings,Baseline,5931414453.206124
-2038.0,Secondary castings,Scenario1,6637818407.158202
-2038.0,Secondary castings,Scenario2,5619542872.816447
-2038.0,Secondary castings,Scenario3,5868780625.024372
-2038.0,Secondary castings,Scenario4,5733962711.182697
+2038.0,Secondary castings,Baseline,9490263125.1298
+2038.0,Secondary castings,Scenario1,10620509451.453125
+2038.0,Secondary castings,Scenario2,8991268596.506317
+2038.0,Secondary castings,Scenario3,9390049000.039
+2038.0,Secondary castings,Scenario4,9174340337.892319
 2039.0,Wrought,Baseline,0.0
 2039.0,Wrought,Scenario1,0.0
 2039.0,Wrought,Scenario2,0.0
@@ -2094,11 +2094,11 @@ Time,Alloy,Scenario,Values
 2039.0,Primary castings,Scenario2,0.0
 2039.0,Primary castings,Scenario3,0.0
 2039.0,Primary castings,Scenario4,0.0
-2039.0,Secondary castings,Baseline,6092635352.845524
-2039.0,Secondary castings,Scenario1,6929570595.093027
-2039.0,Secondary castings,Scenario2,5724335894.935122
-2039.0,Secondary castings,Scenario3,6015512084.3714485
-2039.0,Secondary castings,Scenario4,5842933366.473148
+2039.0,Secondary castings,Baseline,10135050555.2097
+2039.0,Secondary castings,Scenario1,11527285688.345228
+2039.0,Secondary castings,Scenario2,9522387329.987316
+2039.0,Secondary castings,Scenario3,10006756610.192505
+2039.0,Secondary castings,Scenario4,9719673282.64105
 2040.0,Wrought,Baseline,0.0
 2040.0,Wrought,Scenario1,0.0
 2040.0,Wrought,Scenario2,0.0
@@ -2109,11 +2109,11 @@ Time,Alloy,Scenario,Values
 2040.0,Primary castings,Scenario2,0.0
 2040.0,Primary castings,Scenario3,0.0
 2040.0,Primary castings,Scenario4,0.0
-2040.0,Secondary castings,Baseline,6271337008.190439
-2040.0,Secondary castings,Scenario1,7243006926.521887
-2040.0,Secondary castings,Scenario2,5844554037.751875
-2040.0,Secondary castings,Scenario3,6177604865.42792
-2040.0,Secondary castings,Scenario4,5962769732.236302
+2040.0,Secondary castings,Baseline,10870317480.86343
+2040.0,Secondary castings,Scenario1,12554545339.304605
+2040.0,Secondary castings,Scenario2,10130560332.103252
+2040.0,Secondary castings,Scenario3,10707848433.408398
+2040.0,Secondary castings,Scenario4,10335467535.876259
 2041.0,Wrought,Baseline,0.0
 2041.0,Wrought,Scenario1,0.0
 2041.0,Wrought,Scenario2,0.0
@@ -2124,11 +2124,11 @@ Time,Alloy,Scenario,Values
 2041.0,Primary castings,Scenario2,0.0
 2041.0,Primary castings,Scenario3,0.0
 2041.0,Primary castings,Scenario4,0.0
-2041.0,Secondary castings,Baseline,6456388358.370181
-2041.0,Secondary castings,Scenario1,7559988643.511718
-2041.0,Secondary castings,Scenario2,5971403316.197692
-2041.0,Secondary castings,Scenario3,6343982593.354567
-2041.0,Secondary castings,Scenario4,6084163780.5607605
+2041.0,Secondary castings,Baseline,11689461027.786016
+2041.0,Secondary castings,Scenario1,13687558386.147535
+2041.0,Secondary castings,Scenario2,10811382846.168457
+2041.0,Secondary castings,Scenario3,11485947432.178799
+2041.0,Secondary castings,Scenario4,11015538634.278433
 2042.0,Wrought,Baseline,0.0
 2042.0,Wrought,Scenario1,0.0
 2042.0,Wrought,Scenario2,0.0
@@ -2139,11 +2139,11 @@ Time,Alloy,Scenario,Values
 2042.0,Primary castings,Scenario2,0.0
 2042.0,Primary castings,Scenario3,0.0
 2042.0,Primary castings,Scenario4,0.0
-2042.0,Secondary castings,Baseline,6621430729.529994
-2042.0,Secondary castings,Scenario1,7843457990.917317
-2042.0,Secondary castings,Scenario2,6082350287.345622
-2042.0,Secondary castings,Scenario3,6488769962.73958
-2042.0,Secondary castings,Scenario4,6184146469.903964
+2042.0,Secondary castings,Baseline,12556194568.590216
+2042.0,Secondary castings,Scenario1,14873520338.332104
+2042.0,Secondary castings,Scenario2,11533938322.670221
+2042.0,Secondary castings,Scenario3,12304630447.861727
+2042.0,Secondary castings,Scenario4,11726974046.632706
 2043.0,Wrought,Baseline,0.0
 2043.0,Wrought,Scenario1,0.0
 2043.0,Wrought,Scenario2,0.0
@@ -2154,11 +2154,11 @@ Time,Alloy,Scenario,Values
 2043.0,Primary castings,Scenario2,0.0
 2043.0,Primary castings,Scenario3,0.0
 2043.0,Primary castings,Scenario4,0.0
-2043.0,Secondary castings,Baseline,6728856689.050552
-2043.0,Secondary castings,Scenario1,8042940203.011679
-2043.0,Secondary castings,Scenario2,6144704945.163223
-2043.0,Secondary castings,Scenario3,6575395072.289642
-2043.0,Secondary castings,Scenario4,6229664310.660241
+2043.0,Secondary castings,Baseline,13404938031.520323
+2043.0,Secondary castings,Scenario1,16022798522.078175
+2043.0,Secondary castings,Scenario2,12241216126.050663
+2043.0,Secondary castings,Scenario3,13099218418.52212
+2043.0,Secondary castings,Scenario4,12410468509.080015
 2044.0,Wrought,Baseline,0.0
 2044.0,Wrought,Scenario1,0.0
 2044.0,Wrought,Scenario2,0.0
@@ -2169,11 +2169,11 @@ Time,Alloy,Scenario,Values
 2044.0,Primary castings,Scenario2,0.0
 2044.0,Primary castings,Scenario3,0.0
 2044.0,Primary castings,Scenario4,0.0
-2044.0,Secondary castings,Baseline,6743506005.507818
-2044.0,Secondary castings,Scenario1,8112010723.2739725
-2044.0,Secondary castings,Scenario2,6127930094.882275
-2044.0,Secondary castings,Scenario3,6570143591.334766
-2044.0,Secondary castings,Scenario4,6189783226.851325
+2044.0,Secondary castings,Baseline,14161362611.566425
+2044.0,Secondary castings,Scenario1,17035222518.87535
+2044.0,Secondary castings,Scenario2,12868653199.252785
+2044.0,Secondary castings,Scenario3,13797301541.803019
+2044.0,Secondary castings,Scenario4,12998544776.387789
 2045.0,Wrought,Baseline,0.0
 2045.0,Wrought,Scenario1,0.0
 2045.0,Wrought,Scenario2,0.0
@@ -2184,11 +2184,11 @@ Time,Alloy,Scenario,Values
 2045.0,Primary castings,Scenario2,0.0
 2045.0,Primary castings,Scenario3,0.0
 2045.0,Primary castings,Scenario4,0.0
-2045.0,Secondary castings,Baseline,6651559545.294417
-2045.0,Secondary castings,Scenario1,8031865805.332836
-2045.0,Secondary castings,Scenario2,6020590619.637327
-2045.0,Secondary castings,Scenario3,6460637354.507836
-2045.0,Secondary castings,Scenario4,6052377651.789869
+2045.0,Secondary castings,Baseline,14781243433.987604
+2045.0,Secondary castings,Scenario1,17848590678.517426
+2045.0,Secondary castings,Scenario2,13379090265.860733
+2045.0,Secondary castings,Scenario3,14356971898.906311
+2045.0,Secondary castings,Scenario4,13449728115.08861
 2046.0,Wrought,Baseline,0.0
 2046.0,Wrought,Scenario1,0.0
 2046.0,Wrought,Scenario2,0.0
@@ -2199,11 +2199,11 @@ Time,Alloy,Scenario,Values
 2046.0,Primary castings,Scenario2,0.0
 2046.0,Primary castings,Scenario3,0.0
 2046.0,Primary castings,Scenario4,0.0
-2046.0,Secondary castings,Baseline,6474904428.120353
-2046.0,Secondary castings,Scenario1,7828906137.282045
-2046.0,Secondary castings,Scenario2,5843172747.952409
-2046.0,Secondary castings,Scenario3,6269723368.772419
-2046.0,Secondary castings,Scenario4,5836659412.309256
+2046.0,Secondary castings,Baseline,15293107601.655703
+2046.0,Secondary castings,Scenario1,18491130686.151897
+2046.0,Secondary castings,Scenario2,13801017538.020939
+2046.0,Secondary castings,Scenario3,14808489480.529152
+2046.0,Secondary castings,Scenario4,13785633659.549494
 2047.0,Wrought,Baseline,0.0
 2047.0,Wrought,Scenario1,0.0
 2047.0,Wrought,Scenario2,0.0
@@ -2214,11 +2214,11 @@ Time,Alloy,Scenario,Values
 2047.0,Primary castings,Scenario2,0.0
 2047.0,Primary castings,Scenario3,0.0
 2047.0,Primary castings,Scenario4,0.0
-2047.0,Secondary castings,Baseline,6268250012.934565
-2047.0,Secondary castings,Scenario1,7571072009.497831
-2047.0,Secondary castings,Scenario2,5645306759.380148
-2047.0,Secondary castings,Scenario3,6052531831.074099
-2047.0,Secondary castings,Scenario4,5590641718.1594095
+2047.0,Secondary castings,Baseline,15815276955.711838
+2047.0,Secondary castings,Scenario1,19102397070.117622
+2047.0,Secondary castings,Scenario2,14243543208.28223
+2047.0,Secondary castings,Scenario3,15271003389.171585
+2047.0,Secondary castings,Scenario4,14105619104.27914
 2048.0,Wrought,Baseline,0.0
 2048.0,Wrought,Scenario1,0.0
 2048.0,Wrought,Scenario2,0.0
@@ -2229,11 +2229,11 @@ Time,Alloy,Scenario,Values
 2048.0,Primary castings,Scenario2,0.0
 2048.0,Primary castings,Scenario3,0.0
 2048.0,Primary castings,Scenario4,0.0
-2048.0,Secondary castings,Baseline,6091838070.827485
-2048.0,Secondary castings,Scenario1,7334744908.414057
-2048.0,Secondary castings,Scenario2,5480971813.792863
-2048.0,Secondary castings,Scenario3,5869887499.827233
-2048.0,Secondary castings,Scenario4,5367750926.635168
+2048.0,Secondary castings,Baseline,16515649880.91009
+2048.0,Secondary castings,Scenario1,19885308418.367023
+2048.0,Secondary castings,Scenario2,14859523584.060665
+2048.0,Secondary castings,Scenario3,15913917221.753853
+2048.0,Secondary castings,Scenario4,14552569178.877583
 2049.0,Wrought,Baseline,0.0
 2049.0,Wrought,Scenario1,0.0
 2049.0,Wrought,Scenario2,0.0
@@ -2244,11 +2244,11 @@ Time,Alloy,Scenario,Values
 2049.0,Primary castings,Scenario2,0.0
 2049.0,Primary castings,Scenario3,0.0
 2049.0,Primary castings,Scenario4,0.0
-2049.0,Secondary castings,Baseline,5970020775.2258415
-2049.0,Secondary castings,Scenario1,7154777009.755014
-2049.0,Secondary castings,Scenario2,5371068545.720133
-2049.0,Secondary castings,Scenario3,5747910687.513693
-2049.0,Secondary castings,Scenario4,5191631621.720123
+2049.0,Secondary castings,Baseline,17512060940.66249
+2049.0,Secondary castings,Scenario1,20987345895.281406
+2049.0,Secondary castings,Scenario2,15755134400.77908
+2049.0,Secondary castings,Scenario3,16860538016.706852
+2049.0,Secondary castings,Scenario4,15228786090.379047
 2050.0,Wrought,Baseline,0.0
 2050.0,Wrought,Scenario1,0.0
 2050.0,Wrought,Scenario2,0.0
@@ -2259,8 +2259,8 @@ Time,Alloy,Scenario,Values
 2050.0,Primary castings,Scenario2,0.0
 2050.0,Primary castings,Scenario3,0.0
 2050.0,Primary castings,Scenario4,0.0
-2050.0,Secondary castings,Baseline,5865005851.2643385
-2050.0,Secondary castings,Scenario1,6992456423.781506
-2050.0,Secondary castings,Scenario2,5279937004.017138
-2050.0,Secondary castings,Scenario3,5651901042.629618
-2050.0,Secondary castings,Scenario4,5033891480.302853
+2050.0,Secondary castings,Baseline,18768018724.045883
+2050.0,Secondary castings,Scenario1,22375860556.100815
+2050.0,Secondary castings,Scenario2,16895798412.854837
+2050.0,Secondary castings,Scenario3,18086083336.41478
+2050.0,Secondary castings,Scenario4,16108452736.969126

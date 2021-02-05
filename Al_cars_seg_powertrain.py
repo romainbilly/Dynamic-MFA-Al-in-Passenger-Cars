@@ -35,6 +35,7 @@ import ODYM_Classes as msc # import the ODYM class file
 import ODYM_Functions as msf # import the ODYM function file
 import dynamic_stock_model as dsm # import the dynamic stock model library
 import custom_functions as cf
+import mfa_system as mss # import the system definition
 
 # Initialize loggin routine
 
@@ -300,8 +301,8 @@ PassengerVehicleFleet_MFA_System = msc.MFAsystem(Name = 'Global_Passengers_Vehic
                       Geogr_Scope = 'World', 
                       Unit = 'Mt', 
                       ProcessList = [], 
-                      FlowDict = {}, 
-                      StockDict = {},
+                      FlowDict = mss.FlowDict, 
+                      StockDict = mss.StockDict,
                       ParameterDict = ParameterDict, 
                       Time_Start = Model_Time_Start, 
                       Time_End = Model_Time_End, 
@@ -319,81 +320,81 @@ PassengerVehicleFleet_MFA_System.IndexTableCheck()
 for m in range(0, len(PrL_Number)):
     PassengerVehicleFleet_MFA_System.ProcessList.append(msc.Process(Name = PrL_Name[m], ID   = PrL_Number[m]))
     
-# Define system variables: 6 flows.
-PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'] = msc.Flow(Name = 'Primary Aluminium demand', P_Start = 0,
-                                                  P_End = 1, Indices = 't,e,a,S',
-                                                  Values=None, Uncert=None, Color = None,
-                                                  ID = None, UUID = None)     
-PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'] = msc.Flow(Name = 'Materials for Passenger vehicle production', P_Start = 1,
-                                                  P_End = 2, Indices = 't,r,e,a,S',
-                                                  Values=None, Uncert=None, Color = None,
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'] = msc.Flow(Name = 'Scrap surplus', P_Start = 1, 
-                                                  P_End = 9, Indices = 't,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'] = msc.Flow(Name = 'New registration of vehicles', P_Start = 2, 
-                                                  P_End = 3, Indices = 't,r,p,s,z,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'] = msc.Flow(Name = 'End of Life vehicles', P_Start = 3, 
-                                                  P_End = 4, Indices = 't,c,r,p,s,z,e,a,S',
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'] = msc.Flow(Name = 'Collection losses', P_Start = 4, 
-                                                  P_End = 0, Indices = 't,c,r,p,s,z,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'] = msc.Flow(Name = 'Collected cars to dismantling', P_Start = 4, 
-                                                  P_End = 5, Indices = 't,c,r,p,s,z,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'] = msc.Flow(Name = 'Collected cars directly to shredding', P_Start = 4, 
-                                                  P_End = 7, Indices = 't,c,r,p,s,z,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'] = msc.Flow(Name = 'Dismantled components to shredding', P_Start = 5, 
-                                                  P_End = 6, Indices = 't,r,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'] = msc.Flow(Name = 'Residues from dismantllng to shredding', P_Start = 5, 
-                                                  P_End = 7, Indices = 't,r,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'] = msc.Flow(Name = 'Shredding losses', P_Start = 6, 
-                                                  P_End = 0, Indices = 't,r,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'] = msc.Flow(Name = 'Al scrap from dismantled components', P_Start = 6, 
-                                                  P_End = 1, Indices = 't,r,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'] = msc.Flow(Name = 'Shredding losses', P_Start = 7, 
-                                                  P_End = 0, Indices = 't,r,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'] = msc.Flow(Name = 'Mixed Al scrap', P_Start = 7, 
-                                                  P_End = 1, Indices = 't,r,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)
-PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'] = msc.Flow(Name = 'Mixed Al scrap to alloy sorting', P_Start = 7, 
-                                                  P_End = 8, Indices = 't,r,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)          
-PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'] = msc.Flow(Name = 'Alloy sorted scrap', P_Start = 8, 
-                                                  P_End = 1, Indices = 't,r,e,a,S', 
-                                                  Values=None, Uncert=None, Color = None, 
-                                                  ID = None, UUID = None)                                               
+# # Define system variables: 6 flows.
+# PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'] = msc.Flow(Name = 'Primary Aluminium demand', P_Start = 0,
+#                                                   P_End = 1, Indices = 't,e,a,S',
+#                                                   Values=None, Uncert=None, Color = None,
+#                                                   ID = None, UUID = None)     
+# PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'] = msc.Flow(Name = 'Materials for Passenger vehicle production', P_Start = 1,
+#                                                   P_End = 2, Indices = 't,r,e,a,S',
+#                                                   Values=None, Uncert=None, Color = None,
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'] = msc.Flow(Name = 'Scrap surplus', P_Start = 1, 
+#                                                   P_End = 9, Indices = 't,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'] = msc.Flow(Name = 'New registration of vehicles', P_Start = 2, 
+#                                                   P_End = 3, Indices = 't,r,p,s,z,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'] = msc.Flow(Name = 'End of Life vehicles', P_Start = 3, 
+#                                                   P_End = 4, Indices = 't,c,r,p,s,z,e,a,S',
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'] = msc.Flow(Name = 'Collection losses', P_Start = 4, 
+#                                                   P_End = 0, Indices = 't,c,r,p,s,z,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'] = msc.Flow(Name = 'Collected cars to dismantling', P_Start = 4, 
+#                                                   P_End = 5, Indices = 't,c,r,p,s,z,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'] = msc.Flow(Name = 'Collected cars directly to shredding', P_Start = 4, 
+#                                                   P_End = 7, Indices = 't,c,r,p,s,z,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'] = msc.Flow(Name = 'Dismantled components to shredding', P_Start = 5, 
+#                                                   P_End = 6, Indices = 't,r,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'] = msc.Flow(Name = 'Residues from dismantllng to shredding', P_Start = 5, 
+#                                                   P_End = 7, Indices = 't,r,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'] = msc.Flow(Name = 'Shredding losses', P_Start = 6, 
+#                                                   P_End = 0, Indices = 't,r,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'] = msc.Flow(Name = 'Al scrap from dismantled components', P_Start = 6, 
+#                                                   P_End = 1, Indices = 't,r,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'] = msc.Flow(Name = 'Shredding losses', P_Start = 7, 
+#                                                   P_End = 0, Indices = 't,r,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'] = msc.Flow(Name = 'Mixed Al scrap', P_Start = 7, 
+#                                                   P_End = 1, Indices = 't,r,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'] = msc.Flow(Name = 'Mixed Al scrap to alloy sorting', P_Start = 7, 
+#                                                   P_End = 8, Indices = 't,r,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)          
+# PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'] = msc.Flow(Name = 'Alloy sorted scrap', P_Start = 8, 
+#                                                   P_End = 1, Indices = 't,r,e,a,S', 
+#                                                   Values=None, Uncert=None, Color = None, 
+#                                                   ID = None, UUID = None)                                               
                                                                                        
                                                   
-# Define system variables: 1 stock and 1 stock change:
-PassengerVehicleFleet_MFA_System.StockDict['S_3']  = msc.Stock(Name = 'In-use stock', P_Res = 3, Type = 0,
-                                                  Indices = 't,c,r,p,s,z,e,a,S', Values=None, Uncert=None,
-                                                  ID = None, UUID = None)
+# # Define system variables: 1 stock and 1 stock change:
+# PassengerVehicleFleet_MFA_System.StockDict['S_3']  = msc.Stock(Name = 'In-use stock', P_Res = 3, Type = 0,
+#                                                   Indices = 't,c,r,p,s,z,e,a,S', Values=None, Uncert=None,
+#                                                   ID = None, UUID = None)
 
-PassengerVehicleFleet_MFA_System.StockDict['dS_3']  = msc.Stock(Name = 'Net in-use stock change', P_Res = 3, Type = 1,
-                                                  Indices = 't,r,p,s,z,e,a,S', Values=None, Uncert=None,
-                                                  ID = None, UUID = None)
+# PassengerVehicleFleet_MFA_System.StockDict['dS_3']  = msc.Stock(Name = 'Net in-use stock change', P_Res = 3, Type = 1,
+#                                                   Indices = 't,r,p,s,z,e,a,S', Values=None, Uncert=None,
+#                                                   ID = None, UUID = None)
 
 PassengerVehicleFleet_MFA_System.Initialize_StockValues() # Assign empty arrays to stocks according to dimensions.
 PassengerVehicleFleet_MFA_System.Initialize_FlowValues() # Assign empty arrays to flows according to dimensions. 
