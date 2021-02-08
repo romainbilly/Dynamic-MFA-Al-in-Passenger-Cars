@@ -6,29 +6,7 @@ Created on Thu Feb  4 20:14:09 2021
 """
 import ODYM_Classes as msc # import the ODYM class file
 
-# PassengerVehicleFleet_MFA_System = msc.MFAsystem(Name = 'Global_Passengers_Vehicle_Fleet', 
-#                       Geogr_Scope = 'World', 
-#                       Unit = 'Mt', 
-#                       ProcessList = [], 
-#                       FlowDict = {}, 
-#                       StockDict = {},
-#                       ParameterDict = ParameterDict, 
-#                       Time_Start = Model_Time_Start, 
-#                       Time_End = Model_Time_End, 
-#                       IndexTable = IndexTable, 
-#                       Elements = IndexTable.loc['Element'].Classification.Items, 
-#                       Graphical = None) # Initialize MFA system
-                      
-# # Check Validity of index tables:
-# # returns true if dimensions are OK and time index is present and element list is not empty
-# IndexTableCheck() 
 
-
-
-# # Add processes to system
-# for m in range(0, len(PrL_Number)):
-#     ProcessList.append(msc.Process(Name = PrL_Name[m], ID   = PrL_Number[m]))
-  
 
 # Define system variables: 16 flows.
 FlowDict = {}  
@@ -107,6 +85,3 @@ StockDict['S_3']  = msc.Stock(Name = 'In-use stock', P_Res = 3, Type = 0,
 StockDict['dS_3']  = msc.Stock(Name = 'Net in-use stock change', P_Res = 3, Type = 1,
                                                   Indices = 't,r,p,s,z,e,a,S', Values=None, Uncert=None,
                                                   ID = None, UUID = None)
-
-# Initialize_StockValues() # Assign empty arrays to stocks according to dimensions.
-# Initialize_FlowValues() # Assign empty arrays to flows according to dimensions. 

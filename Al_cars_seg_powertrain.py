@@ -48,41 +48,41 @@ log.getLogger('matplotlib').setLevel(log.WARNING)
                                                      log_verbosity, log_verbosity)
 Mylog.info('### 1. - Initialize.')
            
+import data_prep
+# Mylog.info('### 2 - Load Config file and read model control parameters')
+# #Read main script parameters
+# #Load project-specific config file
+# ProjectSpecs_Name_ConFile = 'ODYM_Config_Al_cars.xlsx'
+# Model_Configfile = xlrd.open_workbook(os.path.join(DataPath, ProjectSpecs_Name_ConFile))
+# ScriptConfig = {'Model Setting': Model_Configfile.sheet_by_name('Config').cell_value(3,3)}
+# Model_Configsheet = Model_Configfile.sheet_by_name('Setting_' + ScriptConfig['Model Setting'])
 
-Mylog.info('### 2 - Load Config file and read model control parameters')
-#Read main script parameters
-#Load project-specific config file
-ProjectSpecs_Name_ConFile = 'ODYM_Config_Al_cars.xlsx'
-Model_Configfile = xlrd.open_workbook(os.path.join(DataPath, ProjectSpecs_Name_ConFile))
-ScriptConfig = {'Model Setting': Model_Configfile.sheet_by_name('Config').cell_value(3,3)}
-Model_Configsheet = Model_Configfile.sheet_by_name('Setting_' + ScriptConfig['Model Setting'])
+# Name_Scenario            = Model_Configsheet.cell_value(3,3)
+# print(Name_Scenario)
 
-Name_Scenario            = Model_Configsheet.cell_value(3,3)
-print(Name_Scenario)
-
-### 1.2) Read model control parameters
-#Read control and selection parameters into dictionary
-SCix = 0
-# search for script config list entry
-while Model_Configsheet.cell_value(SCix, 1) != 'General Info':
-    SCix += 1
+# ### 1.2) Read model control parameters
+# #Read control and selection parameters into dictionary
+# SCix = 0
+# # search for script config list entry
+# while Model_Configsheet.cell_value(SCix, 1) != 'General Info':
+#     SCix += 1
         
-SCix += 2  # start on first data row
-while len(Model_Configsheet.cell_value(SCix, 3)) > 0:
-    ScriptConfig[Model_Configsheet.cell_value(SCix, 2)] = Model_Configsheet.cell_value(SCix,3)
-    SCix += 1
+# SCix += 2  # start on first data row
+# while len(Model_Configsheet.cell_value(SCix, 3)) > 0:
+#     ScriptConfig[Model_Configsheet.cell_value(SCix, 2)] = Model_Configsheet.cell_value(SCix,3)
+#     SCix += 1
 
-SCix = 0
-# search for script config list entry
-while Model_Configsheet.cell_value(SCix, 1) != 'Software version selection':
-    SCix += 1
+# SCix = 0
+# # search for script config list entry
+# while Model_Configsheet.cell_value(SCix, 1) != 'Software version selection':
+#     SCix += 1
         
-SCix += 2 # start on first data row
-while len(Model_Configsheet.cell_value(SCix, 3)) > 0:
-    ScriptConfig[Model_Configsheet.cell_value(SCix, 2)] = Model_Configsheet.cell_value(SCix,3)
-    SCix += 1 
+# SCix += 2 # start on first data row
+# while len(Model_Configsheet.cell_value(SCix, 3)) > 0:
+#     ScriptConfig[Model_Configsheet.cell_value(SCix, 2)] = Model_Configsheet.cell_value(SCix,3)
+#     SCix += 1 
     
-print(ScriptConfig)
+# print(ScriptConfig)
 
 
 
@@ -90,180 +90,182 @@ print(ScriptConfig)
 Mylog.info('### 3 - Read classification and data')
 # This is standard for each ODYM model run.
 
-# Read model run config data
-Classfile  = xlrd.open_workbook(os.path.join(DataPath, 
-                                             str(ScriptConfig['Version of master classification']) \
-                                             + '.xlsx'))
-Classsheet = Classfile.sheet_by_name('MAIN_Table')
-ci = 1 # column index to start with
-MasterClassification = {} # Dict of master classifications
-while True:
-    TheseItems = []
-    ri = 10 # row index to start with    
-    try: 
-        ThisName = Classsheet.cell_value(0,ci)
-        ThisDim  = Classsheet.cell_value(1,ci)
-        ThisID   = Classsheet.cell_value(3,ci)
-        ThisUUID = Classsheet.cell_value(4,ci)
-        TheseItems.append(Classsheet.cell_value(ri,ci)) # read the first classification item
-    except:
-        print('End of file or formatting error while reading the classification file in column '+ str(ci) +'.')
-        break
-    while True:
-        ri +=1
-        try:
-            ThisItem = Classsheet.cell_value(ri,ci)
-        except:
-            break
-        if ThisItem != '':
-            TheseItems.append(ThisItem)
-    MasterClassification[ThisName] = msc.Classification(Name = ThisName, Dimension = ThisDim, 
-                                                        ID = ThisID, UUID = ThisUUID, Items = TheseItems)
-    ci +=1 
+# # Read model run config data
+# Classfile  = xlrd.open_workbook(os.path.join(DataPath, 
+#                                              str(ScriptConfig['Version of master classification']) \
+#                                              + '.xlsx'))
+# Classsheet = Classfile.sheet_by_name('MAIN_Table')
+# ci = 1 # column index to start with
+# MasterClassification = {} # Dict of master classifications
+# while True:
+#     TheseItems = []
+#     ri = 10 # row index to start with    
+#     try: 
+#         ThisName = Classsheet.cell_value(0,ci)
+#         ThisDim  = Classsheet.cell_value(1,ci)
+#         ThisID   = Classsheet.cell_value(3,ci)
+#         ThisUUID = Classsheet.cell_value(4,ci)
+#         TheseItems.append(Classsheet.cell_value(ri,ci)) # read the first classification item
+#     except:
+#         print('End of file or formatting error while reading the classification file in column '+ str(ci) +'.')
+#         break
+#     while True:
+#         ri +=1
+#         try:
+#             ThisItem = Classsheet.cell_value(ri,ci)
+#         except:
+#             break
+#         if ThisItem != '':
+#             TheseItems.append(ThisItem)
+#     MasterClassification[ThisName] = msc.Classification(Name = ThisName, Dimension = ThisDim, 
+#                                                         ID = ThisID, UUID = ThisUUID, Items = TheseItems)
+#     ci +=1 
     
-print('Read index table from model config sheet.')
-ITix = 0
-while True: # search for index table entry
-    if Model_Configsheet.cell_value(ITix,1) == 'Index Table':
-        break
-    else:
-        ITix += 1
+# print('Read index table from model config sheet.')
+# ITix = 0
+# while True: # search for index table entry
+#     if Model_Configsheet.cell_value(ITix,1) == 'Index Table':
+#         break
+#     else:
+#         ITix += 1
         
-IT_Aspects        = []
-IT_Description    = []
-IT_Dimension      = []
-IT_Classification = []
-IT_Selector       = []
-IT_IndexLetter    = []
-ITix += 2 # start on first data row
-while True:
-    if len(Model_Configsheet.cell_value(ITix,2)) > 0:
-        IT_Aspects.append(Model_Configsheet.cell_value(ITix,2))
-        IT_Description.append(Model_Configsheet.cell_value(ITix,3))
-        IT_Dimension.append(Model_Configsheet.cell_value(ITix,4))
-        IT_Classification.append(Model_Configsheet.cell_value(ITix,5))
-        IT_Selector.append(Model_Configsheet.cell_value(ITix,6))
-        IT_IndexLetter.append(Model_Configsheet.cell_value(ITix,7))        
-        ITix += 1
-    else:
-        break
+# IT_Aspects        = []
+# IT_Description    = []
+# IT_Dimension      = []
+# IT_Classification = []
+# IT_Selector       = []
+# IT_IndexLetter    = []
+# ITix += 2 # start on first data row
+# while True:
+#     if len(Model_Configsheet.cell_value(ITix,2)) > 0:
+#         IT_Aspects.append(Model_Configsheet.cell_value(ITix,2))
+#         IT_Description.append(Model_Configsheet.cell_value(ITix,3))
+#         IT_Dimension.append(Model_Configsheet.cell_value(ITix,4))
+#         IT_Classification.append(Model_Configsheet.cell_value(ITix,5))
+#         IT_Selector.append(Model_Configsheet.cell_value(ITix,6))
+#         IT_IndexLetter.append(Model_Configsheet.cell_value(ITix,7))        
+#         ITix += 1
+#     else:
+#         break
 
-print('Read parameter list from model config sheet.')
-PLix = 0
-while True: # search for parameter list entry
-    if Model_Configsheet.cell_value(PLix,1) == 'Model Parameters':
-        break
-    else:
-        PLix += 1
+# print('Read parameter list from model config sheet.')
+# PLix = 0
+# while True: # search for parameter list entry
+#     if Model_Configsheet.cell_value(PLix,1) == 'Model Parameters':
+#         break
+#     else:
+#         PLix += 1
         
-PL_Names          = []
-PL_Description    = []
-PL_Version        = []
-PL_IndexStructure = []
-PL_IndexMatch     = []
-PL_IndexLayer     = []
-PLix += 2 # start on first data row
-while True:
-    if len(Model_Configsheet.cell_value(PLix,2)) > 0:
-        PL_Names.append(Model_Configsheet.cell_value(PLix,2))
-        PL_Description.append(Model_Configsheet.cell_value(PLix,3))
-        PL_Version.append(Model_Configsheet.cell_value(PLix,4))
-        PL_IndexStructure.append(Model_Configsheet.cell_value(PLix,5))
-        PL_IndexMatch.append(Model_Configsheet.cell_value(PLix,6))
-        # strip numbers out of list string
-        PL_IndexLayer.append(msf.ListStringToListNumbers(Model_Configsheet.cell_value(PLix,7))) 
-        PLix += 1
-    else:
-        break
+# PL_Names          = []
+# PL_Description    = []
+# PL_Version        = []
+# PL_IndexStructure = []
+# PL_IndexMatch     = []
+# PL_IndexLayer     = []
+# PLix += 2 # start on first data row
+# while True:
+#     if len(Model_Configsheet.cell_value(PLix,2)) > 0:
+#         PL_Names.append(Model_Configsheet.cell_value(PLix,2))
+#         PL_Description.append(Model_Configsheet.cell_value(PLix,3))
+#         PL_Version.append(Model_Configsheet.cell_value(PLix,4))
+#         PL_IndexStructure.append(Model_Configsheet.cell_value(PLix,5))
+#         PL_IndexMatch.append(Model_Configsheet.cell_value(PLix,6))
+#         # strip numbers out of list string
+#         PL_IndexLayer.append(msf.ListStringToListNumbers(Model_Configsheet.cell_value(PLix,7))) 
+#         PLix += 1
+#     else:
+#         break
     
-print('Read process list from model config sheet.')
-PrLix = 0
-while True: # search for process list entry
-    if Model_Configsheet.cell_value(PrLix,1) == 'Process Group List':
-        break
-    else:
-        PrLix += 1
+# print('Read process list from model config sheet.')
+# PrLix = 0
+# while True: # search for process list entry
+#     if Model_Configsheet.cell_value(PrLix,1) == 'Process Group List':
+#         break
+#     else:
+#         PrLix += 1
         
-PrL_Number         = []
-PrL_Name           = []
-PrL_Code           = []
-PrL_Type           = []
-PrLix += 2 # start on first data row
-while True:
-    if Model_Configsheet.cell_value(PrLix,2) != '':
-        try:
-            PrL_Number.append(int(Model_Configsheet.cell_value(PrLix,2)))
-        except:
-            PrL_Number.append(Model_Configsheet.cell_value(PrLix,2))
-        PrL_Name.append(Model_Configsheet.cell_value(PrLix,3))
-        PrL_Code.append(Model_Configsheet.cell_value(PrLix,4))
-        PrL_Type.append(Model_Configsheet.cell_value(PrLix,5))
-        PrLix += 1
-    else:
-        break    
+# PrL_Number         = []
+# PrL_Name           = []
+# PrL_Code           = []
+# PrL_Type           = []
+# PrLix += 2 # start on first data row
+# while True:
+#     if Model_Configsheet.cell_value(PrLix,2) != '':
+#         try:
+#             PrL_Number.append(int(Model_Configsheet.cell_value(PrLix,2)))
+#         except:
+#             PrL_Number.append(Model_Configsheet.cell_value(PrLix,2))
+#         PrL_Name.append(Model_Configsheet.cell_value(PrLix,3))
+#         PrL_Code.append(Model_Configsheet.cell_value(PrLix,4))
+#         PrL_Type.append(Model_Configsheet.cell_value(PrLix,5))
+#         PrLix += 1
+#     else:
+#         break    
 
-print('Read model run control from model config sheet.')
-PrLix = 0
-while True: # search for model flow control entry
-    if Model_Configsheet.cell_value(PrLix,1) == 'Model flow control':
-        break
-    else:
-        PrLix += 1
+# print('Read model run control from model config sheet.')
+# PrLix = 0
+# while True: # search for model flow control entry
+#     if Model_Configsheet.cell_value(PrLix,1) == 'Model flow control':
+#         break
+#     else:
+#         PrLix += 1
         
-PrLix += 2 # start on first data row
-while True:
-    if Model_Configsheet.cell_value(PrLix,2) != '':
-        try:
-            ScriptConfig[Model_Configsheet.cell_value(PrLix,2)] = Model_Configsheet.cell_value(PrLix,3)
-        except:
-            None
-        PrLix += 1
-    else:
-        break
+# PrLix += 2 # start on first data row
+# while True:
+#     if Model_Configsheet.cell_value(PrLix,2) != '':
+#         try:
+#             ScriptConfig[Model_Configsheet.cell_value(PrLix,2)] = Model_Configsheet.cell_value(PrLix,3)
+#         except:
+#             None
+#         PrLix += 1
+#     else:
+#         break
     
     
-print('Define model classifications and select items for model classifications according to information provided by config file.')
-ModelClassification  = {} # Dict of model classifications
-for m in range(0,len(IT_Aspects)):
-    ModelClassification[IT_Aspects[m]] = deepcopy(MasterClassification[IT_Classification[m]])
-    EvalString = msf.EvalItemSelectString(IT_Selector[m],len(ModelClassification[IT_Aspects[m]].Items))
-    if EvalString.find(':') > -1: # range of items is taken
-        RangeStart = int(EvalString[0:EvalString.find(':')])
-        RangeStop  = int(EvalString[EvalString.find(':')+1::])
-        ModelClassification[IT_Aspects[m]].Items = ModelClassification[IT_Aspects[m]].Items[RangeStart:RangeStop]           
-    elif EvalString.find('[') > -1: # selected items are taken
-        ModelClassification[IT_Aspects[m]].Items = \
-            [ModelClassification[IT_Aspects[m]].Items[i] for i in eval(EvalString)]
-    elif EvalString == 'all':
-        None
-    else:
-        Mylog.info('ITEM SELECT ERROR for aspect ' + IT_Aspects[m] + ' were found in datafile.</br>')
-        break
+# print('Define model classifications and select items for model classifications according to information provided by config file.')
+# ModelClassification  = {} # Dict of model classifications
+# for m in range(0,len(IT_Aspects)):
+#     ModelClassification[IT_Aspects[m]] = deepcopy(MasterClassification[IT_Classification[m]])
+#     EvalString = msf.EvalItemSelectString(IT_Selector[m],len(ModelClassification[IT_Aspects[m]].Items))
+#     if EvalString.find(':') > -1: # range of items is taken
+#         RangeStart = int(EvalString[0:EvalString.find(':')])
+#         RangeStop  = int(EvalString[EvalString.find(':')+1::])
+#         ModelClassification[IT_Aspects[m]].Items = ModelClassification[IT_Aspects[m]].Items[RangeStart:RangeStop]           
+#     elif EvalString.find('[') > -1: # selected items are taken
+#         ModelClassification[IT_Aspects[m]].Items = \
+#             [ModelClassification[IT_Aspects[m]].Items[i] for i in eval(EvalString)]
+#     elif EvalString == 'all':
+#         None
+#     else:
+#         Mylog.info('ITEM SELECT ERROR for aspect ' + IT_Aspects[m] + ' were found in datafile.</br>')
+#         break
     
     
-# Define model index table and parameter dictionary
-Model_Time_Start = int(min(ModelClassification['Time'].Items))
-Model_Time_End   = int(max(ModelClassification['Time'].Items))
-Model_Duration   = Model_Time_End - Model_Time_Start
+# # Define model index table and parameter dictionary
+# Model_Time_Start = int(min(ModelClassification['Time'].Items))
+# Model_Time_End   = int(max(ModelClassification['Time'].Items))
+# Model_Duration   = Model_Time_End - Model_Time_Start
 
-print('Define index table dataframe.')
-IndexTable = pd.DataFrame({'Aspect'        : IT_Aspects, # 'Time' and 'Element' must be present!
-                           'Description'   : IT_Description,
-                           'Dimension'     : IT_Dimension,
-                           'Classification': [ModelClassification[Aspect] for Aspect in IT_Aspects],
-                           # Unique one letter (upper or lower case) indices to be used later for calculations.
-                           'IndexLetter'   : IT_IndexLetter}) 
+# print('Define index table dataframe.')
+# IndexTable = pd.DataFrame({'Aspect'        : IT_Aspects, # 'Time' and 'Element' must be present!
+#                            'Description'   : IT_Description,
+#                            'Dimension'     : IT_Dimension,
+#                            'Classification': [ModelClassification[Aspect] for Aspect in IT_Aspects],
+#                            # Unique one letter (upper or lower case) indices to be used later for calculations.
+#                            'IndexLetter'   : IT_IndexLetter}) 
 
-# Default indexing of IndexTable, other indices are produced on the fly
-IndexTable.set_index('Aspect', inplace = True) 
+# # Default indexing of IndexTable, other indices are produced on the fly
+# IndexTable.set_index('Aspect', inplace = True) 
 
-# Add indexSize to IndexTable:
-IndexTable['IndexSize'] = \
-    pd.Series([len(IndexTable.Classification[i].Items) for i in range(0,len(IndexTable.IndexLetter))], index=IndexTable.index)
+# # Add indexSize to IndexTable:
+# IndexTable['IndexSize'] = \
+#     pd.Series([len(IndexTable.Classification[i].Items) for i in range(0,len(IndexTable.IndexLetter))], index=IndexTable.index)
 
-# list of the classifications used for each indexletter
-IndexTable_ClassificationNames = [IndexTable.Classification[i].Name for i in range(0,len(IndexTable.IndexLetter))] 
+# # list of the classifications used for each indexletter
+# IndexTable_ClassificationNames = [IndexTable.Classification[i].Name for i in range(0,len(IndexTable.IndexLetter))] 
 
+
+IndexTable = data_prep.IndexTable
 #Define shortcuts for the most important index sizes:
 Nt = len(IndexTable.Classification[IndexTable.index.get_loc('Time')].Items)
 Nr = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('r')].Items)
@@ -272,132 +274,28 @@ Ns = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get
 Nz = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('z')].Items)
 Na = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('a')].Items)
 NS = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('S')].Items)
-print('Read model data and parameters.')
 
-ParameterDict = {}
-for mo in range(0,len(PL_Names)):
-    ParPath = os.path.join(DataPath,PL_Version[mo])
-    print('Reading parameter ' + PL_Names[mo])
-    # Do not change order of parameters handed over to function!
-    MetaData, Values, Uncertainty = msf.ReadParameterV2(ParPath, PL_Names[mo], PL_IndexStructure[mo], 
-                                         PL_IndexMatch[mo], PL_IndexLayer[mo],
-                                         MasterClassification, IndexTable,
-                                         IndexTable_ClassificationNames, ScriptConfig, Mylog, ParseUncertainty = True) 
-    ParameterDict[PL_Names[mo]] = msc.Parameter(Name = MetaData['Dataset_Name'], 
-                                                ID = MetaData['Dataset_ID'], 
-                                                UUID = MetaData['Dataset_UUID'],
-                                                P_Res = None,
-                                                MetaData = MetaData,
-                                                Indices = PL_IndexStructure[mo], 
-                                                Values=Values, 
-                                                Uncert=Uncertainty,
-                                                Unit = MetaData['Dataset_Unit'])
-    
-    
+
+print('Read model data and parameters.')
+ParameterDict = data_prep.get_parameter_dict(data_prep.DataPath, data_prep.PL_Names)
+
+
+
 Mylog.info('### 4 - Define MFA system')
 print('Define MFA system and processes.')
 
-PassengerVehicleFleet_MFA_System = msc.MFAsystem(Name = 'Global_Passengers_Vehicle_Fleet', 
-                      Geogr_Scope = 'World', 
-                      Unit = 'Mt', 
-                      ProcessList = [], 
-                      FlowDict = mss.FlowDict, 
-                      StockDict = mss.StockDict,
-                      ParameterDict = ParameterDict, 
-                      Time_Start = Model_Time_Start, 
-                      Time_End = Model_Time_End, 
-                      IndexTable = IndexTable, 
-                      Elements = IndexTable.loc['Element'].Classification.Items, 
-                      Graphical = None) # Initialize MFA system
+PassengerVehicleFleet_MFA_System = data_prep.PassengerVehicleFleet_MFA_System
                       
-# Check Validity of index tables:
-# returns true if dimensions are OK and time index is present and element list is not empty
-PassengerVehicleFleet_MFA_System.IndexTableCheck() 
+# # Check Validity of index tables:
+# # returns true if dimensions are OK and time index is present and element list is not empty
+# PassengerVehicleFleet_MFA_System.IndexTableCheck() 
 
-
-
-# Add processes to system
-for m in range(0, len(PrL_Number)):
-    PassengerVehicleFleet_MFA_System.ProcessList.append(msc.Process(Name = PrL_Name[m], ID   = PrL_Number[m]))
+# # Add processes to system
+# for m in range(0, len(data_prep.PrL_Number)):
+#     PassengerVehicleFleet_MFA_System.ProcessList.append(msc.Process(Name = PrL_Name[m], ID   = PrL_Number[m]))
     
-# # Define system variables: 6 flows.
-# PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'] = msc.Flow(Name = 'Primary Aluminium demand', P_Start = 0,
-#                                                   P_End = 1, Indices = 't,e,a,S',
-#                                                   Values=None, Uncert=None, Color = None,
-#                                                   ID = None, UUID = None)     
-# PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'] = msc.Flow(Name = 'Materials for Passenger vehicle production', P_Start = 1,
-#                                                   P_End = 2, Indices = 't,r,e,a,S',
-#                                                   Values=None, Uncert=None, Color = None,
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'] = msc.Flow(Name = 'Scrap surplus', P_Start = 1, 
-#                                                   P_End = 9, Indices = 't,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'] = msc.Flow(Name = 'New registration of vehicles', P_Start = 2, 
-#                                                   P_End = 3, Indices = 't,r,p,s,z,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'] = msc.Flow(Name = 'End of Life vehicles', P_Start = 3, 
-#                                                   P_End = 4, Indices = 't,c,r,p,s,z,e,a,S',
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'] = msc.Flow(Name = 'Collection losses', P_Start = 4, 
-#                                                   P_End = 0, Indices = 't,c,r,p,s,z,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'] = msc.Flow(Name = 'Collected cars to dismantling', P_Start = 4, 
-#                                                   P_End = 5, Indices = 't,c,r,p,s,z,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'] = msc.Flow(Name = 'Collected cars directly to shredding', P_Start = 4, 
-#                                                   P_End = 7, Indices = 't,c,r,p,s,z,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'] = msc.Flow(Name = 'Dismantled components to shredding', P_Start = 5, 
-#                                                   P_End = 6, Indices = 't,r,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'] = msc.Flow(Name = 'Residues from dismantllng to shredding', P_Start = 5, 
-#                                                   P_End = 7, Indices = 't,r,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'] = msc.Flow(Name = 'Shredding losses', P_Start = 6, 
-#                                                   P_End = 0, Indices = 't,r,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'] = msc.Flow(Name = 'Al scrap from dismantled components', P_Start = 6, 
-#                                                   P_End = 1, Indices = 't,r,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'] = msc.Flow(Name = 'Shredding losses', P_Start = 7, 
-#                                                   P_End = 0, Indices = 't,r,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'] = msc.Flow(Name = 'Mixed Al scrap', P_Start = 7, 
-#                                                   P_End = 1, Indices = 't,r,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)
-# PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'] = msc.Flow(Name = 'Mixed Al scrap to alloy sorting', P_Start = 7, 
-#                                                   P_End = 8, Indices = 't,r,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)          
-# PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'] = msc.Flow(Name = 'Alloy sorted scrap', P_Start = 8, 
-#                                                   P_End = 1, Indices = 't,r,e,a,S', 
-#                                                   Values=None, Uncert=None, Color = None, 
-#                                                   ID = None, UUID = None)                                               
-                                                                                       
-                                                  
-# # Define system variables: 1 stock and 1 stock change:
-# PassengerVehicleFleet_MFA_System.StockDict['S_3']  = msc.Stock(Name = 'In-use stock', P_Res = 3, Type = 0,
-#                                                   Indices = 't,c,r,p,s,z,e,a,S', Values=None, Uncert=None,
-#                                                   ID = None, UUID = None)
-
-# PassengerVehicleFleet_MFA_System.StockDict['dS_3']  = msc.Stock(Name = 'Net in-use stock change', P_Res = 3, Type = 1,
-#                                                   Indices = 't,r,p,s,z,e,a,S', Values=None, Uncert=None,
-#                                                   ID = None, UUID = None)
-
-PassengerVehicleFleet_MFA_System.Initialize_StockValues() # Assign empty arrays to stocks according to dimensions.
-PassengerVehicleFleet_MFA_System.Initialize_FlowValues() # Assign empty arrays to flows according to dimensions. 
+# PassengerVehicleFleet_MFA_System.Initialize_StockValues() # Assign empty arrays to stocks according to dimensions.
+# PassengerVehicleFleet_MFA_System.Initialize_FlowValues() # Assign empty arrays to flows according to dimensions. 
 
 
 Mylog.info('### 5 - Building and solving the MFA model')
@@ -418,15 +316,10 @@ I_crS = np.zeros((Nt,Nr,NS))
 O_trS = np.zeros((Nt,Nr,NS))
 
 
-
+print('Solving dynamic stock model of the passenger vehicle fleet')
 for scenario in range(NS):
-    print('Computing Scenario:  ',IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('S')].Items[scenario])
-    
-    print('Solving dynamic stock model of the passenger vehicle fleet for: ')
     for region in range(Nr):
-             
-        # 1a) Loop over all regions to determine inflow-driven stock of vehicles, with pre 2005 age-cohorts absent
-        print(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('r')].Items[region])
+        # 1a) Loop over all regions to determine a stock-driven model of the global passenger vehicle fleet
         # Create helper DSM for computing the dynamic stock model:
         DSM = dsm.DynamicStockModel(t = np.array(IndexTable.Classification[IndexTable.index.get_loc('Time')].Items),
                                            s = PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Stock'].Values[region,:], 
@@ -714,19 +607,19 @@ S_3_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.StockDi
 dS_3_taS = np.einsum('trpszeaS -> taS', PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values)
 
 
-cf.export_to_csv(F_2_3_taS, 'F_2_3_taS', IndexTable)
-cf.export_to_csv(F_3_4_taS, 'F_3_4_taS', IndexTable)
-cf.export_to_csv(F_4_0_taS, 'F_4_0_taS', IndexTable)
-cf.export_to_csv(F_4_5_taS, 'F_4_5_taS', IndexTable)
-cf.export_to_csv(F_4_7_taS, 'F_4_7_taS', IndexTable)
-cf.export_to_csv(F_5_6_taS, 'F_5_6_taS', IndexTable)
-cf.export_to_csv(F_5_7_taS, 'F_5_7_taS', IndexTable)
-cf.export_to_csv(F_6_0_taS, 'F_6_0_taS', IndexTable)
-cf.export_to_csv(F_6_1_taS, 'F_6_1_taS', IndexTable)
-cf.export_to_csv(F_7_0_taS, 'F_7_0_taS', IndexTable)
-cf.export_to_csv(F_7_1_taS, 'F_7_1_taS', IndexTable)
-cf.export_to_csv(F_1_2_taS, 'F_1_2_taS', IndexTable)
-cf.export_to_csv(F_1_9_taS, 'scrap_surplus_taS', IndexTable)
+# cf.export_to_csv(F_2_3_taS, 'F_2_3_taS', IndexTable)
+# cf.export_to_csv(F_3_4_taS, 'F_3_4_taS', IndexTable)
+# cf.export_to_csv(F_4_0_taS, 'F_4_0_taS', IndexTable)
+# cf.export_to_csv(F_4_5_taS, 'F_4_5_taS', IndexTable)
+# cf.export_to_csv(F_4_7_taS, 'F_4_7_taS', IndexTable)
+# cf.export_to_csv(F_5_6_taS, 'F_5_6_taS', IndexTable)
+# cf.export_to_csv(F_5_7_taS, 'F_5_7_taS', IndexTable)
+# cf.export_to_csv(F_6_0_taS, 'F_6_0_taS', IndexTable)
+# cf.export_to_csv(F_6_1_taS, 'F_6_1_taS', IndexTable)
+# cf.export_to_csv(F_7_0_taS, 'F_7_0_taS', IndexTable)
+# cf.export_to_csv(F_7_1_taS, 'F_7_1_taS', IndexTable)
+# cf.export_to_csv(F_1_2_taS, 'F_1_2_taS', IndexTable)
+# cf.export_to_csv(F_1_9_taS, 'scrap_surplus_taS', IndexTable)
 
 iterables = []
 names = []
@@ -801,8 +694,10 @@ df.to_excel('results/flows_scenarios.xlsx', merge_cells=False)
 # df['F_8_1_t'] = F_8_1_t.flatten()
 
 
-
-# df.to_excel('results/flows_per_year.xlsx')
+try:
+    df.to_excel('results/flows_per_year.xlsx')
+except:
+    print('Results could not be saved to results/flows_per_year.xlsx, the file is probably open')
 
 
 #### Plots
