@@ -4,6 +4,16 @@
 
 ### 3 - Read classification and data
 
+End of file or formatting error while reading the classification file in column 12. Check if all classifications are present. If yes, you are good to go!
+
+Read parameter list from model config sheet.
+
+Read process list from model config sheet.
+
+Read model run control from model config sheet.
+
+Read model output control from model config sheet.
+
 A total of 755 values was read from file for parameter Vehicle_Lifetime.
 
 755.0 of 755 values for parameter Vehicle_Lifetime were assigned.
@@ -63,4 +73,8 @@ A total of 755 values was read from file for parameter Carbon_Footprint_Primary.
 A total of 755 values was read from file for parameter Carbon_Footprint_Secondary.
 
 755.0 of 755 values for parameter Carbon_Footprint_Secondary were assigned.
+
+### 4 - Define MFA system
+
+### 5 - Building and solving the MFA model
 
