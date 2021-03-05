@@ -34,24 +34,20 @@ import ODYM_Classes as msc # import the ODYM class file
 import ODYM_Functions as msf # import the ODYM function file
 import mfa_system # import the system definition
         
-
-
-
 class DataPrep(object):
    
-
     
 
 
-    def __init__(self, DataPath, Mylog):
+    def __init__(self, DataPath, Mylog, pickle_parameters=None):
         self.DataPath = DataPath
-
-        
         self.Mylog = Mylog
+        self.pickle_parameters = pickle_parameters
         self.initial_config()
         self.build_index_table()
         print('Read model data and parameters.')
         self.get_parameter_dict()
+
 
     def initial_config(self):
         self.Mylog.info('### 2 - Load Config file and read model control parameters')
@@ -143,27 +139,31 @@ class DataPrep(object):
 
 
     def get_parameter_dict(self):
-        self.ParameterDict = {}
-        for mo in range(0,len(self.PL_Names)):
-            ParPath = os.path.join(self.DataPath,self.PL_Version[mo])
-            print('Reading parameter ' + self.PL_Names[mo])
-            # Do not change order of parameters handed over to function!
-            MetaData, Values, Uncertainty = msf.ReadParameterV2(ParPath, self.PL_Names[mo], self.PL_IndexStructure[mo], 
-                                                 self.PL_IndexMatch[mo], self.PL_IndexLayer[mo],
-                                                 self.MasterClassification, self.IndexTable,
-                                                 self.IndexTable_ClassificationNames, self.ScriptConfig, self.Mylog, ParseUncertainty = True) 
-            self.ParameterDict[self.PL_Names[mo]] = msc.Parameter(Name = MetaData['Dataset_Name'], 
-                                                        ID = MetaData['Dataset_ID'], 
-                                                        UUID = MetaData['Dataset_UUID'],
-                                                        P_Res = None,
-                                                        MetaData = MetaData,
-                                                        Indices = self.PL_IndexStructure[mo], 
-                                                        Values=Values, 
-                                                        Uncert=Uncertainty,
-                                                                Unit = MetaData['Dataset_Unit'])
-    
-    
-    
+        if self.pickle_parameters:
+            self.ParameterDict = pickle.load(open(self.pickle_parameters, "rb" ))
+        else:            
+            self.ParameterDict = {}
+            for mo in range(0,len(self.PL_Names)):
+                ParPath = os.path.join(self.DataPath,self.PL_Version[mo])
+                print('Reading parameter ' + self.PL_Names[mo])
+                # Do not change order of parameters handed over to function!
+                MetaData, Values, Uncertainty = msf.ReadParameterV2(ParPath, self.PL_Names[mo], self.PL_IndexStructure[mo], 
+                                                     self.PL_IndexMatch[mo], self.PL_IndexLayer[mo],
+                                                     self.MasterClassification, self.IndexTable,
+                                                     self.IndexTable_ClassificationNames, self.ScriptConfig, self.Mylog, ParseUncertainty = True) 
+                self.ParameterDict[self.PL_Names[mo]] = msc.Parameter(Name = MetaData['Dataset_Name'], 
+                                                            ID = MetaData['Dataset_ID'], 
+                                                            UUID = MetaData['Dataset_UUID'],
+                                                            P_Res = None,
+                                                            MetaData = MetaData,
+                                                            Indices = self.PL_IndexStructure[mo], 
+                                                            Values=Values, 
+                                                            Uncert=Uncertainty,
+                                                                    Unit = MetaData['Dataset_Unit'])
+            # Export ParameterDict to  pickle file for easier loading next time
+            file_name = "ParameterDict.p"
+            pickle.dump(self.ParameterDict, open(file_name, "wb" ))
+            print("ParaneterDict exported to: ", file_name)
     
     
     def create_mfa_system(self):
@@ -191,3 +191,17 @@ class DataPrep(object):
         self.PassengerVehicleFleet_MFA_System.Initialize_StockValues() # Assign empty arrays to stocks according to dimensions.
         self.PassengerVehicleFleet_MFA_System.Initialize_FlowValues() # Assign empty arrays to flows according to dimensions. 
         return self.PassengerVehicleFleet_MFA_System
+    
+    
+if __name__ == "__main__":
+    # Initialize loggin routine
+    log_verbosity = eval("log.DEBUG")
+    log_filename = 'LogFileTest.md'
+    log.getLogger('matplotlib').setLevel(log.WARNING)
+    [Mylog, console_log, file_log] = msf.function_logger(log_filename, os.getcwd(),
+                                                          log_verbosity, log_verbosity)
+    Mylog.info('### 1. - Initialize.')
+               
+    Data_Prep = DataPrep(DataPath,Mylog)
+    # pickle.dump(DataPrep, open( "DataPrep.p", "wb" ) )
+

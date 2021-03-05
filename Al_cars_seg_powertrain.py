@@ -16,6 +16,7 @@ import xlrd, xlwt
 import pylab
 from copy import deepcopy
 import logging as log
+import time
 
 
 # add ODYM module directory to system path, relative
@@ -36,7 +37,6 @@ import ODYM_Functions as msf # import the ODYM function file
 import dynamic_stock_model as dsm # import the dynamic stock model library
 import custom_functions as cf
 from data_prep_class import DataPrep
-import mfa_system as mss # import the system definition
 
 # Initialize loggin routine
 log_verbosity = eval("log.DEBUG")
@@ -45,13 +45,14 @@ log.getLogger('matplotlib').setLevel(log.WARNING)
 [Mylog, console_log, file_log] = msf.function_logger(log_filename, os.getcwd(),
                                                      log_verbosity, log_verbosity)
 Mylog.info('### 1. - Initialize.')
-           
-DataPrep = DataPrep(DataPath,Mylog)
+Data_Prep = DataPrep(DataPath,Mylog)      
+# Data_Prep = DataPrep(DataPath,Mylog, "ParameterDict.p")
+
 
 # Mylog.info('### 3 - Read classification and data')
 
 
-IndexTable = DataPrep.IndexTable
+IndexTable = Data_Prep.IndexTable
 #Define shortcuts for the most important index sizes:
 Nt = len(IndexTable.Classification[IndexTable.index.get_loc('Time')].Items)
 Nr = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('r')].Items)
@@ -70,7 +71,7 @@ Mylog.info('### 4 - Define MFA system')
 print('Define MFA system and processes.')
 
 # PassengerVehicleFleet_MFA_System = data_prep.PassengerVehicleFleet_MFA_System
-PassengerVehicleFleet_MFA_System = DataPrep.create_mfa_system()
+PassengerVehicleFleet_MFA_System = Data_Prep.create_mfa_system()
                       
 
 Mylog.info('### 5 - Building and solving the MFA model')
@@ -103,9 +104,6 @@ for scenario in range(NS):
         
         Stock_by_cohort = DSM.compute_stock_driven_model()
     
-    
-    
-        #print(Stock_by_cohort.shape)
         O_tcr[:,:,region] = DSM.compute_o_c_from_s_c()
         O_tr[:,region] = DSM.compute_outflow_total()
         S_tcr[:,:,region] = DSM.s_c
@@ -127,10 +125,30 @@ for scenario in range(NS):
 print("Performing Stock calculations")
 S_tcrpS = np.einsum('tcrS, Srpc -> tcrpS', S_tcrS, 
                     PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values) 
+S_tcrsS = np.einsum('tcrS, Srsc -> tcrsS', S_tcrS, 
+                    PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
+S_tcrpsS_raw = np.einsum('tcrpS, Srsc -> tcrpsS', S_tcrpS, 
+                    PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
+
+
+# Segment split correction by powertrain
+S_tcrpsS = np.einsum('tcrpsS , ps -> tcrpsS', S_tcrpsS_raw, 
+                    PassengerVehicleFleet_MFA_System.ParameterDict['SP_Coeff'].Values) 
+S_tcrpsS[:,:,:,1,1,:] = S_tcrpS[:,:,:,1,:] - S_tcrpsS[:,:,:,1,0,:] - S_tcrpsS[:,:,:,1,2,:] -S_tcrpsS[:,:,:,1,3,:]
+
+S_tcrpsS[:,:,:,2,1,:] = S_tcrpS[:,:,:,2,:] - S_tcrpsS[:,:,:,2,0,:] - S_tcrpsS[:,:,:,2,2,:] -S_tcrpsS[:,:,:,2,3,:]
+
+S_tcrpsS[:,:,:,3,1,:] = S_tcrpS[:,:,:,3,:] - S_tcrpsS[:,:,:,3,0,:] - S_tcrpsS[:,:,:,3,2,:] -S_tcrpsS[:,:,:,3,3,:]
+
+for s in range(Ns):
+    S_tcrpsS[:,:,:,0,s,:] = S_tcrsS[:,:,:,s] -  np.sum(S_tcrpsS[:,:,:,0:,s,:], axis=3)
+
+
+S_trpsS = np.einsum('tcrpsS -> trpsS', S_tcrpsS) 
 S_tcrpsS = np.einsum('tcrpS, Srsc -> tcrpsS', S_tcrpS, 
                     PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
 
-S_trpsS = np.einsum('tcrpsS -> trpsS', S_tcrpsS) 
+
 S_tpsS = np.einsum('tcrpsS -> tpsS', S_tcrpsS) 
 S_tpS = np.einsum('tcrpsS -> tpS', S_tcrpsS) 
 S_tsS = np.einsum('tcrpsS -> tsS', S_tcrpsS) 
@@ -149,6 +167,16 @@ O_tcrpsS = np.einsum('tcrpS, Srsc -> tcrpsS', O_tcrpS,
                     PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
 O_tsS = np.einsum('tcrpsS -> tsS', O_tcrpsS) 
 O_tpS = np.einsum('tcrpsS -> tpS', O_tcrpsS) 
+
+
+I_crps_corr = np.einsum('cr, rpsc -> crps', I_cr, 
+                    PassengerVehicleFleet_MFA_System.ParameterDict['Powertrain_and_Segment'].Values) 
+I_crp = np.einsum('cr, rpsc -> crp', I_cr, 
+                    PassengerVehicleFleet_MFA_System.ParameterDict['Powertrain_and_Segment'].Values) 
+Ps_rsc =  np.einsum('rpsc -> rsc', PassengerVehicleFleet_MFA_System.ParameterDict['Powertrain_and_Segment'].Values) 
+I_crps =  np.einsum('crp, rsc -> crps', I_crp, Ps_rsc) 
+P_crps = I_crps_corr / I_crps
+# cf.export_to_csv(P_crps, 'P_crps', IndexTable)
 
 #Aluminium content calculations by scenario
 print("Performing Al content calculations")
@@ -428,47 +456,46 @@ df['F_8_1_ta'] = F_8_1_taS.flatten()/10**9
 
 df.to_excel('results/flows_scenarios.xlsx', merge_cells=False)
 
-# F_0_1_t = np.einsum('ta -> t', F_0_1_ta)/10**9
-# F_1_2_t = np.einsum('ta -> t', F_1_2_ta)/10**9
-# F_1_9_t = np.einsum('ta -> t', F_1_9_ta)/10**9
-# F_2_3_t = np.einsum('ta -> t', F_2_3_ta)/10**9
-# F_3_4_t = np.einsum('ta -> t', F_3_4_ta)/10**9
-# F_4_0_t = np.einsum('ta -> t', F_4_0_ta)/10**9
-# F_4_5_t = np.einsum('ta -> t', F_4_5_ta)/10**9
-# F_4_7_t = np.einsum('ta -> t', F_4_7_ta)/10**9
-# F_5_6_t = np.einsum('ta -> t', F_5_6_ta)/10**9
-# F_5_7_t = np.einsum('ta -> t', F_5_7_ta)/10**9
-# F_6_0_t = np.einsum('ta -> t', F_6_0_ta)/10**9
-# F_6_1_t = np.einsum('ta -> t', F_6_1_ta)/10**9
-# F_7_0_t = np.einsum('ta -> t', F_7_0_ta)/10**9
-# F_7_1_t = np.einsum('ta -> t', F_7_1_ta)/10**9
-# F_7_8_t = np.einsum('ta -> t', F_7_8_ta)/10**9
-# F_8_1_t = np.einsum('ta -> t', F_8_1_ta)/10**9
+F_0_1_t = np.einsum('taS -> t', F_0_1_taS)/10**9
+F_1_2_t = np.einsum('taS -> t', F_1_2_taS)/10**9
+F_1_9_t = np.einsum('taS -> t', F_1_9_taS)/10**9
+F_2_3_t = np.einsum('taS -> t', F_2_3_taS)/10**9
+F_3_4_t = np.einsum('taS -> t', F_3_4_taS)/10**9
+F_4_0_t = np.einsum('taS -> t', F_4_0_taS)/10**9
+F_4_5_t = np.einsum('taS -> t', F_4_5_taS)/10**9
+F_4_7_t = np.einsum('taS -> t', F_4_7_taS)/10**9
+F_5_6_t = np.einsum('taS -> t', F_5_6_taS)/10**9
+F_5_7_t = np.einsum('taS -> t', F_5_7_taS)/10**9
+F_6_0_t = np.einsum('taS -> t', F_6_0_taS)/10**9
+F_6_1_t = np.einsum('taS -> t', F_6_1_taS)/10**9
+F_7_0_t = np.einsum('taS -> t', F_7_0_taS)/10**9
+F_7_1_t = np.einsum('taS-> t', F_7_1_taS)/10**9
+F_7_8_t = np.einsum('taS -> t', F_7_8_taS)/10**9
+F_8_1_t = np.einsum('taS -> t', F_8_1_taS)/10**9
 
 
 
 
-# index = pd.Index(
-#         PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:],
-#         name="Time")
+index = pd.Index(
+        PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:],
+        name="Time")
 
-# df = pd.DataFrame(F_0_1_t.flatten(),index=index, columns = ['F_0_1_t'])
-
-# df['F_1_2_t'] = F_1_2_t.flatten()
-# df['F_1_9_t'] = F_1_9_t.flatten()
-# df['F_2_3_t'] = F_2_3_t.flatten()
-# df['F_3_4_t'] = F_3_4_t.flatten()
-# df['F_4_0_t'] = F_4_0_t.flatten()
-# df['F_4_5_t'] = F_4_5_t.flatten()
-# df['F_4_7_t'] = F_4_7_t.flatten()
-# df['F_5_6_t'] = F_5_6_t.flatten()
-# df['F_5_7_t'] = F_5_7_t.flatten()
-# df['F_6_0_t'] = F_6_0_t.flatten()
-# df['F_6_1_t'] = F_6_1_t.flatten()
-# df['F_7_0_t'] = F_7_0_t.flatten()
-# df['F_7_1_t'] = F_7_1_t.flatten()
-# df['F_7_8_t'] = F_7_8_t.flatten()
-# df['F_8_1_t'] = F_8_1_t.flatten()
+df = pd.DataFrame(F_0_1_t.flatten(),index=index, columns = ['F_0_1_t'])
+df['F_1_2_t'] = F_1_2_t.flatten()
+df['F_1_9_t'] = F_1_9_t.flatten()
+df['F_2_3_t'] = F_2_3_t.flatten()
+df['F_3_4_t'] = F_3_4_t.flatten()
+df['F_4_0_t'] = F_4_0_t.flatten()
+df['F_4_5_t'] = F_4_5_t.flatten()
+df['F_4_7_t'] = F_4_7_t.flatten()
+df['F_5_6_t'] = F_5_6_t.flatten()
+df['F_5_7_t'] = F_5_7_t.flatten()
+df['F_6_0_t'] = F_6_0_t.flatten()
+df['F_6_1_t'] = F_6_1_t.flatten()
+df['F_7_0_t'] = F_7_0_t.flatten()
+df['F_7_1_t'] = F_7_1_t.flatten()
+df['F_7_8_t'] = F_7_8_t.flatten()
+df['F_8_1_t'] = F_8_1_t.flatten()
 
 
 try:
@@ -478,9 +505,39 @@ except:
 
 
 #### Plots
+start_time = time.time()
 print("Plots")
 plt.ioff() 
+np.seterr(divide='ignore', invalid='ignore') #avoid warning for negative values in divides for first years
+fig, ax = plt.subplots()
 
+### Scenario comparison plots
+## Plot Al inflows per scenario
+y_dict = {
+        'name': 'Global Al demand',
+        'aspect': 'Scenario',
+        'unit': 'Mt/year'
+        }
+cf.plot_result_time(Al_inflow_cS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='no', fig=fig, ax=ax)
+    
+## Plot Total Carbon footprint
+y_dict = {
+        'name': 'Carbon footprint of Al production',
+        'aspect': 'Scenario',
+        'unit': 'Mt CO2/yr'
+        }
+cf.plot_result_time((carbon_footprint_primary + carbon_footprint_secondary)/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='no', fig=fig, ax=ax)
+
+## Plot Cumulative Carbon footprint
+y_dict = {
+        'name': 'Cumulative Carbon footprint of Al production',
+        'aspect': 'Scenario',
+        'unit': 'Mt CO2'
+        }
+cf.plot_result_time(np.cumsum(carbon_footprint_primary + carbon_footprint_secondary, axis=0)/10**9, y_dict, IndexTable, t_min= 120, t_max = 151, show = 'no', stack='no', fig=fig, ax=ax)
+        
+
+### Single scenario plots
 for scenario in range(NS):
 
     print("Plotting results for scenario " + str(scenario))
@@ -490,7 +547,7 @@ for scenario in range(NS):
             'aspect': 'Region',
             'unit': 'cars'
             }
-    cf.plot_result_time_scenario(S_trS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(S_trS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     ## Car inflows per region
     y_dict = {
@@ -498,7 +555,7 @@ for scenario in range(NS):
             'aspect': 'Region',
             'unit': 'cars/yr'
             }
-    cf.plot_result_time_scenario(I_crS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(I_crS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     # Car outflows per region
     y_dict = {
@@ -506,7 +563,7 @@ for scenario in range(NS):
             'aspect': 'Region',
             'unit': 'cars/yr'
             }
-    cf.plot_result_time_scenario(O_trS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(O_trS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     ## Stock by powertrain
     y_dict = {
@@ -514,7 +571,7 @@ for scenario in range(NS):
             'aspect': 'Powertrain',
             'unit': 'cars'
             }
-    cf.plot_result_time_scenario(S_tpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(S_tpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     ## Car inflows by powertrain
     y_dict = {
@@ -522,7 +579,7 @@ for scenario in range(NS):
             'aspect': 'Powertrain',
             'unit': 'cars'
             }
-    cf.plot_result_time_scenario(I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     ## Car outflows by powertrain
     y_dict = {
@@ -530,7 +587,7 @@ for scenario in range(NS):
             'aspect': 'Powertrain',
             'unit': 'cars'
             }
-    cf.plot_result_time_scenario(O_tpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(O_tpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     ## Stock by segment
     y_dict = {
@@ -538,7 +595,7 @@ for scenario in range(NS):
             'aspect': 'Segment',
             'unit': 'cars'
             }
-    cf.plot_result_time_scenario(S_tsS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(S_tsS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     ## Car inflows by segment
     y_dict = {
@@ -546,7 +603,7 @@ for scenario in range(NS):
             'aspect': 'Segment',
             'unit': 'cars'
             }
-    cf.plot_result_time_scenario(I_csS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(I_csS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     ## Car outflows by segment
     y_dict = {
@@ -554,7 +611,7 @@ for scenario in range(NS):
             'aspect': 'Segment',
             'unit': 'cars'
             }
-    cf.plot_result_time_scenario(O_tsS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(O_tsS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     
     
@@ -564,7 +621,7 @@ for scenario in range(NS):
             'aspect': 'Component',
             'unit': 'Mt'
             }
-    cf.plot_result_time_scenario(Al_stock_tzS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(Al_stock_tzS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     ## Plot Al inflows per conponent
     y_dict = {
@@ -572,16 +629,17 @@ for scenario in range(NS):
             'aspect': 'Component',
             'unit': 'Mt/yr'
             }
-    cf.plot_result_time_scenario(Al_inflow_czS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(Al_inflow_czS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     
     ## Plot Al outflows per conponent
     y_dict = {
             'name': 'Al Outflows',
+            
             'aspect': 'Component',
             'unit': 'Mt/yr'
             }
-    cf.plot_result_time_scenario(Al_outflow_tzS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(Al_outflow_tzS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     
     
@@ -591,7 +649,7 @@ for scenario in range(NS):
             'aspect': 'Region',
             'unit': 'Mt'
             }
-    cf.plot_result_time_scenario(Al_stock_trS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(Al_stock_trS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     # Aluminium inflows per region
     y_dict = {
@@ -599,7 +657,7 @@ for scenario in range(NS):
             'aspect': 'Region',
             'unit': 'Mt/yr'
             }
-    cf.plot_result_time_scenario(Al_inflow_crS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(Al_inflow_crS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     # Aluminium outflows per region
     y_dict = {
@@ -607,7 +665,7 @@ for scenario in range(NS):
             'aspect': 'Region',
             'unit': 'Mt/yr'
             }
-    cf.plot_result_time_scenario(Al_outflow_trS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(Al_outflow_trS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     ## Plot Al Alloys inflows 
     y_dict = {
@@ -615,15 +673,14 @@ for scenario in range(NS):
             'aspect': 'Alloy',
             'unit': 'Mt/yr'
             }
-    cf.plot_result_time_scenario(Alloys_inflow_caS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
-    
+    cf.plot_result_time_scenario(Alloys_inflow_caS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     ## Plot Average Al content in inflows per region
     y_dict = {
             'name': 'Average Al content',
             'aspect': 'Region',
             'unit': 'kg/car'
             }
-    cf.plot_result_time_scenario(Al_inflow_crS / I_crS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no')
+    cf.plot_result_time_scenario(Al_inflow_crS / I_crS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no', fig=fig, ax=ax)
     
     
     ## Plot Average Al content in inflows per powertrain
@@ -634,7 +691,7 @@ for scenario in range(NS):
             'aspect': 'Powertrain',
             'unit': 'kg/car'
             }
-    cf.plot_result_time_scenario(Al_inflow_cpS / I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no')
+    cf.plot_result_time_scenario(Al_inflow_cpS / I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no', fig=fig, ax=ax)
     
     
     ## Plot Average Al content in inflows per segment
@@ -645,7 +702,7 @@ for scenario in range(NS):
             'aspect': 'Segment',
             'unit': 'kg/car'
             }
-    cf.plot_result_time_scenario(Al_inflow_csS / I_csS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no')
+    cf.plot_result_time_scenario(Al_inflow_csS / I_csS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no', fig=fig, ax=ax)
     
     ## Plot Al Alloys outflows
     y_dict = {
@@ -653,7 +710,7 @@ for scenario in range(NS):
             'aspect': 'Alloy',
             'unit': 'Mt/yr'
             }
-    cf.plot_result_time_scenario(Alloys_outflow_taS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    cf.plot_result_time_scenario(Alloys_outflow_taS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes', fig=fig, ax=ax)
     
     # Plot Ratio Outflows / Inflows
     y_dict = {
@@ -661,7 +718,7 @@ for scenario in range(NS):
             'aspect': 'Alloy',
             'unit': ''
             }
-    cf.plot_result_time_scenario(Alloys_outflow_taS / Alloys_inflow_caS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no')
+    cf.plot_result_time_scenario(Alloys_outflow_taS / Alloys_inflow_caS, y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', fig=fig, ax=ax)
     
     # Plot Ratio Outflows / Inflows for secondary castings per region
     y_dict = {
@@ -669,32 +726,242 @@ for scenario in range(NS):
             'aspect': 'Region',
             'unit': ''
             }
-    cf.plot_result_time_scenario(Alloys_outflow_traS[:,:,2] / Alloys_inflow_craS[:,:,2], y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no')
+    cf.plot_result_time_scenario(Alloys_outflow_traS[:,:,2] / Alloys_inflow_craS[:,:,2], y_dict, IndexTable, t_min= 100, t_max = 151, scenario=scenario, show = 'no', fig=fig, ax=ax)
+
+
+end_time = time.time()
+print("Time for plotting: ", end_time - start_time)
 
 
 
 
-## Plot Al inflows per scenario
-y_dict = {
-        'name': 'Global Al demand',
-        'aspect': 'Scenario',
-        'unit': 'Mt/year'
-        }
-cf.plot_result_time(Al_inflow_cS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='no')
+
+
+# exportfig = cf.ExportFigure(IndexTable)
+
+# ### Scenario comparison plots
+# ## Plot Al inflows per scenario
+# y_dict = {
+#         'name': 'Global Al demand',
+#         'aspect': 'Scenario',
+#         'unit': 'Mt/year'
+#         }
+# exportfig.plot_result_time(Al_inflow_cS/10**9, y_dict, t_min= 100, t_max = 151, show = 'no', stack='no')
     
-## Plot Total Carbon footprint
-y_dict = {
-        'name': 'Carbon footprint of Al production',
-        'aspect': 'Scenario',
-        'unit': 'Mt CO2/yr'
-        }
-cf.plot_result_time((carbon_footprint_primary + carbon_footprint_secondary)/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, show = 'no', stack='no')
+# ## Plot Total Carbon footprint
+# y_dict = {
+#         'name': 'Carbon footprint of Al production',
+#         'aspect': 'Scenario',
+#         'unit': 'Mt CO2/yr'
+#         }
+# exportfig.plot_result_time((carbon_footprint_primary + carbon_footprint_secondary)/10**9, y_dict, t_min= 100, t_max = 151, show = 'no', stack='no')
 
-## Plot Cumulative Carbon footprint
-y_dict = {
-        'name': 'Cumulative Carbon footprint of Al production',
-        'aspect': 'Scenario',
-        'unit': 'Mt CO2'
-        }
-cf.plot_result_time(np.cumsum(carbon_footprint_primary + carbon_footprint_secondary, axis=0)/10**9, y_dict, IndexTable, t_min= 120, t_max = 151, show = 'no', stack='no')
+# ## Plot Cumulative Carbon footprint
+# y_dict = {
+#         'name': 'Cumulative Carbon footprint of Al production',
+#         'aspect': 'Scenario',
+#         'unit': 'Mt CO2'
+#         }
+# exportfig.plot_result_time(np.cumsum(carbon_footprint_primary + carbon_footprint_secondary, axis=0)/10**9, y_dict, t_min= 120, t_max = 151, show = 'no', stack='no')
         
+# end_time = time.time()
+# print("Time for plotting: ", end_time - start_time)
+
+
+
+
+
+# ### Single scenario plots
+# for scenario in range(NS):
+
+#     print("Plotting results for scenario " + str(scenario))
+#     ## Car Stock per region
+#     y_dict = {
+#             'name': 'Car Stock',
+#             'aspect': 'Region',
+#             'unit': 'cars'
+#             }
+#     exportfig.plot_result_time_scenario(S_trS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     ## Car inflows per region
+#     y_dict = {
+#             'name': 'Car Inflows',
+#             'aspect': 'Region',
+#             'unit': 'cars/yr'
+#             }
+#     exportfig.plot_result_time_scenario(I_crS, y_dict,  t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     # Car outflows per region
+#     y_dict = {
+#             'name': 'Car Outflows',
+#             'aspect': 'Region',
+#             'unit': 'cars/yr'
+#             }
+#     exportfig.plot_result_time_scenario(O_trS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     ## Stock by powertrain
+#     y_dict = {
+#             'name': 'Car Stock',
+#             'aspect': 'Powertrain',
+#             'unit': 'cars'
+#             }
+#     exportfig.plot_result_time_scenario(S_tpS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     ## Car inflows by powertrain
+#     y_dict = {
+#             'name': 'Car inflows',
+#             'aspect': 'Powertrain',
+#             'unit': 'cars'
+#             }
+#     exportfig.plot_result_time_scenario(I_cpS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     ## Car outflows by powertrain
+#     y_dict = {
+#             'name': 'Car Outflows',
+#             'aspect': 'Powertrain',
+#             'unit': 'cars'
+#             }
+#     exportfig.plot_result_time_scenario(O_tpS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     ## Stock by segment
+#     y_dict = {
+#             'name': 'Car Stock',
+#             'aspect': 'Segment',
+#             'unit': 'cars'
+#             }
+#     exportfig.plot_result_time_scenario(S_tsS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     ## Car inflows by segment
+#     y_dict = {
+#             'name': 'Car Inflows',
+#             'aspect': 'Segment',
+#             'unit': 'cars'
+#             }
+#     exportfig.plot_result_time_scenario(I_csS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     ## Car outflows by segment
+#     y_dict = {
+#             'name': 'Car Outflows',
+#             'aspect': 'Segment',
+#             'unit': 'cars'
+#             }
+#     exportfig.plot_result_time_scenario(O_tsS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    
+    
+#     ## Plot Al Stock per component
+#     y_dict = {
+#             'name': 'Al Stock',
+#             'aspect': 'Component',
+#             'unit': 'Mt'
+#             }
+#     exportfig.plot_result_time_scenario(Al_stock_tzS/10**9, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     ## Plot Al inflows per conponent
+#     y_dict = {
+#             'name': 'Al Inflows',
+#             'aspect': 'Component',
+#             'unit': 'Mt/yr'
+#             }
+#     exportfig.plot_result_time_scenario(Al_inflow_czS/10**9, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    
+#     ## Plot Al outflows per conponent
+#     y_dict = {
+#             'name': 'Al Outflows',
+            
+#             'aspect': 'Component',
+#             'unit': 'Mt/yr'
+#             }
+#     exportfig.plot_result_time_scenario(Al_outflow_tzS/10**9, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+    
+    
+#     # Aluminium stock per region
+#     y_dict = {
+#             'name': 'Al stock',
+#             'aspect': 'Region',
+#             'unit': 'Mt'
+#             }
+#     exportfig.plot_result_time_scenario(Al_stock_trS/10**9, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     # Aluminium inflows per region
+#     y_dict = {
+#             'name': 'Al Inflows',
+#             'aspect': 'Region',
+#             'unit': 'Mt/yr'
+#             }
+#     exportfig.plot_result_time_scenario(Al_inflow_crS/10**9, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     # Aluminium outflows per region
+#     y_dict = {
+#             'name': 'Al Outflows',
+#             'aspect': 'Region',
+#             'unit': 'Mt/yr'
+#             }
+#     exportfig.plot_result_time_scenario(Al_outflow_trS/10**9, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     ## Plot Al Alloys inflows 
+#     y_dict = {
+#             'name': 'Al Inflows',
+#             'aspect': 'Alloy',
+#             'unit': 'Mt/yr'
+#             }
+#     exportfig.plot_result_time_scenario(Alloys_inflow_caS/10**9, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+#     ## Plot Average Al content in inflows per region
+#     y_dict = {
+#             'name': 'Average Al content',
+#             'aspect': 'Region',
+#             'unit': 'kg/car'
+#             }
+#     exportfig.plot_result_time_scenario(Al_inflow_crS / I_crS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no')
+    
+    
+#     ## Plot Average Al content in inflows per powertrain
+#     I_cpS = np.einsum('crpsS -> cpS', I_crpsS)
+#     Al_inflow_cpS = np.einsum('crpsS -> cpS', Al_inflow_crpsS)
+#     y_dict = {
+#             'name': 'Average Al content',
+#             'aspect': 'Powertrain',
+#             'unit': 'kg/car'
+#             }
+#     exportfig.plot_result_time_scenario(Al_inflow_cpS / I_cpS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no')
+    
+    
+#     ## Plot Average Al content in inflows per segment
+#     I_csS = np.einsum('crpsS -> csS', I_crpsS)
+#     Al_inflow_csS = np.einsum('crpsS -> csS', Al_inflow_crpsS)
+#     y_dict = {
+#             'name': 'Average Al content',
+#             'aspect': 'Segment',
+#             'unit': 'kg/car'
+#             }
+#     exportfig.plot_result_time_scenario(Al_inflow_csS / I_csS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='no')
+    
+#     ## Plot Al Alloys outflows
+#     y_dict = {
+#             'name': 'Al Outflows',
+#             'aspect': 'Alloy',
+#             'unit': 'Mt/yr'
+#             }
+#     exportfig.plot_result_time_scenario(Alloys_outflow_taS/10**9, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no', stack='yes')
+    
+#     # Plot Ratio Outflows / Inflows
+#     y_dict = {
+#             'name': 'Ratio Outflows - Inflows',
+#             'aspect': 'Alloy',
+#             'unit': ''
+#             }
+#     exportfig.plot_result_time_scenario(Alloys_outflow_taS / Alloys_inflow_caS, y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no')
+    
+#     # Plot Ratio Outflows / Inflows for secondary castings per region
+#     y_dict = {
+#             'name': 'O-I Ratio for 2nd castings',
+#             'aspect': 'Region',
+#             'unit': ''
+#             }
+#     exportfig.plot_result_time_scenario(Alloys_outflow_traS[:,:,2] / Alloys_inflow_craS[:,:,2], y_dict, t_min= 100, t_max = 151, scenario=scenario, show = 'no')
+
+
+
+

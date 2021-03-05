@@ -74,6 +74,10 @@ A total of 755 values was read from file for parameter Carbon_Footprint_Secondar
 
 755.0 of 755 values for parameter Carbon_Footprint_Secondary were assigned.
 
+A total of 16 values was read from file for parameter SP_Coeff.
+
+16.0 of 16 values for parameter SP_Coeff were assigned.
+
 ### 4 - Define MFA system
 
 ### 5 - Building and solving the MFA model
