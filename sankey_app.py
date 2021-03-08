@@ -49,8 +49,10 @@ sankey_app.layout = html.Div(
                         id='scenario',
                         options=[
                             {'label': 'Baseline', 'value': 'Baseline'},
-                            {'label': 'Historic', 'value': 'Historic'},
-                            {'label': 'Electric Europe', 'value': 'Electric Europe'}
+                            {'label': 'High EV - Low ownership', 'value': 'Scenario1'},
+                            {'label': 'ICEV - SUV', 'value': 'Scenario2'},
+                            {'label': 'Scenario3', 'value': 'Scenario3'},
+                            {'label': 'Scenario4', 'value': 'Scenario4'}
                         ],
                         value='Baseline'
                     )
@@ -75,11 +77,11 @@ sankey_app.layout = html.Div(
 )
 
 
-df = pd.read_excel('results/flows_per_year.xlsx')
+df = pd.read_excel('results/flows_plotly.xlsx')
 
 # max_value is used so that the size of flow is scaled to the biggest one:
 # what really matter is the size of the nodes, so it could be improved
-max_value = df.loc[:, df.columns != 'Time'].max().max()
+max_value = df.loc[:, (df.columns != 'Time') & (df.columns !='Scenario')].max().max()
 
 @sankey_app.callback(
     Output("graph", "figure"), 
@@ -87,43 +89,43 @@ max_value = df.loc[:, df.columns != 'Time'].max().max()
     [Input("scenario", "value")])
 
 def display_sankey(year, scenario):
-    year = year - 1900
-
     fig = go.Figure(data=[go.Sankey(
         node = dict(
           pad = 15,
           thickness = 20,
           line = dict(color = "white", width = 0.5),
           label = ["0. Environment", "1. Raw Material Market", "2. Production", "3. Use", "4. Collection",
-                   "5. Dismantling", "6. Shredding of dismantled component", "7. Sorting and Shredding of mixed scrap", "8. Alloy Sorting", "9. Scrap Surplus", ""],
+                   "5. Dismantling", "6. Shredding of dismantled components", "7. Sorting and Shredding of mixed scrap", "8. Alloy Sorting", "9. Scrap Surplus", ""],
           x = [0.05, 0.12, 0.22, 0.32, 0.42, 0.52, 0.72, 0.62, 0.72, 0.32, 1.1],
           y = [0.18, 0.4, 0.4, 0.4, 0.4, 0.16, 0.16, 0.4, 0.55, 0.65, 1.1],
           color = ["#594F4F", "#594F4F", "#594F4F", "#594F4F", "#594F4F",
                    "#594F4F", "#594F4F", "#594F4F", "#594F4F","#FE4365","white"]
-        ),|
+        ),
         link = dict(
           source = [0, 1, 2, 3, 4, 4, 4, 5, 5, 6, 6, 7, 7, 7, 8, 1, 8, 9, 10], # indices correspond to labels, eg A1, A2, A1, B1, ...
           target = [1, 2, 3, 4, 0, 5, 7, 6, 7, 0, 1, 0, 1, 8, 1, 9, 8, 9, 10],
           color = ["lightsteelblue", "lightsteelblue", "lightsteelblue", "lightsteelblue", "#FE4365", 
                    "lightsteelblue", "lightsteelblue", "lightsteelblue", "lightsteelblue",
                    "#FE4365", "#83AF9B", "#FE4365","#83AF9B","lightsteelblue", "lightsteelblue", "#FE4365","white", "white", "white"],
-          value = [df['F_0_1_t'][year], df['F_1_2_t'][year], df['F_2_3_t'][year], df['F_3_4_t'][year], df['F_4_0_t'][year],
-                   df['F_4_5_t'][year], df['F_4_7_t'][year], df['F_5_6_t'][year], df['F_5_7_t'][year],
-                   df['F_6_0_t'][year], df['F_6_1_t'][year], df['F_7_0_t'][year], df['F_7_1_t'][year],
-                   df['F_7_8_t'][year], df['F_8_1_t'][year], df['F_1_9_t'][year], 0.001, 0.001, max_value/2], 
+          value = [df['F_0_1'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_1_2'][(df['Time']==year) & (df['Scenario']==scenario)],
+                   df['F_2_3'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_3_4'][(df['Time']==year) & (df['Scenario']==scenario)],
+                   df['F_4_0'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_4_5'][(df['Time']==year) & (df['Scenario']==scenario)], 
+                   df['F_4_7'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_5_6'][(df['Time']==year) & (df['Scenario']==scenario)], 
+                   df['F_5_7'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_6_0'][(df['Time']==year) & (df['Scenario']==scenario)], 
+                   df['F_6_1'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_7_0'][(df['Time']==year) & (df['Scenario']==scenario)], 
+                   df['F_7_1'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_7_8'][(df['Time']==year) & (df['Scenario']==scenario)],
+                   df['F_8_1'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_1_9'][(df['Time']==year) & (df['Scenario']==scenario)], 0.001, 0.001, max_value/2], 
                    ), 
         textfont=dict(color="black", size=15))]
         )
     
     fig.update_layout(
-            title_text= "Global flows for " + str(year + 1900) + " according to the " + scenario + " scenario (Mt/yr)", font=dict(size = 15, color = 'black'),
+            title_text= "Global flows for " + str(year) + " according to the " + scenario + " scenario (Mt/yr)", font=dict(size = 15, color = 'black'),
             paper_bgcolor='white'
             )
     fig.update_yaxes(automargin=True)
     fig.update_xaxes(automargin=True)
     return fig
-
-
 
 if __name__ == '__main__':
     sankey_app.run_server(debug=True)

@@ -389,6 +389,7 @@ Bal = PassengerVehicleFleet_MFA_System.MassBalance()
 print(np.abs(Bal).sum(axis = 0)) # reports the sum of all absolute balancing errors by process.        
 
 # Exports
+# File flows_scenarios.xlsx, structure taS
 print("Exporting data")
 F_1_2_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)
 F_2_3_taS = np.einsum('trpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values)
@@ -408,21 +409,6 @@ F_0_1_taS = np.einsum('teaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['
 F_1_9_taS = scrap_surplus_taS
 S_3_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.StockDict['S_3'].Values)
 dS_3_taS = np.einsum('trpszeaS -> taS', PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values)
-
-
-# cf.export_to_csv(F_2_3_taS, 'F_2_3_taS', IndexTable)
-# cf.export_to_csv(F_3_4_taS, 'F_3_4_taS', IndexTable)
-# cf.export_to_csv(F_4_0_taS, 'F_4_0_taS', IndexTable)
-# cf.export_to_csv(F_4_5_taS, 'F_4_5_taS', IndexTable)
-# cf.export_to_csv(F_4_7_taS, 'F_4_7_taS', IndexTable)
-# cf.export_to_csv(F_5_6_taS, 'F_5_6_taS', IndexTable)
-# cf.export_to_csv(F_5_7_taS, 'F_5_7_taS', IndexTable)
-# cf.export_to_csv(F_6_0_taS, 'F_6_0_taS', IndexTable)
-# cf.export_to_csv(F_6_1_taS, 'F_6_1_taS', IndexTable)
-# cf.export_to_csv(F_7_0_taS, 'F_7_0_taS', IndexTable)
-# cf.export_to_csv(F_7_1_taS, 'F_7_1_taS', IndexTable)
-# cf.export_to_csv(F_1_2_taS, 'F_1_2_taS', IndexTable)
-# cf.export_to_csv(F_1_9_taS, 'scrap_surplus_taS', IndexTable)
 
 iterables = []
 names = []
@@ -451,9 +437,59 @@ df['F_7_8_ta'] = F_7_8_taS.flatten()/10**9
 df['F_8_1_ta'] = F_8_1_taS.flatten()/10**9
 
 
+try:
+    df.to_excel('results/flows_scenarios.xlsx', merge_cells=False)
+except:
+    print('Results could not be saved to results/flows_scenarios.xlsx, the file is probably open')
 
-df.to_excel('results/flows_scenarios.xlsx', merge_cells=False)
+# File flows_plotly.xlsx, structure tS
+F_1_2_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)
+F_2_3_tS = np.einsum('trpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values)
+F_3_4_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
+F_4_0_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values)
+F_4_5_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values)
+F_4_7_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values)
+F_5_6_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values)
+F_5_7_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values)
+F_6_0_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'].Values)
+F_6_1_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values)
+F_7_0_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values)
+F_7_1_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values)
+F_7_8_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values)
+F_8_1_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values)
+F_0_1_tS = np.einsum('teaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values)
+F_1_9_tS = np.einsum('taS -> tS', scrap_surplus_taS)
 
+iterables = []
+names = []
+for dim in ['t','S']:
+    iterables.append(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc(dim)].Items)
+    names.append(IndexTable[IndexTable['IndexLetter'] == dim]['Description'].index.values[0])  
+
+index = pd.MultiIndex.from_product(iterables, names=names)
+df = pd.DataFrame(F_2_3_tS.flatten()/10**9,index=index, columns = ['F_2_3'])
+df['F_3_4'] = F_3_4_tS.flatten()/10**9
+df['F_4_0'] = F_4_0_tS.flatten()/10**9
+df['F_4_5'] = F_4_5_tS.flatten()/10**9
+df['F_4_7'] = F_4_7_tS.flatten()/10**9
+df['F_5_6'] = F_5_6_tS.flatten()/10**9
+df['F_5_7'] = F_5_7_tS.flatten()/10**9
+df['F_6_0'] = F_6_0_tS.flatten()/10**9
+df['F_6_1'] = F_6_1_tS.flatten()/10**9
+df['F_7_0'] = F_7_0_tS.flatten()/10**9
+df['F_7_1'] = F_7_1_tS.flatten()/10**9
+df['F_1_2'] = F_1_2_tS.flatten()/10**9
+df['F_1_9'] = F_1_9_tS.flatten()/10**9
+df['F_0_1'] = F_0_1_tS.flatten()/10**9
+df['F_7_8'] = F_7_8_tS.flatten()/10**9
+df['F_8_1'] = F_8_1_tS.flatten()/10**9
+
+try:
+    df.to_excel('results/flows_plotly.xlsx', merge_cells=False)
+except:
+    print('Results could not be saved to results/flows_plotly.xlsx, the file is probably open')
+
+# File flows_per_year.xlsx, structure t
 F_0_1_t = np.einsum('taS -> t', F_0_1_taS)/10**9
 F_1_2_t = np.einsum('taS -> t', F_1_2_taS)/10**9
 F_1_9_t = np.einsum('taS -> t', F_1_9_taS)/10**9
@@ -467,34 +503,30 @@ F_5_7_t = np.einsum('taS -> t', F_5_7_taS)/10**9
 F_6_0_t = np.einsum('taS -> t', F_6_0_taS)/10**9
 F_6_1_t = np.einsum('taS -> t', F_6_1_taS)/10**9
 F_7_0_t = np.einsum('taS -> t', F_7_0_taS)/10**9
-F_7_1_t = np.einsum('taS-> t', F_7_1_taS)/10**9
+F_7_1_t = np.einsum('taS -> t', F_7_1_taS)/10**9
 F_7_8_t = np.einsum('taS -> t', F_7_8_taS)/10**9
 F_8_1_t = np.einsum('taS -> t', F_8_1_taS)/10**9
-
-
-
 
 index = pd.Index(
         PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:],
         name="Time")
 
-df = pd.DataFrame(F_0_1_t.flatten(),index=index, columns = ['F_0_1_t'])
-df['F_1_2_t'] = F_1_2_t.flatten()
-df['F_1_9_t'] = F_1_9_t.flatten()
-df['F_2_3_t'] = F_2_3_t.flatten()
-df['F_3_4_t'] = F_3_4_t.flatten()
-df['F_4_0_t'] = F_4_0_t.flatten()
-df['F_4_5_t'] = F_4_5_t.flatten()
-df['F_4_7_t'] = F_4_7_t.flatten()
-df['F_5_6_t'] = F_5_6_t.flatten()
-df['F_5_7_t'] = F_5_7_t.flatten()
-df['F_6_0_t'] = F_6_0_t.flatten()
-df['F_6_1_t'] = F_6_1_t.flatten()
-df['F_7_0_t'] = F_7_0_t.flatten()
-df['F_7_1_t'] = F_7_1_t.flatten()
-df['F_7_8_t'] = F_7_8_t.flatten()
-df['F_8_1_t'] = F_8_1_t.flatten()
-
+df = pd.DataFrame(F_0_1_t.flatten(),index=index, columns = ['F_0_1'])
+df['F_1_2'] = F_1_2_t.flatten()
+df['F_1_9'] = F_1_9_t.flatten()
+df['F_2_3'] = F_2_3_t.flatten()
+df['F_3_4'] = F_3_4_t.flatten()
+df['F_4_0'] = F_4_0_t.flatten()
+df['F_4_5'] = F_4_5_t.flatten()
+df['F_4_7'] = F_4_7_t.flatten()
+df['F_5_6'] = F_5_6_t.flatten()
+df['F_5_7'] = F_5_7_t.flatten()
+df['F_6_0'] = F_6_0_t.flatten()
+df['F_6_1'] = F_6_1_t.flatten()
+df['F_7_0'] = F_7_0_t.flatten()
+df['F_7_1'] = F_7_1_t.flatten()
+df['F_7_8'] = F_7_8_t.flatten()
+df['F_8_1'] = F_8_1_t.flatten()
 
 try:
     df.to_excel('results/flows_per_year.xlsx')
@@ -502,7 +534,7 @@ except:
     print('Results could not be saved to results/flows_per_year.xlsx, the file is probably open')
 
 
-#### Plots
+# %% Plots
 start_time = time.time()
 print("Plots")
 plt.ioff() 

@@ -184,7 +184,7 @@ def plot_result_time_scenario(array, y_dict, IndexTable, t_min, t_max, scenario,
                     color = MyColorCycle[m,:], linewidth = 2)
             m += 1
     ax.set_ylabel(y_dict['name'] +', ' + y_dict['unit'],fontsize =16)
-    fig.suptitle(y_dict['name'] +' by ' + y_dict['aspect'])
+    fig.suptitle(y_dict['name'] +' by ' + y_dict['aspect'] + ' ' + scenario_name)
     ax.legend(category, loc='upper left',prop={'size':8})
     plot_dir = os.path.join(plot_dir, scenario_name)
     mkdir_p(plot_dir)
