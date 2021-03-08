@@ -18,9 +18,9 @@ A total of 755 values was read from file for parameter Vehicle_Lifetime.
 
 755.0 of 755 values for parameter Vehicle_Lifetime were assigned.
 
-A total of 755 values was read from file for parameter Vehicle_Stock.
+A total of 3775 values was read from file for parameter Vehicle_Stock.
 
-755.0 of 755 values for parameter Vehicle_Stock were assigned.
+3775.0 of 3775 values for parameter Vehicle_Stock were assigned.
 
 A total of 12080 values was read from file for parameter Powertrain_and_Segment.
 
