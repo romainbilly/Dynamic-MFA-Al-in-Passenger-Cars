@@ -8,7 +8,26 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import pylab
+import os
 from matplotlib.figure import Figure
+
+
+
+
+
+
+def mkdir_p(mypath):
+    '''Creates a directory. equivalent to using mkdir -p on the command line'''
+
+    from errno import EEXIST
+    from os import makedirs,path
+
+    try:
+        makedirs(mypath)
+    except OSError as exc: # Python >2.5
+        if exc.errno == EEXIST and path.isdir(mypath):
+            pass
+        else: raise
 
 def export_to_csv(array: np.array, array_name: str, IndexTable):
     """
@@ -75,7 +94,8 @@ def export_to_csv_scenario(array: np.array, array_name: str, IndexTable):
 
 
 
-def plot_result_time(array, y_dict, IndexTable, t_min, t_max, fig, ax, width=35, height=25, show='no', stack='no'):
+def plot_result_time(array, y_dict, IndexTable, t_min, t_max, plot_dir, 
+                     width=35, height=25, show='no', stack='no'):
     """
     Function used to draw and save standard plots from the model results
     x-axis is always time in years
@@ -95,8 +115,7 @@ def plot_result_time(array, y_dict, IndexTable, t_min, t_max, fig, ax, width=35,
                 otherwise it is just saved under results/plot
     :param stack: if 'yes', uses a stackplot
     """    
-    # Car Stock per region
-    # plt.figure(figsize=(width, height))
+    fig, ax = plt.subplots()
     m = 0
     category = IndexTable.Classification[y_dict['aspect']].Items
     N_cat = len(category)
@@ -114,16 +133,19 @@ def plot_result_time(array, y_dict, IndexTable, t_min, t_max, fig, ax, width=35,
     ax.set_ylabel(y_dict['name'] +', ' + y_dict['unit'],fontsize =16)
     fig.suptitle(y_dict['name'] +' by ' + y_dict['aspect'])
     ax.legend(category, loc='upper left',prop={'size':8})
-    fig.savefig('results/plots/' + y_dict['name'] +' by ' + y_dict['aspect'], dpi = 400)    
+    mkdir_p(plot_dir)
+    plot_path = plot_dir + '/' + y_dict['name'] +' by ' + y_dict['aspect']
+    fig.savefig(plot_path, dpi = 400)    
     if show == 'yes':
         plt.show()
     plt.cla()
     plt.clf()
     plt.close(fig)
+    print("Saved to: " + plot_path)
 
 
-def plot_result_time_scenario(array, y_dict, IndexTable, t_min, t_max, fig, ax, scenario, 
-                              width=35, height=25, show='no', stack='no'):
+def plot_result_time_scenario(array, y_dict, IndexTable, t_min, t_max, scenario, 
+                              plot_dir, width=35, height=25, show='no', stack='no'):
     """
     Function used to draw and save standard plots from the model results
     x-axis is always time in years
@@ -143,7 +165,6 @@ def plot_result_time_scenario(array, y_dict, IndexTable, t_min, t_max, fig, ax, 
                 otherwise it is just saved under results/plot
     :param stack: if 'yes', uses a stackplot
     """    
-    # Car Stock per region
     fig, ax = plt.subplots()
     # plt.figure(figsize=(width, height))
     m = 0
@@ -165,13 +186,17 @@ def plot_result_time_scenario(array, y_dict, IndexTable, t_min, t_max, fig, ax, 
     ax.set_ylabel(y_dict['name'] +', ' + y_dict['unit'],fontsize =16)
     fig.suptitle(y_dict['name'] +' by ' + y_dict['aspect'])
     ax.legend(category, loc='upper left',prop={'size':8})
-    fig.savefig('results/plots/' + scenario_name + '/' + \
-                y_dict['name'] +' by ' + y_dict['aspect'], dpi = 400)    
+    plot_dir = os.path.join(plot_dir, scenario_name)
+    mkdir_p(plot_dir)
+    plot_path = (plot_dir + '/' + y_dict['name'] +' by ' + y_dict['aspect'])
+    fig.savefig(plot_path, dpi = 400)    
     if show == 'yes':
         plt.show()
     plt.cla()
     plt.clf()
     plt.close(fig)
+    print("Saved to: " + plot_path)
+
 
     
     
@@ -277,3 +302,6 @@ class ExportFigure(Figure):
             plt.show()
         # plt.cla()
   
+    
+  
+    
