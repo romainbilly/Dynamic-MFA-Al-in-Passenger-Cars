@@ -183,8 +183,11 @@ print("Performing Al content calculations")
 # Stock
 Al_stock_tcrpsS = np.einsum('tcrpsS, erc -> tcrpsS', S_tcrpsS, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
+# Correction by P_seg
 Al_stock_tcrpsS_pseg = np.einsum('tcrpsS, sc -> tcrpsS', Al_stock_tcrpsS, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
+Al_stock_tcrpsS_pseg[:,:,:,0,:,:] = np.sum(Al_stock_tcrpsS, axis=3) - \
+    np.sum(Al_stock_tcrpsS_pseg[:,:,:,1:,:,:], axis=3) 
 Al_stock_tcrpsS_pseg_ptype = np.einsum('tcrpsS, pc -> tcrpsS', Al_stock_tcrpsS_pseg, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
 Al_stock_tcrpsS = Al_stock_tcrpsS_pseg_ptype
@@ -775,5 +778,93 @@ for scenario in range(NS):
 
 end_time = time.time()
 print("Time for plotting: ", end_time - start_time)
+
+
+
+# %% Custom Plots
+current_datetime = datetime.now().strftime("%Y%m%d_%H%M")
+plot_dir = os.path.join('results', 'plots','custom', current_datetime)
+
+scenario = 0
+
+## Car inflows by powertrain
+y_dict = {
+        'name': 'Global Car inflows',
+        'aspect': 'Powertrain',
+        'unit': 'cars'
+        }
+cf.plot_result_time_scenario(I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
+
+scenario = 1
+
+## Car inflows by powertrain
+y_dict = {
+        'name': 'Globlal Car inflows',
+        'aspect': 'Powertrain',
+        'unit': 'cars'
+        }
+cf.plot_result_time_scenario(I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
+
+
+## Plot Al inflows per scenario
+y_dict = {
+        'name': 'Global Al demand',
+        'aspect': 'Scenario',
+        'unit': 'Mt/year'
+        }
+t_min= 120
+t_max = 151
+category = IndexTable.Classification[y_dict['aspect']].Items[:2]
+array = Al_inflow_cS/10**9
+MyColorCycle = pylab.cm.Paired(np.arange(0,1,1/2)) # select 10 colors from the 'Paired' color map.
+fig, ax = plt.subplots()
+ax.plot(IndexTable['Classification']['Time'].Items[t_min:t_max],
+           array[t_min:t_max,0],
+           color = MyColorCycle[0,:], linewidth = 2)
+ax.plot(IndexTable['Classification']['Time'].Items[t_min:t_max],
+           array[t_min:t_max,1],
+           color = MyColorCycle[1,:], linewidth = 2)
+ax.set_ylabel(y_dict['unit'],fontsize =16)
+fig.suptitle(y_dict['name'] +' by ' + y_dict['aspect'])
+ax.legend(category, loc='upper left',prop={'size':8})
+cf.mkdir_p(plot_dir)
+plot_path = plot_dir + '/' + y_dict['name'] +' by ' + y_dict['aspect']
+fig.savefig(plot_path, dpi = 400)    
+plt.show()
+plt.cla()
+plt.clf()
+plt.close(fig)
+print("Saved to: " + plot_path)
+
+## Plot Cumulative Carbon footprint
+y_dict = {
+        'name': 'Cumulative Carbon footprint of Al production',
+        'aspect': 'Scenario',
+        'unit': 'Gt CO2'
+        }
+t_min= 120
+t_max = 151
+category = IndexTable.Classification[y_dict['aspect']].Items[:2]
+array = np.cumsum(carbon_footprint_primary + carbon_footprint_secondary, axis=0)/10**12
+MyColorCycle = pylab.cm.Paired(np.arange(0,1,1/2)) # select 10 colors from the 'Paired' color map.
+fig, ax = plt.subplots()
+ax.plot(IndexTable['Classification']['Time'].Items[t_min:t_max],
+           array[t_min:t_max,0],
+           color = MyColorCycle[0,:], linewidth = 2)
+ax.plot(IndexTable['Classification']['Time'].Items[t_min:t_max],
+           array[t_min:t_max,1],
+           color = MyColorCycle[1,:], linewidth = 2)
+ax.set_ylabel(y_dict['unit'],fontsize =16)
+fig.suptitle(y_dict['name'] +' by ' + y_dict['aspect'])
+ax.legend(category, loc='upper left',prop={'size':8})
+cf.mkdir_p(plot_dir)
+plot_path = plot_dir + '/' + y_dict['name'] +' by ' + y_dict['aspect']
+fig.savefig(plot_path, dpi = 400)    
+plt.show()
+plt.cla()
+plt.clf()
+plt.close(fig)
+print("Saved to: " + plot_path)
+
 
 

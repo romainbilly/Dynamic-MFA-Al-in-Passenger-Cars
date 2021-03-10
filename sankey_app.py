@@ -49,10 +49,10 @@ sankey_app.layout = html.Div(
                         id='scenario',
                         options=[
                             {'label': 'Baseline', 'value': 'Baseline'},
-                            {'label': 'High EV - Low ownership', 'value': 'Scenario1'},
+                            {'label': 'High EV penetration', 'value': 'Scenario1'},
                             {'label': 'ICEV - SUV', 'value': 'Scenario2'},
-                            {'label': 'Scenario3', 'value': 'Scenario3'},
-                            {'label': 'Scenario4', 'value': 'Scenario4'}
+                            {'label': 'Autonomous Vehicles', 'value': 'Scenario3'},
+                            {'label': 'Smaller cars', 'value': 'Scenario4'}
                         ],
                         value='Baseline'
                     )
@@ -96,8 +96,8 @@ def display_sankey(year, scenario):
           line = dict(color = "white", width = 0.5),
           label = ["0. Environment", "1. Raw Material Market", "2. Production", "3. Use", "4. Collection",
                    "5. Dismantling", "6. Shredding of dismantled components", "7. Sorting and Shredding of mixed scrap", "8. Alloy Sorting", "9. Scrap Surplus", ""],
-          x = [0.05, 0.12, 0.22, 0.32, 0.42, 0.52, 0.72, 0.62, 0.72, 0.32, 1.1],
-          y = [0.18, 0.4, 0.4, 0.4, 0.4, 0.16, 0.16, 0.4, 0.55, 0.65, 1.1],
+          x = [0.05, 0.10, 0.27, 0.42, 0.53, 0.62, 0.82, 0.72, 0.82, 0.27, 1.1],
+          y = [0.3, 0.5, 0.5, 0.5, 0.5, 0.16, 0.16, 0.5, 0.8, 0.7, 1.1],
           color = ["#594F4F", "#594F4F", "#594F4F", "#594F4F", "#594F4F",
                    "#594F4F", "#594F4F", "#594F4F", "#594F4F","#FE4365","white"]
         ),
@@ -119,8 +119,16 @@ def display_sankey(year, scenario):
         textfont=dict(color="black", size=15))]
         )
     
+    scenario_dict = {
+        'Baseline': 'Baseline',
+        'Scenario1': 'High EV penetration',
+        'Scenario2': 'ICEV - SUV',
+        'Scenario3': 'Autonomous Vehicles',
+        'Scenario4': 'Smaller cars'
+        }
+    
     fig.update_layout(
-            title_text= "Global flows for " + str(year) + " according to the " + scenario + " scenario (Mt/yr)", font=dict(size = 15, color = 'black'),
+            title_text= "Global flows for " + str(year) + " according to the " + scenario_dict[scenario] + " scenario (Mt/yr)", font=dict(size = 13, color = 'black'),
             paper_bgcolor='white'
             )
     fig.update_yaxes(automargin=True)
