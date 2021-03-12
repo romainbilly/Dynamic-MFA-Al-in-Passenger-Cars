@@ -128,10 +128,14 @@ print("Performing Stock calculations")
 Powertrain_Srpc = PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values
 Segment_Srsc = PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values
 PS_Srpsc =  np.einsum('Srpc, Srsc -> Srpsc', Powertrain_Srpc, Segment_Srsc)
+PS_Srpsc_raw = PS_Srpsc
 
 # Correction according to SP_Coeff parameter
 PS_Srpsc =  np.einsum('Srpsc, psc -> Srpsc', PS_Srpsc,
                       PassengerVehicleFleet_MFA_System.ParameterDict['SP_Coeff'].Values)
+
+PS_Srpsc =  np.einsum('Srpsc, Srpc -> Srpsc', PS_Srpsc, np.nan_to_num(Powertrain_Srpc / (np.sum(PS_Srpsc, axis=3))))
+PS_Srpsc =  np.einsum('Srpsc, Srsc -> Srpsc', PS_Srpsc, np.nan_to_num(Segment_Srsc / (np.sum(PS_Srpsc, axis=2))))
 # for powertrains HEV, PHEV, and BEV, a correction coefficient is applied to the segments AB, DE, and SUV. 
 # Segment C is calculated by "mass balance" to reach the average powertrain split 
 PS_Srpsc[:,:,1,1,:] = Powertrain_Srpc[:,:,1,:] - PS_Srpsc[:,:,1,0,:] - PS_Srpsc[:,:,1,2,:] - PS_Srpsc[:,:,1,3,:]
@@ -141,6 +145,8 @@ PS_Srpsc[:,:,3,1,:] = Powertrain_Srpc[:,:,3,:] - PS_Srpsc[:,:,3,0,:] - PS_Srpsc[
 for s in range(Ns):
     PS_Srpsc[:,:,0,s,:] = Segment_Srsc[:,:,s,:] -  np.sum(PS_Srpsc[:,:,1:,s,:], axis=2)
 
+PS_Srpsc[np.isclose(PS_Srpsc, 0, atol=10**(-5))] = 0
+print(np.sum(np.array(PS_Srpsc[:,:,:,:,:] < 0)))
 
 # Stock py powertrain and segment with scenarios
 S_tcrpS = np.einsum('tcrS, Srpc -> tcrpS', S_tcrS, Powertrain_Srpc) 
@@ -155,7 +161,8 @@ I_crpS = np.einsum('crS, Srpc -> crpS', I_crS,
                     PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values) 
 I_crsS = np.einsum('crS, Srsc -> crS', I_crS, 
                     PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
-I_crpsS= np.einsum('crS, Srpsc -> crpsS', I_crS, PS_Srpsc) 
+
+I_crpsS = np.einsum('crS, Srpsc -> crpsS', I_crS, PS_Srpsc) 
 I_csS = np.einsum('crpsS -> csS', I_crpsS) 
 I_cpS = np.einsum('crpsS -> cpS', I_crpsS) 
 
@@ -176,7 +183,7 @@ O_tpS = np.einsum('tcrpsS -> tpS', O_tcrpsS)
 # Ps_rsc =  np.einsum('rpsc -> rsc', PassengerVehicleFleet_MFA_System.ParameterDict['Powertrain_and_Segment'].Values) 
 # I_crps =  np.einsum('crp, rsc -> crps', I_crp, Ps_rsc) 
 # P_crps = I_crps_corr / I_crps
-# # cf.export_to_csv(P_crps, 'P_crps', IndexTable)
+cf.export_to_csv(PS_Srpsc, 'PS_Srpsc', IndexTable)
 
 #Aluminium content calculations by scenario
 print("Performing Al content calculations")
@@ -186,8 +193,8 @@ Al_stock_tcrpsS = np.einsum('tcrpsS, erc -> tcrpsS', S_tcrpsS,
 # Correction by P_seg
 Al_stock_tcrpsS_pseg = np.einsum('tcrpsS, sc -> tcrpsS', Al_stock_tcrpsS, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
-Al_stock_tcrpsS_pseg[:,:,:,0,:,:] = np.sum(Al_stock_tcrpsS, axis=3) - \
-    np.sum(Al_stock_tcrpsS_pseg[:,:,:,1:,:,:], axis=3) 
+# Al_stock_tcrpsS_pseg[:,:,:,0,:,:] = np.sum(Al_stock_tcrpsS, axis=3) - \
+#     np.sum(Al_stock_tcrpsS_pseg[:,:,:,1:,:,:], axis=3) 
 Al_stock_tcrpsS_pseg_ptype = np.einsum('tcrpsS, pc -> tcrpsS', Al_stock_tcrpsS_pseg, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
 Al_stock_tcrpsS = Al_stock_tcrpsS_pseg_ptype
@@ -579,13 +586,28 @@ cf.plot_result_time((carbon_footprint_primary + carbon_footprint_secondary)/10**
 y_dict = {
         'name': 'Cumulative Carbon footprint of Al production',
         'aspect': 'Scenario',
-        'unit': 'Mt CO2'
+        'unit': 'Gt CO2'
         }
-cf.plot_result_time(np.cumsum(carbon_footprint_primary + carbon_footprint_secondary, axis=0)/10**9, y_dict, IndexTable, t_min= 120, t_max = 151, plot_dir=plot_dir, show = 'no', stack='no')
+cf.plot_result_time(np.cumsum(carbon_footprint_primary + carbon_footprint_secondary, axis=0)/10**12, y_dict, IndexTable, t_min= 120, t_max = 151, plot_dir=plot_dir, show = 'no', stack='no')
         
+## Plot Scrap surplus
+y_dict = {
+        'name': 'Global scrap surplus',
+        'aspect': 'Scenario',
+        'unit': 'Mt Al'
+        }
+cf.plot_result_time((F_1_9_tS)/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, show = 'no', stack='no')
 
+## Plot Cumulative Scrap surplus
+y_dict = {
+        'name': 'Cumulative Global scrap surplus',
+        'aspect': 'Scenario',
+        'unit': 'Mt Al'
+        }
+cf.plot_result_time(np.cumsum(F_1_9_tS, axis=0)/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, show = 'no', stack='no')
+        
 ### Single scenario plots
-for scenario in range(NS):
+for scenario in range(2):
 
     print("Plotting results for scenario " + str(scenario))
     ## Car Stock per region
@@ -661,7 +683,6 @@ for scenario in range(NS):
     cf.plot_result_time_scenario(O_tsS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
     
     
-    
     ## Plot Al Stock per component
     y_dict = {
             'name': 'Al Stock',
@@ -687,7 +708,6 @@ for scenario in range(NS):
             'unit': 'Mt/yr'
             }
     cf.plot_result_time_scenario(Al_outflow_tzS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
     
     
     # Aluminium stock per region
@@ -867,4 +887,76 @@ plt.close(fig)
 print("Saved to: " + plot_path)
 
 
+
+Al_inflow_crS[-50:,0,0] / I_crS[-50:,0,0]
+
+
+
+# # %% Custom Plots
+
+# # Calculating segment split by powertrain 
+# Powertrain_Srpc = PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values
+# Segment_Srsc = PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values
+# PS_Srpsc =  np.einsum('Srpc, Srsc -> Srpsc', Powertrain_Srpc, Segment_Srsc)
+
+# # Correction according to SP_Coeff parameter
+# PS_Srpsc =  np.einsum('Srpsc, psc -> Srpsc', PS_Srpsc,
+#                       PassengerVehicleFleet_MFA_System.ParameterDict['SP_Coeff'].Values)
+# PS_Srpsc =  np.einsum('Srpsc, Srsc -> Srpsc', PS_Srpsc, Segment_Srsc / (np.sum(PS_Srpsc, axis=2)))
+
+# # for powertrains HEV, PHEV, and BEV, a correction coefficient is applied to the segments AB, DE, and SUV. 
+# # Segment C is calculated by "mass balance" to reach the average powertrain split 
+# PS_Srpsc[:,:,1,1,:] = Powertrain_Srpc[:,:,1,:] - PS_Srpsc[:,:,1,0,:] - PS_Srpsc[:,:,1,2,:] - PS_Srpsc[:,:,1,3,:]
+# PS_Srpsc[:,:,2,1,:] = Powertrain_Srpc[:,:,2,:] - PS_Srpsc[:,:,2,0,:] - PS_Srpsc[:,:,2,2,:] - PS_Srpsc[:,:,2,3,:]
+# PS_Srpsc[:,:,3,1,:] = Powertrain_Srpc[:,:,3,:] - PS_Srpsc[:,:,3,0,:] - PS_Srpsc[:,:,3,2,:] - PS_Srpsc[:,:,3,3,:]
+# # the segment split of the ICEV segment is calculated from the other powertrain types to reach the average segment split
+# for s in range(Ns):
+#     PS_Srpsc[:,:,0,s,:] = Segment_Srsc[:,:,s,:] -  np.sum(PS_Srpsc[:,:,1:,s,:], axis=2)
+
+# # %% Custom Plots
+
+
+# A = PS_Srpsc[0,0,:,:,-1:]
+# print(A)
+# B = PassengerVehicleFleet_MFA_System.ParameterDict['SP_Coeff'].Values[:,:,-1:]
+# print(B)
+
+# # %% Custom Plots
+# A = [0.1,0.2,0.3,0.5]
+# print(A)
+
+# B = [0.2,0.5,0.2,0.1]
+
+# C = np.einsum('p,s -> ps', A,B)
+# print(C)
+
+# # D = data_prep.ParameterDict['SP_Coeff'].Values[:,:,-1:]
+# D = [
+#      [1,1,1,1.3],
+#      [0.5,1,1.2,1.2],
+#      [0.3,1,1.7,1],
+#      [2,1,0.9,0.8]
+#      ]
+# D_s = np.sum(D, axis = 0)
+# D_p = np.sum(D, axis = 1)
+# print(D_s)
+# print(D_p)
+
+# C_corr = C*D
+# print(C_corr)
+# C_corr_p = np.sum(C_corr, axis = 1)
+# C_p =  np.sum(C, axis = 0)
+# print(C_corr_p / C_p)
+# C_corr = np.einsum('ps,p -> ps', C_corr,  C_p/C_corr_p)
+# C_corr_p = np.sum(C_corr, axis = 1)
+# print(C_corr_p - C_p)
+
+# C_corr_s = np.sum(C_corr, axis = 0)
+# C_s =  np.sum(C, axis = 0)
+# print(C_corr_s / C_s)
+# C_corr = np.einsum('ps,s -> ps', C_corr,  C_s/C_corr_s)
+# C_corr_s = np.sum(C_corr, axis = 0)
+# print(C_corr_s - C_s)
+# C_corr_p = np.sum(C_corr, axis = 1)
+# print(C_corr_p - C_p)
 
