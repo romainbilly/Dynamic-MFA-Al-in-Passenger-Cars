@@ -175,14 +175,6 @@ O_tcrpsS = np.einsum('tcrS, Srpsc -> tcrpsS', O_tcrS, PS_Srpsc)
 O_tsS = np.einsum('tcrpsS -> tsS', O_tcrpsS) 
 O_tpS = np.einsum('tcrpsS -> tpS', O_tcrpsS) 
 
-
-# I_crps_corr = np.einsum('cr, rpsc -> crps', I_cr, 
-#                     PassengerVehicleFleet_MFA_System.ParameterDict['Powertrain_and_Segment'].Values) 
-# I_crp = np.einsum('cr, rpsc -> crp', I_cr, 
-#                     PassengerVehicleFleet_MFA_System.ParameterDict['Powertrain_and_Segment'].Values) 
-# Ps_rsc =  np.einsum('rpsc -> rsc', PassengerVehicleFleet_MFA_System.ParameterDict['Powertrain_and_Segment'].Values) 
-# I_crps =  np.einsum('crp, rsc -> crps', I_crp, Ps_rsc) 
-# P_crps = I_crps_corr / I_crps
 cf.export_to_csv(PS_Srpsc, 'PS_Srpsc', IndexTable)
 
 #Aluminium content calculations by scenario
@@ -401,9 +393,14 @@ Bal = PassengerVehicleFleet_MFA_System.MassBalance()
 print(np.abs(Bal).sum(axis = 0)) # reports the sum of all absolute balancing errors by process.        
 
 # Exports
+# Raw files
+# cf.export_to_csv(I_crpsS, 'I_crpsS', IndexTable)
+# cf.export_to_csv(S_tcrpsS, 'S_tcrpsS', IndexTable)
+# cf.export_to_csv(O_tcrpsS, 'O_tcrpsS', IndexTable)
+
 # File flows_scenarios.xlsx, structure taS
 print("Exporting data")
-F_1_2_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)
+F_1_2_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)        
 F_2_3_taS = np.einsum('trpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values)
 F_3_4_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
 F_4_0_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values)
@@ -448,7 +445,7 @@ df['F_0_1_ta'] = F_0_1_taS.flatten()/10**9
 df['F_7_8_ta'] = F_7_8_taS.flatten()/10**9
 df['F_8_1_ta'] = F_8_1_taS.flatten()/10**9
 
-
+  
 try:
     df.to_excel('results/flows_scenarios.xlsx', merge_cells=False)
 except:
@@ -544,6 +541,9 @@ try:
     df.to_excel('results/flows_per_year.xlsx')
 except:
     print('Results could not be saved to results/flows_per_year.xlsx, the file is probably open')
+    
+    
+
 
 
 # %% Plots
@@ -888,75 +888,10 @@ print("Saved to: " + plot_path)
 
 
 
-Al_inflow_crS[-50:,0,0] / I_crS[-50:,0,0]
 
 
 
-# # %% Custom Plots
-
-# # Calculating segment split by powertrain 
-# Powertrain_Srpc = PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values
-# Segment_Srsc = PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values
-# PS_Srpsc =  np.einsum('Srpc, Srsc -> Srpsc', Powertrain_Srpc, Segment_Srsc)
-
-# # Correction according to SP_Coeff parameter
-# PS_Srpsc =  np.einsum('Srpsc, psc -> Srpsc', PS_Srpsc,
-#                       PassengerVehicleFleet_MFA_System.ParameterDict['SP_Coeff'].Values)
-# PS_Srpsc =  np.einsum('Srpsc, Srsc -> Srpsc', PS_Srpsc, Segment_Srsc / (np.sum(PS_Srpsc, axis=2)))
-
-# # for powertrains HEV, PHEV, and BEV, a correction coefficient is applied to the segments AB, DE, and SUV. 
-# # Segment C is calculated by "mass balance" to reach the average powertrain split 
-# PS_Srpsc[:,:,1,1,:] = Powertrain_Srpc[:,:,1,:] - PS_Srpsc[:,:,1,0,:] - PS_Srpsc[:,:,1,2,:] - PS_Srpsc[:,:,1,3,:]
-# PS_Srpsc[:,:,2,1,:] = Powertrain_Srpc[:,:,2,:] - PS_Srpsc[:,:,2,0,:] - PS_Srpsc[:,:,2,2,:] - PS_Srpsc[:,:,2,3,:]
-# PS_Srpsc[:,:,3,1,:] = Powertrain_Srpc[:,:,3,:] - PS_Srpsc[:,:,3,0,:] - PS_Srpsc[:,:,3,2,:] - PS_Srpsc[:,:,3,3,:]
-# # the segment split of the ICEV segment is calculated from the other powertrain types to reach the average segment split
-# for s in range(Ns):
-#     PS_Srpsc[:,:,0,s,:] = Segment_Srsc[:,:,s,:] -  np.sum(PS_Srpsc[:,:,1:,s,:], axis=2)
-
-# # %% Custom Plots
 
 
-# A = PS_Srpsc[0,0,:,:,-1:]
-# print(A)
-# B = PassengerVehicleFleet_MFA_System.ParameterDict['SP_Coeff'].Values[:,:,-1:]
-# print(B)
 
-# # %% Custom Plots
-# A = [0.1,0.2,0.3,0.5]
-# print(A)
-
-# B = [0.2,0.5,0.2,0.1]
-
-# C = np.einsum('p,s -> ps', A,B)
-# print(C)
-
-# # D = data_prep.ParameterDict['SP_Coeff'].Values[:,:,-1:]
-# D = [
-#      [1,1,1,1.3],
-#      [0.5,1,1.2,1.2],
-#      [0.3,1,1.7,1],
-#      [2,1,0.9,0.8]
-#      ]
-# D_s = np.sum(D, axis = 0)
-# D_p = np.sum(D, axis = 1)
-# print(D_s)
-# print(D_p)
-
-# C_corr = C*D
-# print(C_corr)
-# C_corr_p = np.sum(C_corr, axis = 1)
-# C_p =  np.sum(C, axis = 0)
-# print(C_corr_p / C_p)
-# C_corr = np.einsum('ps,p -> ps', C_corr,  C_p/C_corr_p)
-# C_corr_p = np.sum(C_corr, axis = 1)
-# print(C_corr_p - C_p)
-
-# C_corr_s = np.sum(C_corr, axis = 0)
-# C_s =  np.sum(C, axis = 0)
-# print(C_corr_s / C_s)
-# C_corr = np.einsum('ps,s -> ps', C_corr,  C_s/C_corr_s)
-# C_corr_s = np.sum(C_corr, axis = 0)
-# print(C_corr_s - C_s)
-# C_corr_p = np.sum(C_corr, axis = 1)
-# print(C_corr_p - C_p)
 

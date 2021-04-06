@@ -22,10 +22,6 @@ A total of 3775 values was read from file for parameter Vehicle_Stock.
 
 3775.0 of 3775 values for parameter Vehicle_Stock were assigned.
 
-A total of 12080 values was read from file for parameter Powertrain_and_Segment.
-
-12080.0 of 12080 values for parameter Powertrain_and_Segment were assigned.
-
 A total of 604 values was read from file for parameter P_type.
 
 604.0 of 604 values for parameter P_type were assigned.
