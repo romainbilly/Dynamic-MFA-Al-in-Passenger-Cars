@@ -1,0 +1,2266 @@
+Time,Alloy,Scenario,Values
+1900.0,Wrought,Baseline,0.0
+1900.0,Wrought,Scenario1,0.0
+1900.0,Wrought,Scenario2,0.0
+1900.0,Wrought,Scenario3,0.0
+1900.0,Wrought,Scenario4,0.0
+1900.0,Primary castings,Baseline,0.0
+1900.0,Primary castings,Scenario1,0.0
+1900.0,Primary castings,Scenario2,0.0
+1900.0,Primary castings,Scenario3,0.0
+1900.0,Primary castings,Scenario4,0.0
+1900.0,Secondary castings,Baseline,0.0
+1900.0,Secondary castings,Scenario1,0.0
+1900.0,Secondary castings,Scenario2,0.0
+1900.0,Secondary castings,Scenario3,0.0
+1900.0,Secondary castings,Scenario4,0.0
+1901.0,Wrought,Baseline,0.0
+1901.0,Wrought,Scenario1,0.0
+1901.0,Wrought,Scenario2,0.0
+1901.0,Wrought,Scenario3,0.0
+1901.0,Wrought,Scenario4,0.0
+1901.0,Primary castings,Baseline,0.0
+1901.0,Primary castings,Scenario1,0.0
+1901.0,Primary castings,Scenario2,0.0
+1901.0,Primary castings,Scenario3,0.0
+1901.0,Primary castings,Scenario4,0.0
+1901.0,Secondary castings,Baseline,0.0
+1901.0,Secondary castings,Scenario1,0.0
+1901.0,Secondary castings,Scenario2,0.0
+1901.0,Secondary castings,Scenario3,0.0
+1901.0,Secondary castings,Scenario4,0.0
+1902.0,Wrought,Baseline,0.0
+1902.0,Wrought,Scenario1,0.0
+1902.0,Wrought,Scenario2,0.0
+1902.0,Wrought,Scenario3,0.0
+1902.0,Wrought,Scenario4,0.0
+1902.0,Primary castings,Baseline,0.0
+1902.0,Primary castings,Scenario1,0.0
+1902.0,Primary castings,Scenario2,0.0
+1902.0,Primary castings,Scenario3,0.0
+1902.0,Primary castings,Scenario4,0.0
+1902.0,Secondary castings,Baseline,0.0
+1902.0,Secondary castings,Scenario1,0.0
+1902.0,Secondary castings,Scenario2,0.0
+1902.0,Secondary castings,Scenario3,0.0
+1902.0,Secondary castings,Scenario4,0.0
+1903.0,Wrought,Baseline,0.0
+1903.0,Wrought,Scenario1,0.0
+1903.0,Wrought,Scenario2,0.0
+1903.0,Wrought,Scenario3,0.0
+1903.0,Wrought,Scenario4,0.0
+1903.0,Primary castings,Baseline,0.0
+1903.0,Primary castings,Scenario1,0.0
+1903.0,Primary castings,Scenario2,0.0
+1903.0,Primary castings,Scenario3,0.0
+1903.0,Primary castings,Scenario4,0.0
+1903.0,Secondary castings,Baseline,0.0
+1903.0,Secondary castings,Scenario1,0.0
+1903.0,Secondary castings,Scenario2,0.0
+1903.0,Secondary castings,Scenario3,0.0
+1903.0,Secondary castings,Scenario4,0.0
+1904.0,Wrought,Baseline,0.0
+1904.0,Wrought,Scenario1,0.0
+1904.0,Wrought,Scenario2,0.0
+1904.0,Wrought,Scenario3,0.0
+1904.0,Wrought,Scenario4,0.0
+1904.0,Primary castings,Baseline,0.0
+1904.0,Primary castings,Scenario1,0.0
+1904.0,Primary castings,Scenario2,0.0
+1904.0,Primary castings,Scenario3,0.0
+1904.0,Primary castings,Scenario4,0.0
+1904.0,Secondary castings,Baseline,0.0
+1904.0,Secondary castings,Scenario1,0.0
+1904.0,Secondary castings,Scenario2,0.0
+1904.0,Secondary castings,Scenario3,0.0
+1904.0,Secondary castings,Scenario4,0.0
+1905.0,Wrought,Baseline,0.0
+1905.0,Wrought,Scenario1,0.0
+1905.0,Wrought,Scenario2,0.0
+1905.0,Wrought,Scenario3,0.0
+1905.0,Wrought,Scenario4,0.0
+1905.0,Primary castings,Baseline,0.0
+1905.0,Primary castings,Scenario1,0.0
+1905.0,Primary castings,Scenario2,0.0
+1905.0,Primary castings,Scenario3,0.0
+1905.0,Primary castings,Scenario4,0.0
+1905.0,Secondary castings,Baseline,0.0
+1905.0,Secondary castings,Scenario1,0.0
+1905.0,Secondary castings,Scenario2,0.0
+1905.0,Secondary castings,Scenario3,0.0
+1905.0,Secondary castings,Scenario4,0.0
+1906.0,Wrought,Baseline,0.0
+1906.0,Wrought,Scenario1,0.0
+1906.0,Wrought,Scenario2,0.0
+1906.0,Wrought,Scenario3,0.0
+1906.0,Wrought,Scenario4,0.0
+1906.0,Primary castings,Baseline,0.0
+1906.0,Primary castings,Scenario1,0.0
+1906.0,Primary castings,Scenario2,0.0
+1906.0,Primary castings,Scenario3,0.0
+1906.0,Primary castings,Scenario4,0.0
+1906.0,Secondary castings,Baseline,0.0
+1906.0,Secondary castings,Scenario1,0.0
+1906.0,Secondary castings,Scenario2,0.0
+1906.0,Secondary castings,Scenario3,0.0
+1906.0,Secondary castings,Scenario4,0.0
+1907.0,Wrought,Baseline,0.0
+1907.0,Wrought,Scenario1,0.0
+1907.0,Wrought,Scenario2,0.0
+1907.0,Wrought,Scenario3,0.0
+1907.0,Wrought,Scenario4,0.0
+1907.0,Primary castings,Baseline,0.0
+1907.0,Primary castings,Scenario1,0.0
+1907.0,Primary castings,Scenario2,0.0
+1907.0,Primary castings,Scenario3,0.0
+1907.0,Primary castings,Scenario4,0.0
+1907.0,Secondary castings,Baseline,0.0
+1907.0,Secondary castings,Scenario1,0.0
+1907.0,Secondary castings,Scenario2,0.0
+1907.0,Secondary castings,Scenario3,0.0
+1907.0,Secondary castings,Scenario4,0.0
+1908.0,Wrought,Baseline,0.0
+1908.0,Wrought,Scenario1,0.0
+1908.0,Wrought,Scenario2,0.0
+1908.0,Wrought,Scenario3,0.0
+1908.0,Wrought,Scenario4,0.0
+1908.0,Primary castings,Baseline,0.0
+1908.0,Primary castings,Scenario1,0.0
+1908.0,Primary castings,Scenario2,0.0
+1908.0,Primary castings,Scenario3,0.0
+1908.0,Primary castings,Scenario4,0.0
+1908.0,Secondary castings,Baseline,0.0
+1908.0,Secondary castings,Scenario1,0.0
+1908.0,Secondary castings,Scenario2,0.0
+1908.0,Secondary castings,Scenario3,0.0
+1908.0,Secondary castings,Scenario4,0.0
+1909.0,Wrought,Baseline,0.0
+1909.0,Wrought,Scenario1,0.0
+1909.0,Wrought,Scenario2,0.0
+1909.0,Wrought,Scenario3,0.0
+1909.0,Wrought,Scenario4,0.0
+1909.0,Primary castings,Baseline,0.0
+1909.0,Primary castings,Scenario1,0.0
+1909.0,Primary castings,Scenario2,0.0
+1909.0,Primary castings,Scenario3,0.0
+1909.0,Primary castings,Scenario4,0.0
+1909.0,Secondary castings,Baseline,0.0
+1909.0,Secondary castings,Scenario1,0.0
+1909.0,Secondary castings,Scenario2,0.0
+1909.0,Secondary castings,Scenario3,0.0
+1909.0,Secondary castings,Scenario4,0.0
+1910.0,Wrought,Baseline,0.0
+1910.0,Wrought,Scenario1,0.0
+1910.0,Wrought,Scenario2,0.0
+1910.0,Wrought,Scenario3,0.0
+1910.0,Wrought,Scenario4,0.0
+1910.0,Primary castings,Baseline,0.0
+1910.0,Primary castings,Scenario1,0.0
+1910.0,Primary castings,Scenario2,0.0
+1910.0,Primary castings,Scenario3,0.0
+1910.0,Primary castings,Scenario4,0.0
+1910.0,Secondary castings,Baseline,0.0
+1910.0,Secondary castings,Scenario1,0.0
+1910.0,Secondary castings,Scenario2,0.0
+1910.0,Secondary castings,Scenario3,0.0
+1910.0,Secondary castings,Scenario4,0.0
+1911.0,Wrought,Baseline,0.0
+1911.0,Wrought,Scenario1,0.0
+1911.0,Wrought,Scenario2,0.0
+1911.0,Wrought,Scenario3,0.0
+1911.0,Wrought,Scenario4,0.0
+1911.0,Primary castings,Baseline,0.0
+1911.0,Primary castings,Scenario1,0.0
+1911.0,Primary castings,Scenario2,0.0
+1911.0,Primary castings,Scenario3,0.0
+1911.0,Primary castings,Scenario4,0.0
+1911.0,Secondary castings,Baseline,0.0
+1911.0,Secondary castings,Scenario1,0.0
+1911.0,Secondary castings,Scenario2,0.0
+1911.0,Secondary castings,Scenario3,0.0
+1911.0,Secondary castings,Scenario4,0.0
+1912.0,Wrought,Baseline,0.0
+1912.0,Wrought,Scenario1,0.0
+1912.0,Wrought,Scenario2,0.0
+1912.0,Wrought,Scenario3,0.0
+1912.0,Wrought,Scenario4,0.0
+1912.0,Primary castings,Baseline,0.0
+1912.0,Primary castings,Scenario1,0.0
+1912.0,Primary castings,Scenario2,0.0
+1912.0,Primary castings,Scenario3,0.0
+1912.0,Primary castings,Scenario4,0.0
+1912.0,Secondary castings,Baseline,0.0
+1912.0,Secondary castings,Scenario1,0.0
+1912.0,Secondary castings,Scenario2,0.0
+1912.0,Secondary castings,Scenario3,0.0
+1912.0,Secondary castings,Scenario4,0.0
+1913.0,Wrought,Baseline,0.0
+1913.0,Wrought,Scenario1,0.0
+1913.0,Wrought,Scenario2,0.0
+1913.0,Wrought,Scenario3,0.0
+1913.0,Wrought,Scenario4,0.0
+1913.0,Primary castings,Baseline,0.0
+1913.0,Primary castings,Scenario1,0.0
+1913.0,Primary castings,Scenario2,0.0
+1913.0,Primary castings,Scenario3,0.0
+1913.0,Primary castings,Scenario4,0.0
+1913.0,Secondary castings,Baseline,0.0
+1913.0,Secondary castings,Scenario1,0.0
+1913.0,Secondary castings,Scenario2,0.0
+1913.0,Secondary castings,Scenario3,0.0
+1913.0,Secondary castings,Scenario4,0.0
+1914.0,Wrought,Baseline,0.0
+1914.0,Wrought,Scenario1,0.0
+1914.0,Wrought,Scenario2,0.0
+1914.0,Wrought,Scenario3,0.0
+1914.0,Wrought,Scenario4,0.0
+1914.0,Primary castings,Baseline,0.0
+1914.0,Primary castings,Scenario1,0.0
+1914.0,Primary castings,Scenario2,0.0
+1914.0,Primary castings,Scenario3,0.0
+1914.0,Primary castings,Scenario4,0.0
+1914.0,Secondary castings,Baseline,0.0
+1914.0,Secondary castings,Scenario1,0.0
+1914.0,Secondary castings,Scenario2,0.0
+1914.0,Secondary castings,Scenario3,0.0
+1914.0,Secondary castings,Scenario4,0.0
+1915.0,Wrought,Baseline,0.0
+1915.0,Wrought,Scenario1,0.0
+1915.0,Wrought,Scenario2,0.0
+1915.0,Wrought,Scenario3,0.0
+1915.0,Wrought,Scenario4,0.0
+1915.0,Primary castings,Baseline,0.0
+1915.0,Primary castings,Scenario1,0.0
+1915.0,Primary castings,Scenario2,0.0
+1915.0,Primary castings,Scenario3,0.0
+1915.0,Primary castings,Scenario4,0.0
+1915.0,Secondary castings,Baseline,0.0
+1915.0,Secondary castings,Scenario1,0.0
+1915.0,Secondary castings,Scenario2,0.0
+1915.0,Secondary castings,Scenario3,0.0
+1915.0,Secondary castings,Scenario4,0.0
+1916.0,Wrought,Baseline,0.0
+1916.0,Wrought,Scenario1,0.0
+1916.0,Wrought,Scenario2,0.0
+1916.0,Wrought,Scenario3,0.0
+1916.0,Wrought,Scenario4,0.0
+1916.0,Primary castings,Baseline,0.0
+1916.0,Primary castings,Scenario1,0.0
+1916.0,Primary castings,Scenario2,0.0
+1916.0,Primary castings,Scenario3,0.0
+1916.0,Primary castings,Scenario4,0.0
+1916.0,Secondary castings,Baseline,0.0
+1916.0,Secondary castings,Scenario1,0.0
+1916.0,Secondary castings,Scenario2,0.0
+1916.0,Secondary castings,Scenario3,0.0
+1916.0,Secondary castings,Scenario4,0.0
+1917.0,Wrought,Baseline,0.0
+1917.0,Wrought,Scenario1,0.0
+1917.0,Wrought,Scenario2,0.0
+1917.0,Wrought,Scenario3,0.0
+1917.0,Wrought,Scenario4,0.0
+1917.0,Primary castings,Baseline,0.0
+1917.0,Primary castings,Scenario1,0.0
+1917.0,Primary castings,Scenario2,0.0
+1917.0,Primary castings,Scenario3,0.0
+1917.0,Primary castings,Scenario4,0.0
+1917.0,Secondary castings,Baseline,0.0
+1917.0,Secondary castings,Scenario1,0.0
+1917.0,Secondary castings,Scenario2,0.0
+1917.0,Secondary castings,Scenario3,0.0
+1917.0,Secondary castings,Scenario4,0.0
+1918.0,Wrought,Baseline,0.0
+1918.0,Wrought,Scenario1,0.0
+1918.0,Wrought,Scenario2,0.0
+1918.0,Wrought,Scenario3,0.0
+1918.0,Wrought,Scenario4,0.0
+1918.0,Primary castings,Baseline,0.0
+1918.0,Primary castings,Scenario1,0.0
+1918.0,Primary castings,Scenario2,0.0
+1918.0,Primary castings,Scenario3,0.0
+1918.0,Primary castings,Scenario4,0.0
+1918.0,Secondary castings,Baseline,0.0
+1918.0,Secondary castings,Scenario1,0.0
+1918.0,Secondary castings,Scenario2,0.0
+1918.0,Secondary castings,Scenario3,0.0
+1918.0,Secondary castings,Scenario4,0.0
+1919.0,Wrought,Baseline,0.0
+1919.0,Wrought,Scenario1,0.0
+1919.0,Wrought,Scenario2,0.0
+1919.0,Wrought,Scenario3,0.0
+1919.0,Wrought,Scenario4,0.0
+1919.0,Primary castings,Baseline,0.0
+1919.0,Primary castings,Scenario1,0.0
+1919.0,Primary castings,Scenario2,0.0
+1919.0,Primary castings,Scenario3,0.0
+1919.0,Primary castings,Scenario4,0.0
+1919.0,Secondary castings,Baseline,0.0
+1919.0,Secondary castings,Scenario1,0.0
+1919.0,Secondary castings,Scenario2,0.0
+1919.0,Secondary castings,Scenario3,0.0
+1919.0,Secondary castings,Scenario4,0.0
+1920.0,Wrought,Baseline,0.0
+1920.0,Wrought,Scenario1,0.0
+1920.0,Wrought,Scenario2,0.0
+1920.0,Wrought,Scenario3,0.0
+1920.0,Wrought,Scenario4,0.0
+1920.0,Primary castings,Baseline,0.0
+1920.0,Primary castings,Scenario1,0.0
+1920.0,Primary castings,Scenario2,0.0
+1920.0,Primary castings,Scenario3,0.0
+1920.0,Primary castings,Scenario4,0.0
+1920.0,Secondary castings,Baseline,0.0
+1920.0,Secondary castings,Scenario1,0.0
+1920.0,Secondary castings,Scenario2,0.0
+1920.0,Secondary castings,Scenario3,0.0
+1920.0,Secondary castings,Scenario4,0.0
+1921.0,Wrought,Baseline,0.0
+1921.0,Wrought,Scenario1,0.0
+1921.0,Wrought,Scenario2,0.0
+1921.0,Wrought,Scenario3,0.0
+1921.0,Wrought,Scenario4,0.0
+1921.0,Primary castings,Baseline,0.0
+1921.0,Primary castings,Scenario1,0.0
+1921.0,Primary castings,Scenario2,0.0
+1921.0,Primary castings,Scenario3,0.0
+1921.0,Primary castings,Scenario4,0.0
+1921.0,Secondary castings,Baseline,0.0
+1921.0,Secondary castings,Scenario1,0.0
+1921.0,Secondary castings,Scenario2,0.0
+1921.0,Secondary castings,Scenario3,0.0
+1921.0,Secondary castings,Scenario4,0.0
+1922.0,Wrought,Baseline,0.0
+1922.0,Wrought,Scenario1,0.0
+1922.0,Wrought,Scenario2,0.0
+1922.0,Wrought,Scenario3,0.0
+1922.0,Wrought,Scenario4,0.0
+1922.0,Primary castings,Baseline,0.0
+1922.0,Primary castings,Scenario1,0.0
+1922.0,Primary castings,Scenario2,0.0
+1922.0,Primary castings,Scenario3,0.0
+1922.0,Primary castings,Scenario4,0.0
+1922.0,Secondary castings,Baseline,0.0
+1922.0,Secondary castings,Scenario1,0.0
+1922.0,Secondary castings,Scenario2,0.0
+1922.0,Secondary castings,Scenario3,0.0
+1922.0,Secondary castings,Scenario4,0.0
+1923.0,Wrought,Baseline,0.0
+1923.0,Wrought,Scenario1,0.0
+1923.0,Wrought,Scenario2,0.0
+1923.0,Wrought,Scenario3,0.0
+1923.0,Wrought,Scenario4,0.0
+1923.0,Primary castings,Baseline,0.0
+1923.0,Primary castings,Scenario1,0.0
+1923.0,Primary castings,Scenario2,0.0
+1923.0,Primary castings,Scenario3,0.0
+1923.0,Primary castings,Scenario4,0.0
+1923.0,Secondary castings,Baseline,0.0
+1923.0,Secondary castings,Scenario1,0.0
+1923.0,Secondary castings,Scenario2,0.0
+1923.0,Secondary castings,Scenario3,0.0
+1923.0,Secondary castings,Scenario4,0.0
+1924.0,Wrought,Baseline,0.0
+1924.0,Wrought,Scenario1,0.0
+1924.0,Wrought,Scenario2,0.0
+1924.0,Wrought,Scenario3,0.0
+1924.0,Wrought,Scenario4,0.0
+1924.0,Primary castings,Baseline,0.0
+1924.0,Primary castings,Scenario1,0.0
+1924.0,Primary castings,Scenario2,0.0
+1924.0,Primary castings,Scenario3,0.0
+1924.0,Primary castings,Scenario4,0.0
+1924.0,Secondary castings,Baseline,0.0
+1924.0,Secondary castings,Scenario1,0.0
+1924.0,Secondary castings,Scenario2,0.0
+1924.0,Secondary castings,Scenario3,0.0
+1924.0,Secondary castings,Scenario4,0.0
+1925.0,Wrought,Baseline,0.0
+1925.0,Wrought,Scenario1,0.0
+1925.0,Wrought,Scenario2,0.0
+1925.0,Wrought,Scenario3,0.0
+1925.0,Wrought,Scenario4,0.0
+1925.0,Primary castings,Baseline,0.0
+1925.0,Primary castings,Scenario1,0.0
+1925.0,Primary castings,Scenario2,0.0
+1925.0,Primary castings,Scenario3,0.0
+1925.0,Primary castings,Scenario4,0.0
+1925.0,Secondary castings,Baseline,0.0
+1925.0,Secondary castings,Scenario1,0.0
+1925.0,Secondary castings,Scenario2,0.0
+1925.0,Secondary castings,Scenario3,0.0
+1925.0,Secondary castings,Scenario4,0.0
+1926.0,Wrought,Baseline,0.0
+1926.0,Wrought,Scenario1,0.0
+1926.0,Wrought,Scenario2,0.0
+1926.0,Wrought,Scenario3,0.0
+1926.0,Wrought,Scenario4,0.0
+1926.0,Primary castings,Baseline,0.0
+1926.0,Primary castings,Scenario1,0.0
+1926.0,Primary castings,Scenario2,0.0
+1926.0,Primary castings,Scenario3,0.0
+1926.0,Primary castings,Scenario4,0.0
+1926.0,Secondary castings,Baseline,0.0
+1926.0,Secondary castings,Scenario1,0.0
+1926.0,Secondary castings,Scenario2,0.0
+1926.0,Secondary castings,Scenario3,0.0
+1926.0,Secondary castings,Scenario4,0.0
+1927.0,Wrought,Baseline,0.0
+1927.0,Wrought,Scenario1,0.0
+1927.0,Wrought,Scenario2,0.0
+1927.0,Wrought,Scenario3,0.0
+1927.0,Wrought,Scenario4,0.0
+1927.0,Primary castings,Baseline,0.0
+1927.0,Primary castings,Scenario1,0.0
+1927.0,Primary castings,Scenario2,0.0
+1927.0,Primary castings,Scenario3,0.0
+1927.0,Primary castings,Scenario4,0.0
+1927.0,Secondary castings,Baseline,0.0
+1927.0,Secondary castings,Scenario1,0.0
+1927.0,Secondary castings,Scenario2,0.0
+1927.0,Secondary castings,Scenario3,0.0
+1927.0,Secondary castings,Scenario4,0.0
+1928.0,Wrought,Baseline,0.0
+1928.0,Wrought,Scenario1,0.0
+1928.0,Wrought,Scenario2,0.0
+1928.0,Wrought,Scenario3,0.0
+1928.0,Wrought,Scenario4,0.0
+1928.0,Primary castings,Baseline,0.0
+1928.0,Primary castings,Scenario1,0.0
+1928.0,Primary castings,Scenario2,0.0
+1928.0,Primary castings,Scenario3,0.0
+1928.0,Primary castings,Scenario4,0.0
+1928.0,Secondary castings,Baseline,0.0
+1928.0,Secondary castings,Scenario1,0.0
+1928.0,Secondary castings,Scenario2,0.0
+1928.0,Secondary castings,Scenario3,0.0
+1928.0,Secondary castings,Scenario4,0.0
+1929.0,Wrought,Baseline,0.0
+1929.0,Wrought,Scenario1,0.0
+1929.0,Wrought,Scenario2,0.0
+1929.0,Wrought,Scenario3,0.0
+1929.0,Wrought,Scenario4,0.0
+1929.0,Primary castings,Baseline,0.0
+1929.0,Primary castings,Scenario1,0.0
+1929.0,Primary castings,Scenario2,0.0
+1929.0,Primary castings,Scenario3,0.0
+1929.0,Primary castings,Scenario4,0.0
+1929.0,Secondary castings,Baseline,0.0
+1929.0,Secondary castings,Scenario1,0.0
+1929.0,Secondary castings,Scenario2,0.0
+1929.0,Secondary castings,Scenario3,0.0
+1929.0,Secondary castings,Scenario4,0.0
+1930.0,Wrought,Baseline,0.0
+1930.0,Wrought,Scenario1,0.0
+1930.0,Wrought,Scenario2,0.0
+1930.0,Wrought,Scenario3,0.0
+1930.0,Wrought,Scenario4,0.0
+1930.0,Primary castings,Baseline,0.0
+1930.0,Primary castings,Scenario1,0.0
+1930.0,Primary castings,Scenario2,0.0
+1930.0,Primary castings,Scenario3,0.0
+1930.0,Primary castings,Scenario4,0.0
+1930.0,Secondary castings,Baseline,0.0
+1930.0,Secondary castings,Scenario1,0.0
+1930.0,Secondary castings,Scenario2,0.0
+1930.0,Secondary castings,Scenario3,0.0
+1930.0,Secondary castings,Scenario4,0.0
+1931.0,Wrought,Baseline,0.0
+1931.0,Wrought,Scenario1,0.0
+1931.0,Wrought,Scenario2,0.0
+1931.0,Wrought,Scenario3,0.0
+1931.0,Wrought,Scenario4,0.0
+1931.0,Primary castings,Baseline,0.0
+1931.0,Primary castings,Scenario1,0.0
+1931.0,Primary castings,Scenario2,0.0
+1931.0,Primary castings,Scenario3,0.0
+1931.0,Primary castings,Scenario4,0.0
+1931.0,Secondary castings,Baseline,0.0
+1931.0,Secondary castings,Scenario1,0.0
+1931.0,Secondary castings,Scenario2,0.0
+1931.0,Secondary castings,Scenario3,0.0
+1931.0,Secondary castings,Scenario4,0.0
+1932.0,Wrought,Baseline,0.0
+1932.0,Wrought,Scenario1,0.0
+1932.0,Wrought,Scenario2,0.0
+1932.0,Wrought,Scenario3,0.0
+1932.0,Wrought,Scenario4,0.0
+1932.0,Primary castings,Baseline,0.0
+1932.0,Primary castings,Scenario1,0.0
+1932.0,Primary castings,Scenario2,0.0
+1932.0,Primary castings,Scenario3,0.0
+1932.0,Primary castings,Scenario4,0.0
+1932.0,Secondary castings,Baseline,0.0
+1932.0,Secondary castings,Scenario1,0.0
+1932.0,Secondary castings,Scenario2,0.0
+1932.0,Secondary castings,Scenario3,0.0
+1932.0,Secondary castings,Scenario4,0.0
+1933.0,Wrought,Baseline,0.0
+1933.0,Wrought,Scenario1,0.0
+1933.0,Wrought,Scenario2,0.0
+1933.0,Wrought,Scenario3,0.0
+1933.0,Wrought,Scenario4,0.0
+1933.0,Primary castings,Baseline,0.0
+1933.0,Primary castings,Scenario1,0.0
+1933.0,Primary castings,Scenario2,0.0
+1933.0,Primary castings,Scenario3,0.0
+1933.0,Primary castings,Scenario4,0.0
+1933.0,Secondary castings,Baseline,0.0
+1933.0,Secondary castings,Scenario1,0.0
+1933.0,Secondary castings,Scenario2,0.0
+1933.0,Secondary castings,Scenario3,0.0
+1933.0,Secondary castings,Scenario4,0.0
+1934.0,Wrought,Baseline,0.0
+1934.0,Wrought,Scenario1,0.0
+1934.0,Wrought,Scenario2,0.0
+1934.0,Wrought,Scenario3,0.0
+1934.0,Wrought,Scenario4,0.0
+1934.0,Primary castings,Baseline,0.0
+1934.0,Primary castings,Scenario1,0.0
+1934.0,Primary castings,Scenario2,0.0
+1934.0,Primary castings,Scenario3,0.0
+1934.0,Primary castings,Scenario4,0.0
+1934.0,Secondary castings,Baseline,0.0
+1934.0,Secondary castings,Scenario1,0.0
+1934.0,Secondary castings,Scenario2,0.0
+1934.0,Secondary castings,Scenario3,0.0
+1934.0,Secondary castings,Scenario4,0.0
+1935.0,Wrought,Baseline,0.0
+1935.0,Wrought,Scenario1,0.0
+1935.0,Wrought,Scenario2,0.0
+1935.0,Wrought,Scenario3,0.0
+1935.0,Wrought,Scenario4,0.0
+1935.0,Primary castings,Baseline,0.0
+1935.0,Primary castings,Scenario1,0.0
+1935.0,Primary castings,Scenario2,0.0
+1935.0,Primary castings,Scenario3,0.0
+1935.0,Primary castings,Scenario4,0.0
+1935.0,Secondary castings,Baseline,0.0
+1935.0,Secondary castings,Scenario1,0.0
+1935.0,Secondary castings,Scenario2,0.0
+1935.0,Secondary castings,Scenario3,0.0
+1935.0,Secondary castings,Scenario4,0.0
+1936.0,Wrought,Baseline,0.0
+1936.0,Wrought,Scenario1,0.0
+1936.0,Wrought,Scenario2,0.0
+1936.0,Wrought,Scenario3,0.0
+1936.0,Wrought,Scenario4,0.0
+1936.0,Primary castings,Baseline,0.0
+1936.0,Primary castings,Scenario1,0.0
+1936.0,Primary castings,Scenario2,0.0
+1936.0,Primary castings,Scenario3,0.0
+1936.0,Primary castings,Scenario4,0.0
+1936.0,Secondary castings,Baseline,0.0
+1936.0,Secondary castings,Scenario1,0.0
+1936.0,Secondary castings,Scenario2,0.0
+1936.0,Secondary castings,Scenario3,0.0
+1936.0,Secondary castings,Scenario4,0.0
+1937.0,Wrought,Baseline,0.0
+1937.0,Wrought,Scenario1,0.0
+1937.0,Wrought,Scenario2,0.0
+1937.0,Wrought,Scenario3,0.0
+1937.0,Wrought,Scenario4,0.0
+1937.0,Primary castings,Baseline,0.0
+1937.0,Primary castings,Scenario1,0.0
+1937.0,Primary castings,Scenario2,0.0
+1937.0,Primary castings,Scenario3,0.0
+1937.0,Primary castings,Scenario4,0.0
+1937.0,Secondary castings,Baseline,0.0
+1937.0,Secondary castings,Scenario1,0.0
+1937.0,Secondary castings,Scenario2,0.0
+1937.0,Secondary castings,Scenario3,0.0
+1937.0,Secondary castings,Scenario4,0.0
+1938.0,Wrought,Baseline,0.0
+1938.0,Wrought,Scenario1,0.0
+1938.0,Wrought,Scenario2,0.0
+1938.0,Wrought,Scenario3,0.0
+1938.0,Wrought,Scenario4,0.0
+1938.0,Primary castings,Baseline,0.0
+1938.0,Primary castings,Scenario1,0.0
+1938.0,Primary castings,Scenario2,0.0
+1938.0,Primary castings,Scenario3,0.0
+1938.0,Primary castings,Scenario4,0.0
+1938.0,Secondary castings,Baseline,0.0
+1938.0,Secondary castings,Scenario1,0.0
+1938.0,Secondary castings,Scenario2,0.0
+1938.0,Secondary castings,Scenario3,0.0
+1938.0,Secondary castings,Scenario4,0.0
+1939.0,Wrought,Baseline,0.0
+1939.0,Wrought,Scenario1,0.0
+1939.0,Wrought,Scenario2,0.0
+1939.0,Wrought,Scenario3,0.0
+1939.0,Wrought,Scenario4,0.0
+1939.0,Primary castings,Baseline,0.0
+1939.0,Primary castings,Scenario1,0.0
+1939.0,Primary castings,Scenario2,0.0
+1939.0,Primary castings,Scenario3,0.0
+1939.0,Primary castings,Scenario4,0.0
+1939.0,Secondary castings,Baseline,0.0
+1939.0,Secondary castings,Scenario1,0.0
+1939.0,Secondary castings,Scenario2,0.0
+1939.0,Secondary castings,Scenario3,0.0
+1939.0,Secondary castings,Scenario4,0.0
+1940.0,Wrought,Baseline,0.0
+1940.0,Wrought,Scenario1,0.0
+1940.0,Wrought,Scenario2,0.0
+1940.0,Wrought,Scenario3,0.0
+1940.0,Wrought,Scenario4,0.0
+1940.0,Primary castings,Baseline,0.0
+1940.0,Primary castings,Scenario1,0.0
+1940.0,Primary castings,Scenario2,0.0
+1940.0,Primary castings,Scenario3,0.0
+1940.0,Primary castings,Scenario4,0.0
+1940.0,Secondary castings,Baseline,0.0
+1940.0,Secondary castings,Scenario1,0.0
+1940.0,Secondary castings,Scenario2,0.0
+1940.0,Secondary castings,Scenario3,0.0
+1940.0,Secondary castings,Scenario4,0.0
+1941.0,Wrought,Baseline,0.0
+1941.0,Wrought,Scenario1,0.0
+1941.0,Wrought,Scenario2,0.0
+1941.0,Wrought,Scenario3,0.0
+1941.0,Wrought,Scenario4,0.0
+1941.0,Primary castings,Baseline,0.0
+1941.0,Primary castings,Scenario1,0.0
+1941.0,Primary castings,Scenario2,0.0
+1941.0,Primary castings,Scenario3,0.0
+1941.0,Primary castings,Scenario4,0.0
+1941.0,Secondary castings,Baseline,0.0
+1941.0,Secondary castings,Scenario1,0.0
+1941.0,Secondary castings,Scenario2,0.0
+1941.0,Secondary castings,Scenario3,0.0
+1941.0,Secondary castings,Scenario4,0.0
+1942.0,Wrought,Baseline,0.0
+1942.0,Wrought,Scenario1,0.0
+1942.0,Wrought,Scenario2,0.0
+1942.0,Wrought,Scenario3,0.0
+1942.0,Wrought,Scenario4,0.0
+1942.0,Primary castings,Baseline,0.0
+1942.0,Primary castings,Scenario1,0.0
+1942.0,Primary castings,Scenario2,0.0
+1942.0,Primary castings,Scenario3,0.0
+1942.0,Primary castings,Scenario4,0.0
+1942.0,Secondary castings,Baseline,0.0
+1942.0,Secondary castings,Scenario1,0.0
+1942.0,Secondary castings,Scenario2,0.0
+1942.0,Secondary castings,Scenario3,0.0
+1942.0,Secondary castings,Scenario4,0.0
+1943.0,Wrought,Baseline,0.0
+1943.0,Wrought,Scenario1,0.0
+1943.0,Wrought,Scenario2,0.0
+1943.0,Wrought,Scenario3,0.0
+1943.0,Wrought,Scenario4,0.0
+1943.0,Primary castings,Baseline,0.0
+1943.0,Primary castings,Scenario1,0.0
+1943.0,Primary castings,Scenario2,0.0
+1943.0,Primary castings,Scenario3,0.0
+1943.0,Primary castings,Scenario4,0.0
+1943.0,Secondary castings,Baseline,0.0
+1943.0,Secondary castings,Scenario1,0.0
+1943.0,Secondary castings,Scenario2,0.0
+1943.0,Secondary castings,Scenario3,0.0
+1943.0,Secondary castings,Scenario4,0.0
+1944.0,Wrought,Baseline,0.0
+1944.0,Wrought,Scenario1,0.0
+1944.0,Wrought,Scenario2,0.0
+1944.0,Wrought,Scenario3,0.0
+1944.0,Wrought,Scenario4,0.0
+1944.0,Primary castings,Baseline,0.0
+1944.0,Primary castings,Scenario1,0.0
+1944.0,Primary castings,Scenario2,0.0
+1944.0,Primary castings,Scenario3,0.0
+1944.0,Primary castings,Scenario4,0.0
+1944.0,Secondary castings,Baseline,0.0
+1944.0,Secondary castings,Scenario1,0.0
+1944.0,Secondary castings,Scenario2,0.0
+1944.0,Secondary castings,Scenario3,0.0
+1944.0,Secondary castings,Scenario4,0.0
+1945.0,Wrought,Baseline,0.0
+1945.0,Wrought,Scenario1,0.0
+1945.0,Wrought,Scenario2,0.0
+1945.0,Wrought,Scenario3,0.0
+1945.0,Wrought,Scenario4,0.0
+1945.0,Primary castings,Baseline,0.0
+1945.0,Primary castings,Scenario1,0.0
+1945.0,Primary castings,Scenario2,0.0
+1945.0,Primary castings,Scenario3,0.0
+1945.0,Primary castings,Scenario4,0.0
+1945.0,Secondary castings,Baseline,0.0
+1945.0,Secondary castings,Scenario1,0.0
+1945.0,Secondary castings,Scenario2,0.0
+1945.0,Secondary castings,Scenario3,0.0
+1945.0,Secondary castings,Scenario4,0.0
+1946.0,Wrought,Baseline,0.0
+1946.0,Wrought,Scenario1,0.0
+1946.0,Wrought,Scenario2,0.0
+1946.0,Wrought,Scenario3,0.0
+1946.0,Wrought,Scenario4,0.0
+1946.0,Primary castings,Baseline,0.0
+1946.0,Primary castings,Scenario1,0.0
+1946.0,Primary castings,Scenario2,0.0
+1946.0,Primary castings,Scenario3,0.0
+1946.0,Primary castings,Scenario4,0.0
+1946.0,Secondary castings,Baseline,0.0
+1946.0,Secondary castings,Scenario1,0.0
+1946.0,Secondary castings,Scenario2,0.0
+1946.0,Secondary castings,Scenario3,0.0
+1946.0,Secondary castings,Scenario4,0.0
+1947.0,Wrought,Baseline,0.0
+1947.0,Wrought,Scenario1,0.0
+1947.0,Wrought,Scenario2,0.0
+1947.0,Wrought,Scenario3,0.0
+1947.0,Wrought,Scenario4,0.0
+1947.0,Primary castings,Baseline,0.0
+1947.0,Primary castings,Scenario1,0.0
+1947.0,Primary castings,Scenario2,0.0
+1947.0,Primary castings,Scenario3,0.0
+1947.0,Primary castings,Scenario4,0.0
+1947.0,Secondary castings,Baseline,0.0
+1947.0,Secondary castings,Scenario1,0.0
+1947.0,Secondary castings,Scenario2,0.0
+1947.0,Secondary castings,Scenario3,0.0
+1947.0,Secondary castings,Scenario4,0.0
+1948.0,Wrought,Baseline,0.0
+1948.0,Wrought,Scenario1,0.0
+1948.0,Wrought,Scenario2,0.0
+1948.0,Wrought,Scenario3,0.0
+1948.0,Wrought,Scenario4,0.0
+1948.0,Primary castings,Baseline,0.0
+1948.0,Primary castings,Scenario1,0.0
+1948.0,Primary castings,Scenario2,0.0
+1948.0,Primary castings,Scenario3,0.0
+1948.0,Primary castings,Scenario4,0.0
+1948.0,Secondary castings,Baseline,0.0
+1948.0,Secondary castings,Scenario1,0.0
+1948.0,Secondary castings,Scenario2,0.0
+1948.0,Secondary castings,Scenario3,0.0
+1948.0,Secondary castings,Scenario4,0.0
+1949.0,Wrought,Baseline,0.0
+1949.0,Wrought,Scenario1,0.0
+1949.0,Wrought,Scenario2,0.0
+1949.0,Wrought,Scenario3,0.0
+1949.0,Wrought,Scenario4,0.0
+1949.0,Primary castings,Baseline,0.0
+1949.0,Primary castings,Scenario1,0.0
+1949.0,Primary castings,Scenario2,0.0
+1949.0,Primary castings,Scenario3,0.0
+1949.0,Primary castings,Scenario4,0.0
+1949.0,Secondary castings,Baseline,0.0
+1949.0,Secondary castings,Scenario1,0.0
+1949.0,Secondary castings,Scenario2,0.0
+1949.0,Secondary castings,Scenario3,0.0
+1949.0,Secondary castings,Scenario4,0.0
+1950.0,Wrought,Baseline,12.449390078181459
+1950.0,Wrought,Scenario1,12.449390078181459
+1950.0,Wrought,Scenario2,12.449390078181459
+1950.0,Wrought,Scenario3,12.449390078181459
+1950.0,Wrought,Scenario4,12.449390078181459
+1950.0,Primary castings,Baseline,14.260210453189671
+1950.0,Primary castings,Scenario1,14.260210453189671
+1950.0,Primary castings,Scenario2,14.260210453189671
+1950.0,Primary castings,Scenario3,14.260210453189671
+1950.0,Primary castings,Scenario4,14.260210453189671
+1950.0,Secondary castings,Baseline,33.27382439077589
+1950.0,Secondary castings,Scenario1,33.27382439077589
+1950.0,Secondary castings,Scenario2,33.27382439077589
+1950.0,Secondary castings,Scenario3,33.27382439077589
+1950.0,Secondary castings,Scenario4,33.27382439077589
+1951.0,Wrought,Baseline,37.9383663593586
+1951.0,Wrought,Scenario1,37.9383663593586
+1951.0,Wrought,Scenario2,37.9383663593586
+1951.0,Wrought,Scenario3,37.9383663593586
+1951.0,Wrought,Scenario4,37.9383663593586
+1951.0,Primary castings,Baseline,43.456674193447114
+1951.0,Primary castings,Scenario1,43.456674193447114
+1951.0,Primary castings,Scenario2,43.456674193447114
+1951.0,Primary castings,Scenario3,43.456674193447114
+1951.0,Primary castings,Scenario4,43.456674193447114
+1951.0,Secondary castings,Baseline,101.39890645137662
+1951.0,Secondary castings,Scenario1,101.39890645137662
+1951.0,Secondary castings,Scenario2,101.39890645137662
+1951.0,Secondary castings,Scenario3,101.39890645137662
+1951.0,Secondary castings,Scenario4,101.39890645137662
+1952.0,Wrought,Baseline,108.72818053814619
+1952.0,Wrought,Scenario1,108.72818053814619
+1952.0,Wrought,Scenario2,108.72818053814619
+1952.0,Wrought,Scenario3,108.72818053814619
+1952.0,Wrought,Scenario4,108.72818053814619
+1952.0,Primary castings,Baseline,124.54318861642194
+1952.0,Primary castings,Scenario1,124.54318861642194
+1952.0,Primary castings,Scenario2,124.54318861642194
+1952.0,Primary castings,Scenario3,124.54318861642194
+1952.0,Primary castings,Scenario4,124.54318861642194
+1952.0,Secondary castings,Baseline,290.60077343831796
+1952.0,Secondary castings,Scenario1,290.60077343831796
+1952.0,Secondary castings,Scenario2,290.60077343831796
+1952.0,Secondary castings,Scenario3,290.60077343831796
+1952.0,Secondary castings,Scenario4,290.60077343831796
+1953.0,Wrought,Baseline,293.372036609327
+1953.0,Wrought,Scenario1,293.372036609327
+1953.0,Wrought,Scenario2,293.372036609327
+1953.0,Wrought,Scenario3,293.372036609327
+1953.0,Wrought,Scenario4,293.372036609327
+1953.0,Primary castings,Baseline,336.0443328434108
+1953.0,Primary castings,Scenario1,336.0443328434108
+1953.0,Primary castings,Scenario2,336.0443328434108
+1953.0,Primary castings,Scenario3,336.0443328434108
+1953.0,Primary castings,Scenario4,336.0443328434108
+1953.0,Secondary castings,Baseline,784.1034433012919
+1953.0,Secondary castings,Scenario1,784.1034433012919
+1953.0,Secondary castings,Scenario2,784.1034433012919
+1953.0,Secondary castings,Scenario3,784.1034433012919
+1953.0,Secondary castings,Scenario4,784.1034433012919
+1954.0,Wrought,Baseline,740.707503708422
+1954.0,Wrought,Scenario1,740.707503708422
+1954.0,Wrought,Scenario2,740.707503708422
+1954.0,Wrought,Scenario3,740.707503708422
+1954.0,Wrought,Scenario4,740.707503708422
+1954.0,Primary castings,Baseline,848.4467769751021
+1954.0,Primary castings,Scenario1,848.4467769751021
+1954.0,Primary castings,Scenario2,848.4467769751021
+1954.0,Primary castings,Scenario3,848.4467769751021
+1954.0,Primary castings,Scenario4,848.4467769751021
+1954.0,Secondary castings,Baseline,1979.709146275238
+1954.0,Secondary castings,Scenario1,1979.709146275238
+1954.0,Secondary castings,Scenario2,1979.709146275238
+1954.0,Secondary castings,Scenario3,1979.709146275238
+1954.0,Secondary castings,Scenario4,1979.709146275238
+1955.0,Wrought,Baseline,1755.5417496862208
+1955.0,Wrought,Scenario1,1755.5417496862208
+1955.0,Wrought,Scenario2,1755.5417496862208
+1955.0,Wrought,Scenario3,1755.5417496862208
+1955.0,Wrought,Scenario4,1755.5417496862208
+1955.0,Primary castings,Baseline,2010.8932769133085
+1955.0,Primary castings,Scenario1,2010.8932769133085
+1955.0,Primary castings,Scenario2,2010.8932769133085
+1955.0,Primary castings,Scenario3,2010.8932769133085
+1955.0,Primary castings,Scenario4,2010.8932769133085
+1955.0,Secondary castings,Baseline,4692.084312797717
+1955.0,Secondary castings,Scenario1,4692.084312797717
+1955.0,Secondary castings,Scenario2,4692.084312797717
+1955.0,Secondary castings,Scenario3,4692.084312797717
+1955.0,Secondary castings,Scenario4,4692.084312797717
+1956.0,Wrought,Baseline,3895.6646030412476
+1956.0,Wrought,Scenario1,3895.6646030412476
+1956.0,Wrought,Scenario2,3895.6646030412476
+1956.0,Wrought,Scenario3,3895.6646030412476
+1956.0,Wrought,Scenario4,3895.6646030412476
+1956.0,Primary castings,Baseline,4462.306727119972
+1956.0,Primary castings,Scenario1,4462.306727119972
+1956.0,Primary castings,Scenario2,4462.306727119972
+1956.0,Primary castings,Scenario3,4462.306727119972
+1956.0,Primary castings,Scenario4,4462.306727119972
+1956.0,Secondary castings,Baseline,10412.049029946596
+1956.0,Secondary castings,Scenario1,10412.049029946596
+1956.0,Secondary castings,Scenario2,10412.049029946596
+1956.0,Secondary castings,Scenario3,10412.049029946596
+1956.0,Secondary castings,Scenario4,10412.049029946596
+1957.0,Wrought,Baseline,8099.154904592782
+1957.0,Wrought,Scenario1,8099.154904592782
+1957.0,Wrought,Scenario2,8099.154904592782
+1957.0,Wrought,Scenario3,8099.154904592782
+1957.0,Wrought,Scenario4,8099.154904592782
+1957.0,Primary castings,Baseline,9277.213799806274
+1957.0,Primary castings,Scenario1,9277.213799806274
+1957.0,Primary castings,Scenario2,9277.213799806274
+1957.0,Primary castings,Scenario3,9277.213799806274
+1957.0,Primary castings,Scenario4,9277.213799806274
+1957.0,Secondary castings,Baseline,21646.832199547964
+1957.0,Secondary castings,Scenario1,21646.832199547964
+1957.0,Secondary castings,Scenario2,21646.832199547964
+1957.0,Secondary castings,Scenario3,21646.832199547964
+1957.0,Secondary castings,Scenario4,21646.832199547964
+1958.0,Wrought,Baseline,15786.777130511551
+1958.0,Wrought,Scenario1,15786.777130511551
+1958.0,Wrought,Scenario2,15786.777130511551
+1958.0,Wrought,Scenario3,15786.777130511551
+1958.0,Wrought,Scenario4,15786.777130511551
+1958.0,Primary castings,Baseline,18083.03562222233
+1958.0,Primary castings,Scenario1,18083.03562222233
+1958.0,Primary castings,Scenario2,18083.03562222233
+1958.0,Primary castings,Scenario3,18083.03562222233
+1958.0,Primary castings,Scenario4,18083.03562222233
+1958.0,Secondary castings,Baseline,42193.74978518541
+1958.0,Secondary castings,Scenario1,42193.74978518541
+1958.0,Secondary castings,Scenario2,42193.74978518541
+1958.0,Secondary castings,Scenario3,42193.74978518541
+1958.0,Secondary castings,Scenario4,42193.74978518541
+1959.0,Wrought,Baseline,28868.513302632306
+1959.0,Wrought,Scenario1,28868.513302632306
+1959.0,Wrought,Scenario2,28868.513302632306
+1959.0,Wrought,Scenario3,28868.513302632306
+1959.0,Wrought,Scenario4,28868.513302632306
+1959.0,Primary castings,Baseline,33067.5697830152
+1959.0,Primary castings,Scenario1,33067.5697830152
+1959.0,Primary castings,Scenario2,33067.5697830152
+1959.0,Primary castings,Scenario3,33067.5697830152
+1959.0,Primary castings,Scenario4,33067.5697830152
+1959.0,Secondary castings,Baseline,77157.66282703548
+1959.0,Secondary castings,Scenario1,77157.66282703548
+1959.0,Secondary castings,Scenario2,77157.66282703548
+1959.0,Secondary castings,Scenario3,77157.66282703548
+1959.0,Secondary castings,Scenario4,77157.66282703548
+1960.0,Wrought,Baseline,49590.30734907205
+1960.0,Wrought,Scenario1,49590.30734907205
+1960.0,Wrought,Scenario2,49590.30734907205
+1960.0,Wrought,Scenario3,49590.30734907205
+1960.0,Wrought,Scenario4,49590.30734907205
+1960.0,Primary castings,Baseline,56803.44296348253
+1960.0,Primary castings,Scenario1,56803.44296348253
+1960.0,Primary castings,Scenario2,56803.44296348253
+1960.0,Primary castings,Scenario3,56803.44296348253
+1960.0,Primary castings,Scenario4,56803.44296348253
+1960.0,Secondary castings,Baseline,132541.36691479257
+1960.0,Secondary castings,Scenario1,132541.36691479257
+1960.0,Secondary castings,Scenario2,132541.36691479257
+1960.0,Secondary castings,Scenario3,132541.36691479257
+1960.0,Secondary castings,Scenario4,132541.36691479257
+1961.0,Wrought,Baseline,80143.11351593908
+1961.0,Wrought,Scenario1,80143.11351593908
+1961.0,Wrought,Scenario2,80143.11351593908
+1961.0,Wrought,Scenario3,80143.11351593908
+1961.0,Wrought,Scenario4,80143.11351593908
+1961.0,Primary castings,Baseline,91800.29366371203
+1961.0,Primary castings,Scenario1,91800.29366371203
+1961.0,Primary castings,Scenario2,91800.29366371203
+1961.0,Primary castings,Scenario3,91800.29366371203
+1961.0,Primary castings,Scenario4,91800.29366371203
+1961.0,Secondary castings,Baseline,214200.6852153279
+1961.0,Secondary castings,Scenario1,214200.6852153279
+1961.0,Secondary castings,Scenario2,214200.6852153279
+1961.0,Secondary castings,Scenario3,214200.6852153279
+1961.0,Secondary castings,Scenario4,214200.6852153279
+1962.0,Wrought,Baseline,122129.22412038218
+1962.0,Wrought,Scenario1,122129.22412038218
+1962.0,Wrought,Scenario2,122129.22412038218
+1962.0,Wrought,Scenario3,122129.22412038218
+1962.0,Wrought,Scenario4,122129.22412038218
+1962.0,Primary castings,Baseline,139893.47490152856
+1962.0,Primary castings,Scenario1,139893.47490152856
+1962.0,Primary castings,Scenario2,139893.47490152856
+1962.0,Primary castings,Scenario3,139893.47490152856
+1962.0,Primary castings,Scenario4,139893.47490152856
+1962.0,Secondary castings,Baseline,326418.1081035666
+1962.0,Secondary castings,Scenario1,326418.1081035666
+1962.0,Secondary castings,Scenario2,326418.1081035666
+1962.0,Secondary castings,Scenario3,326418.1081035666
+1962.0,Secondary castings,Scenario4,326418.1081035666
+1963.0,Wrought,Baseline,175971.49679540689
+1963.0,Wrought,Scenario1,175971.49679540689
+1963.0,Wrought,Scenario2,175971.49679540689
+1963.0,Wrought,Scenario3,175971.49679540689
+1963.0,Wrought,Scenario4,175971.49679540689
+1963.0,Primary castings,Baseline,201567.35087473886
+1963.0,Primary castings,Scenario1,201567.35087473886
+1963.0,Primary castings,Scenario2,201567.35087473886
+1963.0,Primary castings,Scenario3,201567.35087473886
+1963.0,Primary castings,Scenario4,201567.35087473886
+1963.0,Secondary castings,Baseline,470323.8187077242
+1963.0,Secondary castings,Scenario1,470323.8187077242
+1963.0,Secondary castings,Scenario2,470323.8187077242
+1963.0,Secondary castings,Scenario3,470323.8187077242
+1963.0,Secondary castings,Scenario4,470323.8187077242
+1964.0,Wrought,Baseline,240522.4740869389
+1964.0,Wrought,Scenario1,240522.4740869389
+1964.0,Wrought,Scenario2,240522.4740869389
+1964.0,Wrought,Scenario3,240522.4740869389
+1964.0,Wrought,Scenario4,240522.4740869389
+1964.0,Primary castings,Baseline,275507.56122685765
+1964.0,Primary castings,Scenario1,275507.56122685765
+1964.0,Primary castings,Scenario2,275507.56122685765
+1964.0,Primary castings,Scenario3,275507.56122685765
+1964.0,Primary castings,Scenario4,275507.56122685765
+1964.0,Secondary castings,Baseline,642850.9761960004
+1964.0,Secondary castings,Scenario1,642850.9761960004
+1964.0,Secondary castings,Scenario2,642850.9761960004
+1964.0,Secondary castings,Scenario3,642850.9761960004
+1964.0,Secondary castings,Scenario4,642850.9761960004
+1965.0,Wrought,Baseline,313073.2778908483
+1965.0,Wrought,Scenario1,313073.2778908483
+1965.0,Wrought,Scenario2,313073.2778908483
+1965.0,Wrought,Scenario3,313073.2778908483
+1965.0,Wrought,Scenario4,313073.2778908483
+1965.0,Primary castings,Baseline,358611.20922042645
+1965.0,Primary castings,Scenario1,358611.20922042645
+1965.0,Primary castings,Scenario2,358611.20922042645
+1965.0,Primary castings,Scenario3,358611.20922042645
+1965.0,Primary castings,Scenario4,358611.20922042645
+1965.0,Secondary castings,Baseline,836759.4881809952
+1965.0,Secondary castings,Scenario1,836759.4881809952
+1965.0,Secondary castings,Scenario2,836759.4881809952
+1965.0,Secondary castings,Scenario3,836759.4881809952
+1965.0,Secondary castings,Scenario4,836759.4881809952
+1966.0,Wrought,Baseline,389802.1658092603
+1966.0,Wrought,Scenario1,389802.1658092603
+1966.0,Wrought,Scenario2,389802.1658092603
+1966.0,Wrought,Scenario3,389802.1658092603
+1966.0,Wrought,Scenario4,389802.1658092603
+1966.0,Primary castings,Baseline,446500.66265424364
+1966.0,Primary castings,Scenario1,446500.66265424364
+1966.0,Primary castings,Scenario2,446500.66265424364
+1966.0,Primary castings,Scenario3,446500.66265424364
+1966.0,Primary castings,Scenario4,446500.66265424364
+1966.0,Secondary castings,Baseline,1041834.8795265692
+1966.0,Secondary castings,Scenario1,1041834.8795265692
+1966.0,Secondary castings,Scenario2,1041834.8795265692
+1966.0,Secondary castings,Scenario3,1041834.8795265692
+1966.0,Secondary castings,Scenario4,1041834.8795265692
+1967.0,Wrought,Baseline,466564.11782796343
+1967.0,Wrought,Scenario1,466564.11782796343
+1967.0,Wrought,Scenario2,466564.11782796343
+1967.0,Wrought,Scenario3,466564.11782796343
+1967.0,Wrought,Scenario4,466564.11782796343
+1967.0,Primary castings,Baseline,534427.9895120309
+1967.0,Primary castings,Scenario1,534427.9895120309
+1967.0,Primary castings,Scenario2,534427.9895120309
+1967.0,Primary castings,Scenario3,534427.9895120309
+1967.0,Primary castings,Scenario4,534427.9895120309
+1967.0,Secondary castings,Baseline,1246998.6421947395
+1967.0,Secondary castings,Scenario1,1246998.6421947395
+1967.0,Secondary castings,Scenario2,1246998.6421947395
+1967.0,Secondary castings,Scenario3,1246998.6421947395
+1967.0,Secondary castings,Scenario4,1246998.6421947395
+1968.0,Wrought,Baseline,539719.2789120112
+1968.0,Wrought,Scenario1,539719.2789120112
+1968.0,Wrought,Scenario2,539719.2789120112
+1968.0,Wrought,Scenario3,539719.2789120112
+1968.0,Wrought,Scenario4,539719.2789120112
+1968.0,Primary castings,Baseline,618223.9012992131
+1968.0,Primary castings,Scenario1,618223.9012992131
+1968.0,Primary castings,Scenario2,618223.9012992131
+1968.0,Primary castings,Scenario3,618223.9012992131
+1968.0,Primary castings,Scenario4,618223.9012992131
+1968.0,Secondary castings,Baseline,1442522.4363648298
+1968.0,Secondary castings,Scenario1,1442522.4363648298
+1968.0,Secondary castings,Scenario2,1442522.4363648298
+1968.0,Secondary castings,Scenario3,1442522.4363648298
+1968.0,Secondary castings,Scenario4,1442522.4363648298
+1969.0,Wrought,Baseline,606833.6967716818
+1969.0,Wrought,Scenario1,606833.6967716818
+1969.0,Wrought,Scenario2,606833.6967716818
+1969.0,Wrought,Scenario3,606833.6967716818
+1969.0,Wrought,Scenario4,606833.6967716818
+1969.0,Primary castings,Baseline,695100.4163021074
+1969.0,Primary castings,Scenario1,695100.4163021074
+1969.0,Primary castings,Scenario2,695100.4163021074
+1969.0,Primary castings,Scenario3,695100.4163021074
+1969.0,Primary castings,Scenario4,695100.4163021074
+1969.0,Secondary castings,Baseline,1621900.9713715834
+1969.0,Secondary castings,Scenario1,1621900.9713715834
+1969.0,Secondary castings,Scenario2,1621900.9713715834
+1969.0,Secondary castings,Scenario3,1621900.9713715834
+1969.0,Secondary castings,Scenario4,1621900.9713715834
+1970.0,Wrought,Baseline,875785.2929792325
+1970.0,Wrought,Scenario1,875785.2929792325
+1970.0,Wrought,Scenario2,875785.2929792325
+1970.0,Wrought,Scenario3,875785.2929792325
+1970.0,Wrought,Scenario4,875785.2929792325
+1970.0,Primary castings,Baseline,1003172.2446853038
+1970.0,Primary castings,Scenario1,1003172.2446853038
+1970.0,Primary castings,Scenario2,1003172.2446853038
+1970.0,Primary castings,Scenario3,1003172.2446853038
+1970.0,Primary castings,Scenario4,1003172.2446853038
+1970.0,Secondary castings,Baseline,2340735.2375990404
+1970.0,Secondary castings,Scenario1,2340735.2375990404
+1970.0,Secondary castings,Scenario2,2340735.2375990404
+1970.0,Secondary castings,Scenario3,2340735.2375990404
+1970.0,Secondary castings,Scenario4,2340735.2375990404
+1971.0,Wrought,Baseline,947923.9802623463
+1971.0,Wrought,Scenario1,947923.9802623463
+1971.0,Wrought,Scenario2,947923.9802623463
+1971.0,Wrought,Scenario3,947923.9802623463
+1971.0,Wrought,Scenario4,947923.9802623463
+1971.0,Primary castings,Baseline,1085803.8319368695
+1971.0,Primary castings,Scenario1,1085803.8319368695
+1971.0,Primary castings,Scenario2,1085803.8319368695
+1971.0,Primary castings,Scenario3,1085803.8319368695
+1971.0,Primary castings,Scenario4,1085803.8319368695
+1971.0,Secondary castings,Baseline,2533542.274519363
+1971.0,Secondary castings,Scenario1,2533542.274519363
+1971.0,Secondary castings,Scenario2,2533542.274519363
+1971.0,Secondary castings,Scenario3,2533542.274519363
+1971.0,Secondary castings,Scenario4,2533542.274519363
+1972.0,Wrought,Baseline,1011733.0066975493
+1972.0,Wrought,Scenario1,1011733.0066975493
+1972.0,Wrought,Scenario2,1011733.0066975493
+1972.0,Wrought,Scenario3,1011733.0066975493
+1972.0,Wrought,Scenario4,1011733.0066975493
+1972.0,Primary castings,Baseline,1158894.1713081016
+1972.0,Primary castings,Scenario1,1158894.1713081016
+1972.0,Primary castings,Scenario2,1158894.1713081016
+1972.0,Primary castings,Scenario3,1158894.1713081016
+1972.0,Primary castings,Scenario4,1158894.1713081016
+1972.0,Secondary castings,Baseline,2704086.399718903
+1972.0,Secondary castings,Scenario1,2704086.399718903
+1972.0,Secondary castings,Scenario2,2704086.399718903
+1972.0,Secondary castings,Scenario3,2704086.399718903
+1972.0,Secondary castings,Scenario4,2704086.399718903
+1973.0,Wrought,Baseline,1069509.7129881198
+1973.0,Wrought,Scenario1,1069509.7129881198
+1973.0,Wrought,Scenario2,1069509.7129881198
+1973.0,Wrought,Scenario3,1069509.7129881198
+1973.0,Wrought,Scenario4,1069509.7129881198
+1973.0,Primary castings,Baseline,1225074.7621500278
+1973.0,Primary castings,Scenario1,1225074.7621500278
+1973.0,Primary castings,Scenario2,1225074.7621500278
+1973.0,Primary castings,Scenario3,1225074.7621500278
+1973.0,Primary castings,Scenario4,1225074.7621500278
+1973.0,Secondary castings,Baseline,2858507.778350064
+1973.0,Secondary castings,Scenario1,2858507.778350064
+1973.0,Secondary castings,Scenario2,2858507.778350064
+1973.0,Secondary castings,Scenario3,2858507.778350064
+1973.0,Secondary castings,Scenario4,2858507.778350064
+1974.0,Wrought,Baseline,1124092.62516321
+1974.0,Wrought,Scenario1,1124092.62516321
+1974.0,Wrought,Scenario2,1124092.62516321
+1974.0,Wrought,Scenario3,1124092.62516321
+1974.0,Wrought,Scenario4,1124092.62516321
+1974.0,Primary castings,Baseline,1287597.007005132
+1974.0,Primary castings,Scenario1,1287597.007005132
+1974.0,Primary castings,Scenario2,1287597.007005132
+1974.0,Primary castings,Scenario3,1287597.007005132
+1974.0,Primary castings,Scenario4,1287597.007005132
+1974.0,Secondary castings,Baseline,3004393.016345305
+1974.0,Secondary castings,Scenario1,3004393.016345305
+1974.0,Secondary castings,Scenario2,3004393.016345305
+1974.0,Secondary castings,Scenario3,3004393.016345305
+1974.0,Secondary castings,Scenario4,3004393.016345305
+1975.0,Wrought,Baseline,1178426.4777204357
+1975.0,Wrought,Scenario1,1178426.4777204357
+1975.0,Wrought,Scenario2,1178426.4777204357
+1975.0,Wrought,Scenario3,1178426.4777204357
+1975.0,Wrought,Scenario4,1178426.4777204357
+1975.0,Primary castings,Baseline,1349833.9653888624
+1975.0,Primary castings,Scenario1,1349833.9653888624
+1975.0,Primary castings,Scenario2,1349833.9653888624
+1975.0,Primary castings,Scenario3,1349833.9653888624
+1975.0,Primary castings,Scenario4,1349833.9653888624
+1975.0,Secondary castings,Baseline,3149612.585907345
+1975.0,Secondary castings,Scenario1,3149612.585907345
+1975.0,Secondary castings,Scenario2,3149612.585907345
+1975.0,Secondary castings,Scenario3,3149612.585907345
+1975.0,Secondary castings,Scenario4,3149612.585907345
+1976.0,Wrought,Baseline,1235143.7598656972
+1976.0,Wrought,Scenario1,1235143.7598656972
+1976.0,Wrought,Scenario2,1235143.7598656972
+1976.0,Wrought,Scenario3,1235143.7598656972
+1976.0,Wrought,Scenario4,1235143.7598656972
+1976.0,Primary castings,Baseline,1414801.0340279802
+1976.0,Primary castings,Scenario1,1414801.0340279802
+1976.0,Primary castings,Scenario2,1414801.0340279802
+1976.0,Primary castings,Scenario3,1414801.0340279802
+1976.0,Primary castings,Scenario4,1414801.0340279802
+1976.0,Secondary castings,Baseline,3301202.4127319497
+1976.0,Secondary castings,Scenario1,3301202.4127319497
+1976.0,Secondary castings,Scenario2,3301202.4127319497
+1976.0,Secondary castings,Scenario3,3301202.4127319497
+1976.0,Secondary castings,Scenario4,3301202.4127319497
+1977.0,Wrought,Baseline,1296247.2360044357
+1977.0,Wrought,Scenario1,1296247.2360044357
+1977.0,Wrought,Scenario2,1296247.2360044357
+1977.0,Wrought,Scenario3,1296247.2360044357
+1977.0,Wrought,Scenario4,1296247.2360044357
+1977.0,Primary castings,Baseline,1484792.2885141694
+1977.0,Primary castings,Scenario1,1484792.2885141694
+1977.0,Primary castings,Scenario2,1484792.2885141694
+1977.0,Primary castings,Scenario3,1484792.2885141694
+1977.0,Primary castings,Scenario4,1484792.2885141694
+1977.0,Secondary castings,Baseline,3464515.3398663998
+1977.0,Secondary castings,Scenario1,3464515.3398663998
+1977.0,Secondary castings,Scenario2,3464515.3398663998
+1977.0,Secondary castings,Scenario3,3464515.3398663998
+1977.0,Secondary castings,Scenario4,3464515.3398663998
+1978.0,Wrought,Baseline,1362898.4008934386
+1978.0,Wrought,Scenario1,1362898.4008934386
+1978.0,Wrought,Scenario2,1362898.4008934386
+1978.0,Wrought,Scenario3,1362898.4008934386
+1978.0,Wrought,Scenario4,1362898.4008934386
+1978.0,Primary castings,Baseline,1561138.16829612
+1978.0,Primary castings,Scenario1,1561138.16829612
+1978.0,Primary castings,Scenario2,1561138.16829612
+1978.0,Primary castings,Scenario3,1561138.16829612
+1978.0,Primary castings,Scenario4,1561138.16829612
+1978.0,Secondary castings,Baseline,3642655.7260242794
+1978.0,Secondary castings,Scenario1,3642655.7260242794
+1978.0,Secondary castings,Scenario2,3642655.7260242794
+1978.0,Secondary castings,Scenario3,3642655.7260242794
+1978.0,Secondary castings,Scenario4,3642655.7260242794
+1979.0,Wrought,Baseline,1435329.6387303534
+1979.0,Wrought,Scenario1,1435329.6387303534
+1979.0,Wrought,Scenario2,1435329.6387303534
+1979.0,Wrought,Scenario3,1435329.6387303534
+1979.0,Wrought,Scenario4,1435329.6387303534
+1979.0,Primary castings,Baseline,1644104.858909313
+1979.0,Primary castings,Scenario1,1644104.858909313
+1979.0,Primary castings,Scenario2,1644104.858909313
+1979.0,Primary castings,Scenario3,1644104.858909313
+1979.0,Primary castings,Scenario4,1644104.858909313
+1979.0,Secondary castings,Baseline,3836244.6707883975
+1979.0,Secondary castings,Scenario1,3836244.6707883975
+1979.0,Secondary castings,Scenario2,3836244.6707883975
+1979.0,Secondary castings,Scenario3,3836244.6707883975
+1979.0,Secondary castings,Scenario4,3836244.6707883975
+1980.0,Wrought,Baseline,1513064.6436237723
+1980.0,Wrought,Scenario1,1513064.6436237723
+1980.0,Wrought,Scenario2,1513064.6436237723
+1980.0,Wrought,Scenario3,1513064.6436237723
+1980.0,Wrought,Scenario4,1513064.6436237723
+1980.0,Primary castings,Baseline,1733146.773605412
+1980.0,Primary castings,Scenario1,1733146.773605412
+1980.0,Primary castings,Scenario2,1733146.773605412
+1980.0,Primary castings,Scenario3,1733146.773605412
+1980.0,Primary castings,Scenario4,1733146.773605412
+1980.0,Secondary castings,Baseline,4044009.1384126265
+1980.0,Secondary castings,Scenario1,4044009.1384126265
+1980.0,Secondary castings,Scenario2,4044009.1384126265
+1980.0,Secondary castings,Scenario3,4044009.1384126265
+1980.0,Secondary castings,Scenario4,4044009.1384126265
+1981.0,Wrought,Baseline,1594537.3525977777
+1981.0,Wrought,Scenario1,1594537.3525977777
+1981.0,Wrought,Scenario2,1594537.3525977777
+1981.0,Wrought,Scenario3,1594537.3525977777
+1981.0,Wrought,Scenario4,1594537.3525977777
+1981.0,Primary castings,Baseline,1826465.9746805911
+1981.0,Primary castings,Scenario1,1826465.9746805911
+1981.0,Primary castings,Scenario2,1826465.9746805911
+1981.0,Primary castings,Scenario3,1826465.9746805911
+1981.0,Primary castings,Scenario4,1826465.9746805911
+1981.0,Secondary castings,Baseline,4261753.940921381
+1981.0,Secondary castings,Scenario1,4261753.940921381
+1981.0,Secondary castings,Scenario2,4261753.940921381
+1981.0,Secondary castings,Scenario3,4261753.940921381
+1981.0,Secondary castings,Scenario4,4261753.940921381
+1982.0,Wrought,Baseline,1678290.977291618
+1982.0,Wrought,Scenario1,1678290.977291618
+1982.0,Wrought,Scenario2,1678290.977291618
+1982.0,Wrought,Scenario3,1678290.977291618
+1982.0,Wrought,Scenario4,1678290.977291618
+1982.0,Primary castings,Baseline,1922390.3461826881
+1982.0,Primary castings,Scenario1,1922390.3461826881
+1982.0,Primary castings,Scenario2,1922390.3461826881
+1982.0,Primary castings,Scenario3,1922390.3461826881
+1982.0,Primary castings,Scenario4,1922390.3461826881
+1982.0,Secondary castings,Baseline,4485577.474426273
+1982.0,Secondary castings,Scenario1,4485577.474426273
+1982.0,Secondary castings,Scenario2,4485577.474426273
+1982.0,Secondary castings,Scenario3,4485577.474426273
+1982.0,Secondary castings,Scenario4,4485577.474426273
+1983.0,Wrought,Baseline,1762817.170624552
+1983.0,Wrought,Scenario1,1762817.170624552
+1983.0,Wrought,Scenario2,1762817.170624552
+1983.0,Wrought,Scenario3,1762817.170624552
+1983.0,Wrought,Scenario4,1762817.170624552
+1983.0,Primary castings,Baseline,2019177.7851248807
+1983.0,Primary castings,Scenario1,2019177.7851248807
+1983.0,Primary castings,Scenario2,2019177.7851248807
+1983.0,Primary castings,Scenario3,2019177.7851248807
+1983.0,Primary castings,Scenario4,2019177.7851248807
+1983.0,Secondary castings,Baseline,4711414.831958054
+1983.0,Secondary castings,Scenario1,4711414.831958054
+1983.0,Secondary castings,Scenario2,4711414.831958054
+1983.0,Secondary castings,Scenario3,4711414.831958054
+1983.0,Secondary castings,Scenario4,4711414.831958054
+1984.0,Wrought,Baseline,1847046.374886216
+1984.0,Wrought,Scenario1,1847046.374886216
+1984.0,Wrought,Scenario2,1847046.374886216
+1984.0,Wrought,Scenario3,1847046.374886216
+1984.0,Wrought,Scenario4,1847046.374886216
+1984.0,Primary castings,Baseline,2115569.873774985
+1984.0,Primary castings,Scenario1,2115569.873774985
+1984.0,Primary castings,Scenario2,2115569.873774985
+1984.0,Primary castings,Scenario3,2115569.873774985
+1984.0,Primary castings,Scenario4,2115569.873774985
+1984.0,Secondary castings,Baseline,4936329.705474965
+1984.0,Secondary castings,Scenario1,4936329.705474965
+1984.0,Secondary castings,Scenario2,4936329.705474965
+1984.0,Secondary castings,Scenario3,4936329.705474965
+1984.0,Secondary castings,Scenario4,4936329.705474965
+1985.0,Wrought,Baseline,1930657.0729043784
+1985.0,Wrought,Scenario1,1930657.0729043784
+1985.0,Wrought,Scenario2,1930657.0729043784
+1985.0,Wrought,Scenario3,1930657.0729043784
+1985.0,Wrought,Scenario4,1930657.0729043784
+1985.0,Primary castings,Baseline,2211122.0515759173
+1985.0,Primary castings,Scenario1,2211122.0515759173
+1985.0,Primary castings,Scenario2,2211122.0515759173
+1985.0,Primary castings,Scenario3,2211122.0515759173
+1985.0,Primary castings,Scenario4,2211122.0515759173
+1985.0,Secondary castings,Baseline,5159284.787010473
+1985.0,Secondary castings,Scenario1,5159284.787010473
+1985.0,Secondary castings,Scenario2,5159284.787010473
+1985.0,Secondary castings,Scenario3,5159284.787010473
+1985.0,Secondary castings,Scenario4,5159284.787010473
+1986.0,Wrought,Baseline,2014207.1932863384
+1986.0,Wrought,Scenario1,2014207.1932863384
+1986.0,Wrought,Scenario2,2014207.1932863384
+1986.0,Wrought,Scenario3,2014207.1932863384
+1986.0,Wrought,Scenario4,2014207.1932863384
+1986.0,Primary castings,Baseline,2306317.197118182
+1986.0,Primary castings,Scenario1,2306317.197118182
+1986.0,Primary castings,Scenario2,2306317.197118182
+1986.0,Primary castings,Scenario3,2306317.197118182
+1986.0,Primary castings,Scenario4,2306317.197118182
+1986.0,Secondary castings,Baseline,5381406.793275754
+1986.0,Secondary castings,Scenario1,5381406.793275754
+1986.0,Secondary castings,Scenario2,5381406.793275754
+1986.0,Secondary castings,Scenario3,5381406.793275754
+1986.0,Secondary castings,Scenario4,5381406.793275754
+1987.0,Wrought,Baseline,2099150.1263910625
+1987.0,Wrought,Scenario1,2099150.1263910625
+1987.0,Wrought,Scenario2,2099150.1263910625
+1987.0,Wrought,Scenario3,2099150.1263910625
+1987.0,Wrought,Scenario4,2099150.1263910625
+1987.0,Primary castings,Baseline,2402512.6101837815
+1987.0,Primary castings,Scenario1,2402512.6101837815
+1987.0,Primary castings,Scenario2,2402512.6101837815
+1987.0,Primary castings,Scenario3,2402512.6101837815
+1987.0,Primary castings,Scenario4,2402512.6101837815
+1987.0,Secondary castings,Baseline,5605862.757095489
+1987.0,Secondary castings,Scenario1,5605862.757095489
+1987.0,Secondary castings,Scenario2,5605862.757095489
+1987.0,Secondary castings,Scenario3,5605862.757095489
+1987.0,Secondary castings,Scenario4,5605862.757095489
+1988.0,Wrought,Baseline,2187605.767694607
+1988.0,Wrought,Scenario1,2187605.767694607
+1988.0,Wrought,Scenario2,2187605.767694607
+1988.0,Wrought,Scenario3,2187605.767694607
+1988.0,Wrought,Scenario4,2187605.767694607
+1988.0,Primary castings,Baseline,2501595.8942255997
+1988.0,Primary castings,Scenario1,2501595.8942255997
+1988.0,Primary castings,Scenario2,2501595.8942255997
+1988.0,Primary castings,Scenario3,2501595.8942255997
+1988.0,Primary castings,Scenario4,2501595.8942255997
+1988.0,Secondary castings,Baseline,5837057.086526394
+1988.0,Secondary castings,Scenario1,5837057.086526394
+1988.0,Secondary castings,Scenario2,5837057.086526394
+1988.0,Secondary castings,Scenario3,5837057.086526394
+1988.0,Secondary castings,Scenario4,5837057.086526394
+1989.0,Wrought,Baseline,2282057.356422558
+1989.0,Wrought,Scenario1,2282057.356422558
+1989.0,Wrought,Scenario2,2282057.356422558
+1989.0,Wrought,Scenario3,2282057.356422558
+1989.0,Wrought,Scenario4,2282057.356422558
+1989.0,Primary castings,Baseline,2605532.157969465
+1989.0,Primary castings,Scenario1,2605532.157969465
+1989.0,Primary castings,Scenario2,2605532.157969465
+1989.0,Primary castings,Scenario3,2605532.157969465
+1989.0,Primary castings,Scenario4,2605532.157969465
+1989.0,Secondary castings,Baseline,6079575.035262081
+1989.0,Secondary castings,Scenario1,6079575.035262081
+1989.0,Secondary castings,Scenario2,6079575.035262081
+1989.0,Secondary castings,Scenario3,6079575.035262081
+1989.0,Secondary castings,Scenario4,6079575.035262081
+1990.0,Wrought,Baseline,2385035.7755542607
+1990.0,Wrought,Scenario1,2385035.7755542607
+1990.0,Wrought,Scenario2,2385035.7755542607
+1990.0,Wrought,Scenario3,2385035.7755542607
+1990.0,Wrought,Scenario4,2385035.7755542607
+1990.0,Primary castings,Baseline,2715910.660016902
+1990.0,Primary castings,Scenario1,2715910.660016902
+1990.0,Primary castings,Scenario2,2715910.660016902
+1990.0,Primary castings,Scenario3,2715910.660016902
+1990.0,Primary castings,Scenario4,2715910.660016902
+1990.0,Secondary castings,Baseline,6337124.873372769
+1990.0,Secondary castings,Scenario1,6337124.873372769
+1990.0,Secondary castings,Scenario2,6337124.873372769
+1990.0,Secondary castings,Scenario3,6337124.873372769
+1990.0,Secondary castings,Scenario4,6337124.873372769
+1991.0,Wrought,Baseline,2498893.824167777
+1991.0,Wrought,Scenario1,2498893.824167777
+1991.0,Wrought,Scenario2,2498893.824167777
+1991.0,Wrought,Scenario3,2498893.824167777
+1991.0,Wrought,Scenario4,2498893.824167777
+1991.0,Primary castings,Baseline,2833658.4831860233
+1991.0,Primary castings,Scenario1,2833658.4831860233
+1991.0,Primary castings,Scenario2,2833658.4831860233
+1991.0,Primary castings,Scenario3,2833658.4831860233
+1991.0,Primary castings,Scenario4,2833658.4831860233
+1991.0,Secondary castings,Baseline,6611869.794100719
+1991.0,Secondary castings,Scenario1,6611869.794100719
+1991.0,Secondary castings,Scenario2,6611869.794100719
+1991.0,Secondary castings,Scenario3,6611869.794100719
+1991.0,Secondary castings,Scenario4,6611869.794100719
+1992.0,Wrought,Baseline,2625894.620589633
+1992.0,Wrought,Scenario1,2625894.620589633
+1992.0,Wrought,Scenario2,2625894.620589633
+1992.0,Wrought,Scenario3,2625894.620589633
+1992.0,Wrought,Scenario4,2625894.620589633
+1992.0,Primary castings,Baseline,2959193.9230538337
+1992.0,Primary castings,Scenario1,2959193.9230538337
+1992.0,Primary castings,Scenario2,2959193.9230538337
+1992.0,Primary castings,Scenario3,2959193.9230538337
+1992.0,Primary castings,Scenario4,2959193.9230538337
+1992.0,Secondary castings,Baseline,6904785.820458947
+1992.0,Secondary castings,Scenario1,6904785.820458947
+1992.0,Secondary castings,Scenario2,6904785.820458947
+1992.0,Secondary castings,Scenario3,6904785.820458947
+1992.0,Secondary castings,Scenario4,6904785.820458947
+1993.0,Wrought,Baseline,2768473.910245383
+1993.0,Wrought,Scenario1,2768473.910245383
+1993.0,Wrought,Scenario2,2768473.910245383
+1993.0,Wrought,Scenario3,2768473.910245383
+1993.0,Wrought,Scenario4,2768473.910245383
+1993.0,Primary castings,Baseline,3092909.96742907
+1993.0,Primary castings,Scenario1,3092909.96742907
+1993.0,Primary castings,Scenario2,3092909.96742907
+1993.0,Primary castings,Scenario3,3092909.96742907
+1993.0,Primary castings,Scenario4,3092909.96742907
+1993.0,Secondary castings,Baseline,7216789.924001165
+1993.0,Secondary castings,Scenario1,7216789.924001165
+1993.0,Secondary castings,Scenario2,7216789.924001165
+1993.0,Secondary castings,Scenario3,7216789.924001165
+1993.0,Secondary castings,Scenario4,7216789.924001165
+1994.0,Wrought,Baseline,2929656.057577336
+1994.0,Wrought,Scenario1,2929656.057577336
+1994.0,Wrought,Scenario2,2929656.057577336
+1994.0,Wrought,Scenario3,2929656.057577336
+1994.0,Wrought,Scenario4,2929656.057577336
+1994.0,Primary castings,Baseline,3235919.235070465
+1994.0,Primary castings,Scenario1,3235919.235070465
+1994.0,Primary castings,Scenario2,3235919.235070465
+1994.0,Primary castings,Scenario3,3235919.235070465
+1994.0,Primary castings,Scenario4,3235919.235070465
+1994.0,Secondary castings,Baseline,7550478.215164419
+1994.0,Secondary castings,Scenario1,7550478.215164419
+1994.0,Secondary castings,Scenario2,7550478.215164419
+1994.0,Secondary castings,Scenario3,7550478.215164419
+1994.0,Secondary castings,Scenario4,7550478.215164419
+1995.0,Wrought,Baseline,3167641.5529015292
+1995.0,Wrought,Scenario1,3167641.5529015292
+1995.0,Wrought,Scenario2,3167641.5529015292
+1995.0,Wrought,Scenario3,3167641.5529015292
+1995.0,Wrought,Scenario4,3167641.5529015292
+1995.0,Primary castings,Baseline,3448018.93084695
+1995.0,Primary castings,Scenario1,3448018.93084695
+1995.0,Primary castings,Scenario2,3448018.93084695
+1995.0,Primary castings,Scenario3,3448018.93084695
+1995.0,Primary castings,Scenario4,3448018.93084695
+1995.0,Secondary castings,Baseline,8045377.505309549
+1995.0,Secondary castings,Scenario1,8045377.505309549
+1995.0,Secondary castings,Scenario2,8045377.505309549
+1995.0,Secondary castings,Scenario3,8045377.505309549
+1995.0,Secondary castings,Scenario4,8045377.505309549
+1996.0,Wrought,Baseline,3361534.5736659765
+1996.0,Wrought,Scenario1,3361534.5736659765
+1996.0,Wrought,Scenario2,3361534.5736659765
+1996.0,Wrought,Scenario3,3361534.5736659765
+1996.0,Wrought,Scenario4,3361534.5736659765
+1996.0,Primary castings,Baseline,3599103.028457589
+1996.0,Primary castings,Scenario1,3599103.028457589
+1996.0,Primary castings,Scenario2,3599103.028457589
+1996.0,Primary castings,Scenario3,3599103.028457589
+1996.0,Primary castings,Scenario4,3599103.028457589
+1996.0,Secondary castings,Baseline,8397907.066401036
+1996.0,Secondary castings,Scenario1,8397907.066401036
+1996.0,Secondary castings,Scenario2,8397907.066401036
+1996.0,Secondary castings,Scenario3,8397907.066401036
+1996.0,Secondary castings,Scenario4,8397907.066401036
+1997.0,Wrought,Baseline,3586005.581287211
+1997.0,Wrought,Scenario1,3586005.581287211
+1997.0,Wrought,Scenario2,3586005.581287211
+1997.0,Wrought,Scenario3,3586005.581287211
+1997.0,Wrought,Scenario4,3586005.581287211
+1997.0,Primary castings,Baseline,3770075.3037634594
+1997.0,Primary castings,Scenario1,3770075.3037634594
+1997.0,Primary castings,Scenario2,3770075.3037634594
+1997.0,Primary castings,Scenario3,3770075.3037634594
+1997.0,Primary castings,Scenario4,3770075.3037634594
+1997.0,Secondary castings,Baseline,8796842.375448076
+1997.0,Secondary castings,Scenario1,8796842.375448076
+1997.0,Secondary castings,Scenario2,8796842.375448076
+1997.0,Secondary castings,Scenario3,8796842.375448076
+1997.0,Secondary castings,Scenario4,8796842.375448076
+1998.0,Wrought,Baseline,3844551.953651215
+1998.0,Wrought,Scenario1,3844551.953651215
+1998.0,Wrought,Scenario2,3844551.953651215
+1998.0,Wrought,Scenario3,3844551.953651215
+1998.0,Wrought,Scenario4,3844551.953651215
+1998.0,Primary castings,Baseline,3965444.6654909006
+1998.0,Primary castings,Scenario1,3965444.6654909006
+1998.0,Primary castings,Scenario2,3965444.6654909006
+1998.0,Primary castings,Scenario3,3965444.6654909006
+1998.0,Primary castings,Scenario4,3965444.6654909006
+1998.0,Secondary castings,Baseline,9252704.21947876
+1998.0,Secondary castings,Scenario1,9252704.21947876
+1998.0,Secondary castings,Scenario2,9252704.21947876
+1998.0,Secondary castings,Scenario3,9252704.21947876
+1998.0,Secondary castings,Scenario4,9252704.21947876
+1999.0,Wrought,Baseline,4138696.0546182278
+1999.0,Wrought,Scenario1,4138696.0546182278
+1999.0,Wrought,Scenario2,4138696.0546182278
+1999.0,Wrought,Scenario3,4138696.0546182278
+1999.0,Wrought,Scenario4,4138696.0546182278
+1999.0,Primary castings,Baseline,4188168.835676548
+1999.0,Primary castings,Scenario1,4188168.835676548
+1999.0,Primary castings,Scenario2,4188168.835676548
+1999.0,Primary castings,Scenario3,4188168.835676548
+1999.0,Primary castings,Scenario4,4188168.835676548
+1999.0,Secondary castings,Baseline,9772393.949911943
+1999.0,Secondary castings,Scenario1,9772393.949911943
+1999.0,Secondary castings,Scenario2,9772393.949911943
+1999.0,Secondary castings,Scenario3,9772393.949911943
+1999.0,Secondary castings,Scenario4,9772393.949911943
+2000.0,Wrought,Baseline,4467111.763304014
+2000.0,Wrought,Scenario1,4467111.763304014
+2000.0,Wrought,Scenario2,4467111.763304014
+2000.0,Wrought,Scenario3,4467111.763304014
+2000.0,Wrought,Scenario4,4467111.763304014
+2000.0,Primary castings,Baseline,4438511.674389088
+2000.0,Primary castings,Scenario1,4438511.674389088
+2000.0,Primary castings,Scenario2,4438511.674389088
+2000.0,Primary castings,Scenario3,4438511.674389088
+2000.0,Primary castings,Scenario4,4438511.674389088
+2000.0,Secondary castings,Baseline,10356527.240241203
+2000.0,Secondary castings,Scenario1,10356527.240241203
+2000.0,Secondary castings,Scenario2,10356527.240241203
+2000.0,Secondary castings,Scenario3,10356527.240241203
+2000.0,Secondary castings,Scenario4,10356527.240241203
+2001.0,Wrought,Baseline,4825440.954419541
+2001.0,Wrought,Scenario1,4825440.954419541
+2001.0,Wrought,Scenario2,4825440.954419541
+2001.0,Wrought,Scenario3,4825440.954419541
+2001.0,Wrought,Scenario4,4825440.954419541
+2001.0,Primary castings,Baseline,4713636.649643785
+2001.0,Primary castings,Scenario1,4713636.649643785
+2001.0,Primary castings,Scenario2,4713636.649643785
+2001.0,Primary castings,Scenario3,4713636.649643785
+2001.0,Primary castings,Scenario4,4713636.649643785
+2001.0,Secondary castings,Baseline,10998485.515835498
+2001.0,Secondary castings,Scenario1,10998485.515835498
+2001.0,Secondary castings,Scenario2,10998485.515835498
+2001.0,Secondary castings,Scenario3,10998485.515835498
+2001.0,Secondary castings,Scenario4,10998485.515835498
+2002.0,Wrought,Baseline,5207062.513556826
+2002.0,Wrought,Scenario1,5207062.513556826
+2002.0,Wrought,Scenario2,5207062.513556826
+2002.0,Wrought,Scenario3,5207062.513556826
+2002.0,Wrought,Scenario4,5207062.513556826
+2002.0,Primary castings,Baseline,5008220.6800513705
+2002.0,Primary castings,Scenario1,5008220.6800513705
+2002.0,Primary castings,Scenario2,5008220.6800513705
+2002.0,Primary castings,Scenario3,5008220.6800513705
+2002.0,Primary castings,Scenario4,5008220.6800513705
+2002.0,Secondary castings,Baseline,11685848.253453197
+2002.0,Secondary castings,Scenario1,11685848.253453197
+2002.0,Secondary castings,Scenario2,11685848.253453197
+2002.0,Secondary castings,Scenario3,11685848.253453197
+2002.0,Secondary castings,Scenario4,11685848.253453197
+2003.0,Wrought,Baseline,5604523.446564578
+2003.0,Wrought,Scenario1,5604523.446564578
+2003.0,Wrought,Scenario2,5604523.446564578
+2003.0,Wrought,Scenario3,5604523.446564578
+2003.0,Wrought,Scenario4,5604523.446564578
+2003.0,Primary castings,Baseline,5315815.883669954
+2003.0,Primary castings,Scenario1,5315815.883669954
+2003.0,Primary castings,Scenario2,5315815.883669954
+2003.0,Primary castings,Scenario3,5315815.883669954
+2003.0,Primary castings,Scenario4,5315815.883669954
+2003.0,Secondary castings,Baseline,12403570.395229902
+2003.0,Secondary castings,Scenario1,12403570.395229902
+2003.0,Secondary castings,Scenario2,12403570.395229902
+2003.0,Secondary castings,Scenario3,12403570.395229902
+2003.0,Secondary castings,Scenario4,12403570.395229902
+2004.0,Wrought,Baseline,6011490.803033857
+2004.0,Wrought,Scenario1,6011490.803033857
+2004.0,Wrought,Scenario2,6011490.803033857
+2004.0,Wrought,Scenario3,6011490.803033857
+2004.0,Wrought,Scenario4,6011490.803033857
+2004.0,Primary castings,Baseline,5630750.403726654
+2004.0,Primary castings,Scenario1,5630750.403726654
+2004.0,Primary castings,Scenario2,5630750.403726654
+2004.0,Primary castings,Scenario3,5630750.403726654
+2004.0,Primary castings,Scenario4,5630750.403726654
+2004.0,Secondary castings,Baseline,13138417.608695528
+2004.0,Secondary castings,Scenario1,13138417.608695528
+2004.0,Secondary castings,Scenario2,13138417.608695528
+2004.0,Secondary castings,Scenario3,13138417.608695528
+2004.0,Secondary castings,Scenario4,13138417.608695528
+2005.0,Wrought,Baseline,6424327.716061976
+2005.0,Wrought,Scenario1,6424327.716061976
+2005.0,Wrought,Scenario2,6424327.716061976
+2005.0,Wrought,Scenario3,6424327.716061976
+2005.0,Wrought,Scenario4,6424327.716061976
+2005.0,Primary castings,Baseline,5949695.5141100725
+2005.0,Primary castings,Scenario1,5949695.5141100725
+2005.0,Primary castings,Scenario2,5949695.5141100725
+2005.0,Primary castings,Scenario3,5949695.5141100725
+2005.0,Primary castings,Scenario4,5949695.5141100725
+2005.0,Secondary castings,Baseline,13882622.866256831
+2005.0,Secondary castings,Scenario1,13882622.866256831
+2005.0,Secondary castings,Scenario2,13882622.866256831
+2005.0,Secondary castings,Scenario3,13882622.866256831
+2005.0,Secondary castings,Scenario4,13882622.866256831
+2006.0,Wrought,Baseline,6842915.621131693
+2006.0,Wrought,Scenario1,6842915.621131693
+2006.0,Wrought,Scenario2,6842915.621131693
+2006.0,Wrought,Scenario3,6842915.621131693
+2006.0,Wrought,Scenario4,6842915.621131693
+2006.0,Primary castings,Baseline,6272498.179339985
+2006.0,Primary castings,Scenario1,6272498.179339985
+2006.0,Primary castings,Scenario2,6272498.179339985
+2006.0,Primary castings,Scenario3,6272498.179339985
+2006.0,Primary castings,Scenario4,6272498.179339985
+2006.0,Secondary castings,Baseline,14635829.085126644
+2006.0,Secondary castings,Scenario1,14635829.085126644
+2006.0,Secondary castings,Scenario2,14635829.085126644
+2006.0,Secondary castings,Scenario3,14635829.085126644
+2006.0,Secondary castings,Scenario4,14635829.085126644
+2007.0,Wrought,Baseline,7270467.702279143
+2007.0,Wrought,Scenario1,7270467.702279143
+2007.0,Wrought,Scenario2,7270467.702279143
+2007.0,Wrought,Scenario3,7270467.702279143
+2007.0,Wrought,Scenario4,7270467.702279143
+2007.0,Primary castings,Baseline,6602033.064457943
+2007.0,Primary castings,Scenario1,6602033.064457943
+2007.0,Primary castings,Scenario2,6602033.064457943
+2007.0,Primary castings,Scenario3,6602033.064457943
+2007.0,Primary castings,Scenario4,6602033.064457943
+2007.0,Secondary castings,Baseline,15404743.817068536
+2007.0,Secondary castings,Scenario1,15404743.817068536
+2007.0,Secondary castings,Scenario2,15404743.817068536
+2007.0,Secondary castings,Scenario3,15404743.817068536
+2007.0,Secondary castings,Scenario4,15404743.817068536
+2008.0,Wrought,Baseline,7719527.708630556
+2008.0,Wrought,Scenario1,7719527.708630556
+2008.0,Wrought,Scenario2,7719527.708630556
+2008.0,Wrought,Scenario3,7719527.708630556
+2008.0,Wrought,Scenario4,7719527.708630556
+2008.0,Primary castings,Baseline,6949456.696579437
+2008.0,Primary castings,Scenario1,6949456.696579437
+2008.0,Primary castings,Scenario2,6949456.696579437
+2008.0,Primary castings,Scenario3,6949456.696579437
+2008.0,Primary castings,Scenario4,6949456.696579437
+2008.0,Secondary castings,Baseline,16215398.958685359
+2008.0,Secondary castings,Scenario1,16215398.958685359
+2008.0,Secondary castings,Scenario2,16215398.958685359
+2008.0,Secondary castings,Scenario3,16215398.958685359
+2008.0,Secondary castings,Scenario4,16215398.958685359
+2009.0,Wrought,Baseline,8184639.2015241925
+2009.0,Wrought,Scenario1,8184639.2015241925
+2009.0,Wrought,Scenario2,8184639.2015241925
+2009.0,Wrought,Scenario3,8184639.2015241925
+2009.0,Wrought,Scenario4,8184639.2015241925
+2009.0,Primary castings,Baseline,7309926.684981402
+2009.0,Primary castings,Scenario1,7309926.684981402
+2009.0,Primary castings,Scenario2,7309926.684981402
+2009.0,Primary castings,Scenario3,7309926.684981402
+2009.0,Primary castings,Scenario4,7309926.684981402
+2009.0,Secondary castings,Baseline,17056495.598289926
+2009.0,Secondary castings,Scenario1,17056495.598289926
+2009.0,Secondary castings,Scenario2,17056495.598289926
+2009.0,Secondary castings,Scenario3,17056495.598289926
+2009.0,Secondary castings,Scenario4,17056495.598289926
+2010.0,Wrought,Baseline,10787762.591487812
+2010.0,Wrought,Scenario1,10787762.591487812
+2010.0,Wrought,Scenario2,10787762.591487812
+2010.0,Wrought,Scenario3,10787762.591487812
+2010.0,Wrought,Scenario4,10787762.591487812
+2010.0,Primary castings,Baseline,8566106.0619855
+2010.0,Primary castings,Scenario1,8566106.0619855
+2010.0,Primary castings,Scenario2,8566106.0619855
+2010.0,Primary castings,Scenario3,8566106.0619855
+2010.0,Primary castings,Scenario4,8566106.0619855
+2010.0,Secondary castings,Baseline,19987580.811299477
+2010.0,Secondary castings,Scenario1,19987580.811299477
+2010.0,Secondary castings,Scenario2,19987580.811299477
+2010.0,Secondary castings,Scenario3,19987580.811299477
+2010.0,Secondary castings,Scenario4,19987580.811299477
+2011.0,Wrought,Baseline,11366319.246003583
+2011.0,Wrought,Scenario1,11366319.246003583
+2011.0,Wrought,Scenario2,11366319.246003583
+2011.0,Wrought,Scenario3,11366319.246003583
+2011.0,Wrought,Scenario4,11366319.246003583
+2011.0,Primary castings,Baseline,8991420.26113454
+2011.0,Primary castings,Scenario1,8991420.26113454
+2011.0,Primary castings,Scenario2,8991420.26113454
+2011.0,Primary castings,Scenario3,8991420.26113454
+2011.0,Primary castings,Scenario4,8991420.26113454
+2011.0,Secondary castings,Baseline,20979980.609313913
+2011.0,Secondary castings,Scenario1,20979980.609313913
+2011.0,Secondary castings,Scenario2,20979980.609313913
+2011.0,Secondary castings,Scenario3,20979980.609313913
+2011.0,Secondary castings,Scenario4,20979980.609313913
+2012.0,Wrought,Baseline,11980303.108110372
+2012.0,Wrought,Scenario1,11980303.108110372
+2012.0,Wrought,Scenario2,11980303.108110372
+2012.0,Wrought,Scenario3,11980303.108110372
+2012.0,Wrought,Scenario4,11980303.108110372
+2012.0,Primary castings,Baseline,9451733.319250897
+2012.0,Primary castings,Scenario1,9451733.319250897
+2012.0,Primary castings,Scenario2,9451733.319250897
+2012.0,Primary castings,Scenario3,9451733.319250897
+2012.0,Primary castings,Scenario4,9451733.319250897
+2012.0,Secondary castings,Baseline,22054044.411585424
+2012.0,Secondary castings,Scenario1,22054044.411585424
+2012.0,Secondary castings,Scenario2,22054044.411585424
+2012.0,Secondary castings,Scenario3,22054044.411585424
+2012.0,Secondary castings,Scenario4,22054044.411585424
+2013.0,Wrought,Baseline,12641479.472847512
+2013.0,Wrought,Scenario1,12641479.472847512
+2013.0,Wrought,Scenario2,12641479.472847512
+2013.0,Wrought,Scenario3,12641479.472847512
+2013.0,Wrought,Scenario4,12641479.472847512
+2013.0,Primary castings,Baseline,9954173.812579013
+2013.0,Primary castings,Scenario1,9954173.812579013
+2013.0,Primary castings,Scenario2,9954173.812579013
+2013.0,Primary castings,Scenario3,9954173.812579013
+2013.0,Primary castings,Scenario4,9954173.812579013
+2013.0,Secondary castings,Baseline,23226405.56268433
+2013.0,Secondary castings,Scenario1,23226405.56268433
+2013.0,Secondary castings,Scenario2,23226405.56268433
+2013.0,Secondary castings,Scenario3,23226405.56268433
+2013.0,Secondary castings,Scenario4,23226405.56268433
+2014.0,Wrought,Baseline,13376339.15279724
+2014.0,Wrought,Scenario1,13376339.15279724
+2014.0,Wrought,Scenario2,13376339.15279724
+2014.0,Wrought,Scenario3,13376339.15279724
+2014.0,Wrought,Scenario4,13376339.15279724
+2014.0,Primary castings,Baseline,10518333.78334619
+2014.0,Primary castings,Scenario1,10518333.78334619
+2014.0,Primary castings,Scenario2,10518333.78334619
+2014.0,Primary castings,Scenario3,10518333.78334619
+2014.0,Primary castings,Scenario4,10518333.78334619
+2014.0,Secondary castings,Baseline,24542778.827807773
+2014.0,Secondary castings,Scenario1,24542778.827807773
+2014.0,Secondary castings,Scenario2,24542778.827807773
+2014.0,Secondary castings,Scenario3,24542778.827807773
+2014.0,Secondary castings,Scenario4,24542778.827807773
+2015.0,Wrought,Baseline,14165222.15797222
+2015.0,Wrought,Scenario1,14165222.15797222
+2015.0,Wrought,Scenario2,14165222.15797222
+2015.0,Wrought,Scenario3,14165222.15797222
+2015.0,Wrought,Scenario4,14165222.15797222
+2015.0,Primary castings,Baseline,11124856.774829151
+2015.0,Primary castings,Scenario1,11124856.774829151
+2015.0,Primary castings,Scenario2,11124856.774829151
+2015.0,Primary castings,Scenario3,11124856.774829151
+2015.0,Primary castings,Scenario4,11124856.774829151
+2015.0,Secondary castings,Baseline,25957999.141268015
+2015.0,Secondary castings,Scenario1,25957999.141268015
+2015.0,Secondary castings,Scenario2,25957999.141268015
+2015.0,Secondary castings,Scenario3,25957999.141268015
+2015.0,Secondary castings,Scenario4,25957999.141268015
+2016.0,Wrought,Baseline,15024304.12626842
+2016.0,Wrought,Scenario1,15024304.12626842
+2016.0,Wrought,Scenario2,15024304.12626842
+2016.0,Wrought,Scenario3,15024304.12626842
+2016.0,Wrought,Scenario4,15024304.12626842
+2016.0,Primary castings,Baseline,11786085.102341533
+2016.0,Primary castings,Scenario1,11786085.102341533
+2016.0,Primary castings,Scenario2,11786085.102341533
+2016.0,Primary castings,Scenario3,11786085.102341533
+2016.0,Primary castings,Scenario4,11786085.102341533
+2016.0,Secondary castings,Baseline,27500865.238796905
+2016.0,Secondary castings,Scenario1,27500865.238796905
+2016.0,Secondary castings,Scenario2,27500865.238796905
+2016.0,Secondary castings,Scenario3,27500865.238796905
+2016.0,Secondary castings,Scenario4,27500865.238796905
+2017.0,Wrought,Baseline,15952878.654114682
+2017.0,Wrought,Scenario1,15952878.654114682
+2017.0,Wrought,Scenario2,15952878.654114682
+2017.0,Wrought,Scenario3,15952878.654114682
+2017.0,Wrought,Scenario4,15952878.654114682
+2017.0,Primary castings,Baseline,12500609.46839872
+2017.0,Primary castings,Scenario1,12500609.46839872
+2017.0,Primary castings,Scenario2,12500609.46839872
+2017.0,Primary castings,Scenario3,12500609.46839872
+2017.0,Primary castings,Scenario4,12500609.46839872
+2017.0,Secondary castings,Baseline,29168088.759597037
+2017.0,Secondary castings,Scenario1,29168088.759597037
+2017.0,Secondary castings,Scenario2,29168088.759597037
+2017.0,Secondary castings,Scenario3,29168088.759597037
+2017.0,Secondary castings,Scenario4,29168088.759597037
+2018.0,Wrought,Baseline,16947141.47417411
+2018.0,Wrought,Scenario1,16947141.47417411
+2018.0,Wrought,Scenario2,16947141.47417411
+2018.0,Wrought,Scenario3,16947141.47417411
+2018.0,Wrought,Scenario4,16947141.47417411
+2018.0,Primary castings,Baseline,13264508.89851346
+2018.0,Primary castings,Scenario1,13264508.89851346
+2018.0,Primary castings,Scenario2,13264508.89851346
+2018.0,Primary castings,Scenario3,13264508.89851346
+2018.0,Primary castings,Scenario4,13264508.89851346
+2018.0,Secondary castings,Baseline,30950520.763198063
+2018.0,Secondary castings,Scenario1,30950520.763198063
+2018.0,Secondary castings,Scenario2,30950520.763198063
+2018.0,Secondary castings,Scenario3,30950520.763198063
+2018.0,Secondary castings,Scenario4,30950520.763198063
+2019.0,Wrought,Baseline,18003151.484003477
+2019.0,Wrought,Scenario1,18003374.994334478
+2019.0,Wrought,Scenario2,18003096.339376103
+2019.0,Wrought,Scenario3,18003138.369243097
+2019.0,Wrought,Scenario4,18003151.484003477
+2019.0,Primary castings,Baseline,14072986.283124667
+2019.0,Primary castings,Scenario1,14073000.485178985
+2019.0,Primary castings,Scenario2,14072976.694663996
+2019.0,Primary castings,Scenario3,14072982.460353304
+2019.0,Primary castings,Scenario4,14072986.283124667
+2019.0,Secondary castings,Baseline,32836967.993957557
+2019.0,Secondary castings,Scenario1,32837001.132084288
+2019.0,Secondary castings,Scenario2,32836945.620882653
+2019.0,Secondary castings,Scenario3,32836959.074157707
+2019.0,Secondary castings,Scenario4,32836967.993957557
+2020.0,Wrought,Baseline,19119091.735555716
+2020.0,Wrought,Scenario1,19119962.42889144
+2020.0,Wrought,Scenario2,19118876.019322988
+2020.0,Wrought,Scenario3,19119052.84531953
+2020.0,Wrought,Scenario4,19119091.735555716
+2020.0,Primary castings,Baseline,14921761.758049794
+2020.0,Primary castings,Scenario1,14921816.923043245
+2020.0,Primary castings,Scenario2,14921724.425918225
+2020.0,Primary castings,Scenario3,14921750.52715345
+2020.0,Primary castings,Scenario4,14921761.758049794
+2020.0,Secondary castings,Baseline,34817444.102116145
+2020.0,Secondary castings,Scenario1,34817572.820434205
+2020.0,Secondary castings,Scenario2,34817356.993809156
+2020.0,Secondary castings,Scenario3,34817417.896691345
+2020.0,Secondary castings,Scenario4,34817444.102116145
+2021.0,Wrought,Baseline,20299568.195026755
+2021.0,Wrought,Scenario1,20302244.43953947
+2021.0,Wrought,Scenario2,20298875.468222354
+2021.0,Wrought,Scenario3,20299460.387560606
+2021.0,Wrought,Scenario4,20299548.72746949
+2021.0,Primary castings,Baseline,15809889.341613073
+2021.0,Primary castings,Scenario1,15810064.661336798
+2021.0,Primary castings,Scenario2,15809779.777128119
+2021.0,Primary castings,Scenario3,15809856.714284506
+2021.0,Primary castings,Scenario4,15809879.378088996
+2021.0,Secondary castings,Baseline,36889741.79709712
+2021.0,Secondary castings,Scenario1,36890150.87645249
+2021.0,Secondary castings,Scenario2,36889486.14663221
+2021.0,Secondary castings,Scenario3,36889665.666663796
+2021.0,Secondary castings,Scenario4,36889718.54887428
+2022.0,Wrought,Baseline,21557492.60874845
+2022.0,Wrought,Scenario1,21564965.696794733
+2022.0,Wrought,Scenario2,21555498.63445431
+2022.0,Wrought,Scenario3,21557222.387460522
+2022.0,Wrought,Scenario4,21557404.441265844
+2022.0,Primary castings,Baseline,16741113.206046827
+2022.0,Primary castings,Scenario1,16741612.494183335
+2022.0,Primary castings,Scenario2,16740819.981005732
+2022.0,Primary castings,Scenario3,16741029.491745984
+2022.0,Primary castings,Scenario4,16741070.168971743
+2022.0,Secondary castings,Baseline,39062597.48077591
+2022.0,Secondary castings,Scenario1,39063762.48642776
+2022.0,Secondary castings,Scenario2,39061913.28901338
+2022.0,Secondary castings,Scenario3,39062402.1474073
+2022.0,Secondary castings,Scenario4,39062497.06093409
+2023.0,Wrought,Baseline,22915110.916491102
+2023.0,Wrought,Scenario1,22934318.833062846
+2023.0,Wrought,Scenario2,22909881.766470544
+2023.0,Wrought,Scenario3,22914485.737074617
+2023.0,Wrought,Scenario4,22914823.161794446
+2023.0,Primary castings,Baseline,17724331.63904883
+2023.0,Primary castings,Scenario1,17725627.52652242
+2023.0,Primary castings,Scenario2,17723599.42971254
+2023.0,Primary castings,Scenario3,17724127.897161603
+2023.0,Primary castings,Scenario4,17724195.165683802
+2023.0,Secondary castings,Baseline,41356773.82444728
+2023.0,Secondary castings,Scenario1,41359797.561885685
+2023.0,Secondary castings,Scenario2,41355065.33599591
+2023.0,Secondary castings,Scenario3,41356298.42671041
+2023.0,Secondary castings,Scenario4,41356455.386595555
+2024.0,Wrought,Baseline,24404400.379243072
+2024.0,Wrought,Scenario1,24450514.383022383
+2024.0,Wrought,Scenario2,24391542.050338723
+2024.0,Wrought,Scenario3,24402984.539540548
+2024.0,Wrought,Scenario4,24403569.911602724
+2024.0,Primary castings,Baseline,18772840.705119397
+2024.0,Primary castings,Scenario1,18775984.64802734
+2024.0,Primary castings,Scenario2,18771122.722411416
+2024.0,Primary castings,Scenario3,18772376.043558102
+2024.0,Primary castings,Scenario4,18772455.82453114
+2024.0,Secondary castings,Baseline,43803294.97861194
+2024.0,Secondary castings,Scenario1,43810630.84539714
+2024.0,Secondary castings,Scenario2,43799286.35229331
+2024.0,Secondary castings,Scenario3,43802210.76830222
+2024.0,Secondary castings,Scenario4,43802396.923906
+2025.0,Wrought,Baseline,26065323.009098817
+2025.0,Wrought,Scenario1,26169324.35347069
+2025.0,Wrought,Scenario2,26035730.462271992
+2025.0,Wrought,Scenario3,26062323.611746017
+2025.0,Wrought,Scenario4,26063121.670342516
+2025.0,Primary castings,Baseline,19901647.349355236
+2025.0,Primary castings,Scenario1,19908802.450159054
+2025.0,Primary castings,Scenario2,19897838.61920543
+2025.0,Primary castings,Scenario3,19900643.087486245
+2025.0,Primary castings,Scenario4,19900645.14628408
+2025.0,Secondary castings,Baseline,46437177.14849558
+2025.0,Secondary castings,Scenario1,46453872.38370442
+2025.0,Secondary castings,Scenario2,46428290.11147933
+2025.0,Secondary castings,Scenario3,46434833.87080127
+2025.0,Secondary castings,Scenario4,46434838.67466292
+2026.0,Wrought,Baseline,27943939.38036529
+2026.0,Wrought,Scenario1,28164582.467973694
+2026.0,Wrought,Scenario2,27879876.28938512
+2026.0,Wrought,Scenario3,27937904.443589225
+2026.0,Wrought,Scenario4,27938498.374623097
+2026.0,Primary castings,Baseline,21123924.76816343
+2026.0,Primary castings,Scenario1,21139245.14001812
+2026.0,Primary castings,Scenario2,21115939.322335407
+2026.0,Primary castings,Scenario3,21121867.099342547
+2026.0,Primary castings,Scenario4,21121488.24796205
+2026.0,Secondary castings,Baseline,49289157.792381324
+2026.0,Secondary castings,Scenario1,49324905.32670895
+2026.0,Secondary castings,Scenario2,49270525.085449286
+2026.0,Secondary castings,Scenario3,49284356.565132625
+2026.0,Secondary castings,Scenario4,49283472.57857811
+2027.0,Wrought,Baseline,30089947.86029488
+2027.0,Wrought,Scenario1,30531143.200895224
+2027.0,Wrought,Scenario2,29959392.769615356
+2027.0,Wrought,Scenario3,30078418.845796164
+2027.0,Wrought,Scenario4,30077344.354305465
+2027.0,Primary castings,Baseline,22447407.923423823
+2027.0,Primary castings,Scenario1,22478307.19573942
+2027.0,Primary castings,Scenario2,22431545.006863296
+2027.0,Primary castings,Scenario3,22443396.936253604
+2027.0,Primary castings,Scenario4,22441851.308579024
+2027.0,Secondary castings,Baseline,52377285.15465558
+2027.0,Secondary castings,Scenario1,52449383.45672532
+2027.0,Secondary castings,Scenario2,52340271.68268098
+2027.0,Secondary castings,Scenario3,52367926.1845917
+2027.0,Secondary castings,Scenario4,52364319.720017776
+2028.0,Wrought,Baseline,32554772.91209103
+2028.0,Wrought,Scenario1,33387714.675815076
+2028.0,Wrought,Scenario2,32303764.20996091
+2028.0,Wrought,Scenario3,32533811.016507585
+2028.0,Wrought,Scenario4,32527335.63099028
+2028.0,Primary castings,Baseline,23871924.096987717
+2028.0,Primary castings,Scenario1,23930747.565252878
+2028.0,Primary castings,Scenario2,23842041.810373057
+2028.0,Primary castings,Scenario3,23864474.776430413
+2028.0,Primary castings,Scenario4,23860013.59694576
+2028.0,Secondary castings,Baseline,55701156.226304635
+2028.0,Secondary castings,Scenario1,55838410.98559006
+2028.0,Secondary castings,Scenario2,55631430.89087045
+2028.0,Secondary castings,Scenario3,55683774.4783376
+2028.0,Secondary castings,Scenario4,55673365.05954006
+2029.0,Wrought,Baseline,35390496.67790098
+2029.0,Wrought,Scenario1,36878139.84779735
+2029.0,Wrought,Scenario2,34934082.2677907
+2029.0,Wrought,Scenario3,35354112.82657298
+2029.0,Wrought,Scenario4,35334240.75370611
+2029.0,Primary castings,Baseline,25389187.515992057
+2029.0,Primary castings,Scenario1,25495128.85106036
+2029.0,Primary castings,Scenario2,25335755.089925624
+2029.0,Primary castings,Scenario3,25375987.805932667
+2029.0,Primary castings,Scenario4,25365154.457440775
+2029.0,Secondary castings,Baseline,59241437.53731481
+2029.0,Secondary castings,Scenario1,59488633.98580741
+2029.0,Secondary castings,Scenario2,59116761.87649305
+2029.0,Secondary castings,Scenario3,59210638.21384292
+2029.0,Secondary castings,Scenario4,59185360.40069513
+2030.0,Wrought,Baseline,38650204.9378802
+2030.0,Wrought,Scenario1,41169476.58336606
+2030.0,Wrought,Scenario2,37863211.40357174
+2030.0,Wrought,Scenario3,38589788.60271616
+2030.0,Wrought,Scenario4,38541342.895920925
+2030.0,Primary castings,Baseline,26985391.46326384
+2030.0,Primary castings,Scenario1,27166350.839172278
+2030.0,Primary castings,Scenario2,26894591.289034206
+2030.0,Primary castings,Scenario3,26963037.19715408
+2030.0,Primary castings,Scenario4,26939664.211389244
+2030.0,Secondary castings,Baseline,62965913.41428226
+2030.0,Secondary castings,Scenario1,63388151.958068594
+2030.0,Secondary castings,Scenario2,62754046.34107969
+2030.0,Secondary castings,Scenario3,62913753.46002613
+2030.0,Secondary castings,Scenario4,62859216.49324164
+2031.0,Wrought,Baseline,42389456.598426804
+2031.0,Wrought,Scenario1,46444616.07024406
+2031.0,Wrought,Scenario2,41098777.48169196
+2031.0,Wrought,Scenario3,42293059.134764075
+2031.0,Wrought,Scenario4,42190197.57031285
+2031.0,Primary castings,Baseline,28645931.858595356
+2031.0,Primary castings,Scenario1,28939860.79302175
+2031.0,Primary castings,Scenario2,28499094.998092644
+2031.0,Primary castings,Scenario3,28609697.27429253
+2031.0,Primary castings,Scenario4,28563738.748310857
+2031.0,Secondary castings,Baseline,66840507.67005591
+2031.0,Secondary castings,Scenario1,67526341.85038412
+2031.0,Secondary castings,Scenario2,66497888.32888286
+2031.0,Secondary castings,Scenario3,66755960.306682676
+2031.0,Secondary castings,Scenario4,66648723.746058695
+2032.0,Wrought,Baseline,46671635.60358609
+2032.0,Wrought,Scenario1,52895021.79770114
+2032.0,Wrought,Scenario2,44650427.35008063
+2032.0,Wrought,Scenario3,46523120.04860117
+2032.0,Wrought,Scenario4,46325349.27926279
+2032.0,Primary castings,Baseline,30361692.41812539
+2032.0,Primary castings,Scenario1,30817276.379691407
+2032.0,Primary castings,Scenario2,30135279.68571066
+2032.0,Primary castings,Scenario3,30305355.774439648
+2032.0,Primary castings,Scenario4,30221707.844925646
+2032.0,Secondary castings,Baseline,70843948.97562584
+2032.0,Secondary castings,Scenario1,71906978.21927989
+2032.0,Secondary castings,Scenario2,70315652.59999156
+2032.0,Secondary castings,Scenario3,70712496.80702588
+2032.0,Secondary castings,Scenario4,70517318.30482645
+2033.0,Wrought,Baseline,51568566.76166965
+2033.0,Wrought,Scenario1,60703151.72665194
+2033.0,Wrought,Scenario2,48534238.92018571
+2033.0,Wrought,Scenario3,51346355.542047076
+2033.0,Wrought,Scenario4,50995235.32646534
+2033.0,Primary castings,Baseline,32132305.24295448
+2033.0,Primary castings,Scenario1,32808467.076540045
+2033.0,Primary castings,Scenario2,31798732.042762987
+2033.0,Primary castings,Scenario3,32048129.523607682
+2033.0,Primary castings,Scenario4,31905751.45795308
+2033.0,Secondary castings,Baseline,74975378.90022717
+2033.0,Secondary castings,Scenario1,76553089.84526004
+2033.0,Secondary castings,Scenario2,74197041.43311357
+2033.0,Secondary castings,Scenario3,74778968.88841802
+2033.0,Secondary castings,Scenario4,74446753.40189043
+2034.0,Wrought,Baseline,57167085.95083852
+2034.0,Wrought,Scenario1,70036372.77337292
+2034.0,Wrought,Scenario2,52779934.2297266
+2034.0,Wrought,Scenario3,56841727.9749202
+2034.0,Wrought,Scenario4,56258665.41934378
+2034.0,Primary castings,Baseline,33968410.36767951
+2034.0,Primary castings,Scenario1,34933141.51705475
+2034.0,Primary castings,Scenario2,33497601.661231246
+2034.0,Primary castings,Scenario3,33847268.09287165
+2034.0,Primary castings,Scenario4,33618653.765854195
+2034.0,Secondary castings,Baseline,79259624.19125222
+2034.0,Secondary castings,Scenario1,81510663.53979447
+2034.0,Secondary castings,Scenario2,78161070.5428729
+2034.0,Secondary castings,Scenario3,78976958.88336736
+2034.0,Secondary castings,Scenario4,78443525.45365986
+2035.0,Wrought,Baseline,63579410.848405704
+2035.0,Wrought,Scenario1,81053207.2017718
+2035.0,Wrought,Scenario2,57438570.67485805
+2035.0,Wrought,Scenario3,63108929.661873
+2035.0,Wrought,Scenario4,62194614.76310465
+2035.0,Primary castings,Baseline,35892125.02830043
+2035.0,Primary castings,Scenario1,37221182.818146005
+2035.0,Primary castings,Scenario2,35253531.47941059
+2035.0,Primary castings,Scenario3,35723764.69159142
+2035.0,Primary castings,Scenario4,35374683.75298042
+2035.0,Secondary castings,Baseline,83748291.732701
+2035.0,Secondary castings,Scenario1,86849426.57567403
+2035.0,Secondary castings,Scenario2,82258240.11862473
+2035.0,Secondary castings,Scenario3,83355450.94704667
+2035.0,Secondary castings,Scenario4,82540928.75695436
+2036.0,Wrought,Baseline,70964014.33618356
+2036.0,Wrought,Scenario1,93934063.4657069
+2036.0,Wrought,Scenario2,62595994.327746436
+2036.0,Wrought,Scenario3,70285470.27237639
+2036.0,Wrought,Scenario4,68921133.28239709
+2036.0,Primary castings,Baseline,37939359.82767443
+2036.0,Primary castings,Scenario1,39715680.320208065
+2036.0,Primary castings,Scenario2,37103887.80030641
+2036.0,Primary castings,Scenario3,37712742.12123542
+2036.0,Primary castings,Scenario4,37201859.89689999
+2036.0,Secondary castings,Baseline,88525172.93124023
+2036.0,Secondary castings,Scenario1,92669920.7471522
+2036.0,Secondary castings,Scenario2,86575738.20071493
+2036.0,Secondary castings,Scenario3,87996398.28288259
+2036.0,Secondary castings,Scenario4,86804339.75943333
+2037.0,Wrought,Baseline,79552124.35950589
+2037.0,Wrought,Scenario1,108928192.53244875
+2037.0,Wrought,Scenario2,68390488.40738717
+2037.0,Wrought,Scenario3,78567880.79873994
+2037.0,Wrought,Scenario4,76618957.82891078
+2037.0,Primary castings,Baseline,40164893.454672836
+2037.0,Primary castings,Scenario1,42479051.93790004
+2037.0,Primary castings,Scenario2,39106170.78263053
+2037.0,Primary castings,Scenario3,39868488.614511415
+2037.0,Primary castings,Scenario4,39146480.73235332
+2037.0,Secondary castings,Baseline,93718084.72756994
+2037.0,Secondary castings,Scenario1,99117787.85510008
+2037.0,Secondary castings,Scenario2,91247731.82613799
+2037.0,Secondary castings,Scenario3,93026473.43385991
+2037.0,Secondary castings,Scenario4,91341788.37549117
+2038.0,Wrought,Baseline,89656100.97262383
+2038.0,Wrought,Scenario1,126378613.67335589
+2038.0,Wrought,Scenario2,75019996.99961828
+2038.0,Wrought,Scenario3,88214531.03050527
+2038.0,Wrought,Scenario4,85538740.6236055
+2038.0,Primary castings,Baseline,42645029.12110867
+2038.0,Primary castings,Scenario1,45595662.84828266
+2038.0,Primary castings,Scenario2,41339753.48889814
+2038.0,Primary castings,Scenario3,42267019.86240019
+2038.0,Primary castings,Scenario4,41275320.949068174
+2038.0,Secondary castings,Baseline,99505067.94925353
+2038.0,Secondary castings,Scenario1,106389879.97932617
+2038.0,Secondary castings,Scenario2,96459424.80742909
+2038.0,Secondary castings,Scenario3,98623046.34560043
+2038.0,Secondary castings,Scenario4,96309082.21449234
+2039.0,Wrought,Baseline,101619002.97605869
+2039.0,Wrought,Scenario1,146661000.87167692
+2039.0,Wrought,Scenario2,82711272.167669
+2039.0,Wrought,Scenario3,99492224.78907518
+2039.0,Wrought,Scenario4,95955919.30586948
+2039.0,Primary castings,Baseline,45466100.211589
+2039.0,Primary castings,Scenario1,49157190.75004307
+2039.0,Primary castings,Scenario2,43893838.92743424
+2039.0,Primary castings,Scenario3,44994554.147224575
+2039.0,Primary castings,Scenario4,43664936.216038786
+2039.0,Secondary castings,Baseline,106087567.1603743
+2039.0,Secondary castings,Scenario1,114700111.75010043
+2039.0,Secondary castings,Scenario2,102418957.49734657
+2039.0,Secondary castings,Scenario3,104987293.01019084
+2039.0,Secondary castings,Scenario4,101884851.17075711
+2040.0,Wrought,Baseline,115674476.76661386
+2040.0,Wrought,Scenario1,169987602.27653626
+2040.0,Wrought,Scenario2,91628532.1766413
+2040.0,Wrought,Scenario3,112539702.14805354
+2040.0,Wrought,Scenario4,108046327.57046075
+2040.0,Primary castings,Baseline,48688201.508214355
+2040.0,Primary castings,Scenario1,53218956.12875736
+2040.0,Primary castings,Scenario2,46831714.27334495
+2040.0,Primary castings,Scenario3,48111476.64306708
+2040.0,Primary castings,Scenario4,46368541.38797572
+2040.0,Secondary castings,Baseline,113605803.51916693
+2040.0,Secondary castings,Scenario1,124177564.3004337
+2040.0,Secondary castings,Scenario2,109273999.97113824
+2040.0,Secondary castings,Scenario3,112260112.16715668
+2040.0,Secondary castings,Scenario4,108193263.23861003
+2041.0,Wrought,Baseline,131739120.49506544
+2041.0,Wrought,Scenario1,196106923.4148439
+2041.0,Wrought,Scenario2,101735074.61621676
+2041.0,Wrought,Scenario3,127173607.24462457
+2041.0,Wrought,Scenario4,121703095.2550953
+2041.0,Primary castings,Baseline,52288126.60393677
+2041.0,Primary castings,Scenario1,57732836.66691992
+2041.0,Primary castings,Scenario2,50135538.25615084
+2041.0,Primary castings,Scenario3,51595915.282969624
+2041.0,Primary castings,Scenario4,49364222.6620128
+2041.0,Secondary castings,Baseline,122005628.74251933
+2041.0,Secondary castings,Scenario1,134709952.2228131
+2041.0,Secondary castings,Scenario2,116982922.59768523
+2041.0,Secondary castings,Scenario3,120390468.99359585
+2041.0,Secondary castings,Scenario4,115183186.21136323
+2042.0,Wrought,Baseline,149249102.23220715
+2042.0,Wrought,Scenario1,224063899.25336945
+2042.0,Wrought,Scenario2,112683504.99133284
+2042.0,Wrought,Scenario3,142744313.31301874
+2042.0,Wrought,Scenario4,136393409.63779962
+2042.0,Primary castings,Baseline,56111425.231741525
+2042.0,Primary castings,Scenario1,62492222.00468547
+2042.0,Primary castings,Scenario2,53660814.353765085
+2042.0,Primary castings,Scenario3,55296745.90508537
+2042.0,Primary castings,Scenario4,52511502.431487806
+2042.0,Secondary castings,Baseline,130926658.87406352
+2042.0,Secondary castings,Scenario1,145815184.67759928
+2042.0,Secondary castings,Scenario2,125208566.82545182
+2042.0,Secondary castings,Scenario3,129025740.44519937
+2042.0,Secondary castings,Scenario4,122526839.00680476
+2043.0,Wrought,Baseline,167178620.92703086
+2043.0,Wrought,Scenario1,252226113.0186988
+2043.0,Wrought,Scenario2,123828351.81731686
+2043.0,Wrought,Scenario3,158174509.607956
+2043.0,Wrought,Scenario4,151176478.65652508
+2043.0,Primary castings,Baseline,59872975.48825743
+2043.0,Primary castings,Scenario1,67135102.45792393
+2043.0,Primary castings,Scenario2,57138428.40984048
+2043.0,Primary castings,Scenario3,58935050.536700726
+2043.0,Primary castings,Scenario4,55551891.4114999
+2043.0,Secondary castings,Baseline,139703609.47260073
+2043.0,Secondary castings,Scenario1,156648572.40182245
+2043.0,Secondary castings,Scenario2,133322999.62296098
+2043.0,Secondary castings,Scenario3,137515117.91896835
+2043.0,Secondary castings,Scenario4,129621079.96016642
+2044.0,Wrought,Baseline,184385045.95168507
+2044.0,Wrought,Scenario1,278790921.4791459
+2044.0,Wrought,Scenario2,134460976.09335274
+2044.0,Wrought,Scenario3,172303610.64124334
+2044.0,Wrought,Scenario4,165002633.92590332
+2044.0,Primary castings,Baseline,63246100.26871842
+2044.0,Primary castings,Scenario1,71250105.96686447
+2044.0,Primary castings,Scenario2,60262281.56501087
+2044.0,Primary castings,Scenario3,62193412.14021239
+2044.0,Primary castings,Scenario4,58188233.26065811
+2044.0,Secondary castings,Baseline,147574233.96034306
+2044.0,Secondary castings,Scenario1,166250247.25601697
+2044.0,Secondary castings,Scenario2,140611990.31835863
+2044.0,Secondary castings,Scenario3,145117961.66049564
+2044.0,Secondary castings,Scenario4,135772544.274869
+2045.0,Wrought,Baseline,200259271.3837101
+2045.0,Wrought,Scenario1,302741616.11099195
+2045.0,Wrought,Scenario2,144252352.1821443
+2045.0,Wrought,Scenario3,184506244.24488178
+2045.0,Wrought,Scenario4,177267230.63024735
+2045.0,Primary castings,Baseline,66033616.98261234
+2045.0,Primary castings,Scenario1,74575710.7087464
+2045.0,Primary castings,Scenario2,62855346.51683209
+2045.0,Primary castings,Scenario3,64885999.6202914
+2045.0,Primary castings,Scenario4,60235621.93949567
+2045.0,Secondary castings,Baseline,154078439.6260957
+2045.0,Secondary castings,Scenario1,174009991.65374148
+2045.0,Secondary castings,Scenario2,146662475.20594156
+2045.0,Secondary castings,Scenario3,151400665.78067985
+2045.0,Secondary castings,Scenario4,140549784.52548993
+2046.0,Wrought,Baseline,215448742.98018822
+2046.0,Wrought,Scenario1,324913257.08465767
+2046.0,Wrought,Scenario2,153743889.54427406
+2046.0,Wrought,Scenario3,195365684.1578703
+2046.0,Wrought,Scenario4,188414494.01078254
+2046.0,Primary castings,Baseline,68357997.37357685
+2046.0,Primary castings,Scenario1,77218748.55859233
+2046.0,Primary castings,Scenario2,65052541.42821473
+2046.0,Primary castings,Scenario3,67146791.14240737
+2046.0,Primary castings,Scenario4,61787208.17676991
+2046.0,Secondary castings,Baseline,159501993.87167937
+2046.0,Secondary castings,Scenario1,180177079.9700488
+2046.0,Secondary castings,Scenario2,151789263.332501
+2046.0,Secondary castings,Scenario3,156675845.99895057
+2046.0,Secondary castings,Scenario4,144170152.4124632
+2047.0,Wrought,Baseline,232134927.1216997
+2047.0,Wrought,Scenario1,348424629.6098621
+2047.0,Wrought,Scenario2,164527181.80403882
+2047.0,Wrought,Scenario3,206951570.3225891
+2047.0,Wrought,Scenario4,200162305.60478237
+2047.0,Primary castings,Baseline,70740571.59816477
+2047.0,Primary castings,Scenario1,79745610.61196439
+2047.0,Primary castings,Scenario2,67373321.99623899
+2047.0,Primary castings,Scenario3,69506891.70746253
+2047.0,Primary castings,Scenario4,63282321.16043195
+2047.0,Secondary castings,Baseline,165061333.72905144
+2047.0,Secondary castings,Scenario1,186073091.42791694
+2047.0,Secondary castings,Scenario2,157204417.99122435
+2047.0,Secondary castings,Scenario3,162182747.31741288
+2047.0,Secondary castings,Scenario4,147658749.37434128
+2048.0,Wrought,Baseline,253268449.35126942
+2048.0,Wrought,Scenario1,377622154.82897043
+2048.0,Wrought,Scenario2,178699495.42055938
+2048.0,Wrought,Scenario3,222196670.82024607
+2048.0,Wrought,Scenario4,214874628.74441516
+2048.0,Primary castings,Baseline,73927009.9395176
+2048.0,Primary castings,Scenario1,82989427.94456884
+2048.0,Primary castings,Scenario2,70545244.38467899
+2048.0,Primary castings,Scenario3,72719442.93892936
+2048.0,Primary castings,Scenario4,65357164.16367497
+2048.0,Secondary castings,Baseline,172496356.52554113
+2048.0,Secondary castings,Scenario1,193641998.53732723
+2048.0,Secondary castings,Scenario2,164605570.2309176
+2048.0,Secondary castings,Scenario3,169678700.19083518
+2048.0,Secondary castings,Scenario4,152500049.71524158
+2049.0,Wrought,Baseline,280712581.0688574
+2049.0,Wrought,Scenario1,415438824.6355013
+2049.0,Wrought,Scenario2,197568319.4479666
+2049.0,Wrought,Scenario3,243319755.59169295
+2049.0,Wrought,Scenario4,234063652.63884744
+2049.0,Primary castings,Baseline,78446719.40474732
+2049.0,Primary castings,Scenario1,87561951.28315869
+2049.0,Primary castings,Scenario2,75070205.72584486
+2049.0,Primary castings,Scenario3,77319930.28661591
+2049.0,Primary castings,Scenario4,68471290.99381655
+2049.0,Secondary castings,Baseline,183042345.27774376
+2049.0,Secondary castings,Scenario1,204311219.66070372
+2049.0,Secondary castings,Scenario2,175163813.36030465
+2049.0,Secondary castings,Scenario3,180413170.66877028
+2049.0,Secondary castings,Scenario4,159766345.6522387
+2050.0,Wrought,Baseline,313353569.392661
+2050.0,Wrought,Scenario1,460628918.2859683
+2050.0,Wrought,Scenario2,220350113.41143104
+2050.0,Wrought,Scenario3,270153226.98207504
+2050.0,Wrought,Scenario4,256884973.66896838
+2050.0,Primary castings,Baseline,84149234.84700045
+2050.0,Primary castings,Scenario1,93338029.2397492
+2050.0,Primary castings,Scenario2,80776820.35587032
+2050.0,Primary castings,Scenario3,83163367.73801719
+2050.0,Primary castings,Scenario4,72517125.40061991
+2050.0,Secondary castings,Baseline,196348214.6430012
+2050.0,Secondary castings,Scenario1,217788734.89274812
+2050.0,Secondary castings,Scenario2,188479247.49703076
+2050.0,Secondary castings,Scenario3,194047858.05537334
+2050.0,Secondary castings,Scenario4,169206625.9347798

@@ -3,6 +3,23 @@
 Created on Sun Dec 27 22:54:11 2020
 
 @author: romainb
+
+This file creates a Dash app that display a dynamic Sankey diagram
+of Aluminium use in passenger cars
+
+It uses the excel file flows_per_year.xlsx as a data source
+
+It needs to be run from the Anaconda prompt:
+$ cd *current_directory*
+$ python sankey_app.py
+
+After the app is launched, it shoud be available on the local server at:
+    http://127.0.0.1:8050/
+
+dependencies:
+    dash 
+    
+    
 """
 import dash
 import dash_core_components as dcc
@@ -32,8 +49,10 @@ sankey_app.layout = html.Div(
                         id='scenario',
                         options=[
                             {'label': 'Baseline', 'value': 'Baseline'},
-                            {'label': 'Historic', 'value': 'Historic'},
-                            {'label': 'Electric Europe', 'value': 'Electric Europe'}
+                            {'label': 'High EV penetration', 'value': 'Scenario1'},
+                            {'label': 'ICEV - SUV', 'value': 'Scenario2'},
+                            {'label': 'Autonomous Vehicles', 'value': 'Scenario3'},
+                            {'label': 'Smaller cars', 'value': 'Scenario4'}
                         ],
                         value='Baseline'
                     )
@@ -58,11 +77,11 @@ sankey_app.layout = html.Div(
 )
 
 
-df = pd.read_excel('results/flows_per_year.xlsx')
+df = pd.read_excel('results/flows_plotly.xlsx')
 
 # max_value is used so that the size of flow is scaled to the biggest one:
 # what really matter is the size of the nodes, so it could be improved
-max_value = df.loc[:, df.columns != 'Time'].max().max()
+max_value = df.loc[:, (df.columns != 'Time') & (df.columns !='Scenario')].max().max()
 
 @sankey_app.callback(
     Output("graph", "figure"), 
@@ -70,43 +89,51 @@ max_value = df.loc[:, df.columns != 'Time'].max().max()
     [Input("scenario", "value")])
 
 def display_sankey(year, scenario):
-    year = year - 1900
-
     fig = go.Figure(data=[go.Sankey(
         node = dict(
           pad = 15,
           thickness = 20,
           line = dict(color = "white", width = 0.5),
-          label = ["0. Environment"," 1. Production", "2. Use", "3. Collection",
-                   "4. Dismantling", "5. Shredding", "6. Mixed Shredding", "7. Scrap Surplus", ""],
-          x = [0.05, 0.2, 0.3, 0.4, 0.5, 0.8, 0.6, 0.7, 1.1],
-          y = [0.18, 0.4, 0.4, 0.4, 0.16, 0.16, 0.7, 0.5, 1.1],
+          label = ["0. Environment", "1. Raw Material Market", "2. Production", "3. Use", "4. Collection",
+                   "5. Dismantling", "6. Shredding of dismantled components", "7. Sorting and Shredding of mixed scrap", "8. Alloy Sorting", "9. Scrap Surplus", ""],
+          x = [0.05, 0.10, 0.27, 0.42, 0.53, 0.62, 0.82, 0.72, 0.82, 0.27, 1.1],
+          y = [0.3, 0.5, 0.5, 0.5, 0.5, 0.16, 0.16, 0.5, 0.8, 0.7, 1.1],
           color = ["#594F4F", "#594F4F", "#594F4F", "#594F4F", "#594F4F",
-                   "#594F4F", "#594F4F", "#FE4365","white"]
+                   "#594F4F", "#594F4F", "#594F4F", "#594F4F","#FE4365","white"]
         ),
         link = dict(
-          source = [0, 1, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6, 6, 7, 8], # indices correspond to labels, eg A1, A2, A1, B1, ...
-          target = [1, 2, 3, 0, 4, 6, 5, 6, 0, 1, 0, 1, 7, 7, 8],
-          color = ["lightsteelblue", "lightsteelblue", "lightsteelblue", "#FE4365", 
+          source = [0, 1, 2, 3, 4, 4, 4, 5, 5, 6, 6, 7, 7, 7, 8, 1, 8, 9, 10], # indices correspond to labels, eg A1, A2, A1, B1, ...
+          target = [1, 2, 3, 4, 0, 5, 7, 6, 7, 0, 1, 0, 1, 8, 1, 9, 8, 9, 10],
+          color = ["lightsteelblue", "lightsteelblue", "lightsteelblue", "lightsteelblue", "#FE4365", 
                    "lightsteelblue", "lightsteelblue", "lightsteelblue", "lightsteelblue",
-                   "#FE4365", "#83AF9B", "#FE4365","#83AF9B","#FE4365", "white", "white"],
-          value = [df['F_0_1_t'][year], df['F_1_2_t'][year], df['F_2_3_t'][year], df['F_3_0_t'][year],
-                   df['F_3_4_t'][year], df['F_3_6_t'][year], df['F_4_5_t'][year], df['F_4_6_t'][year],
-                   df['F_5_0_t'][year], df['F_5_1_t'][year], df['F_6_0_t'][year], df['F_6_1_t'][year],
-                   df['scrap_surplus_t'][year], 0.001, max_value/2], 
+                   "#FE4365", "#83AF9B", "#FE4365","#83AF9B","lightsteelblue", "lightsteelblue", "#FE4365","white", "white", "white"],
+          value = [df['F_0_1'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_1_2'][(df['Time']==year) & (df['Scenario']==scenario)],
+                   df['F_2_3'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_3_4'][(df['Time']==year) & (df['Scenario']==scenario)],
+                   df['F_4_0'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_4_5'][(df['Time']==year) & (df['Scenario']==scenario)], 
+                   df['F_4_7'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_5_6'][(df['Time']==year) & (df['Scenario']==scenario)], 
+                   df['F_5_7'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_6_0'][(df['Time']==year) & (df['Scenario']==scenario)], 
+                   df['F_6_1'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_7_0'][(df['Time']==year) & (df['Scenario']==scenario)], 
+                   df['F_7_1'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_7_8'][(df['Time']==year) & (df['Scenario']==scenario)],
+                   df['F_8_1'][(df['Time']==year) & (df['Scenario']==scenario)], df['F_1_9'][(df['Time']==year) & (df['Scenario']==scenario)], 0.001, 0.001, max_value/2], 
                    ), 
         textfont=dict(color="black", size=15))]
         )
     
+    scenario_dict = {
+        'Baseline': 'Baseline',
+        'Scenario1': 'High EV penetration',
+        'Scenario2': 'ICEV - SUV',
+        'Scenario3': 'Autonomous Vehicles',
+        'Scenario4': 'Smaller cars'
+        }
+    
     fig.update_layout(
-            title_text= "Global flows for " + str(year + 1900) + " according to the " + scenario + " scenario (Mt/yr)", font=dict(size = 15, color = 'black'),
+            title_text= "Global flows for " + str(year) + " according to the " + scenario_dict[scenario] + " scenario (Mt/yr)", font=dict(size = 13, color = 'black'),
             paper_bgcolor='white'
             )
     fig.update_yaxes(automargin=True)
     fig.update_xaxes(automargin=True)
     return fig
-
-
 
 if __name__ == '__main__':
     sankey_app.run_server(debug=True)
