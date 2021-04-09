@@ -302,6 +302,24 @@ class ExportFigure(Figure):
             plt.show()
         # plt.cla()
   
+def read_scenarios(scenario_path):
+    scenario_matrix = pd.read_excel(scenario_path, index_col=0)
+    return scenario_matrix
     
-  
     
+    
+    
+    
+    
+def create_scenario_parameters(scenario_matrix):
+    for parameter in scenario_matrix.columns:
+        print(parameter)
+        for scenario in scenario_matrix.index:
+            value = scenario_matrix[parameter].loc[scenario]
+            print(scenario, value)
+            
+        
+scenario_path = os.path.join(os.getcwd(), 'data', 'Scenarios.xlsx')
+scenario_matrix = read_scenarios(scenario_path)
+print(scenario_matrix)
+create_scenario_parameters(scenario_matrix)

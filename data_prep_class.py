@@ -163,7 +163,7 @@ class DataPrep(object):
             # Export ParameterDict to  pickle file for easier loading next time
             file_name = "ParameterDict.p"
             pickle.dump(self.ParameterDict, open(file_name, "wb" ))
-            print("ParaneterDict exported to: ", file_name)
+            print("ParameterDict exported to: ", file_name)
     
     
     def create_mfa_system(self):

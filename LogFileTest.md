@@ -4,7 +4,7 @@
 
 ### 3 - Read classification and data
 
-End of file or formatting error while reading the classification file in column 12. Check if all classifications are present. If yes, you are good to go!
+End of file or formatting error while reading the classification file in column 17. Check if all classifications are present. If yes, you are good to go!
 
 Read parameter list from model config sheet.
 
@@ -13,6 +13,14 @@ Read process list from model config sheet.
 Read model run control from model config sheet.
 
 Read model output control from model config sheet.
+
+A total of 2265 values was read from file for parameter Population.
+
+2265.0 of 2265 values for parameter Population were assigned.
+
+A total of 2265 values was read from file for parameter Vehicle_Ownership.
+
+2265.0 of 2265 values for parameter Vehicle_Ownership were assigned.
 
 A total of 755 values was read from file for parameter Vehicle_Lifetime.
 
@@ -30,9 +38,9 @@ A total of 604 values was read from file for parameter P_seg.
 
 604.0 of 604 values for parameter P_seg were assigned.
 
-A total of 755 values was read from file for parameter Aluminium_Content.
+A total of 2265 values was read from file for parameter Aluminium_Content.
 
-755.0 of 755 values for parameter Aluminium_Content were assigned.
+2265.0 of 2265 values for parameter Aluminium_Content were assigned.
 
 A total of 144960 values was read from file for parameter Components.
 
@@ -54,13 +62,13 @@ A total of 755 values was read from file for parameter Alloy_Sorting.
 
 755.0 of 755 values for parameter Alloy_Sorting were assigned.
 
-A total of 15100 values was read from file for parameter Powertrains.
+A total of 12080 values was read from file for parameter Powertrains.
 
-15100.0 of 15100 values for parameter Powertrains were assigned.
+12080.0 of 12080 values for parameter Powertrains were assigned.
 
-A total of 15100 values was read from file for parameter Segments.
+A total of 12080 values was read from file for parameter Segments.
 
-15100.0 of 15100 values for parameter Segments were assigned.
+12080.0 of 12080 values for parameter Segments were assigned.
 
 A total of 755 values was read from file for parameter Carbon_Footprint_Primary.
 
@@ -73,8 +81,4 @@ A total of 755 values was read from file for parameter Carbon_Footprint_Secondar
 A total of 2416 values was read from file for parameter SP_Coeff.
 
 2416.0 of 2416 values for parameter SP_Coeff were assigned.
-
-### 4 - Define MFA system
-
-### 5 - Building and solving the MFA model
 

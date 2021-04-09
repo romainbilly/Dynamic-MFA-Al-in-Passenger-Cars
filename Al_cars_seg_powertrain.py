@@ -21,7 +21,7 @@ from datetime import datetime
 
 
 # add ODYM module directory to system path, relative
-MainPath = os.path.join('..', 'odym', 'modules')
+MainPath = os.path.join('..', 'odym', 'modules')    
 sys.path.insert(0, MainPath)
 
 # add ODYM module directory to system path, absolute
