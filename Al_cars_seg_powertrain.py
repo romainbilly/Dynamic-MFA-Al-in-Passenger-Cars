@@ -61,7 +61,13 @@ Np = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get
 Ns = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('s')].Items) 
 Nz = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('z')].Items)
 Na = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('a')].Items)
+NP = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('P')].Items)
+NV = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('V')].Items)
+NT = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('T')].Items)
 NS = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('S')].Items)
+NA = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('A')].Items)
+NZ = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('Z')].Items)
+
 
 
 # print('Read model data and parameters.')
@@ -80,47 +86,36 @@ Mylog.info('### 5 - Building and solving the MFA model')
 # These calculations are done outside of the MFA system 
 # as we are not yet on the material level but at the product level.
 
-O_tcr = np.zeros((Nt,Nt,Nr))
-S_tcr= np.zeros((Nt,Nt,Nr))
-DS_tr = np.zeros((Nt,Nr))
-I_cr = np.zeros((Nt,Nr))
-O_tr = np.zeros((Nt,Nr))
+O_tcrPV = np.zeros((Nt,Nt,Nr,NP,NV))
+S_tcrPV= np.zeros((Nt,Nt,Nr,NP,NV))
+DS_trPV = np.zeros((Nt,Nr,NP,NV))
+I_crPV = np.zeros((Nt,Nr,NP,NV))
+O_trPV = np.zeros((Nt,Nr,NP,NV))
 
-O_tcrS = np.zeros((Nt,Nt,Nr,NS))
-S_tcrS= np.zeros((Nt,Nt,Nr,NS))
-DS_trS = np.zeros((Nt,Nr,NS))
-I_crS = np.zeros((Nt,Nr,NS))
-O_trS = np.zeros((Nt,Nr,NS))
+S_trPV = np.einsum('Ptr,Vtr -> trPV',
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Population'].Values,
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Ownership'].Values)
 
 
 print('Solving dynamic stock model of the passenger vehicle fleet')
-for scenario in range(NS):
-    for region in range(Nr):
-        # 1a) Loop over all regions to determine a stock-driven model of the global passenger vehicle fleet
-        # Create helper DSM for computing the dynamic stock model:
-        DSM = dsm.DynamicStockModel(t = np.array(IndexTable.Classification[IndexTable.index.get_loc('Time')].Items),
-                                           s = PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Stock'].Values[scenario,region,:], 
-                                           lt = {'Type': 'Normal', 'Mean': PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Lifetime'].Values[:,region],
-                                                 'StdDev': PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Lifetime'].Values[:,region]/4} )
+for P in range(NP):
+    for V in range(NV):
+        for r in range(Nr):
+            # 1a) Loop over all rs to determine a stock-driven model of the global passenger vehicle fleet
+            # Create helper DSM for computing the dynamic stock model:
+            DSM = dsm.DynamicStockModel(t = np.array(IndexTable.Classification[IndexTable.index.get_loc('Time')].Items),
+                                               s = S_trPV[:,r,P,V], 
+                                               lt = {'Type': 'Normal', 'Mean': PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Lifetime'].Values[:,r],
+                                                     'StdDev': PassengerVehicleFleet_MFA_System.ParameterDict['Vehicle_Lifetime'].Values[:,r]/4} )
+            
+            Stock_by_cohort = DSM.compute_stock_driven_model()
         
-        Stock_by_cohort = DSM.compute_stock_driven_model()
-    
-        O_tcr[:,:,region] = DSM.compute_o_c_from_s_c()
-        O_tr[:,region] = DSM.compute_outflow_total()
-        S_tcr[:,:,region] = DSM.s_c
-        I_cr[:,region] = DSM.i
-        DS_tr[:,region] = DSM.compute_stock_change()
-        S_tr = np.einsum('tcr -> tr', S_tcr)
-        
-        
-        O_tcrS[:,:,region,scenario] = DSM.compute_o_c_from_s_c()
-        O_trS[:,region,scenario] = DSM.compute_outflow_total()
-        S_tcrS[:,:,region,scenario] = DSM.s_c
-        I_crS[:,region,scenario] = DSM.i
-        DS_trS[:,region,scenario] = DSM.compute_stock_change()
-        S_trS = np.einsum('tcrS -> trS', S_tcrS)
-
-
+           
+            O_tcrPV[:,:,r,P,V] = DSM.compute_o_c_from_s_c()
+            O_trPV[:,r,P,V] = DSM.compute_outflow_total()
+            S_tcrPV[:,:,r,P,V] = DSM.s_c
+            I_crPV[:,r,P,V] = DSM.i
+            DS_trPV[:,r,P,V] = DSM.compute_stock_change()
 
 
 print("Performing Stock calculations")

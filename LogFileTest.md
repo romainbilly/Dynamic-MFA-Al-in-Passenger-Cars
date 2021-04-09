@@ -82,3 +82,7 @@ A total of 2416 values was read from file for parameter SP_Coeff.
 
 2416.0 of 2416 values for parameter SP_Coeff were assigned.
 
+### 4 - Define MFA system
+
+### 5 - Building and solving the MFA model
+
