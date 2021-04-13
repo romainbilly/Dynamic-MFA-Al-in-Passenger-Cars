@@ -46,8 +46,10 @@ log.getLogger('matplotlib').setLevel(log.WARNING)
 [Mylog, console_log, file_log] = msf.function_logger(log_filename, os.getcwd(),
                                                      log_verbosity, log_verbosity)
 Mylog.info('### 1. - Initialize.')
-Data_Prep = DataPrep(DataPath,Mylog)      
-# Data_Prep = DataPrep(DataPath,Mylog, "ParameterDict.p")
+print('Read model data and parameters.')
+
+# Data_Prep = DataPrep(DataPath,Mylog)      
+Data_Prep = DataPrep(DataPath,Mylog, "ParameterDict.p")
 
 
 # Mylog.info('### 3 - Read classification and data')
@@ -67,12 +69,6 @@ NT = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get
 NS = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('S')].Items)
 NA = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('A')].Items)
 NZ = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('Z')].Items)
-
-
-
-# print('Read model data and parameters.')
-# ParameterDict = data_prep.get_parameter_dict(data_prep.DataPath, data_prep.PL_Names)
-
 
 Mylog.info('### 4 - Define MFA system')
 print('Define MFA system and processes.')
@@ -118,137 +114,142 @@ for P in range(NP):
             DS_trPV[:,r,P,V] = DSM.compute_stock_change()
 
 
-print("Performing Stock calculations")
+
 # Calculating segment split by powertrain 
-Powertrain_Srpc = PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values
+print("Adding Powertrain and Segment splits")
+Powertrain_Trpc = PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values
 Segment_Srsc = PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values
-PS_Srpsc =  np.einsum('Srpc, Srsc -> Srpsc', Powertrain_Srpc, Segment_Srsc)
-PS_Srpsc_raw = PS_Srpsc
+PS_TSrpsc =  np.einsum('Trpc, Srsc -> TSrpsc', Powertrain_Trpc, Segment_Srsc)
 
 # Correction according to SP_Coeff parameter
-PS_Srpsc =  np.einsum('Srpsc, psc -> Srpsc', PS_Srpsc,
+PS_TSrpsc =  np.einsum('TSrpsc, psc -> TSrpsc', PS_TSrpsc,
                       PassengerVehicleFleet_MFA_System.ParameterDict['SP_Coeff'].Values)
 
-PS_Srpsc =  np.einsum('Srpsc, Srpc -> Srpsc', PS_Srpsc, np.nan_to_num(Powertrain_Srpc / (np.sum(PS_Srpsc, axis=3))))
-PS_Srpsc =  np.einsum('Srpsc, Srsc -> Srpsc', PS_Srpsc, np.nan_to_num(Segment_Srsc / (np.sum(PS_Srpsc, axis=2))))
+for S in range(NS):
+    for T in range(NT):
+        PS_TSrpsc[T,S,:,:,:,:] =  np.einsum('rpsc, rpc -> rpsc', PS_TSrpsc[T,S,:,:,:,:], np.nan_to_num(Powertrain_Trpc[T,:,:,:] / (np.sum(PS_TSrpsc[T,S,:,:,:,:], axis=2))))
+        PS_TSrpsc[T,S,:,:,:,:] =  np.einsum('rpsc, rsc -> rpsc', PS_TSrpsc[T,S,:,:,:,:], np.nan_to_num(Segment_Srsc[S,:,:,:] / (np.sum(PS_TSrpsc[T,S,:,:,:,:], axis=1))))
 # for powertrains HEV, PHEV, and BEV, a correction coefficient is applied to the segments AB, DE, and SUV. 
 # Segment C is calculated by "mass balance" to reach the average powertrain split 
-PS_Srpsc[:,:,1,1,:] = Powertrain_Srpc[:,:,1,:] - PS_Srpsc[:,:,1,0,:] - PS_Srpsc[:,:,1,2,:] - PS_Srpsc[:,:,1,3,:]
-PS_Srpsc[:,:,2,1,:] = Powertrain_Srpc[:,:,2,:] - PS_Srpsc[:,:,2,0,:] - PS_Srpsc[:,:,2,2,:] - PS_Srpsc[:,:,2,3,:]
-PS_Srpsc[:,:,3,1,:] = Powertrain_Srpc[:,:,3,:] - PS_Srpsc[:,:,3,0,:] - PS_Srpsc[:,:,3,2,:] - PS_Srpsc[:,:,3,3,:]
-# the segment split of the ICEV segment is calculated from the other powertrain types to reach the average segment split
-for s in range(Ns):
-    PS_Srpsc[:,:,0,s,:] = Segment_Srsc[:,:,s,:] -  np.sum(PS_Srpsc[:,:,1:,s,:], axis=2)
+for S in range(NS):
+    for T in range(NT):
+        PS_TSrpsc[T,S,:,1,1,:] = Powertrain_Trpc[T,:,1,:] - PS_TSrpsc[T,S,:,1,0,:] - PS_TSrpsc[T,S,:,1,2,:] - PS_TSrpsc[T,S,:,1,3,:]
+        PS_TSrpsc[T,S,:,2,1,:] = Powertrain_Trpc[T,:,2,:] - PS_TSrpsc[T,S,:,2,0,:] - PS_TSrpsc[T,S,:,2,2,:] - PS_TSrpsc[T,S,:,2,3,:]
+        PS_TSrpsc[T,S,:,3,1,:] = Powertrain_Trpc[T,:,3,:] - PS_TSrpsc[T,S,:,3,0,:] - PS_TSrpsc[T,S,:,3,2,:] - PS_TSrpsc[T,S,:,3,3,:]
+    # the segment split of the ICEV segment is calculated from the other powertrain types to reach the average segment split
+        for s in range(Ns):
+            PS_TSrpsc[T,S,:,0,s,:] = Segment_Srsc[S,:,s,:] -  np.sum(PS_TSrpsc[T,S,:,1:,s,:], axis=1)
 
-PS_Srpsc[np.isclose(PS_Srpsc, 0, atol=10**(-5))] = 0
-print(np.sum(np.array(PS_Srpsc[:,:,:,:,:] < 0)))
+PS_TSrpsc[np.isclose(PS_TSrpsc, 0, atol=10**(-6))] = 0
+negative_values = np.sum((np.array(PS_TSrpsc < 0)))
+if negative_values > 0: 
+    print("WARNING: ", negative_values, " negative values are present in the type/segment matrix, please check the data")
+
+# cf.export_to_csv(PS_TSrpsc, 'PS_TSrpsc', IndexTable)
 
 # Stock py powertrain and segment with scenarios
-S_tcrpS = np.einsum('tcrS, Srpc -> tcrpS', S_tcrS, Powertrain_Srpc) 
-S_tcrsS = np.einsum('tcrS, Srsc -> tcrsS', S_tcrS, Segment_Srsc) 
-S_tcrpsS= np.einsum('tcrS, Srpsc -> tcrpsS', S_tcrS, PS_Srpsc) 
-S_tpsS = np.einsum('tcrpsS -> tpsS', S_tcrpsS) 
-S_tpS = np.einsum('tcrpsS -> tpS', S_tcrpsS) 
-S_tsS = np.einsum('tcrpsS -> tsS', S_tcrpsS) 
-S_tS = np.einsum('tsS -> tS', S_tsS) 
-
-I_crpS = np.einsum('crS, Srpc -> crpS', I_crS, 
-                    PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values) 
-I_crsS = np.einsum('crS, Srsc -> crS', I_crS, 
-                    PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
-
-I_crpsS = np.einsum('crS, Srpsc -> crpsS', I_crS, PS_Srpsc) 
-I_csS = np.einsum('crpsS -> csS', I_crpsS) 
-I_cpS = np.einsum('crpsS -> cpS', I_crpsS) 
+S_tcrpsPVTS = np.einsum('tcrPV, TSrpsc -> tcrpsPVTS', S_tcrPV, PS_TSrpsc)
+I_crpsPVTS = np.einsum('crPV, TSrpsc -> crpsPVTS', I_crPV, PS_TSrpsc)
+O_tcrpsPVTS = np.einsum('tcrPV, TSrpsc -> tcrpsPVTS', O_tcrPV, PS_TSrpsc)
 
 
-O_tcrpS = np.einsum('tcrS, Srpc -> tcrpS', O_tcrS, 
-                    PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values) 
-O_tcrsS = np.einsum('tcrS, Srsc -> tcrsS', O_tcrS, 
-                    PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
-O_tcrpsS = np.einsum('tcrS, Srpsc -> tcrpsS', O_tcrS, PS_Srpsc) 
-O_tsS = np.einsum('tcrpsS -> tsS', O_tcrpsS) 
-O_tpS = np.einsum('tcrpsS -> tpS', O_tcrpsS) 
+# Shortening to get rid of uneccessary history years
+# All years before 2000 and cohorts before 1970 are deleted
+S_tcrpsPVTS_short = S_tcrpsPVTS[100:,70,:,:,:,:,:,:,:]
 
-cf.export_to_csv(PS_Srpsc, 'PS_Srpsc', IndexTable)
+# for T in range(NT):
+#     for S in range(NS):
+#         print(T,S,np.sum(np.array(PS_TSrpsc[T,S,:,:,:,:] < 0)))
 
-#Aluminium content calculations by scenario
+# for p in range(Np):
+#     for s in range(Ns):
+#         print(p,s,np.sum(np.array(PS_TSrpsc[:,:,:,p,s,:] < 0)))
+
+# for c in range(Nt):
+#     print(c,np.sum(np.array(PS_TSrpsc[:,:,:,:,:,c] < 0)))
+
+# S_tcrpsS= np.einsum('tcrS, Srpsc -> tcrpsS', S_tcrS, PS_TSrpsc) 
+# S_tpsS = np.einsum('tcrpsS -> tpsS', S_tcrpsS) 
+# S_tpS = np.einsum('tcrpsS -> tpS', S_tcrpsS) 
+# S_tsS = np.einsum('tcrpsS -> tsS', S_tcrpsS) 
+# S_tS = np.einsum('tsS -> tS', S_tsS) 
+
+# I_crpS = np.einsum('crS, Srpc -> crpS', I_crS, 
+#                     PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values) 
+# I_crsS = np.einsum('crS, Srsc -> crS', I_crS, 
+#                     PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
+
+# I_crpsS = np.einsum('crS, Srpsc -> crpsS', I_crS, PS_TSrpsc) 
+# I_csS = np.einsum('crpsS -> csS', I_crpsS) 
+# I_cpS = np.einsum('crpsS -> cpS', I_crpsS) 
+
+
+# O_tcrpS = np.einsum('tcrS, Srpc -> tcrpS', O_tcrS, 
+#                     PassengerVehicleFleet_MFA_System.ParameterDict['Powertrains'].Values) 
+# O_tcrsS = np.einsum('tcrS, Srsc -> tcrsS', O_tcrS, 
+#                     PassengerVehicleFleet_MFA_System.ParameterDict['Segments'].Values) 
+# O_tcrpsS = np.einsum('tcrS, Srpsc -> tcrpsS', O_tcrS, PS_TSrpsc) 
+# O_tsS = np.einsum('tcrpsS -> tsS', O_tcrpsS) 
+# O_tpS = np.einsum('tcrpsS -> tpS', O_tcrpsS) 
+
+
+#Aluminium content calculations by scenario, corrected by P_seg and P_type
 print("Performing Al content calculations")
+
 # Stock
-Al_stock_tcrpsS = np.einsum('tcrpsS, erc -> tcrpsS', S_tcrpsS, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
-# Correction by P_seg
-Al_stock_tcrpsS_pseg = np.einsum('tcrpsS, sc -> tcrpsS', Al_stock_tcrpsS, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
-# Al_stock_tcrpsS_pseg[:,:,:,0,:,:] = np.sum(Al_stock_tcrpsS, axis=3) - \
-#     np.sum(Al_stock_tcrpsS_pseg[:,:,:,1:,:,:], axis=3) 
-Al_stock_tcrpsS_pseg_ptype = np.einsum('tcrpsS, pc -> tcrpsS', Al_stock_tcrpsS_pseg, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
-Al_stock_tcrpsS = Al_stock_tcrpsS_pseg_ptype
-
-Al_stock_trS = np.einsum('tcrpsS -> trS', Al_stock_tcrpsS_pseg_ptype)
-
+Al_stock_tcrpsPVTSA = np.einsum('tcrpsPVTS, Aerc, sc, pc -> tcrpsPVTSA', S_tcrpsPVTS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values,
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values,                  
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values)
 # Inflow
-Al_inflow_crpsS = np.einsum('crpsS, erc -> crpsS', I_crpsS, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
-Al_inflow_crpsS_pseg = np.einsum('crpsS, sc -> crpsS', Al_inflow_crpsS, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
-Al_inflow_crpsS_pseg_ptype = np.einsum('crpsS, pc -> crpsS', Al_inflow_crpsS_pseg, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
-Al_inflow_crpsS = Al_inflow_crpsS_pseg_ptype
-Al_inflow_crS = np.einsum('crpsS-> crS ', Al_inflow_crpsS) 
-
-Al_inflow_cS = np.einsum('crS-> cS ', Al_inflow_crS) 
-
-
+Al_inflow_crpsPVTSA = np.einsum('crpsPVTS, Aerc, sc, pc -> crpsPVTSA', I_crpsPVTS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values,
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values,                  
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values)
 # Outflow
-Al_outflow_tcrpsS = np.einsum('tcrpsS, erc -> tcrpsS', O_tcrpsS, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
-Al_outflow_tcrpsS_pseg = np.einsum('tcrpsS, sc -> tcrpsS', Al_outflow_tcrpsS, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
-Al_outflow_tcrpsS_pseg_ptype = np.einsum('tcrpsS, pc -> tcrpsS', Al_outflow_tcrpsS_pseg, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
-Al_outflow_tcrpsS = Al_outflow_tcrpsS_pseg_ptype
-Al_outflow_trS = np.einsum('tcrpsS -> trS', Al_outflow_tcrpsS) 
+Al_outflow_tcrpsPVTSA = np.einsum('tcrpsPVTS, Aerc, sc, pc -> tcrpsPVTSA', O_tcrpsPVTS, 
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values,
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values,                  
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values)
 
 
-# Component level by Scenario
+
+# Al_outflow_tcrpsS = np.einsum('tcrpsS, erc -> tcrpsS', O_tcrpsS, 
+#                    PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values) 
+# Al_outflow_tcrpsS_pseg = np.einsum('tcrpsS, sc -> tcrpsS', Al_outflow_tcrpsS, 
+#                    PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values) 
+# Al_outflow_tcrpsS_pseg_ptype = np.einsum('tcrpsS, pc -> tcrpsS', Al_outflow_tcrpsS_pseg, 
+#                    PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values) 
+# Al_outflow_tcrpsS = Al_outflow_tcrpsS_pseg_ptype
+# Al_outflow_trS = np.einsum('tcrpsS -> trS', Al_outflow_tcrpsS) 
+
+
+# Component level calculations
 print("Performing component level calculations")
-Components = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('z')].Items
 
-Al_stock_tcrpszS = np.einsum('tcrpsS, crpsz -> tcrpszS', Al_stock_tcrpsS, 
+# Stock
+Al_stock_trpszPVTSA = np.einsum('tcrpsPVTSA, crpsz -> trpszPVTSA', Al_stock_tcrpsPVTSA, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values) 
-Al_stock_tzS = np.einsum('tcrpszS -> tzS ', Al_stock_tcrpszS)
-
-Al_inflow_crpszS = np.einsum('crpsS, crpsz -> crpszS ', Al_inflow_crpsS, 
+# Inflow
+Al_inflow_crpszPVTSA = np.einsum('crpsPVTSA, crpsz -> crpszPVTSA', Al_inflow_crpsPVTSA, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values) 
-Al_inflow_czS = np.einsum('crpszS -> czS', Al_inflow_crpszS)
-
-Al_outflow_tcrpszS = np.einsum('tcrpsS, crpsz -> tcrpszS', Al_outflow_tcrpsS, 
+# Outflow
+Al_outflow_trpszPVTSA = np.einsum('tcrpsPVTSA, crpsz -> trpszPVTSA', Al_outflow_tcrpsPVTSA, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values) 
-Al_outflow_tzS = np.einsum('tcrpszS -> tzS', Al_outflow_tcrpszS)
 
 
-
-# Aluminium Alloys calculation
+# Aluminium Alloys calculations
 print("Performing alloy content calculations")
-Alloys = IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('a')].Items
 
-Alloys_inflow_crpszaS = np.einsum('crpszS, az -> crpszaS', Al_inflow_crpszS, 
+# Stock
+Alloys_stock_trpszaPVTSA = np.einsum('trpszPVTSA, az -> trpszaPVTSA', Al_stock_trpszPVTSA, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values) 
-
-Alloys_inflow_craS = np.einsum('crpszaS -> craS', Alloys_inflow_crpszaS)
-Alloys_inflow_caS = np.einsum('craS-> caS', Alloys_inflow_craS)
-
-Alloys_outflow_tcrpszaS = np.einsum('tcrpszS, az -> tcrpszaS', Al_outflow_tcrpszS, 
+# Inflow
+Alloys_inflow_crpszaPVTSA = np.einsum('crpszPVTSA, az -> crpszaPVTSA', Al_inflow_crpszPVTSA, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values) 
-Alloys_outflow_traS = np.einsum('tcrpszaS -> traS', Alloys_outflow_tcrpszaS)
-Alloys_outflow_taS = np.einsum('traS -> taS ', Alloys_outflow_traS)
-
-Alloys_stock_tcrpszaS = np.einsum('tcrpszS, az -> tcrpszaS', Al_stock_tcrpszS, 
+# Outflow
+Alloys_outflow_tcrpszaPVTSA = np.einsum('trpszPVTSA, az -> trpszaPVTSA', Al_outflow_trpszPVTSA, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values) 
-
-
 
 
 # Solving the MFA system
