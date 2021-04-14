@@ -14,7 +14,7 @@ Read model run control from model config sheet.
 
 Read model output control from model config sheet.
 
-### 4 - Define MFA system
+### 5 - Building and solving the dynamic MFA model
 
-### 5 - Building and solving the MFA model
+### 4 - Define MFA system
 
