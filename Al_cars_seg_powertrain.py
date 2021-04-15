@@ -119,9 +119,11 @@ print('Define MFA system and processes.')
 # All years before 2000 and cohorts before 1965 are deleted
 Nt = 51
 # Nc = 86
-Nc = 70
+Nc = 86
 Data_Prep.IndexTable.Classification[IndexTable.index.get_loc('Time')].Items = \
-    Data_Prep.IndexTable.Classification[IndexTable.index.get_loc('Time')].Items[:Nt] 
+    Data_Prep.IndexTable.Classification[IndexTable.index.get_loc('Time')].Items[-Nt:] 
+Data_Prep.IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('c')].Items = \
+    Data_Prep.IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('c')].Items[-Nc:] 
 PassengerVehicleFleet_MFA_System = Data_Prep.create_mfa_system(Model_Time_Start = 2051 - Nt)
 # Mass balance check:
 
@@ -165,9 +167,9 @@ O_tcrpsPVTS = np.einsum('tcrPV, TSrpsc -> tcrpsPVTS', O_tcrPV, PS_TSrpsc)
 
 
 
-S_tcrpsPVTS_short = S_tcrpsPVTS[:Nt,:Nc,:,:,:,:,:,:,:]
-I_crpsPVTS_short = I_crpsPVTS[:Nc,:,:,:,:,:,:,:]
-O_tcrpsPVTS_short = O_tcrpsPVTS[:Nt,:Nc,:,:,:,:,:,:,:]
+S_tcrpsPVTS_short = S_tcrpsPVTS[-Nt:,-Nc:,:,:,:,:,:,:,:]
+I_crpsPVTS_short = I_crpsPVTS[-Nc:,:,:,:,:,:,:,:]
+O_tcrpsPVTS_short = O_tcrpsPVTS[-Nt:,-Nc:,:,:,:,:,:,:,:]
 
 # for T in range(NT):
 #     for S in range(NS):
@@ -186,52 +188,21 @@ print("Performing Al content calculations")
 
 # Stock
 Al_stock_tcrpsPVTSA = np.einsum('tcrpsPVTS, Arc, sc, pc -> tcrpsPVTSA', S_tcrpsPVTS_short, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values[:,:,:Nc],
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values[:,:Nc],                  
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values[:,:Nc], optimize=True)
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values[:,:,-Nc:],
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values[:,-Nc:],                  
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values[:,-Nc:], optimize=True)
 # Inflow
 Al_inflow_crpsPVTSA = np.einsum('crpsPVTS, Arc, sc, pc -> crpsPVTSA', I_crpsPVTS_short, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values[:,:,:Nc],
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values[:,:Nc],                  
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values[:,:Nc], optimize=True)
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values[:,:,-Nc:],
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values[:,-Nc:],                  
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values[:,-Nc:], optimize=True)
 # Outflow
 Al_outflow_tcrpsPVTSA = np.einsum('tcrpsPVTS, Arc, sc, pc -> tcrpsPVTSA', O_tcrpsPVTS_short, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values[:,:,:Nc],
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values[:,:Nc],                  
-                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values[:,:Nc], optimize=True)
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Aluminium_Content'].Values[:,:,-Nc:],
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_seg'].Values[:,-Nc:],                  
+                   PassengerVehicleFleet_MFA_System.ParameterDict['P_type'].Values[:,-Nc:], optimize=True)
 end_time = time.time()
 print(end_time-start_time)
-
-# start_time = time.time()
-# # Component level calculations
-# print("Performing component level calculations")
-
-# # Stock
-# Al_stock_trpszPVTSA = np.einsum('tcrpsPVTSA, crpsz -> trpszPVTSA', Al_stock_tcrpsPVTSA, 
-#                    PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[65:,:,:,:,:], optimize=True) 
-# # Inflow
-# Al_inflow_crpszPVTSA = np.einsum('crpsPVTSA, crpsz -> crpszPVTSA', Al_inflow_crpsPVTSA, 
-#                    PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[65:,:,:,:,:], optimize=True) 
-# # Outflow
-# Al_outflow_trpszPVTSA = np.einsum('tcrpsPVTSA, crpsz -> trpszPVTSA', Al_outflow_tcrpsPVTSA, 
-#                    PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[65:,:,:,:,:], optimize=True)
-# end_time = time.time()
-# print(end_time-start_time)
-
-# # Aluminium Alloys calculations
-# start_time = time.time()
-# print("Performing alloy content calculations")
-# # Stock
-# Alloys_stock_trpszaPVTSA = np.einsum('trpszPVTSA, az -> trpszaPVTSA', Al_stock_trpszPVTSA, 
-#                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values, optimize=True) 
-# # Inflow
-# Alloys_inflow_crpszaPVTSA = np.einsum('crpszPVTSA, az -> crpszaPVTSA', Al_inflow_crpszPVTSA, 
-#                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values, optimize=True) 
-# # Outflow
-# Alloys_outflow_tcrpszaPVTSA = np.einsum('trpszPVTSA, az -> trpszaPVTSA', Al_outflow_trpszPVTSA, 
-#                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values, optimize=True) 
-# end_time = time.time()
-# print(end_time-start_time)
 
 
 # Component level calculations
@@ -240,18 +211,18 @@ print("Performing component level and alloy content calculations")
 
 # Stock
 Al_stock_trpszaPVTSA = np.einsum('tcrpsPVTSA, crpsz, az -> trpszaPVTSA', Al_stock_tcrpsPVTSA, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[:Nc,:,:,:,:],
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[-Nc:,:,:,:,:],
                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values, optimize=True) 
 Al_stock_tcrpsaPVTSA = np.einsum('tcrpsPVTSA, crpsz, az -> tcrpsaPVTSA', Al_stock_tcrpsPVTSA, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[:Nc,:,:,:,:],
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[-Nc:,:,:,:,:],
                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values, optimize=True) 
 # Inflow
 Al_inflow_crpszaPVTSA = np.einsum('crpsPVTSA, crpsz, az -> crpszaPVTSA', Al_inflow_crpsPVTSA, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[:Nc,:,:,:,:],
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[-Nc:,:,:,:,:],
                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values, optimize=True) 
 # Outflow
 Al_outflow_trpszaPVTSA = np.einsum('tcrpsPVTSA, crpsz, az -> trpszaPVTSA', Al_outflow_tcrpsPVTSA, 
-                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[:Nc,:,:,:,:],
+                   PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[-Nc:,:,:,:,:],
                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values, optimize=True)
 end_time = time.time()
 print(end_time-start_time)
@@ -262,17 +233,17 @@ start_time = time.time()
 print("Solving the MFA system")
 # F_2_3, dimensions 't,r,p,s,a,P,V,T,S,A'
 PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values = \
-        np.einsum('crpszaPVTSA -> crpsaPVTSA', Al_inflow_crpszaPVTSA[:Nt,:,:,:,:,:,:,:,:,:,:])
+        np.einsum('crpszaPVTSA -> crpsaPVTSA', Al_inflow_crpszaPVTSA[-Nt:,:,:,:,:,:,:,:,:,:,:])
 # F_1_2, Materials for Passenger vehicle production, dimensions t,r,a,P,V,T,S,A'
 PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values = \
         np.einsum('crpsaPVTSA-> craPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values) 
 # F_3_4, EoL Vehicles, dimensions 't,r,p,s,z,a,P,V,T,S,A'
-PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values = Al_outflow_trpszaPVTSA[:Nt,:,:,:,:,:,:,:,:,:,:]
+PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values = Al_outflow_trpszaPVTSA[-Nt:,:,:,:,:,:,:,:,:,:,:]
 # F_4_0, dimensions 't,r,p,s,z,a,P,V,T,S,A'
 PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values = \
     np.einsum('trpszaPVTSA, tr -> trpszaPVTSA',
     PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values,
-    1 - PassengerVehicleFleet_MFA_System.ParameterDict['Collection'].Values[:Nt,:])
+    1 - PassengerVehicleFleet_MFA_System.ParameterDict['Collection'].Values[-Nt:,:])
 
 
 # F_4_5, Collected cars to dismantling, dimensions 't,r,p,s,a,P,V,T,S,A'
@@ -280,7 +251,7 @@ PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values = \
     np.einsum('trpszaPVTSA, rzt -> trpsaPVTSA',
     PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values - \
     PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values,
-    PassengerVehicleFleet_MFA_System.ParameterDict['Dismantling'].Values[:,:,:Nt])
+    PassengerVehicleFleet_MFA_System.ParameterDict['Dismantling'].Values[:,:,-Nt:])
 # F_4_7, Collected cars to shredding, dimensions 't,r,p,s,a,P,V,T,S,A'
 PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values = \
         np.einsum('trpszaPVTSA -> trpsaPVTSA',
@@ -319,7 +290,7 @@ np.einsum('traPVTSA, tr -> traPVTSA',
         np.einsum('trpsaPVTSA-> traPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values) + \
         PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values - \
         PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values,
-        PassengerVehicleFleet_MFA_System.ParameterDict['Alloy_Sorting'].Values[:Nt,:])
+        PassengerVehicleFleet_MFA_System.ParameterDict['Alloy_Sorting'].Values[-Nt:,:])
 # F_7_1, Mixed shredded scrap, dimensions t,r,a,P,V,T,S,A
 # need to add shredding yield
 PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values = \
@@ -339,8 +310,6 @@ PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values = \
 PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values = PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values
 
     
-
-           
 # Correcting for scrap surplus
 # Scrap surplus considered at global level only
 print("Correcting for scrap surplus")
@@ -357,37 +326,7 @@ for it,ia,iP,iV,iT,iS,iA in np.ndindex(Process_1_mb_taPVTSA.shape):
     if Process_1_mb_taPVTSA[it,ia,iP,iV,iT,iS,iA] > 0:
         scrap_surplus_taPVTSA[it,ia,iP,iV,iT,iS,iA] = Process_1_mb_taPVTSA[it,ia,iP,iV,iT,iS,iA]
 
-
-
 PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'].Values = scrap_surplus_taPVTSA  
-
-
-
-           
-# # Correcting for scrap surplus
-# # Scrap surplus considered at global level only
-# print("Correcting for scrap surplus")
-# # Mass balance of process 1 without scrap surplus and primary production
-# # If positive, there is a scrap surplus for the alloy considered
-# Process_1_mb_traPVTSA = np.einsum('traPVTSA-> taPVTSA', 
-#         PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values + \
-#         PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values + \
-#         PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values - \
-#         PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)
-# scrap_surplus_traPVTSA = np.zeros(Process_1_mb_traPVTSA.shape)        
-
-# for it,ie,ia,iS in np.ndindex(Process_1_mb_traPVTSA.shape):
-#     if Process_1_mb_teaS[it,ie,ia,iS] > 0:
-#         scrap_surplus_teaS[it,ie,ia,iS] = Process_1_mb_teaS[it,ie,ia,iS]
-
-
-
-# PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'].Values = scrap_surplus_teaS       
-# scrap_surplus_taS =  np.einsum('teaS-> taS', scrap_surplus_teaS)
-
-
-
-
 
 # F_0_1, Primary Aluminium Demand, determined by mass balance
 PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values = \
@@ -397,7 +336,6 @@ PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values = \
         PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values - \
         PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values) + \
         PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'].Values     
-
         
 # S_3, dimensions 't,r,p,s,a,P,V,T,S,A'
 PassengerVehicleFleet_MFA_System.StockDict['S_3'].Values = Al_stock_tcrpsaPVTSA
@@ -406,20 +344,15 @@ PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values = \
     PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values - \
     np.einsum('trpszaPVTSA-> trpsaPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
                                                             
-
-
-                                                           
-                                                            
 #### Carbon footprint calculations   
 carbon_footprint_primary = np.einsum('taPVTSA, tF -> tPVTSAF', 
                                      PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values,
                                      PassengerVehicleFleet_MFA_System.ParameterDict['Carbon_Footprint_Primary'].Values[:Nt,:])
 carbon_footprint_secondary = np.einsum('taPVTSA, tF -> tPVTSAF', 
-                                     PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values - \
-                                     np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values),
+                                     np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values) -\
+                                     PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values,
                                      PassengerVehicleFleet_MFA_System.ParameterDict['Carbon_Footprint_Secondary'].Values[:Nt,:])
                                                       
-                                                           
 # Mass balance check:
 print("Checking Mass Balance")    
 Bal = PassengerVehicleFleet_MFA_System.MassBalanceNoElement()
@@ -430,63 +363,88 @@ end_time = time.time()
 print(end_time-start_time)   
 
 # Exports
-# Raw files
-# cf.export_to_csv(I_crpsS, 'I_crpsS', IndexTable)
-# cf.export_to_csv(S_tcrpsS, 'S_tcrpsS', IndexTable)
+print("Exporting data")
+# Raw files vehicle fleet
+cf.export_to_csv(I_crpsPVTS_short, 'I_crpsPVTS', IndexTable)
+cf.export_to_csv(S_tcrpsPVTS_short, 'S_tcrpsPVTS', IndexTable)
 # cf.export_to_csv(O_tcrpsS, 'O_tcrpsS', IndexTable)
 
-# File flows_scenarios.xlsx, structure taS
-print("Exporting data")
-F_1_2_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)        
-F_2_3_taS = np.einsum('trpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values)
-F_3_4_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
-F_4_0_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values)
-F_4_5_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values)
-F_4_7_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values)
-F_5_6_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values)
-F_5_7_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values)
-F_6_0_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'].Values)
-F_6_1_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values)
-F_7_0_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values)
-F_7_1_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values)
-F_7_8_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values)
-F_8_1_taS = np.einsum('treaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values)
-F_0_1_taS = np.einsum('teaS -> taS', PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values)
-F_1_9_taS = scrap_surplus_taS
-S_3_taS = np.einsum('tcrpszeaS -> taS', PassengerVehicleFleet_MFA_System.StockDict['S_3'].Values)
-dS_3_taS = np.einsum('trpszeaS -> taS', PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values)
+# File flows_scenarios.xlsx, structure taPVTSA
+
+F_1_2_taPVTSA = np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)        
+F_2_3_taPVTSA = np.einsum('trpsaPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values)
+F_3_4_taPVTSA = np.einsum('trpszaPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
+F_4_0_taPVTSA = np.einsum('trpszaPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values)
+F_4_5_taPVTSA = np.einsum('trpsaPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values)
+F_4_7_taPVTSA = np.einsum('trpsaPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values)
+F_5_6_taPVTSA = np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values)
+F_5_7_taPVTSA = np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values)
+F_6_0_taPVTSA = np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'].Values)
+F_6_1_taPVTSA = np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values)
+F_7_0_taPVTSA = np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values)
+F_7_1_taPVTSA = np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values)
+F_7_8_taPVTSA = np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values)
+F_8_1_taPVTSA = np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values)
+F_0_1_taPVTSA = PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values
+F_1_9_taPVTSA = scrap_surplus_taPVTSA
+S_3_taPVTSA = np.einsum('tcrpsaPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.StockDict['S_3'].Values)
+dS_3_taPVTSA = np.einsum('trpsaPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values)
 
 iterables = []
 names = []
-for dim in ['t','a','S']:
+for dim in ['t','a','P','V','T','S','A']:
     iterables.append(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc(dim)].Items)
     names.append(IndexTable[IndexTable['IndexLetter'] == dim]['Description'].index.values[0])  
 
 index = pd.MultiIndex.from_product(iterables, names=names)
-df = pd.DataFrame(F_2_3_taS.flatten()/10**9,index=index, columns = ['F_2_3_ta'])
-df['F_3_4_ta'] = F_3_4_taS.flatten()/10**9
-df['F_4_0_ta'] = F_4_0_taS.flatten()/10**9
-df['F_4_5_ta'] = F_4_5_taS.flatten()/10**9
-df['F_4_7_ta'] = F_4_7_taS.flatten()/10**9
-df['F_5_6_ta'] = F_5_6_taS.flatten()/10**9
-df['F_5_7_ta'] = F_5_7_taS.flatten()/10**9
-df['F_6_0_ta'] = F_6_0_taS.flatten()/10**9
-df['F_6_1_ta'] = F_6_1_taS.flatten()/10**9
-df['F_7_0_ta'] = F_7_0_taS.flatten()/10**9
-df['F_7_1_ta'] = F_7_1_taS.flatten()/10**9
-df['F_1_2_ta'] = F_1_2_taS.flatten()/10**9
-df['F_1_9_ta'] = scrap_surplus_taS.flatten()/10**9
-df['S_3_ta'] = S_3_taS.flatten()/10**9
-df['dS_3_ta'] = dS_3_taS.flatten()/10**9
-df['F_0_1_ta'] = F_0_1_taS.flatten()/10**9
-df['F_7_8_ta'] = F_7_8_taS.flatten()/10**9
-df['F_8_1_ta'] = F_8_1_taS.flatten()/10**9
+df = pd.DataFrame(F_2_3_taPVTSA.flatten()/10**9,index=index, columns = ['F_2_3_ta'])
+df['F_3_4_ta'] = F_3_4_taPVTSA.flatten()/10**9
+df['F_4_0_ta'] = F_4_0_taPVTSA.flatten()/10**9
+df['F_4_5_ta'] = F_4_5_taPVTSA.flatten()/10**9
+df['F_4_7_ta'] = F_4_7_taPVTSA.flatten()/10**9
+df['F_5_6_ta'] = F_5_6_taPVTSA.flatten()/10**9
+df['F_5_7_ta'] = F_5_7_taPVTSA.flatten()/10**9
+df['F_6_0_ta'] = F_6_0_taPVTSA.flatten()/10**9
+df['F_6_1_ta'] = F_6_1_taPVTSA.flatten()/10**9
+df['F_7_0_ta'] = F_7_0_taPVTSA.flatten()/10**9
+df['F_7_1_ta'] = F_7_1_taPVTSA.flatten()/10**9
+df['F_1_2_ta'] = F_1_2_taPVTSA.flatten()/10**9
+df['F_1_9_ta'] = scrap_surplus_taPVTSA.flatten()/10**9
+df['S_3_ta'] = S_3_taPVTSA.flatten()/10**9
+df['dS_3_ta'] = dS_3_taPVTSA.flatten()/10**9
+df['F_0_1_ta'] = F_0_1_taPVTSA.flatten()/10**9
+df['F_7_8_ta'] = F_7_8_taPVTSA.flatten()/10**9
+df['F_8_1_ta'] = F_8_1_taPVTSA.flatten()/10**9
 
-  
+path = 'results/flows_scenarios_parameters.xlsx' 
 try:
-    df.to_excel('results/flows_scenarios.xlsx', merge_cells=False)
+    df.to_excel(path, merge_cells=False)
+    print("MFA system data exported to: ", path)
 except:
-    print('Results could not be saved to results/flows_scenarios.xlsx, the file is probably open')
+    print('Results could not be saved to ', path, ', the file is probably open')
+    
+
+# File Carbon_footprint_scenarios_parameters.xlsx, structure tPVTSA
+
+iterables = []
+names = []
+for dim in ['t','P','V','T','S','A','F']:
+    iterables.append(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc(dim)].Items)
+    names.append(IndexTable[IndexTable['IndexLetter'] == dim]['Description'].index.values[0])  
+
+index = pd.MultiIndex.from_product(iterables, names=names)
+df = pd.DataFrame(carbon_footprint_primary.flatten()/10**9,index=index, columns = ['Carbon_footprint_primary'])
+df['Carbon_footprint_secondary'] = carbon_footprint_secondary.flatten()/10**9
+df['Carbon_footprint_total'] = (carbon_footprint_primary + carbon_footprint_secondary).flatten()/10**9
+
+path = 'results/carbon_footprint_scenarios_parameters.xlsx' 
+try:
+    df.to_excel(path, merge_cells=False)
+    print("MFA system data exported to: ", path)
+except:
+    print('Results could not be saved to ', path, ', the file is probably open')
+    
+  
 
 # File flows_plotly.xlsx, structure tS
 F_1_2_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)
