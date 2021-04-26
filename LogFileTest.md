@@ -4,7 +4,7 @@
 
 ### 3 - Read classification and data
 
-End of file or formatting error while reading the classification file in column 17. Check if all classifications are present. If yes, you are good to go!
+End of file or formatting error while reading the classification file in column 19. Check if all classifications are present. If yes, you are good to go!
 
 Read parameter list from model config sheet.
 
@@ -22,9 +22,9 @@ A total of 2265 values was read from file for parameter Vehicle_Ownership.
 
 2265.0 of 2265 values for parameter Vehicle_Ownership were assigned.
 
-A total of 755 values was read from file for parameter Vehicle_Lifetime.
+A total of 2265 values was read from file for parameter Vehicle_Lifetime.
 
-755.0 of 755 values for parameter Vehicle_Lifetime were assigned.
+2265.0 of 2265 values for parameter Vehicle_Lifetime were assigned.
 
 A total of 604 values was read from file for parameter P_type.
 
@@ -54,9 +54,9 @@ A total of 9060 values was read from file for parameter Dismantling.
 
 9060.0 of 9060 values for parameter Dismantling were assigned.
 
-A total of 755 values was read from file for parameter Alloy_Sorting.
+A total of 2265 values was read from file for parameter Alloy_Sorting.
 
-755.0 of 755 values for parameter Alloy_Sorting were assigned.
+2265.0 of 2265 values for parameter Alloy_Sorting were assigned.
 
 A total of 12080 values was read from file for parameter Powertrains.
 
@@ -79,6 +79,4 @@ A total of 2416 values was read from file for parameter SP_Coeff.
 2416.0 of 2416 values for parameter SP_Coeff were assigned.
 
 ### 5 - Building and solving the dynamic MFA model
-
-### 4 - Define MFA system
 
