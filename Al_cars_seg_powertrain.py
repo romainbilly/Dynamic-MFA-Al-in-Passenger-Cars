@@ -48,8 +48,8 @@ log.getLogger('matplotlib').setLevel(log.WARNING)
 Mylog.info('### 1. - Initialize.')
 print('Read model data and parameters.')
 
-# Data_Prep = DataPrep(DataPath,Mylog)      
-Data_Prep = DataPrep(DataPath,Mylog, "ParameterDict.p")
+Data_Prep = DataPrep(DataPath,Mylog)      
+# Data_Prep = DataPrep(DataPath,Mylog, "ParameterDict.p")
 
 
 # Mylog.info('### 3 - Read classification and data')
@@ -347,11 +347,11 @@ PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values = \
 #### Carbon footprint calculations   
 carbon_footprint_primary = np.einsum('taPVTSA, tF -> tPVTSAF', 
                                      PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values,
-                                     PassengerVehicleFleet_MFA_System.ParameterDict['Carbon_Footprint_Primary'].Values[:Nt,:])
+                                     PassengerVehicleFleet_MFA_System.ParameterDict['Carbon_Footprint_Primary'].Values[-Nt:,:])
 carbon_footprint_secondary = np.einsum('taPVTSA, tF -> tPVTSAF', 
                                      np.einsum('traPVTSA -> taPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values) -\
                                      PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values,
-                                     PassengerVehicleFleet_MFA_System.ParameterDict['Carbon_Footprint_Secondary'].Values[:Nt,:])
+                                     PassengerVehicleFleet_MFA_System.ParameterDict['Carbon_Footprint_Secondary'].Values[-Nt:,:])
                                                       
 # Mass balance check:
 print("Checking Mass Balance")    
@@ -365,8 +365,8 @@ print(end_time-start_time)
 # Exports
 print("Exporting data")
 # Raw files vehicle fleet
-cf.export_to_csv(I_crpsPVTS_short, 'I_crpsPVTS', IndexTable)
-cf.export_to_csv(S_tcrpsPVTS_short, 'S_tcrpsPVTS', IndexTable)
+# cf.export_to_csv(I_crpsPVTS_short, 'I_crpsPVTS', IndexTable)
+# cf.export_to_csv(S_tcrpsPVTS_short, 'S_tcrpsPVTS', IndexTable)
 # cf.export_to_csv(O_tcrpsS, 'O_tcrpsS', IndexTable)
 
 # File flows_scenarios.xlsx, structure taPVTSA
@@ -446,52 +446,89 @@ except:
     
   
 
-# File flows_plotly.xlsx, structure tS
-F_1_2_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)
-F_2_3_tS = np.einsum('trpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values)
-F_3_4_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
-F_4_0_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values)
-F_4_5_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values)
-F_4_7_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values)
-F_5_6_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values)
-F_5_7_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values)
-F_6_0_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'].Values)
-F_6_1_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values)
-F_7_0_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values)
-F_7_1_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values)
-F_7_8_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values)
-F_8_1_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values)
-F_0_1_tS = np.einsum('teaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values)
-F_1_9_tS = np.einsum('taS -> tS', scrap_surplus_taS)
+# File flows_plotly_scenarios_parameters.xlsx, structure tS
 
 iterables = []
 names = []
-for dim in ['t','S']:
+for dim in ['t','P','V','T','S','A']:
     iterables.append(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc(dim)].Items)
-    names.append(IndexTable[IndexTable['IndexLetter'] == dim]['Description'].index.values[0])  
+    names.append(IndexTable[IndexTable['IndexLetter'] == dim]['Description'].index.values[0]) 
 
 index = pd.MultiIndex.from_product(iterables, names=names)
-df = pd.DataFrame(F_2_3_tS.flatten()/10**9,index=index, columns = ['F_2_3'])
-df['F_3_4'] = F_3_4_tS.flatten()/10**9
-df['F_4_0'] = F_4_0_tS.flatten()/10**9
-df['F_4_5'] = F_4_5_tS.flatten()/10**9
-df['F_4_7'] = F_4_7_tS.flatten()/10**9
-df['F_5_6'] = F_5_6_tS.flatten()/10**9
-df['F_5_7'] = F_5_7_tS.flatten()/10**9
-df['F_6_0'] = F_6_0_tS.flatten()/10**9
-df['F_6_1'] = F_6_1_tS.flatten()/10**9
-df['F_7_0'] = F_7_0_tS.flatten()/10**9
-df['F_7_1'] = F_7_1_tS.flatten()/10**9
-df['F_1_2'] = F_1_2_tS.flatten()/10**9
-df['F_1_9'] = F_1_9_tS.flatten()/10**9
-df['F_0_1'] = F_0_1_tS.flatten()/10**9
-df['F_7_8'] = F_7_8_tS.flatten()/10**9
-df['F_8_1'] = F_8_1_tS.flatten()/10**9
+df = pd.DataFrame(np.einsum('traPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values).flatten()/10**9 , index=index, columns = ['F_1_2'])
+df['F_2_3'] = np.einsum('trpsaPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values).flatten()/10**9
+df['F_3_4'] = np.einsum('trpszaPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values).flatten()/10**9
+df['F_4_0'] = np.einsum('trpszaPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values).flatten()/10**9
+df['F_4_5'] = np.einsum('trpsaPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values).flatten()/10**9
+df['F_4_7'] = np.einsum('trpsaPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values).flatten()/10**9
+df['F_5_6'] = np.einsum('traPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values).flatten()/10**9
+df['F_5_7'] = np.einsum('traPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values).flatten()/10**9
+df['F_6_0'] = np.einsum('traPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'].Values).flatten()/10**9
+df['F_6_1'] = np.einsum('traPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values).flatten()/10**9
+df['F_7_0'] = np.einsum('traPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values).flatten()/10**9
+df['F_7_1'] = np.einsum('traPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values).flatten()/10**9
+df['F_7_8'] = np.einsum('traPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values).flatten()/10**9
+df['F_8_1'] = np.einsum('traPVTSA -> tPVTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values).flatten()/10**9
+df['F_0_1'] = np.einsum('taPVTSA -> tPVTSA',PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values).flatten()/10**9
+df['F_1_9'] = np.einsum('taPVTSA -> tPVTSA',scrap_surplus_taPVTSA).flatten()/10**9
 
+
+path = 'results/flows_plotly_parameters.xlsx' 
 try:
-    df.to_excel('results/flows_plotly.xlsx', merge_cells=False)
+    df.to_excel(path, merge_cells=False)
+    print("MFA system data exported to: ", path)
 except:
-    print('Results could not be saved to results/flows_plotly.xlsx, the file is probably open')
+    print('Results could not be saved to ', path, ', the file is probably open')
+
+
+# # File flows_plotly_scenarios.xlsx, structure tS
+# F_1_2_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values)
+# F_2_3_tS = np.einsum('trpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values)
+# F_3_4_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
+# F_4_0_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values)
+# F_4_5_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values)
+# F_4_7_tS = np.einsum('tcrpszeaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values)
+# F_5_6_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values)
+# F_5_7_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values)
+# F_6_0_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'].Values)
+# F_6_1_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values)
+# F_7_0_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values)
+# F_7_1_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values)
+# F_7_8_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values)
+# F_8_1_tS = np.einsum('treaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values)
+# F_0_1_tS = np.einsum('teaS -> tS', PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values)
+# F_1_9_tS = np.einsum('taS -> tS', scrap_surplus_taS)
+
+
+# iterables = []
+# names = []
+# for dim in ['t','S']:
+#     iterables.append(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc(dim)].Items)
+#     names.append(IndexTable[IndexTable['IndexLetter'] == dim]['Description'].index.values[0])  
+
+# index = pd.MultiIndex.from_product(iterables, names=names)
+# df = pd.DataFrame(F_2_3_tS.flatten()/10**9,index=index, columns = ['F_2_3'])
+# df['F_3_4'] = F_3_4_tS.flatten()/10**9
+# df['F_4_0'] = F_4_0_tS.flatten()/10**9
+# df['F_4_5'] = F_4_5_tS.flatten()/10**9
+# df['F_4_7'] = F_4_7_tS.flatten()/10**9
+# df['F_5_6'] = F_5_6_tS.flatten()/10**9
+# df['F_5_7'] = F_5_7_tS.flatten()/10**9
+# df['F_6_0'] = F_6_0_tS.flatten()/10**9
+# df['F_6_1'] = F_6_1_tS.flatten()/10**9
+# df['F_7_0'] = F_7_0_tS.flatten()/10**9
+# df['F_7_1'] = F_7_1_tS.flatten()/10**9
+# df['F_1_2'] = F_1_2_tS.flatten()/10**9
+# df['F_1_9'] = F_1_9_tS.flatten()/10**9
+# df['F_0_1'] = F_0_1_tS.flatten()/10**9
+# df['F_7_8'] = F_7_8_tS.flatten()/10**9
+# df['F_8_1'] = F_8_1_tS.flatten()/10**9
+
+# try:
+#     df.to_excel('results/flows_plotly.xlsx', merge_cells=False)
+# except:
+#     print('Results could not be saved to results/flows_plotly.xlsx, the file is probably open')
+
 
 # File flows_per_year.xlsx, structure t
 F_0_1_t = np.einsum('taS -> t', F_0_1_taS)/10**9
