@@ -7,7 +7,7 @@ Created on Sun Dec 27 22:54:11 2020
 This file creates a Dash app that display a dynamic Sankey diagram
 of Aluminium use in passenger cars
 
-It uses the excel file flows_per_year.xlsx as a data source
+It uses the excel file 'results/flows_plotly_parameters.xlsx' as a data source
 
 It needs to be run from the Anaconda prompt:
 $ cd *current_directory*
