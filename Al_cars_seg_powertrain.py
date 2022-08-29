@@ -72,12 +72,7 @@ NA = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get
 NL = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('L')].Items)
 NX = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('X')].Items)
 NF = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc('F')].Items)
-# for letter in IndexTable.IndexLetter:
-#     vars()['N' + str(letter)] = len(IndexTable.Classification[IndexTable.set_index('IndexLetter').index.get_loc(letter)].Items)
-
-
-
-                      
+               
 
 Mylog.info('### 5 - Building and solving the dynamic MFA model')
 # 1) Determine vehicle inflow and outflow by age-cohort from stock and lifetime data. 
@@ -174,17 +169,6 @@ O_tcrpsPVLTS = np.einsum('tcrPVL, TSrpsc -> tcrpsPVLTS', O_tcrPVL, PS_TSrpsc).as
 S_tcrpsPVLTS_short = S_tcrpsPVLTS[-Nt:,-Nc:,:,:,:,:,:,:,:].astype(default_dtype)
 I_crpsPVLTS_short = I_crpsPVLTS[-Nc:,:,:,:,:,:,:,:].astype(default_dtype)
 O_tcrpsPVLTS_short = O_tcrpsPVLTS[-Nt:,-Nc:,:,:,:,:,:,:,:].astype(default_dtype)
-
-# for T in range(NT):
-#     for S in range(NS):
-#         Mylog.info(T,S,np.sum(np.array(PS_TSrpsc[T,S,:,:,:,:] < 0)))
-
-# for p in range(Np):
-#     for s in range(Ns):
-#         Mylog.info(p,s,np.sum(np.array(PS_TSrpsc[:,:,:,p,s,:] < 0)))
-
-# for c in range(Nt):
-#     Mylog.info(c,np.sum(np.array(PS_TSrpsc[:,:,:,:,:,c] < 0)))
 
 
 #Aluminium content calculations by scenario, corrected by P_seg and P_type
@@ -347,10 +331,10 @@ scrap_surplus_taPVLTSAX = np.zeros((Nt,Na,NP,NV,NL,NT,NS,NA,NX),default_dtype)
 
 for X in range(NX):
     Process_1_mb_taPVLTSAX[...,X] = np.einsum('traPVLTSA-> taPVLTSA', 
-            PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values.astype(default_dtype + \
-            PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values[...,X].astype(default_dtype + \
-            PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values[...,X].astype(default_dtype - \
-            PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values).astype(default_dtype)
+        PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values.astype(default_dtype) + \
+        PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values[...,X].astype(default_dtype) + \
+        PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values[...,X].astype(default_dtype) - \
+        PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values).astype(default_dtype)
 
 
 for it,ia,iP,iV,iL,iT,iS,iA,iX in np.ndindex(Process_1_mb_taPVLTSAX.shape):

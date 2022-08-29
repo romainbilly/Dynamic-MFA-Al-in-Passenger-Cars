@@ -28,17 +28,31 @@ Adding Powertrain and Segment splits
 
 Performing Al content calculations
 
-50.12720060348511
+67.15494012832642
 
 Performing component level and alloy content calculations
 
-98.90355443954468
+62.322126150131226
 
 Solving the MFA system
 
 Correcting for scrap surplus
 
-8.060105085372925
+5.8949315547943115
 
 Exporting data
+
+checking mass balance of process 7
+
+Maximum relative MBI process 7
+
+1.6084697673762493e-07
+
+checking mass balance of process 1
+
+Maximum relative MBI process 1
+
+7.890197064523473e-08
+
+97.23468742447558
 
