@@ -35,9 +35,6 @@ import ODYM_Functions as msf # import the ODYM function file
 import mfa_system # import the system definition
         
 class DataPrep(object):
-   
-    
-
 
     def __init__(self, DataPath, Mylog, pickle_parameters=None):
         self.DataPath = DataPath
@@ -105,7 +102,7 @@ class DataPrep(object):
             
     def build_index_table(self):    
         # Define model index table and parameter dictionary
-        self.Model_Time_Start = int(min(self.ModelClassification['Time'].Items))
+        self.Model_Time_Start = 2000
         self.Model_Time_End   = int(max(self.ModelClassification['Time'].Items))
         self.Model_Duration   = self.Model_Time_End - self.Model_Time_Start
         
@@ -126,16 +123,6 @@ class DataPrep(object):
         
         # list of the classifications used for each indexletter
         self.IndexTable_ClassificationNames = [self.IndexTable.Classification[i].Name for i in range(0,len(self.IndexTable.IndexLetter))] 
-
-        #Define shortcuts for the most important index sizes:
-        self.Nt = len(self.IndexTable.Classification[self.IndexTable.index.get_loc('Time')].Items)
-        self.Nr = len(self.IndexTable.Classification[self.IndexTable.set_index('IndexLetter').index.get_loc('r')].Items)
-        self.Np = len(self.IndexTable.Classification[self.IndexTable.set_index('IndexLetter').index.get_loc('p')].Items) 
-        self.Ns = len(self.IndexTable.Classification[self.IndexTable.set_index('IndexLetter').index.get_loc('s')].Items) 
-        self.Nz = len(self.IndexTable.Classification[self.IndexTable.set_index('IndexLetter').index.get_loc('z')].Items)
-        self.Na = len(self.IndexTable.Classification[self.IndexTable.set_index('IndexLetter').index.get_loc('a')].Items)
-        self.NS = len(self.IndexTable.Classification[self.IndexTable.set_index('IndexLetter').index.get_loc('S')].Items)
-
 
 
     def get_parameter_dict(self):
@@ -163,10 +150,12 @@ class DataPrep(object):
             # Export ParameterDict to  pickle file for easier loading next time
             file_name = "ParameterDict.p"
             pickle.dump(self.ParameterDict, open(file_name, "wb" ))
-            print("ParaneterDict exported to: ", file_name)
+            print("ParameterDict exported to: ", file_name)
     
     
-    def create_mfa_system(self):
+    def create_mfa_system(self, Model_Time_Start=None):
+        if Model_Time_Start == None:
+            Model_Time_Start = self.Model_Time_Start
         self.PassengerVehicleFleet_MFA_System = msc.MFAsystem(Name = 'Global_Passengers_Vehicle_Fleet', 
                           Geogr_Scope = 'World', 
                           Unit = 'Mt', 
@@ -174,12 +163,12 @@ class DataPrep(object):
                           FlowDict = mfa_system.FlowDict, 
                           StockDict = mfa_system.StockDict,
                           ParameterDict = self.ParameterDict, 
-                          Time_Start = self.Model_Time_Start, 
+                          Time_Start = Model_Time_Start, 
                           Time_End = self.Model_Time_End, 
                           IndexTable = self.IndexTable, 
-                          Elements = self.IndexTable.loc['Element'].Classification.Items, 
+                          Elements = None, 
                           Graphical = None) # Initialize MFA system
-        
+
         # Check Validity of index tables:
         # returns true if dimensions are OK and time index is present and element list is not empty
         self.PassengerVehicleFleet_MFA_System.IndexTableCheck() 
@@ -203,5 +192,6 @@ if __name__ == "__main__":
     Mylog.info('### 1. - Initialize.')
                
     Data_Prep = DataPrep(DataPath,Mylog)
-    # pickle.dump(DataPrep, open( "DataPrep.p", "wb" ) )
+    # Save data in pickle file for further fast loading, comment if not needed:
+    pickle.dump(DataPrep, open( "DataPrep.p", "wb" ) )
 

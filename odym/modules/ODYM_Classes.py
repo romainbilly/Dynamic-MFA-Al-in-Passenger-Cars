@@ -208,6 +208,61 @@ class MFAsystem(Obj):
             
         return Bal
     
+    def Flow_Sum(self,FlowKey):
+        """ 
+        Reduce flow values to a Time  matrix and return as t array.
+        We take the indices of each flow, e.g., 't,O,D,G,m', strip off the ',' to get 'tODGm', 
+        add a '->' and the index letter for time (here, t), 
+        and call the Einstein sum function np.einsum with the string 'tODGme->t', 
+        and apply it to the flow values. 
+        """
+        return np.einsum(self.FlowDict[FlowKey].Indices.replace(',','') + '->'+ self.IndexTable.loc['Time'].IndexLetter, self.FlowDict[FlowKey].Values) 
+    
+    def Stock_Sum(self,StockKey):
+        """ 
+        Reduce stock values to a Time matrix and return as tarray.
+        We take the indices of each stock, e.g., 't,O,D,G,m', strip off the ',' to get 'tODGm', 
+        add a '->' and the index letter for time (here, t), 
+        and call the Einstein sum function np.einsum with the string 'tODGme->t', 
+        and apply it to the stock values. 
+        """
+        return np.einsum(self.StockDict[StockKey].Indices.replace(',','') + '->'+ self.IndexTable.loc['Time'].IndexLetter, self.StockDict[StockKey].Values) 
+    
+    def MassBalanceNoElement(self):
+        """ 
+        Determines mass balance of MFAsystem
+        Based on the MassBalance function, this is a simplification for systems
+        that only contain one element and therefore have no element index
+        We take the indices of each flow, e.g., 't,O,D,G,m,e', strip off the ',' to get 'tODGme', 
+        add a '->' and the index letters for time (here, t ), 
+        and call the Einstein sum function np.einsum with the string 'tODGme->t', 
+        and apply it to the flow values. 
+        Sum to t is subtracted from process where flow is leaving from and added to destination process.
+        """
+        Bal = np.zeros((len(self.Time_L),len(self.ProcessList))) # Balance array: years x process x element: 
+        #process position 0 is the balance for the system boundary, the other positions are for the processes, 
+        #element position 0 is the balance for the entire mass, the other are for the balance of the individual elements
+        
+        for key in self.FlowDict: # Add all flows to mass balance
+            Bal[:,self.FlowDict[key].P_Start] -= self.Flow_Sum(key) # Flow leaving a process
+            Bal[:,self.FlowDict[key].P_End]   += self.Flow_Sum(key) # Flow entering a process
+            
+        for key in self.StockDict: # Add all stock changes to the mass balance
+            if  self.StockDict[key].Type == 1:
+                Bal[:,self.StockDict[key].P_Res] -= self.Stock_Sum(key) # 1: net stock change or addition to stock
+            elif self.StockDict[key].Type == 2:
+                Bal[:,self.StockDict[key].P_Res] += self.Stock_Sum(key) # 2: removal/release from stock
+            
+        #add stock changes to process with number 0 ('system boundary, environment of system')
+        for key in self.StockDict:
+            if  self.StockDict[key].Type == 1:
+                Bal[:,0] += self.Stock_Sum(key) # 1: net stock change or addition to stock
+            elif self.StockDict[key].Type == 2:
+                Bal[:,0] -= self.Stock_Sum(key) # 2: removal/release from stock
+            
+        return Bal
+    
+    
     def Check_If_All_Chem_Elements_Are_present(self,FlowKey,AllElementsIndex):
         """
         This method is applicable to systems where the chemical element list contains both 0 ('all' chemical elements) and individual elements.

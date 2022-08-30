@@ -1,10 +1,12 @@
 ### 1. - Initialize.
 
+Read model data and parameters.
+
 ### 2 - Load Config file and read model control parameters
 
 ### 3 - Read classification and data
 
-End of file or formatting error while reading the classification file in column 12. Check if all classifications are present. If yes, you are good to go!
+End of file or formatting error while reading the classification file in column 19. Check if all classifications are present. If yes, you are good to go!
 
 Read parameter list from model config sheet.
 
@@ -14,13 +16,17 @@ Read model run control from model config sheet.
 
 Read model output control from model config sheet.
 
-A total of 755 values was read from file for parameter Vehicle_Lifetime.
+A total of 2265 values was read from file for parameter Population.
 
-755.0 of 755 values for parameter Vehicle_Lifetime were assigned.
+2265.0 of 2265 values for parameter Population were assigned.
 
-A total of 3775 values was read from file for parameter Vehicle_Stock.
+A total of 2265 values was read from file for parameter Vehicle_Ownership.
 
-3775.0 of 3775 values for parameter Vehicle_Stock were assigned.
+2265.0 of 2265 values for parameter Vehicle_Ownership were assigned.
+
+A total of 2265 values was read from file for parameter Vehicle_Lifetime.
+
+2265.0 of 2265 values for parameter Vehicle_Lifetime were assigned.
 
 A total of 604 values was read from file for parameter P_type.
 
@@ -30,9 +36,9 @@ A total of 604 values was read from file for parameter P_seg.
 
 604.0 of 604 values for parameter P_seg were assigned.
 
-A total of 755 values was read from file for parameter Aluminium_Content.
+A total of 2265 values was read from file for parameter Aluminium_Content.
 
-755.0 of 755 values for parameter Aluminium_Content were assigned.
+2265.0 of 2265 values for parameter Aluminium_Content were assigned.
 
 A total of 144960 values was read from file for parameter Components.
 
@@ -50,31 +56,75 @@ A total of 9060 values was read from file for parameter Dismantling.
 
 9060.0 of 9060 values for parameter Dismantling were assigned.
 
-A total of 755 values was read from file for parameter Alloy_Sorting.
+A total of 2265 values was read from file for parameter Alloy_Sorting.
 
-755.0 of 755 values for parameter Alloy_Sorting were assigned.
+2265.0 of 2265 values for parameter Alloy_Sorting were assigned.
 
-A total of 15100 values was read from file for parameter Powertrains.
+A total of 12080 values was read from file for parameter Powertrains.
 
-15100.0 of 15100 values for parameter Powertrains were assigned.
+12080.0 of 12080 values for parameter Powertrains were assigned.
 
-A total of 15100 values was read from file for parameter Segments.
+A total of 9060 values was read from file for parameter Segments.
 
-15100.0 of 15100 values for parameter Segments were assigned.
+9060.0 of 9060 values for parameter Segments were assigned.
 
-A total of 755 values was read from file for parameter Carbon_Footprint_Primary.
+A total of 453 values was read from file for parameter Carbon_Footprint_Primary.
 
-755.0 of 755 values for parameter Carbon_Footprint_Primary were assigned.
+453.0 of 453 values for parameter Carbon_Footprint_Primary were assigned.
 
-A total of 755 values was read from file for parameter Carbon_Footprint_Secondary.
+A total of 453 values was read from file for parameter Carbon_Footprint_Secondary.
 
-755.0 of 755 values for parameter Carbon_Footprint_Secondary were assigned.
+453.0 of 453 values for parameter Carbon_Footprint_Secondary were assigned.
 
 A total of 2416 values was read from file for parameter SP_Coeff.
 
 2416.0 of 2416 values for parameter SP_Coeff were assigned.
 
+### 5 - Building and solving the dynamic MFA model
+
+Solving dynamic stock model of the passenger vehicle fleet
+
 ### 4 - Define MFA system
 
-### 5 - Building and solving the MFA model
+Define MFA system and processes.
+
+Adding Powertrain and Segment splits
+
+Performing Al content calculations
+
+48.42313885688782
+
+Performing component level and alloy content calculations
+
+41.22317337989807
+
+Solving the MFA system
+
+Correcting for scrap surplus
+
+4.256195545196533
+
+Exporting data
+
+Exporting to I_crpsPVLTS.csv
+
+Exporting to S_tcrpsPVLTS.csv
+
+Exporting to O_tcrpsS.csv
+
+Exporting to flows_scenarios_parameters.csv
+
+checking mass balance of process 7
+
+Maximum relative MBI process 7
+
+1.7533399482304583e-07
+
+checking mass balance of process 1
+
+Maximum relative MBI process 1
+
+8.007702671090009e-08
+
+81.01407313358106
 
