@@ -2,6 +2,14 @@
 """
 Created on Wed Dec 16 17:31:59 2020
 
+Main file for the execution of the code generating the results for the paper
+"Aluminium use in passenger cars poses systemic challenges for recycling and GHG emissions"
+by Romain G. Billy and Daniel B. Mûller
+
+Warning: export of detailed intermediate results, such as the detailed
+composition of the vehicle fleet under different scenarios (S_tcrpsPVLTS.csv)
+can use a lot of memory and time, so it is recommended to comment those lines if not needed
+
 @author: romainb
 """
 
@@ -44,8 +52,11 @@ log.getLogger('matplotlib').setLevel(log.WARNING)
 Mylog.info('### 1. - Initialize.')
 Mylog.info('Read model data and parameters.')
 
-# Data_Prep = DataPrep(DataPath,Mylog)      
-Data_Prep = DataPrep(DataPath,Mylog, "ParameterDict.p")
+# To reload all data from Excel file (if a parameter was changed) uncomment this line:
+Data_Prep = DataPrep(DataPath,Mylog)   
+
+# To used previously loaded data from pickle file, use this line (faster):
+# Data_Prep = DataPrep(DataPath,Mylog, "ParameterDict.p")
 
 # Default dtype used in numpy arrays
 # use 'float64' for extra precision, but default_dtype reduces the memory usage 
@@ -117,7 +128,6 @@ Mylog.info('Define MFA system and processes.')
 # Shortening to get rid of uneccessary history years
 # All years before 2000 and cohorts before 1965 are deleted
 Nt = 51
-# Nc = 86
 Nc = 86
 Data_Prep.IndexTable.Classification[IndexTable.index.get_loc('Time')].Items = \
     Data_Prep.IndexTable.Classification[IndexTable.index.get_loc('Time')].Items[-Nt:] 
@@ -156,8 +166,8 @@ PS_TSrpsc[np.isclose(PS_TSrpsc, 0, atol=10**(-6))] = 0
 negative_values = np.sum((np.array(PS_TSrpsc < 0)))
 if negative_values > 0: 
     Mylog.info("WARNING: ", negative_values, " negative values are present in the type/segment matrix, please check the data")
-
-# cf.export_to_csv(PS_TSrpsc, 'PS_TSrpsc', IndexTable)
+    # export the detailed PS_TSrpsc matric to check for negative values
+    cf.export_to_csv(PS_TSrpsc[:,:,:,:,:,-Nc:], 'PS_TSrpsc', IndexTable)
 
 # Stock py powertrain and segment with scenarios
 S_tcrpsPVLTS = np.einsum('tcrPVL, TSrpsc -> tcrpsPVLTS', S_tcrPVL, PS_TSrpsc).astype(default_dtype)
@@ -198,9 +208,6 @@ start_time = time.time()
 Mylog.info("Performing component level and alloy content calculations")
 
 # Stock
-# Al_stock_trpszaPVLTSA = np.einsum('tcrpsPVLTSA, crpsz, az -> trpszaPVLTSA', Al_stock_tcrpsPVLTSA, 
-#                    PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[-Nc:,:,:,:,:],
-#                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values, optimize=True) 
 Al_stock_tcrpsaPVLTSA = np.einsum('tcrpsPVLTSA, crpsz, az -> tcrpsaPVLTSA', Al_stock_tcrpsPVLTSA, 
                    PassengerVehicleFleet_MFA_System.ParameterDict['Components'].Values[-Nc:,:,:,:,:],
                    PassengerVehicleFleet_MFA_System.ParameterDict['Alloys'].Values, optimize=True).astype(default_dtype) 
@@ -222,24 +229,19 @@ Mylog.info("Solving the MFA system")
 
 # S_3, dimensions 't,c,r,p,s,a,P,V,T,S,A'
 PassengerVehicleFleet_MFA_System.StockDict['S_3'].Values = Al_stock_tcrpsaPVLTSA
-print(PassengerVehicleFleet_MFA_System.StockDict['S_3'].Values.dtype)
 # F_2_3, dimensions 't,r,p,s,a,P,V,L,T,S,A'
 PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values = \
         np.einsum('crpszaPVLTSA -> crpsaPVLTSA', Al_inflow_crpszaPVLTSA[-Nt:,:,:,:,:,:,:,:,:,:,:].astype(default_dtype)).astype(default_dtype)
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values.dtype)
 # F_1_2, Materials for Passenger vehicle production, dimensions t,r,a,P,V,L,T,S,A'
 PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values = \
         np.einsum('crpsaPVLTSA-> craPVLTSA',  PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values.astype(default_dtype)).astype(default_dtype)
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values.dtype)
 # F_3_4, EoL Vehicles, dimensions 't,r,p,s,z,a,P,V,L,T,S,A'
 PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values = Al_outflow_trpszaPVLTSA[-Nt:,:,:,:,:,:,:,:,:,:,:].astype(default_dtype)
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values.dtype)
 # F_4_0, dimensions 't,r,p,s,z,a,P,V,L,T,S,A'
 PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values = \
     np.einsum('trpszaPVLTSA, tr -> trpszaPVLTSA',
     PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values.astype(default_dtype),
     1 - PassengerVehicleFleet_MFA_System.ParameterDict['Collection'].Values[-Nt:,:].astype(default_dtype)).astype(default_dtype)
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values.dtype)
 
 # F_4_5, Collected cars to dismantling, dimensions 't,r,p,s,a,P,V,L,T,S,A'
 PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values = \
@@ -247,48 +249,40 @@ PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values = \
     PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values.astype(default_dtype) - \
     PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values.astype(default_dtype),
     PassengerVehicleFleet_MFA_System.ParameterDict['Dismantling'].Values[:,:,-Nt:].astype(default_dtype)).astype(default_dtype)
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values.dtype)
 # F_4_7, Collected cars to shredding, dimensions 't,r,p,s,a,P,V,L,T,S,A'
 PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values = \
         np.einsum('trpszaPVLTSA -> trpsaPVLTSA',
                   PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values.astype(default_dtype) - \
                   PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values.astype(default_dtype)).astype(default_dtype) - \
         PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values.astype(default_dtype)       
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values.dtype)
 # F_5_6, Dismantled components to shredding, dimensions 't,r,a,P,V,L,T,S,A'
 # need to add dismantling yield
 dismantling_yield = 0.7
 PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values = \
         dismantling_yield * np.einsum('trpsaPVLTSA-> traPVLTSA',
                         PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values).astype(default_dtype)                                         
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values.dtype)
 # F_5_7, Residues from dismantllng to shredding, dimensions t,r,a,P,V,L,T,S,A
 # need to add dismantling yield
 PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values = \
        (1 - dismantling_yield) * \
        np.einsum('trpsaPVLTSA -> traPVLTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values).astype(default_dtype) 
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values.dtype)
 # F_6_1, Al scrap from dismantled components, dimensions t,r,a,P,V,L,T,S,A
-# need to add shredding yield
-shredding_yield = 0.95
+# Definition of shredding and sorting yield
+shredding_yield = 0.90
 PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values = \
         shredding_yield * PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values.astype(default_dtype) 
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values.dtype)
 # F_6_0, Shredding losses, dimensions t,r,a,P,V,L,T,S,A
 # need to add shredding yield
 PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'].Values = \
         (1 - shredding_yield) * PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values.astype(default_dtype)
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'].Values.dtype)
 # F_7_0, Shredding losses, dimensions t,r,a,P,V,L,T,S,A
 # need to add shredding yield
 PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values =  (1 - shredding_yield) * (
         np.einsum('trpsaPVLTSA-> traPVLTSA', 
                   PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values) + \
         PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values).astype(default_dtype)
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values.dtype)
 # F_7_8, Scrap to alloy sorting, dimensions t,r,a,P,V,L,T,S,A,X
 PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values = np.empty((Nt,Nr,Na,NP,NV,NL,NT,NS,NA,NX),default_dtype)
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values.dtype)
             
 for X in range(NX):
     PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values[:,:,:,:,:,:,:,:,:,X] = \
@@ -315,10 +309,8 @@ PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values = \
         np.einsum('traPVLTSAX, a -> traPVLTSAX', 
                   PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values, 
                   np.array([0,0,1]))
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values.dtype)
 # F_8_1, Alloy sorted scrap, dimensions t,r,a,P,V,L,T,S,A,X
 PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values = PassengerVehicleFleet_MFA_System.FlowDict['F_7_8'].Values
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values.dtype)
 
     
 # Correcting for scrap surplus
@@ -342,7 +334,6 @@ for it,ia,iP,iV,iL,iT,iS,iA,iX in np.ndindex(Process_1_mb_taPVLTSAX.shape):
         scrap_surplus_taPVLTSAX[it,ia,iP,iV,iL,iT,iS,iA,iX] = Process_1_mb_taPVLTSAX[it,ia,iP,iV,iL,iT,iS,iA,iX].astype(default_dtype)
 
 PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'].Values = scrap_surplus_taPVLTSAX.astype(default_dtype)  
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'].Values.dtype)
 
 # F_0_1, Primary Aluminium Demand, determined by mass balance
 for X in range(NX):
@@ -353,20 +344,17 @@ for X in range(NX):
             PassengerVehicleFleet_MFA_System.FlowDict['F_7_1'].Values[...,X] - \
             PassengerVehicleFleet_MFA_System.FlowDict['F_8_1'].Values[...,X]) + \
             PassengerVehicleFleet_MFA_System.FlowDict['F_1_9'].Values[...,X]     
-print(PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values.dtype)
         
 
 # dS_3, dimensions 't,r,p,s,a,P,V,T,S,A' 
 PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values = \
     PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values - \
     np.einsum('trpszaPVLTSA-> trpsaPVLTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_3_4'].Values)
-print(PassengerVehicleFleet_MFA_System.StockDict['dS_3'].Values.dtype)
                                                             
 #### Carbon footprint calculations   
 carbon_footprint_primary = np.einsum('taPVLTSAX, tF -> tPVLTSAXF', 
                                      PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values,
                                      PassengerVehicleFleet_MFA_System.ParameterDict['Carbon_Footprint_Primary'].Values[-Nt:,:]).astype(default_dtype)
-print(carbon_footprint_primary.dtype)
 
 carbon_footprint_secondary = np.zeros(carbon_footprint_primary.shape, default_dtype)
 for X in range(NX):
@@ -374,7 +362,6 @@ for X in range(NX):
                                      np.einsum('traPVLTSA -> taPVLTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values) -\
                                      PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values[...,X],
                                      PassengerVehicleFleet_MFA_System.ParameterDict['Carbon_Footprint_Secondary'].Values[-Nt:,:])
-print(carbon_footprint_secondary.dtype)   
                                                
 # Mass balance check:
 # Mylog.info("Checking Mass Balance")    
@@ -410,12 +397,22 @@ Mylog.info(end_time-start_time)
 
 # Exports
 Mylog.info("Exporting data")
-# Raw files vehicle fleet
+# Raw files for detailed vehicle fleet composition
+
+# Detailed inflow composition
+Mylog.info("Exporting to I_crpsPVLTS.csv")
 # cf.export_to_csv(I_crpsPVLTS_short, 'I_crpsPVLTS', IndexTable)
-cf.export_to_csv(S_tcrpsPVLTS_short, 'S_tcrpsPVLTS', IndexTable)
+
+# Detailed stock composition
+Mylog.info("Exporting to S_tcrpsPVLTS.csv")
+# cf.export_to_csv(S_tcrpsPVLTS_short, 'S_tcrpsPVLTS', IndexTable)
+
+# Detailed outflow composition
+Mylog.info("Exporting to O_tcrpsS.csv")
 # cf.export_to_csv(O_tcrpsS, 'O_tcrpsS', IndexTable)
 
 # File flows_scenarios_parameters.csv, structure taPVLTSA
+Mylog.info("Exporting to flows_scenarios_parameters.csv")
 X = np.ones(NX)
 F_1_2_taPVLTSAX = np.einsum('traPVLTSA, X -> taPVLTSAX', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values, X)        
 F_2_3_taPVLTSAX = np.einsum('trpsaPVLTSA,X  -> taPVLTSAX', PassengerVehicleFleet_MFA_System.FlowDict['F_2_3'].Values, X)
@@ -498,7 +495,9 @@ df['Carbon_footprint_total'] = (carbon_footprint_primary + carbon_footprint_seco
 path = 'results/carbon_footprint_scenarios_parameters.csv' 
 cf.export_df_to_csv(df, path)
  
+
 # File flows_plotly_scenarios_parameters.xlsx, structure tPVLTSAX
+# export file used to generate the interactive Sankey visualisation
 iterables = []
 names = []
 for dim in ['t','P','V','L','T','S','A','X']:
@@ -586,349 +585,6 @@ cf.export_df_to_csv(df, path)
 #     Mylog.info('Results could not be saved to results/flows_per_year.xlsx, the file is probably open')
     
     
-
-
-
-# # %% Plots
-# start_time = time.time()
-# Mylog.info("Plots")
-# plt.ioff() 
-# np.seterr(divide='ignore', invalid='ignore') # avoid warning for negative values in divides for first years
-# fig, ax = plt.subplots()
-
-# # all plots are saved in a subfolder named after current date and time
-# current_datetime = datetime.now().strftime("%Y%m%d_%H%M")
-# plot_dir = os.path.join('results', 'plots', current_datetime)
-
-# ### Scenario comparison plots
-# ## Plot Car Stock per scenario
-# y_dict = {
-#         'name': 'Global Car Stock',
-#         'aspect': 'Scenario',
-#         'unit': 'Cars'
-#         }
-# cf.plot_result_time(S_tS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, show = 'no', stack='no')
-
-# ## Plot Al inflows per scenario
-# y_dict = {
-#         'name': 'Global Al demand',
-#         'aspect': 'Scenario',
-#         'unit': 'Mt/year'
-#         }
-# cf.plot_result_time(Al_inflow_cS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, show = 'no', stack='no')
-    
-# ## Plot Total Carbon footprint
-# y_dict = {
-#         'name': 'Carbon footprint of Al production',
-#         'aspect': 'Scenario',
-#         'unit': 'Mt CO2/yr'
-#         }
-# cf.plot_result_time((carbon_footprint_primary + carbon_footprint_secondary)/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, show = 'no', stack='no')
-
-# ## Plot Cumulative Carbon footprint
-# y_dict = {
-#         'name': 'Cumulative Carbon footprint of Al production',
-#         'aspect': 'Scenario',
-#         'unit': 'Gt CO2'
-#         }
-# cf.plot_result_time(np.cumsum(carbon_footprint_primary + carbon_footprint_secondary, axis=0)/10**12, y_dict, IndexTable, t_min= 120, t_max = 151, plot_dir=plot_dir, show = 'no', stack='no')
-        
-# ## Plot Scrap surplus
-# y_dict = {
-#         'name': 'Global scrap surplus',
-#         'aspect': 'Scenario',
-#         'unit': 'Mt Al'
-#         }
-# cf.plot_result_time((F_1_9_tS)/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, show = 'no', stack='no')
-
-# ## Plot Cumulative Scrap surplus
-# y_dict = {
-#         'name': 'Cumulative Global scrap surplus',
-#         'aspect': 'Scenario',
-#         'unit': 'Mt Al'
-#         }
-# cf.plot_result_time(np.cumsum(F_1_9_tS, axis=0)/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, show = 'no', stack='no')
-        
-# ### Single scenario plots
-# for scenario in range(2):
-
-#     Mylog.info("Plotting results for scenario " + str(scenario))
-#     ## Car Stock per region
-#     y_dict = {
-#             'name': 'Car Stock',
-#             'aspect': 'Region',
-#             'unit': 'cars'
-#             }
-#     cf.plot_result_time_scenario(S_trS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     ## Car inflows per region
-#     y_dict = {
-#             'name': 'Car Inflows',
-#             'aspect': 'Region',
-#             'unit': 'cars/yr'
-#             }
-#     cf.plot_result_time_scenario(I_crS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     # Car outflows per region
-#     y_dict = {
-#             'name': 'Car Outflows',
-#             'aspect': 'Region',
-#             'unit': 'cars/yr'
-#             }
-#     cf.plot_result_time_scenario(O_trS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     ## Stock by powertrain
-#     y_dict = {
-#             'name': 'Car Stock',
-#             'aspect': 'Powertrain',
-#             'unit': 'cars'
-#             }
-#     cf.plot_result_time_scenario(S_tpS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     ## Car inflows by powertrain
-#     y_dict = {
-#             'name': 'Car inflows',
-#             'aspect': 'Powertrain',
-#             'unit': 'cars'
-#             }
-#     cf.plot_result_time_scenario(I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     ## Car outflows by powertrain
-#     y_dict = {
-#             'name': 'Car Outflows',
-#             'aspect': 'Powertrain',
-#             'unit': 'cars'
-#             }
-#     cf.plot_result_time_scenario(O_tpS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     ## Stock by segment
-#     y_dict = {
-#             'name': 'Car Stock',
-#             'aspect': 'Segment',
-#             'unit': 'cars'
-#             }
-#     cf.plot_result_time_scenario(S_tsS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     ## Car inflows by segment
-#     y_dict = {
-#             'name': 'Car Inflows',
-#             'aspect': 'Segment',
-#             'unit': 'cars'
-#             }
-#     cf.plot_result_time_scenario(I_csS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     ## Car outflows by segment
-#     y_dict = {
-#             'name': 'Car Outflows',
-#             'aspect': 'Segment',
-#             'unit': 'cars'
-#             }
-#     cf.plot_result_time_scenario(O_tsS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-    
-#     ## Plot Al Stock per component
-#     y_dict = {
-#             'name': 'Al Stock',
-#             'aspect': 'Component',
-#             'unit': 'Mt'
-#             }
-#     cf.plot_result_time_scenario(Al_stock_tzS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     ## Plot Al inflows per conponent
-#     y_dict = {
-#             'name': 'Al Inflows',
-#             'aspect': 'Component',
-#             'unit': 'Mt/yr'
-#             }
-#     cf.plot_result_time_scenario(Al_inflow_czS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-    
-#     ## Plot Al outflows per conponent
-#     y_dict = {
-#             'name': 'Al Outflows',
-            
-#             'aspect': 'Component',
-#             'unit': 'Mt/yr'
-#             }
-#     cf.plot_result_time_scenario(Al_outflow_tzS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-    
-#     # Aluminium stock per region
-#     y_dict = {
-#             'name': 'Al stock',
-#             'aspect': 'Region',
-#             'unit': 'Mt'
-#             }
-#     cf.plot_result_time_scenario(Al_stock_trS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     # Aluminium inflows per region
-#     y_dict = {
-#             'name': 'Al Inflows',
-#             'aspect': 'Region',
-#             'unit': 'Mt/yr'
-#             }
-#     cf.plot_result_time_scenario(Al_inflow_crS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     # Aluminium outflows per region
-#     y_dict = {
-#             'name': 'Al Outflows',
-#             'aspect': 'Region',
-#             'unit': 'Mt/yr'
-#             }
-#     cf.plot_result_time_scenario(Al_outflow_trS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     ## Plot Al Alloys inflows 
-#     y_dict = {
-#             'name': 'Al Inflows',
-#             'aspect': 'Alloy',
-#             'unit': 'Mt/yr'
-#             }
-#     cf.plot_result_time_scenario(Alloys_inflow_caS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-#     ## Plot Average Al content in inflows per region
-#     y_dict = {
-#             'name': 'Average Al content',
-#             'aspect': 'Region',
-#             'unit': 'kg/car'
-#             }
-#     cf.plot_result_time_scenario(Al_inflow_crS / I_crS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='no')
-    
-    
-#     ## Plot Average Al content in inflows per powertrain
-#     I_cpS = np.einsum('crpsS -> cpS', I_crpsS)
-#     Al_inflow_cpS = np.einsum('crpsS -> cpS', Al_inflow_crpsS)
-#     y_dict = {
-#             'name': 'Average Al content',
-#             'aspect': 'Powertrain',
-#             'unit': 'kg/car'
-#             }
-#     cf.plot_result_time_scenario(Al_inflow_cpS / I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='no')
-    
-    
-#     ## Plot Average Al content in inflows per segment
-#     I_csS = np.einsum('crpsS -> csS', I_crpsS)
-#     Al_inflow_csS = np.einsum('crpsS -> csS', Al_inflow_crpsS)
-#     y_dict = {
-#             'name': 'Average Al content',
-#             'aspect': 'Segment',
-#             'unit': 'kg/car'
-#             }
-#     cf.plot_result_time_scenario(Al_inflow_csS / I_csS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='no')
-    
-#     ## Plot Al Alloys outflows
-#     y_dict = {
-#             'name': 'Al Outflows',
-#             'aspect': 'Alloy',
-#             'unit': 'Mt/yr'
-#             }
-#     cf.plot_result_time_scenario(Alloys_outflow_taS/10**9, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-    
-#     # Plot Ratio Outflows / Inflows
-#     y_dict = {
-#             'name': 'Ratio Outflows - Inflows',
-#             'aspect': 'Alloy',
-#             'unit': ''
-#             }
-#     cf.plot_result_time_scenario(Alloys_outflow_taS / Alloys_inflow_caS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no')
-    
-#     # Plot Ratio Outflows / Inflows for secondary castings per region
-#     y_dict = {
-#             'name': 'O-I Ratio for 2nd castings',
-#             'aspect': 'Region',
-#             'unit': ''
-#             }
-#     cf.plot_result_time_scenario(Alloys_outflow_traS[:,:,2] / Alloys_inflow_craS[:,:,2], y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no')
-
-
-# end_time = time.time()
-# Mylog.info("Time for plotting: ", end_time - start_time)
-
-
-
-# # %% Custom Plots
-# current_datetime = datetime.now().strftime("%Y%m%d_%H%M")
-# plot_dir = os.path.join('results', 'plots','custom', current_datetime)
-
-# scenario = 0
-
-# ## Car inflows by powertrain
-# y_dict = {
-#         'name': 'Global Car inflows',
-#         'aspect': 'Powertrain',
-#         'unit': 'cars'
-#         }
-# cf.plot_result_time_scenario(I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-
-# scenario = 1
-
-# ## Car inflows by powertrain
-# y_dict = {
-#         'name': 'Globlal Car inflows',
-#         'aspect': 'Powertrain',
-#         'unit': 'cars'
-#         }
-# cf.plot_result_time_scenario(I_cpS, y_dict, IndexTable, t_min= 100, t_max = 151, plot_dir=plot_dir, scenario=scenario, show = 'no', stack='yes')
-
-
-# ## Plot Al inflows per scenario
-# y_dict = {
-#         'name': 'Global Al demand',
-#         'aspect': 'Scenario',
-#         'unit': 'Mt/year'
-#         }
-# t_min= 120
-# t_max = 151
-# category = IndexTable.Classification[y_dict['aspect']].Items[:2]
-# array = Al_inflow_cS/10**9
-# MyColorCycle = pylab.cm.Paired(np.arange(0,1,1/2)) # select 10 colors from the 'Paired' color map.
-# fig, ax = plt.subplots()
-# ax.plot(IndexTable['Classification']['Time'].Items[t_min:t_max],
-#            array[t_min:t_max,0],
-#            color = MyColorCycle[0,:], linewidth = 2)
-# ax.plot(IndexTable['Classification']['Time'].Items[t_min:t_max],
-#            array[t_min:t_max,1],
-#            color = MyColorCycle[1,:], linewidth = 2)
-# ax.set_ylabel(y_dict['unit'],fontsize =16)
-# fig.suptitle(y_dict['name'] +' by ' + y_dict['aspect'])
-# ax.legend(category, loc='upper left',prop={'size':8})
-# cf.mkdir_p(plot_dir)
-# plot_path = plot_dir + '/' + y_dict['name'] +' by ' + y_dict['aspect']
-# fig.savefig(plot_path, dpi = 400)    
-# plt.show()
-# plt.cla()
-# plt.clf()
-# plt.close(fig)
-# Mylog.info("Saved to: " + plot_path)
-
-# ## Plot Cumulative Carbon footprint
-# y_dict = {
-#         'name': 'Cumulative Carbon footprint of Al production',
-#         'aspect': 'Scenario',
-#         'unit': 'Gt CO2'
-#         }
-# t_min= 120
-# t_max = 151
-# category = IndexTable.Classification[y_dict['aspect']].Items[:2]
-# array = np.cumsum(carbon_footprint_primary + carbon_footprint_secondary, axis=0)/10**12
-# MyColorCycle = pylab.cm.Paired(np.arange(0,1,1/2)) # select 10 colors from the 'Paired' color map.
-# fig, ax = plt.subplots()
-# ax.plot(IndexTable['Classification']['Time'].Items[t_min:t_max],
-#            array[t_min:t_max,0],
-#            color = MyColorCycle[0,:], linewidth = 2)
-# ax.plot(IndexTable['Classification']['Time'].Items[t_min:t_max],
-#            array[t_min:t_max,1],
-#            color = MyColorCycle[1,:], linewidth = 2)
-# ax.set_ylabel(y_dict['unit'],fontsize =16)
-# fig.suptitle(y_dict['name'] +' by ' + y_dict['aspect'])
-# ax.legend(category, loc='upper left',prop={'size':8})
-# cf.mkdir_p(plot_dir)
-# plot_path = plot_dir + '/' + y_dict['name'] +' by ' + y_dict['aspect']
-# fig.savefig(plot_path, dpi = 400)    
-# plt.show()
-# plt.cla()
-# plt.clf()
-# plt.close(fig)
-# Mylog.info("Saved to: " + plot_path)
-
 
 
 

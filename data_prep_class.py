@@ -35,9 +35,6 @@ import ODYM_Functions as msf # import the ODYM function file
 import mfa_system # import the system definition
         
 class DataPrep(object):
-   
-    
-
 
     def __init__(self, DataPath, Mylog, pickle_parameters=None):
         self.DataPath = DataPath
@@ -195,5 +192,6 @@ if __name__ == "__main__":
     Mylog.info('### 1. - Initialize.')
                
     Data_Prep = DataPrep(DataPath,Mylog)
-    # pickle.dump(DataPrep, open( "DataPrep.p", "wb" ) )
+    # Save data in pickle file for further fast loading, comment if not needed:
+    pickle.dump(DataPrep, open( "DataPrep.p", "wb" ) )
 
