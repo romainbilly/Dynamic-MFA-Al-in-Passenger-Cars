@@ -256,7 +256,6 @@ PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values = \
                   PassengerVehicleFleet_MFA_System.FlowDict['F_4_0'].Values.astype(default_dtype)).astype(default_dtype) - \
         PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values.astype(default_dtype)       
 # F_5_6, Dismantled components to shredding, dimensions 't,r,a,P,V,L,T,S,A'
-# need to add dismantling yield
 dismantling_yield = 0.7
 PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values = \
         dismantling_yield * np.einsum('trpsaPVLTSA-> traPVLTSA',
@@ -268,16 +267,16 @@ PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values = \
        np.einsum('trpsaPVLTSA -> traPVLTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_4_5'].Values).astype(default_dtype) 
 # F_6_1, Al scrap from dismantled components, dimensions t,r,a,P,V,L,T,S,A
 # Definition of shredding and sorting yield
-shredding_yield = 0.90
+recovery_yield = 0.85
 PassengerVehicleFleet_MFA_System.FlowDict['F_6_1'].Values = \
-        shredding_yield * PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values.astype(default_dtype) 
+        recovery_yield * PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values.astype(default_dtype) 
 # F_6_0, Shredding losses, dimensions t,r,a,P,V,L,T,S,A
 # need to add shredding yield
 PassengerVehicleFleet_MFA_System.FlowDict['F_6_0'].Values = \
-        (1 - shredding_yield) * PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values.astype(default_dtype)
+        (1 - recovery_yield) * PassengerVehicleFleet_MFA_System.FlowDict['F_5_6'].Values.astype(default_dtype)
 # F_7_0, Shredding losses, dimensions t,r,a,P,V,L,T,S,A
 # need to add shredding yield
-PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values =  (1 - shredding_yield) * (
+PassengerVehicleFleet_MFA_System.FlowDict['F_7_0'].Values =  (1 - recovery_yield) * (
         np.einsum('trpsaPVLTSA-> traPVLTSA', 
                   PassengerVehicleFleet_MFA_System.FlowDict['F_4_7'].Values) + \
         PassengerVehicleFleet_MFA_System.FlowDict['F_5_7'].Values).astype(default_dtype)
@@ -401,15 +400,12 @@ Mylog.info("Exporting data")
 
 # Detailed inflow composition
 Mylog.info("Exporting to I_crpsPVLTS.csv")
-# cf.export_to_csv(I_crpsPVLTS_short, 'I_crpsPVLTS', IndexTable)
+cf.export_to_csv(I_crpsPVLTS_short, 'I_crpsPVLTS', IndexTable)
 
 # Detailed stock composition
 Mylog.info("Exporting to S_tcrpsPVLTS.csv")
-# cf.export_to_csv(S_tcrpsPVLTS_short, 'S_tcrpsPVLTS', IndexTable)
+#cf.export_to_csv(S_tcrpsPVLTS_short, 'S_tcrpsPVLTS', IndexTable)
 
-# Detailed outflow composition
-Mylog.info("Exporting to O_tcrpsS.csv")
-# cf.export_to_csv(O_tcrpsS, 'O_tcrpsS', IndexTable)
 
 # File flows_scenarios_parameters.csv, structure taPVLTSA
 Mylog.info("Exporting to flows_scenarios_parameters.csv")
@@ -529,66 +525,6 @@ Mylog.info(np.max(balance))
 
 path = 'results/flows_plotly_parameters.csv' 
 cf.export_df_to_csv(df, path)
-
-
-
-
-
-
-
-
-
-
-
-# # File flows_per_year.xlsx, structure t
-# F_0_1_t = np.einsum('taS -> t', F_0_1_taS)/10**9
-# F_1_2_t = np.einsum('taS -> t', F_1_2_taS)/10**9
-# F_1_9_t = np.einsum('taS -> t', F_1_9_taS)/10**9
-# F_2_3_t = np.einsum('taS -> t', F_2_3_taS)/10**9
-# F_3_4_t = np.einsum('taS -> t', F_3_4_taS)/10**9
-# F_4_0_t = np.einsum('taS -> t', F_4_0_taS)/10**9
-# F_4_5_t = np.einsum('taS -> t', F_4_5_taS)/10**9
-# F_4_7_t = np.einsum('taS -> t', F_4_7_taS)/10**9
-# F_5_6_t = np.einsum('taS -> t', F_5_6_taS)/10**9
-# F_5_7_t = np.einsum('taS -> t', F_5_7_taS)/10**9
-# F_6_0_t = np.einsum('taS -> t', F_6_0_taS)/10**9
-# F_6_1_t = np.einsum('taS -> t', F_6_1_taS)/10**9
-# F_7_0_t = np.einsum('taS -> t', F_7_0_taS)/10**9
-# F_7_1_t = np.einsum('taS -> t', F_7_1_taS)/10**9
-# F_7_8_t = np.einsum('taS -> t', F_7_8_taS)/10**9
-# F_8_1_t = np.einsum('taS -> t', F_8_1_taS)/10**9
-
-# index = pd.Index(
-#         PassengerVehicleFleet_MFA_System.IndexTable['Classification']['Time'].Items[:],
-#         name="Time")
-
-# df = pd.DataFrame(F_0_1_t.flatten(),index=index, columns = ['F_0_1'])
-# df['F_1_2'] = F_1_2_t.flatten()
-# df['F_1_9'] = F_1_9_t.flatten()
-# df['F_2_3'] = F_2_3_t.flatten()
-# df['F_3_4'] = F_3_4_t.flatten()
-# df['F_4_0'] = F_4_0_t.flatten()
-# df['F_4_5'] = F_4_5_t.flatten()
-# df['F_4_7'] = F_4_7_t.flatten()
-# df['F_5_6'] = F_5_6_t.flatten()
-# df['F_5_7'] = F_5_7_t.flatten()
-# df['F_6_0'] = F_6_0_t.flatten()
-# df['F_6_1'] = F_6_1_t.flatten()
-# df['F_7_0'] = F_7_0_t.flatten()
-# df['F_7_1'] = F_7_1_t.flatten()
-# df['F_7_8'] = F_7_8_t.flatten()
-# df['F_8_1'] = F_8_1_t.flatten()
-
-# try:
-#     df.to_excel('results/flows_per_year.xlsx')
-# except:
-#     Mylog.info('Results could not be saved to results/flows_per_year.xlsx, the file is probably open')
-    
-    
-
-
-
-
 
 
 

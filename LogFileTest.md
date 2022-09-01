@@ -74,7 +74,7 @@ A total of 453 values was read from file for parameter Carbon_Footprint_Primary.
 
 A total of 453 values was read from file for parameter Carbon_Footprint_Secondary.
 
-453.0 of 453 values for parameter Carbon_Footprint_Secondary were assigned.
+302.0 of 453 values for parameter Carbon_Footprint_Secondary were assigned.
 
 A total of 2416 values was read from file for parameter SP_Coeff.
 
@@ -92,17 +92,17 @@ Adding Powertrain and Segment splits
 
 Performing Al content calculations
 
-63.84433341026306
+52.35287618637085
 
 Performing component level and alloy content calculations
 
-52.32251048088074
+49.194913148880005
 
 Solving the MFA system
 
 Correcting for scrap surplus
 
-5.30769944190979
+4.819025278091431
 
 Exporting data
 
@@ -110,21 +110,19 @@ Exporting to I_crpsPVLTS.csv
 
 Exporting to S_tcrpsPVLTS.csv
 
-Exporting to O_tcrpsS.csv
-
 Exporting to flows_scenarios_parameters.csv
 
 checking mass balance of process 7
 
 Maximum relative MBI process 7
 
-1.4864085276551935e-07
+1.6342941849118541e-07
 
 checking mass balance of process 1
 
 Maximum relative MBI process 1
 
-7.444547149511661e-08
+7.096497507571571e-08
 
-89.50717679599609
+75.93250246902343
 
