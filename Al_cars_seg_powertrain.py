@@ -361,36 +361,7 @@ for X in range(NX):
                                      np.einsum('traPVLTSA -> taPVLTSA', PassengerVehicleFleet_MFA_System.FlowDict['F_1_2'].Values) -\
                                      PassengerVehicleFleet_MFA_System.FlowDict['F_0_1'].Values[...,X],
                                      PassengerVehicleFleet_MFA_System.ParameterDict['Carbon_Footprint_Secondary'].Values[-Nt:,:])
-                                               
-# Mass balance check:
-# Mylog.info("Checking Mass Balance")    
-# Bal = PassengerVehicleFleet_MFA_System.MassBalanceNoElement()
-# Mylog.info(np.abs(Bal).sum(axis = 0)) # reports the sum of all absolute balancing errors by process.        
-
-        # Bal = np.zeros((len(self.Time_L),len(self.ProcessList))) # Balance array: years x process x element: 
-        # #process position 0 is the balance for the system boundary, the other positions are for the processes, 
-        # #element position 0 is the balance for the entire mass, the other are for the balance of the individual elements
-        
-        # for key in self.FlowDict: # Add all flows to mass balance
-        #     Bal[:,self.FlowDict[key].P_Start] -= self.Flow_Sum(key) # Flow leaving a process
-        #     Bal[:,self.FlowDict[key].P_End]   += self.Flow_Sum(key) # Flow entering a process
-            
-        # for key in self.StockDict: # Add all stock changes to the mass balance
-        #     if  self.StockDict[key].Type == 1:
-        #         Bal[:,self.StockDict[key].P_Res] -= self.Stock_Sum(key) # 1: net stock change or addition to stock
-        #     elif self.StockDict[key].Type == 2:
-        #         Bal[:,self.StockDict[key].P_Res] += self.Stock_Sum(key) # 2: removal/release from stock
-            
-        # #add stock changes to process with number 0 ('system boundary, environment of system')
-        # for key in self.StockDict:
-        #     if  self.StockDict[key].Type == 1:
-        #         Bal[:,0] += self.Stock_Sum(key) # 1: net stock change or addition to stock
-        #     elif self.StockDict[key].Type == 2:
-        #         Bal[:,0] -= self.Stock_Sum(key) # 2: removal/release from stock
-            
-        # return Bal
-
-
+     
 end_time = time.time()
 Mylog.info(end_time-start_time)   
 

@@ -57,15 +57,15 @@ FlowDict['F_5_7'] = msc.Flow(Name = 'Residues from dismantllng to shredding', P_
                                                   P_End = 7, Indices = 't,r,a,P,V,L,T,S,A', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
-FlowDict['F_6_0'] = msc.Flow(Name = 'Shredding losses', P_Start = 6, 
+FlowDict['F_6_0'] = msc.Flow(Name = 'Recovery losses', P_Start = 6, 
                                                   P_End = 0, Indices = 't,r,a,P,V,L,T,S,A', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
-FlowDict['F_6_1'] = msc.Flow(Name = 'Al scrap from dismantled components', P_Start = 6, 
+FlowDict['F_6_1'] = msc.Flow(Name = 'Recovered Al scrap from dismantled components', P_Start = 6, 
                                                   P_End = 1, Indices = 't,r,a,P,V,L,T,S,A', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
-FlowDict['F_7_0'] = msc.Flow(Name = 'Shredding losses', P_Start = 7, 
+FlowDict['F_7_0'] = msc.Flow(Name = 'Recovery losses', P_Start = 7, 
                                                   P_End = 0, Indices = 't,r,a,P,V,L,T,S,A', 
                                                   Values=None, Uncert=None, Color = None, 
                                                   ID = None, UUID = None)
