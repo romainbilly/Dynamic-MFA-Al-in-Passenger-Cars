@@ -13,7 +13,7 @@ It needs to be run from the Anaconda prompt:
 $ cd *current_directory*
 $ python sankey_app_parameters.py
 
-After the app is launched, it shoud be available on the local server at:
+After the app is launched on localhost, it shoud be available on the local server at:
     http://127.0.0.1:8050/
 
 dependencies:
@@ -85,43 +85,59 @@ sankey_app_parameters.layout = html.Div(
                             {'label': 'Constant', 'value': 'Constant'},
                             {'label': 'Stated Policies', 'value': 'SP'},
                             {'label': 'Sustainable Development', 'value': 'SUS'},                          
-                            {'label': 'High EV Penetration', 'value': 'High_EV'}
+                            {'label': 'Net Zero', 'value': 'NZE'}
                         ],
                         value='SP'
                     )
                 ]), width={"size": 2, "offset": 0.5})),
+            ],
+            align="center",
+        ),
+            dbc.Row(
+            [
                 (dbc.Col(html.Div([
                     html.Div("Car Segments"),
                     dcc.Dropdown(
                         id='segment',
                         options=[
-                            {'label': 'Constant', 'value': 'Constant'},
+                            {'label': 'Baseline', 'value': 'Baseline'},
                             {'label': 'SUVs', 'value': 'SUV'},
                             {'label': 'Small cars', 'value': 'Small_Cars'},
                         ],
-                        value='Constant'
+                        value='Baseline'
+                    )
+                ]), width={"size": 2, "offset": 2})),
+                (dbc.Col(html.Div([
+                    html.Div("Vehicle Lifetime"),
+                    dcc.Dropdown(
+                        id='lifetime',
+                        options=[
+                            {'label': 'Low', 'value': 'Low'},
+                            {'label': 'Medium', 'value': 'Medium'},
+                            {'label': 'High', 'value': 'High'},
+                        ],
+                        value='Medium'
                     )
                 ]), width={"size": 2, "offset": 0.5})),
-            ],
-            align="end",
+                (dbc.Col(html.Div([
+                    html.Div("Alloy Sorting"),
+                    dcc.Dropdown(
+                        id='alloy_sorting',
+                        options=[
+                            {'label': 'Low', 'value': 'Low'},
+                            {'label': 'Medium', 'value': 'Medium'},
+                            {'label': 'High', 'value': 'High'},
+                        ],
+                        value='Medium'
+                    )
+                ]), width={"size": 2, "offset": 0.5})),  
+            ],      
+            align="center",
         ),               
-         dbc.Row(html.Div(dcc.Graph(id="graph",style={'width': '95vw', 'height': '75vh'}))),
+         dbc.Row(html.Div(dcc.Graph(id="graph",style={'width': '95vw', 'height': '75vh'})),
+            align="center",),
          dbc.Row(
             [
-                # (dbc.Col(html.Div([
-                #     html.Div("Scenario"),
-                #     dcc.Dropdown(
-                #         id='scenario',
-                #         options=[
-                #             {'label': 'Baseline', 'value': 'Baseline'},
-                #             {'label': 'High EV penetration', 'value': 'Scenario1'},
-                #             {'label': 'ICEV - SUV', 'value': 'Scenario2'},
-                #             {'label': 'Autonomous Vehicles', 'value': 'Scenario3'},
-                #             {'label': 'Smaller cars', 'value': 'Scenario4'}
-                #         ],
-                #         value='Baseline'
-                #     )
-                # ]), width={"size": 3, "offset": 1})),
                 dbc.Col(html.Div("Year"), width={"size": 0.5, "offset": 1}),
                 dbc.Col(html.Div(
                         dcc.Slider(id='year', min=2000, max=2050,
@@ -136,20 +152,21 @@ sankey_app_parameters.layout = html.Div(
                                           'always_visible': True}
                                   )), width=8)
             ],
-            align="end",
+            align="center",
         ),
     ]
 )
 
 
-df_data = pd.read_excel('results/flows_plotly_parameters.xlsx')
+df_data = pd.read_csv('results/flows_plotly_parameters.csv')
 
 # max_value is used so that the size of flow is scaled to the biggest one:
 # what really matter is the size of the nodes, so it could be improved
 max_value = df_data.loc[:, (df_data.columns != 'Time') &\
                            (df_data.columns != 'Population_Scenario') & (df_data.columns !='Vehicle_Ownership_Scenario') &\
                            (df_data.columns != 'Powertrain_Scenario') & (df_data.columns !='Segment_Scenario') &\
-                           (df_data.columns != 'Al_Content_Scenario')
+                           (df_data.columns != 'Al_Content_Scenario') & (df_data.columns !='Lifetime_Scenario') & \
+                           (df_data.columns != 'Alloy_Sorting_Scenario')
                         ].max().max()
 
 @sankey_app_parameters.callback(
@@ -160,13 +177,16 @@ max_value = df_data.loc[:, (df_data.columns != 'Time') &\
     [Input("al_content", "value")],
     [Input("powertrain", "value")],
     [Input("segment", "value")],
+    [Input("lifetime", "value")],
+    [Input("alloy_sorting", "value")],
     )
 
-def display_sankey(year, population, VpC, al_content, powertrain, segment):
+def display_sankey(year, population, VpC, al_content, powertrain, segment, lifetime, alloy_sorting):
     df = df_data[(df_data['Time']==year)  & \
                     (df_data['Population_Scenario']==population) & (df_data['Vehicle_Ownership_Scenario']==VpC) & \
                     (df_data['Powertrain_Scenario']==powertrain) & (df_data['Segment_Scenario']==segment) & \
-                    (df_data['Al_Content_Scenario']==al_content)
+                    (df_data['Al_Content_Scenario']==al_content) & (df_data['Lifetime_Scenario']==lifetime) & \
+                    (df_data['Alloy_Sorting_Scenario']==alloy_sorting)
                    ]
     fig = go.Figure(data=[go.Sankey(
         node = dict(
@@ -175,7 +195,7 @@ def display_sankey(year, population, VpC, al_content, powertrain, segment):
           line = dict(color = "white", width = 0.5),
           label = ["0. Environment", "1. Raw Material Market", "2. Production", "3. Use", "4. Collection",
                    "5. Dismantling", "6. Shredding of dismantled components", "7. Sorting and Shredding of mixed scrap", "8. Alloy Sorting", "9. Scrap Surplus", ""],
-          x = [0.05, 0.10, 0.27, 0.42, 0.53, 0.62, 0.82, 0.72, 0.82, 0.27, 1.1],
+          x = [0.07, 0.13, 0.27, 0.42, 0.53, 0.62, 0.82, 0.72, 0.82, 0.27, 1.1],
           y = [0.3, 0.5, 0.5, 0.5, 0.5, 0.16, 0.16, 0.5, 0.8, 0.7, 1.1],
           color = ["#594F4F", "#594F4F", "#594F4F", "#594F4F", "#594F4F",
                    "#594F4F", "#594F4F", "#594F4F", "#594F4F","#FE4365","white"]
@@ -185,7 +205,7 @@ def display_sankey(year, population, VpC, al_content, powertrain, segment):
           target = [1, 2, 3, 4, 0, 5, 7, 6, 7, 0, 1, 0, 1, 8, 1, 9, 8, 9, 10],
           color = ["lightsteelblue", "lightsteelblue", "lightsteelblue", "lightsteelblue", "#FE4365", 
                    "lightsteelblue", "lightsteelblue", "lightsteelblue", "lightsteelblue",
-                   "#FE4365", "#83AF9B", "#FE4365","#83AF9B","lightsteelblue", "lightsteelblue", "#FE4365","white", "white", "white"],
+                   "#FE4365", "#83AF9B", "#FE4365","#83AF9B","lightsteelblue", "#83AF9B", "#FE4365","white", "white", "white"],
           value = [df['F_0_1'], df['F_1_2'],
                    df['F_2_3'], df['F_3_4'],
                    df['F_4_0'], df['F_4_5'], 
@@ -197,15 +217,7 @@ def display_sankey(year, population, VpC, al_content, powertrain, segment):
                    ), 
         textfont=dict(color="black", size=15))]
         )
-    
-    scenario_dict = {
-        'Baseline': 'Baseline',
-        'Scenario1': 'High EV penetration',
-        'Scenario2': 'ICEV - SUV',
-        'Scenario3': 'Autonomous Vehicles',
-        'Scenario4': 'Smaller cars'
-        }
-    
+      
     fig.update_layout(
             title_text= "Global flows for " + str(year) + " (Mt/yr)", font=dict(size = 13, color = 'black'),
             paper_bgcolor='white'
@@ -215,5 +227,8 @@ def display_sankey(year, population, VpC, al_content, powertrain, segment):
     return fig
 
 if __name__ == '__main__':
-    sankey_app_parameters.run_server(debug=True)
+    # for running the app on localhost (on your computer) uncomment the next line:
+    #sankey_app_parameters.run_server(debug=True)
+    # for running the app on the NTNU Openstack server uncomment the next line:
+    sankey_app_parameters.run_server(host="0.0.0.0", port="8050", debug=False)
  
