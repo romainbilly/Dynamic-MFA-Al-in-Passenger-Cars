@@ -1,4 +1,5 @@
 __pycache__/
 ~$*
 *.csv
+!.flows_plotly_parameters.csv
 results/plots
