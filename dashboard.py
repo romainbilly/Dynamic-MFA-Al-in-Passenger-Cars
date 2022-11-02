@@ -147,12 +147,7 @@ sankey_app_parameters.layout = html.Div(
             ],      
             align="center",
         ),
-        # dbc.Row(html.Div(dcc.Graph(id="graph",style={'width': '95vw', 'height': '75vh'})),
-        #     align="center",),
-        # dbc.Row(html.Div(id="graph"),
-        #     align="center"),
-        # dbc.Row(html.Div(dcc.Graph(id="graph",style={'width': '95vw', 'height': '75vh'})),
-        #     align="center",),
+
         dbc.Row(
             [
                 dbc.Col(html.Div("Year"), width={"size": 1, "offset": 2},
@@ -168,15 +163,19 @@ sankey_app_parameters.layout = html.Div(
                                   2040: '2040',
                                   2050: '2050'},
                                   tooltip={
-                                          'always_visible': True}
+                                          'always_visible': False}
                                   )), width=6,)
             ],
             align="center",
         ),               
-        dcc.Tabs(id="tabs_graph", value='tab-al-demand', children=[
-            dcc.Tab(label='Sankey diagram', value='tab-sankey'),
-            dcc.Tab(label='Aluminium demand', value='tab-al-demand'),        
-            dcc.Tab(label='Carbon footprint', value='tab-cf'),
+        dcc.Tabs(id="tabs_graph", value='tab-about', 
+                 style={'width': '100vw'},
+                children=[
+                dcc.Tab(label='About', value='tab-about'),
+                dcc.Tab(label='Sankey diagram', value='tab-sankey'),
+                dcc.Tab(label='Aluminium demand', value='tab-al-demand'),  
+                dcc.Tab(label='Scrap surplus', value='tab-scrap'), 
+                dcc.Tab(label='Carbon footprint', value='tab-cf'),
         ]),
         
         html.Div(id='graph'),
@@ -186,9 +185,9 @@ sankey_app_parameters.layout = html.Div(
 
 df_data = pd.read_csv('results/flows_plotly_parameters.csv')
 df_data.sort_values(by=['Alloy_Sorting_Scenario','Al_Content_Scenario',
-                                  'Lifetime_Scenario','Segment_Scenario','Powertrain_Scenario',
-                                  'Vehicle_Ownership_Scenario','Population_Scenario',
-                                  'Alloy_Sorting_Scenario','Time'], ascending=True, inplace=True) 
+                        'Lifetime_Scenario','Segment_Scenario','Powertrain_Scenario',
+                        'Vehicle_Ownership_Scenario','Population_Scenario',
+                        'Alloy_Sorting_Scenario','Time'], ascending=True, inplace=True) 
 # max_value is used so that the size of flow is scaled to the biggest one:
 # what really matter is the size of the nodes, so it could be improved
 max_value = df_data.loc[:, (df_data.columns != 'Time') &\
@@ -199,6 +198,11 @@ max_value = df_data.loc[:, (df_data.columns != 'Time') &\
                         ].max().max()
 
 cf_data = pd.read_csv('results/carbon_footprint_scenarios_parameters.csv')
+cf_data.sort_values(by=['Alloy_Sorting_Scenario','Al_Content_Scenario',
+                        'Lifetime_Scenario','Segment_Scenario','Powertrain_Scenario',
+                        'Vehicle_Ownership_Scenario','Population_Scenario',
+                        'Alloy_Sorting_Scenario','Carbon_Footprint_Scenario','Time'],
+                        ascending=True, inplace=True) 
     
 @sankey_app_parameters.callback(
     Output('graph', 'children'), 
@@ -217,7 +221,22 @@ cf_data = pd.read_csv('results/carbon_footprint_scenarios_parameters.csv')
 def display_fig(year, population, VpC, al_content, powertrain, segment, 
                 lifetime, alloy_sorting, carbon_footprint, tabs_graph):
     print(tabs_graph)
-    if tabs_graph == 'tab-sankey':
+    if tabs_graph == 'tab-about':
+        return html.Div([
+            html.H3('Interactive visualization for future aluminium flows in passenger cars and associated emissions',
+                    style={"height": "2vh", "margin-top":"1%", "margin-left":"1%"}),
+            html.Div([
+                html.P('Based on the article "Aluminium use in passenger cars pose challenges for recycling and GHG emissions" (under review).'),
+                html.P('Please use the tabs to navigate between the different graphs, and the filters to select scenarios parameters'),
+                html.P("Complete code and data are available on GitHub:"),
+                html.A('https://github.com/romainbilly/Dynamic-MFA-Al-in-Passenger-Cars', 
+                       href='https://github.com/romainbilly/Dynamic-MFA-Al-in-Passenger-Cars/tree/dashboard')
+            ],
+                style={"margin-top":"3%", "margin-left":"1%"})
+        ])
+    
+    
+    elif tabs_graph == 'tab-sankey':
         df = df_data[(df_data['Time']==year)  & \
                      (df_data['Population_Scenario']==population) & (df_data['Vehicle_Ownership_Scenario']==VpC) & \
                      (df_data['Powertrain_Scenario']==powertrain) & (df_data['Segment_Scenario']==segment) & \
@@ -253,17 +272,16 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
                        ), 
             textfont=dict(color="black", size=15))]
             )
-      
-        fig.update_layout(
-                title_text= "Global flows for " + str(year) + " (Mt/yr)", font=dict(size = 13, color = 'black'),
-                paper_bgcolor='white'
-                )
+
         fig.update_yaxes(automargin=True)
         fig.update_xaxes(automargin=True)
-        return html.Div([         
+
+        return html.Div([
+            html.H4("Global flows for " + str(year) + " (Mt/yr)",
+                    style={"height": "2vh", "margin-top":"1%", "margin-left":"1%"}),
             dcc.Graph(id="tab-sankey",
                       figure=fig,
-                      style={'width': '95vw', 'height': '65vh'}
+                      style={'width': '95vw', 'height': '55vh'}
             )
         ])
 
@@ -287,17 +305,38 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
         fig2.update_yaxes(title_text="Al demand (Mt/yr)")
         
         return html.Div([
-            html.H3('Scenario for aluminium demand in passenger cars (Mt/yr)'),
+            html.H4('Scenario for aluminium demand in passenger cars (Mt/yr)',
+                    style={"height": "2vh", "margin-top":"1%", "margin-left":"1%"}),
             dbc.Row([
                 dcc.Graph(
                     id='tab-series',
                     figure=fig,
-                    style={'width': '50vw', 'height': '60vh'}),
+                    style={'width': '48vw', 'height': '55vh'}),
                 dcc.Graph(
                     figure=fig2,
-                    style={'width': '50vw', 'height': '60vh'})
+                    style={'width': '48vw', 'height': '55vh'})
             ])
         ])
+    
+    elif tabs_graph=='tab-scrap':
+        df = df_data[(df_data['Population_Scenario']==population) & (df_data['Vehicle_Ownership_Scenario']==VpC) & \
+                     (df_data['Powertrain_Scenario']==powertrain) & (df_data['Segment_Scenario']==segment) & \
+                     (df_data['Al_Content_Scenario']==al_content) & (df_data['Lifetime_Scenario']==lifetime) & \
+                     (df_data['Alloy_Sorting_Scenario']==alloy_sorting)
+                    ]
+        fig = px.line(df, x="Time", y="F_1_9", labels={'Time':'Year','F_1_9':'Scrap surplus (Mt/yr)'})
+        
+        return html.Div([
+           html.H4('Scenario for mixed scrap surplus from passenger cars (Mt/yr)',
+                    style={"height": "3vh", "margin-top":"1%", "margin-left":"1%"}),
+           dbc.Row([
+               dcc.Graph(
+                   id='tab-surplus',
+                   figure=fig,
+                   style={'width': '50vw', 'height': '55vh'})
+            ])
+        ])
+      
     
     elif tabs_graph=='tab-cf':
         cf = cf_data[(cf_data['Population_Scenario']==population) & (cf_data['Vehicle_Ownership_Scenario']==VpC) & \
@@ -313,13 +352,30 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
             
         fig.add_trace(go.Scatter(x=cf['Time'], y=cf['Carbon_footprint_primary'], mode='lines',
                                   name='Carbon footprint from Primary Al', stackgroup='one'))
+        fig.update_xaxes(title_text="Year")
+        fig.update_yaxes(title_text="Al demand (Mt/yr)")
+
+        fig_cum = go.Figure()
+        fig_cum.add_trace(go.Scatter(x=cf['Time'], y=cf['Carbon_footprint_secondary'].cumsum(), mode='lines', 
+                                  name='Cumulative carbon footprint from Secondary Al', stackgroup='one'))
+            
+        fig_cum.add_trace(go.Scatter(x=cf.tail(31)['Time'], y=cf.tail(31)['Carbon_footprint_primary'].cumsum(), mode='lines',
+                                  name='Cumulative Carbon footprint from Primary Al', stackgroup='one'))
+        fig_cum.update_xaxes(title_text="Year")
+        fig_cum.update_yaxes(title_text="Al demand (Mt/yr)")
+        fig_cum.update_xaxes(range=[2020,2050])
+        
         return html.Div([
-            html.H3('Scenario for the carbon footprint of Aluminium used in passenger cars (Mt Co2e/yr)'),
+            html.H4('Scenario for the carbon footprint of Aluminium used in passenger cars (Mt Co2e/yr)',
+                    style={"height": "2vh", "margin-top":"1%", "margin-left":"1%"}),
             dbc.Row([
                 dcc.Graph(
                     id='tab-cf',
                     figure=fig,
-                    style={'width': '45vw', 'height': '65vh'})
+                    style={'width': '48vw', 'height': '55vh'}),
+                dcc.Graph(
+                    figure=fig_cum,
+                    style={'width': '48vw', 'height': '55vh'})
             ])
         ])
 
