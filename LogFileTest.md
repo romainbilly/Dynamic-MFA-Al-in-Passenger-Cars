@@ -74,7 +74,7 @@ A total of 453 values was read from file for parameter Carbon_Footprint_Primary.
 
 A total of 453 values was read from file for parameter Carbon_Footprint_Secondary.
 
-302.0 of 453 values for parameter Carbon_Footprint_Secondary were assigned.
+453.0 of 453 values for parameter Carbon_Footprint_Secondary were assigned.
 
 A total of 2416 values was read from file for parameter SP_Coeff.
 
@@ -92,17 +92,17 @@ Adding Powertrain and Segment splits
 
 Performing Al content calculations
 
-52.35287618637085
+118.02035164833069
 
 Performing component level and alloy content calculations
 
-49.194913148880005
+85.16896939277649
 
 Solving the MFA system
 
 Correcting for scrap surplus
 
-4.819025278091431
+10.360176801681519
 
 Exporting data
 
