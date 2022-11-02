@@ -1,5 +1,6 @@
 __pycache__/
 ~$*
 *.csv
+!results/carbon_footprint_scenarios_parameters.csv
 !results/flows_plotly_parameters.csv
 results/plots
