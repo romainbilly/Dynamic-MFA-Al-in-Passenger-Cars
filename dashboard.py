@@ -183,11 +183,17 @@ sankey_app_parameters.layout = html.Div(
 )
 
 
-df_data = pd.read_csv('results/flows_plotly_parameters.csv')
-df_data.sort_values(by=['Alloy_Sorting_Scenario','Al_Content_Scenario',
-                        'Lifetime_Scenario','Segment_Scenario','Powertrain_Scenario',
-                        'Vehicle_Ownership_Scenario','Population_Scenario',
-                        'Alloy_Sorting_Scenario','Time'], ascending=True, inplace=True) 
+df_data = pd.read_csv(
+    'results/flows_plotly_parameters.csv',
+     index_col=[1, 2, 3, 4, 5, 6, 7],
+     header=[0]
+     )
+
+df_lines = df_data.copy()
+df_lines["Hash"] = df_lines.index.map(hash)
+df_lines.set_index(["Hash","Time"], append=True, inplace=True)
+df_lines = df_lines[['F_1_2']].sort_index()
+
 # max_value is used so that the size of flow is scaled to the biggest one:
 # what really matter is the size of the nodes, so it could be improved
 max_value = df_data.loc[:, (df_data.columns != 'Time') &\
@@ -237,12 +243,11 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
     
     
     elif tabs_graph == 'tab-sankey':
-        df = df_data[(df_data['Time']==year)  & \
-                     (df_data['Population_Scenario']==population) & (df_data['Vehicle_Ownership_Scenario']==VpC) & \
-                     (df_data['Powertrain_Scenario']==powertrain) & (df_data['Segment_Scenario']==segment) & \
-                     (df_data['Al_Content_Scenario']==al_content) & (df_data['Lifetime_Scenario']==lifetime) & \
-                     (df_data['Alloy_Sorting_Scenario']==alloy_sorting)
-                    ]
+        df = df_data.query((
+            "Population_Scenario==@population & Vehicle_Ownership_Scenario==@VpC &"
+            "Powertrain_Scenario==@powertrain & Segment_Scenario==@segment &"
+            "Al_Content_Scenario==@al_content & Lifetime_Scenario==@lifetime &"
+            "Alloy_Sorting_Scenario==@alloy_sorting& Time==@year"))
         fig = go.Figure(data=[go.Sankey(
             node = dict(
               pad = 15,
@@ -286,24 +291,54 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
         ])
 
     elif tabs_graph=='tab-al-demand':
-        df = df_data[(df_data['Population_Scenario']==population) & (df_data['Vehicle_Ownership_Scenario']==VpC) & \
-                     (df_data['Powertrain_Scenario']==powertrain) & (df_data['Segment_Scenario']==segment) & \
-                     (df_data['Al_Content_Scenario']==al_content) & (df_data['Lifetime_Scenario']==lifetime) & \
-                     (df_data['Alloy_Sorting_Scenario']==alloy_sorting)
-                    ]
-        fig = px.line(df, x="Time", y="F_1_2", labels={'Time':'Year','F_1_2':'Al demand (Mt/yr)'})
-        fig.add_scatter(x=df_data['Time'], y=df_data['F_1_2'], opacity=0.1, name=None, 
-                        legendgroup='one')
-
-        fig2 = go.Figure()
+        df = df_data.query((
+            "Population_Scenario==@population & Vehicle_Ownership_Scenario==@VpC &"
+            "Powertrain_Scenario==@powertrain & Segment_Scenario==@segment &"
+            "Al_Content_Scenario==@al_content & Lifetime_Scenario==@lifetime &"
+            "Alloy_Sorting_Scenario==@alloy_sorting"))
+        
+        # Figure 1: Line graph for Al demand for all scenarios + chosen one
+        df_lines2 = df_lines.query('Alloy_Sorting_Scenario==@alloy_sorting')
+        fig = px.line(df_lines2, 
+                      x=df_lines2.index.get_level_values(8), #index number for time
+                      y='F_1_2', 
+                      line_group=df_lines2.index.get_level_values(7), #index number for hash
+                      color=df_lines2.index.get_level_values(3),
+                      hover_data=['F_1_2'], 
+                      labels={'x':'Year',
+                              'F_1_2':'Al demand (Mt/yr)',
+                              'color':'EV penetration scenario'})
+        fig.update_traces(opacity=0.15)
+        
+        fig.add_trace(
+            # use Scatterg1 to force this line on top of the previous plot
+            go.Scattergl(x=df['Time'], y=df['F_1_2'],
+                        mode='lines',
+                        name='Chosen scenario',
+                        line=dict(color="Black", width=5), opacity=1)
+            )
+        fig.update_traces(hovertemplate='Year: %{x} <br>Aluminium demand: %{y} Mt/yr')
+        fig.update_layout(title="Aluminium demand",
+                          yaxis_range=[0,230])
+        
+        # Figure 2: Area graph for primary and secondary Al demand
+        layout = go.Layout(
+            title="Primary and Secondary Aluminium demand",
+            xaxis=dict(
+                title="Year"
+            ),
+            yaxis=dict(
+                title="Aluminium demand (Mt/yr)"
+            ) ) 
+        fig2 = go.Figure(layout=layout)
         fig2.add_trace(go.Scatter(x=df['Time'], y=df['F_7_1'] + df['F_8_1'] -  df['F_1_9'],
-                                  name='Secondary Al',mode='lines', stackgroup='one'))
+                                 name='Secondary Al',mode='lines', stackgroup='one'))
             
         fig2.add_trace(go.Scatter(x=df['Time'], y=df['F_0_1'], mode='lines',
-                                  name='Primary Al', stackgroup='one'))
-        fig2.update_xaxes(title_text="Year")
-        fig2.update_yaxes(title_text="Al demand (Mt/yr)")
-        
+                                 name='Primary Al', stackgroup='one'))
+        fig2.update_layout(hovermode="x unified",
+                          yaxis_range=[0,230])
+       
         return html.Div([
             html.H4('Scenario for aluminium demand in passenger cars (Mt/yr)',
                     style={"height": "2vh", "margin-top":"1%", "margin-left":"1%"}),
@@ -319,11 +354,11 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
         ])
     
     elif tabs_graph=='tab-scrap':
-        df = df_data[(df_data['Population_Scenario']==population) & (df_data['Vehicle_Ownership_Scenario']==VpC) & \
-                     (df_data['Powertrain_Scenario']==powertrain) & (df_data['Segment_Scenario']==segment) & \
-                     (df_data['Al_Content_Scenario']==al_content) & (df_data['Lifetime_Scenario']==lifetime) & \
-                     (df_data['Alloy_Sorting_Scenario']==alloy_sorting)
-                    ]
+        df = df_data.query((
+            "Population_Scenario==@population & Vehicle_Ownership_Scenario==@VpC &"
+            "Powertrain_Scenario==@powertrain & Segment_Scenario==@segment &"
+            "Al_Content_Scenario==@al_content & Lifetime_Scenario==@lifetime &"
+            "Alloy_Sorting_Scenario==@alloy_sorting"))
         fig = px.line(df, x="Time", y="F_1_9", labels={'Time':'Year','F_1_9':'Scrap surplus (Mt/yr)'})
         
         return html.Div([
