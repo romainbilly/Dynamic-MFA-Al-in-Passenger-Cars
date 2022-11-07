@@ -192,7 +192,9 @@ df_data = pd.read_csv(
 df_lines = df_data.copy()
 df_lines["Hash"] = df_lines.index.map(hash)
 df_lines.set_index(["Hash","Time"], append=True, inplace=True)
-df_lines = df_lines[['F_1_2']].sort_index()
+df_lines = df_lines[['F_1_2']]
+df_lines = df_lines[df_lines.index.get_level_values('Time').isin([2017,2020,2030,2040,2050])].sort_index()
+
 
 # max_value is used so that the size of flow is scaled to the biggest one:
 # what really matter is the size of the nodes, so it could be improved
@@ -303,12 +305,15 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
                       x=df_lines2.index.get_level_values(8), #index number for time
                       y='F_1_2', 
                       line_group=df_lines2.index.get_level_values(7), #index number for hash
-                      color=df_lines2.index.get_level_values(3),
-                      hover_data=['F_1_2'], 
+                      # color=df_lines2.index.get_level_values(3),
+                      # hover_data=['F_1_2'], 
+                      hover_data=None,
+                      render_mode='webgl',
                       labels={'x':'Year',
                               'F_1_2':'Al demand (Mt/yr)',
                               'color':'EV penetration scenario'})
-        fig.update_traces(opacity=0.15)
+        fig.update_traces(hoverinfo='skip')
+        fig.update_traces(hovertemplate=None)
         
         fig.add_trace(
             # use Scatterg1 to force this line on top of the previous plot
@@ -317,7 +322,7 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
                         name='Chosen scenario',
                         line=dict(color="Black", width=5), opacity=1)
             )
-        fig.update_traces(hovertemplate='Year: %{x} <br>Aluminium demand: %{y} Mt/yr')
+        # fig.update_traces(hovertemplate='Year: %{x} <br>Aluminium demand: %{y} Mt/yr')
         fig.update_layout(title="Aluminium demand",
                           yaxis_range=[0,230])
         
@@ -328,7 +333,7 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
                 title="Year"
             ),
             yaxis=dict(
-                title="Aluminium demand (Mt/yr)"
+                title="Al demand (Mt/yr)"
             ) ) 
         fig2 = go.Figure(layout=layout)
         fig2.add_trace(go.Scatter(x=df['Time'], y=df['F_7_1'] + df['F_8_1'] -  df['F_1_9'],
