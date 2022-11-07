@@ -37,7 +37,7 @@ sankey_app_parameters = dash.Dash(
 
 sankey_app_parameters.layout = html.Div(
     [
-         dbc.Row(dbc.Col(html.H1("Mass Flows of Aluminium in Passenger cars (Mt/yr)"),
+         dbc.Row(dbc.Col(html.H1("Scenarios for Aluminium use in Passenger cars towards 2050"),
             style={'textAlign': 'center'},
             width={"size": 10, "offset": 1})),
             dbc.Row(
@@ -234,7 +234,8 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
             html.H3('Interactive visualization for future aluminium flows in passenger cars and associated emissions',
                     style={"height": "2vh", "margin-top":"1%", "margin-left":"1%"}),
             html.Div([
-                html.P('Based on the article "Aluminium use in passenger cars pose challenges for recycling and GHG emissions" (under review).'),
+                html.P('Based on the article "Aluminium use in passenger cars pose challenges for recycling and GHG emissions" (under review) '
+                       'by Romain G. Billy and Daniel B. Müller.'),
                 html.P('Please use the tabs to navigate between the different graphs, and the filters to select scenarios parameters'),
                 html.P("Complete code and data are available on GitHub:"),
                 html.A('https://github.com/romainbilly/Dynamic-MFA-Al-in-Passenger-Cars', 
@@ -327,8 +328,7 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
                       hover_data=None, 
                       # render_mode='webgl',
                       labels={'x':'Year',
-                              'F_1_2':'Al demand (Mt/yr)',
-                              'color':'EV penetration scenario'})
+                              'F_1_2':'Al demand (Mt/yr)',})
         fig.update_traces(hoverinfo='skip')
 
         
@@ -337,7 +337,7 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
             go.Scattergl(x=df['Time'], y=df['F_1_2'],
                         mode='lines',
                         name='Chosen scenario',
-                        line=dict(color="Black", width=5), opacity=1)
+                        line=dict(color="Black", width=3), opacity=1)
             )
         # fig.update_traces(hovertemplate='Year: %{x} <br>Aluminium demand: %{y} Mt/yr')
         fig.update_layout(title="Aluminium demand",
@@ -402,28 +402,45 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
                       (cf_data['Alloy_Sorting_Scenario']==alloy_sorting) & \
                       (cf_data['Carbon_Footprint_Scenario']==carbon_footprint)
                     ]
-            
-        fig = go.Figure()
+        # Figure 1: Area graph for annual carbon footprint  
+        layout = go.Layout(
+            title="Annual carbon footprint from Al use in cars (Mt Co2eq/yr)",
+            xaxis=dict(
+                title="Year"
+            ),
+            yaxis=dict(
+                title="Annual carbon footprint (Mt CO2eq/yr)"
+            ) )             
+        fig = go.Figure(layout=layout)
         fig.add_trace(go.Scatter(x=cf['Time'], y=cf['Carbon_footprint_secondary'], mode='lines', 
                                   name='Carbon footprint from Secondary Al', stackgroup='one'))
             
         fig.add_trace(go.Scatter(x=cf['Time'], y=cf['Carbon_footprint_primary'], mode='lines',
                                   name='Carbon footprint from Primary Al', stackgroup='one'))
-        fig.update_xaxes(title_text="Year")
-        fig.update_yaxes(title_text="Al demand (Mt/yr)")
-
-        fig_cum = go.Figure()
+        fig.update_layout(hovermode="x unified",
+                          yaxis_range=[0,3200])
+        
+        # Figure 2: Area graph for cumulative carbon footprint  
+        layout = go.Layout(
+            title="Cumulative carbon footprint from Al use in cars from 2020 (Mt Co2eq)",
+            xaxis=dict(
+                title="Year"
+            ),
+            yaxis=dict(
+                title="Cumulative carbon footprint (Mt CO2eq/yr)"
+            ) )  
+        fig_cum = go.Figure(layout=layout)
         fig_cum.add_trace(go.Scatter(x=cf['Time'], y=cf['Carbon_footprint_secondary'].cumsum(), mode='lines', 
                                   name='Cumulative carbon footprint from Secondary Al', stackgroup='one'))
             
         fig_cum.add_trace(go.Scatter(x=cf.tail(31)['Time'], y=cf.tail(31)['Carbon_footprint_primary'].cumsum(), mode='lines',
-                                  name='Cumulative Carbon footprint from Primary Al', stackgroup='one'))
-        fig_cum.update_xaxes(title_text="Year")
-        fig_cum.update_yaxes(title_text="Al demand (Mt/yr)")
-        fig_cum.update_xaxes(range=[2020,2050])
+                                  name='Cumulative carbon footprint from Primary Al', stackgroup='one'))
+        fig_cum.update_layout(hovermode="x unified",
+                          xaxis_range=[2020,2050],
+                          yaxis_range=[0,50000])
         
         return html.Div([
-            html.H4('Scenario for the carbon footprint of Aluminium used in passenger cars (Mt Co2e/yr)',
+            html.H4('Scenario for the carbon footprint of Aluminium used in passenger cars',
                     style={"height": "2vh", "margin-top":"1%", "margin-left":"1%"}),
             dbc.Row([
                 dcc.Graph(
@@ -435,6 +452,7 @@ def display_fig(year, population, VpC, al_content, powertrain, segment,
                     style={'width': '48vw', 'height': '55vh'})
             ])
         ])
+
 
 if __name__ == '__main__':
     # for running the app on localhost (on your computer) uncomment the next line:
