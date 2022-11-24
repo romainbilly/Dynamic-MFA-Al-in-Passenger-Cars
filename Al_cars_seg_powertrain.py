@@ -463,7 +463,7 @@ path = 'results/carbon_footprint_scenarios_parameters.csv'
 cf.export_df_to_csv(df, path)
  
 
-# File flows_plotly_scenarios_parameters.xlsx, structure tPVLTSAX
+# File flows_plotly_scenarios_parameters.csv, structure tPVLTSAX
 # export file used to generate the interactive Sankey visualisation
 iterables = []
 names = []
